@@ -12,6 +12,10 @@ export interface ListenOptions {
      * The conference access token that is required to join a protected conference if the conference is created using the [create](/developers/interactivity-apis/reference/rest-apis/conference#operation/postConferenceCreate) REST API. If the conference is created using the [create](/developers/interactivity-apis/reference/client-sdk/reference-javascript/conferenceservice#create) method, the token is managed by the SDK and is not visible to the application users. For more information, see the [Enhanced Conference Access Control](/developers/interactivity-apis/guides/enhanced-conference-access-control) document.
      */
     conferenceAccessToken?: string;
+    /**
+     * Allows handling the [beforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event) event on the application level instead of on the SDK level. By default, the SDK listens to the [beforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event) event and leaves a conference when this event is triggered. When the leaveConferenceOnBeforeUnload is set to false, the SDK stops reacting on the [beforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event) event, which allows customizing the [beforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event) handling. When leaveConferenceOnBeforeUnload is set to false, SDK does not react to events, such as closing a tab to leave a conference, and such events need to be also handled on the application level.
+     */
+    leaveConferenceOnBeforeUnload?: boolean;
 }
 /**
  * The MixingOptions model notifies the server that a participant who [joins](/developers/interactivity-apis/reference/client-sdk/reference-javascript/conferenceservice#join) or [replays](/developers/interactivity-apis/reference/client-sdk/reference-javascript/conferenceservice#replay) a conference is a special participant called Mixer. Mixer can use the SDK in a mixer mode to record or replay a conference. For more information, see the [Recording mechanisms](/developers/interactivity-apis/guides/recording-mechanisms) article.
@@ -137,7 +141,7 @@ export interface JoinOptions {
      */
     conferenceAccessToken?: string;
     /**
-     *
+     * Allows handling the [beforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event) event on the application level instead of on the SDK level. By default, the SDK listens to the [beforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event) event and leaves a conference when this event is triggered. When the leaveConferenceOnBeforeUnload is set to false, the SDK stops reacting on the [beforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event) event, which allows customizing the [beforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event) handling. When leaveConferenceOnBeforeUnload is set to false, SDK does not react to events, such as closing a tab to leave a conference, and such events need to be also handled on the application level.
      */
     leaveConferenceOnBeforeUnload?: boolean;
 }

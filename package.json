@@ -1,6 +1,6 @@
 {
   "name": "@voxeet/voxeet-web-sdk",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "The Voxeet Javascript SDK",
   "author": "Thomas Gourgues (tgourgues@voxeet.com)",
   "main": "dist/voxeet-sdk.js",
@@ -14,7 +14,7 @@
     "buffer": false
   },
   "scripts": {
-    "check": " prettier --check  src",
+    "check": "prettier -w --check  src",
     "test": "jest",
     "test:watch": "yarn test -- --watch",
     "doc": "yarn md && cp -R dist/docs/* ../../../developer-portal-v2/src/markdown-pages/sdk/reference/js",
@@ -102,6 +102,7 @@
     "bowser": "^2.8.1",
     "browserslist": "^4.5.2",
     "btoa": "^1.1.2",
+    "debug": "^4.3.2",
     "events": "^1.1.0",
     "get-float-time-domain-data": "^0.1.0",
     "global": "^4.4.0",
