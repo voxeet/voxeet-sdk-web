@@ -1,6 +1,6 @@
 /// <reference types="node" />
 import { EventEmitter } from 'events';
-import { BroadcastingService, CommandService, ConferenceService, ExtensionsService, FilePresentationService, MediaDeviceService, NotificationService, RecordingService, SessionService, VideoPresentationService } from './services';
+import { BroadcastingService, CommandService, ConferenceService, ExtensionsService, FilePresentationService, MediaDeviceService, NotificationService, RecordingService, SessionService, VideoPresentationService, VideoFiltersService } from './services';
 import { Configuration } from './models/Configuration';
 /**
  * VoxeetSDK is the main object that allows the application to interact with Voxeet services. The SDK is asynchronous and uses promise at its core.
@@ -66,6 +66,10 @@ export default class VoxeetSDK extends EventEmitter {
      * Retrieves the [CommandService](/developers/interactivity-apis/reference/client-sdk/reference-javascript/commandservice) instance that allows the participant to send messages to the specified conferences.
      */
     static get command(): CommandService;
+    /**
+     * Returns video filters service
+     */
+    static get videoFilters(): VideoFiltersService;
     /**
      * Retrieves the [NotificationService](/developers/interactivity-apis/reference/client-sdk/reference-javascript/notificationservice) instance that allows forwarding notifications from developers to the properly registered managers.
      *

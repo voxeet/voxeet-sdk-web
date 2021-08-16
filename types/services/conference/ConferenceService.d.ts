@@ -351,6 +351,17 @@ export declare class ConferenceService extends BaseConferenceService {
      * @param participant - The participant who needs to be kicked from the conference.
      */
     kick(participant: Participant): Promise<any>;
+    /**
+     * Generates state dump for purpose of failure investigation. State dump is in ZIP format.
+     * @ignore
+     */
+    createStateDump(): Promise<any>;
+    /**
+     *
+     * @param audioLoggingLength - Length in seconds of internal audio logging.
+     * @ignore
+     */
+    configureStateDump(audioLoggingLength: number): void;
     private qualityIndicators;
     protected onConferenceCreated(): void;
     protected onConferenceJoined(e: ConferenceJoined): void;

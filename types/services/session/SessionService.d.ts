@@ -13,6 +13,10 @@ export declare class SessionService extends Service {
     #private;
     /**
      * @ignore
+     */
+    private wsHost;
+    /**
+     * @ignore
      * @param sdk
      */
     constructor(sdk: any);

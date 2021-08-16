@@ -4,5 +4,5 @@ import Service from '../Service';
  */
 export declare class ExtensionsService extends Service {
     constructor(sdk: any);
-    hasElectron(): boolean;
+    hasElectron(): any;
 }

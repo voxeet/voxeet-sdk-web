@@ -14,3 +14,7 @@ export { default as ActiveSpeakerChange } from './ActiveSpeakerChange';
 export { default as VideoForwardedChanged } from './VideoForwardedChanged';
 export { default as UpdateToken } from './UpdateToken';
 export { default as ParticipantKicked } from './ParticipantKicked';
+export { default as ConferenceVideoFilterUpdate } from './ConferenceVideoFilterUpdate';
+export { default as StreamAdded } from './StreamAdded';
+export { default as StreamRemoved } from './StreamRemoved';
+export { default as StreamUpdated } from './StreamUpdated';

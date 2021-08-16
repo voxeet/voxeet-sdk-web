@@ -1,10 +1,13 @@
 import { BaseConferenceService } from '../Service';
 import { ConferenceService } from '../index';
+import ComfortNoiseLevel from '../../models/ComfortNoiseLevel';
 /**
- * MediaDeviceService allows the application to manage the devices used during the conference. It allows the application to:
- * - Enumerate [audio](#enumerateaudiodevices) and [video](#enumeratevideodevices) devices
- * - Select inputs for [audio](#selectaudioinput) and [video](#selectvideoinput) devices
- * - Select [outputs](#selectaudiooutput) for audio devices
+ * MediaDeviceService allows the application to manage devices that are used during conferences. The service allows the application to:
+ *
+ * - Enumerate [audio](#enumerateaudiodevices) and [video](#enumeratevideodevices) devices.
+ * - Select [audio](#selectaudioinput) and [video](#selectvideoinput) input devices.
+ * - Select [output](#selectaudiooutput) devices.
+ * - [Check](#getcomfortnoiselevel) the selected comfort noise level for output devices in Dolby Voice conferences and [change](#setcomfortnoiselevel) the comfort noise level. These functions are only available for the [Native Desktop SDK](doc:native-desktop-sdk) users.
  *
  * @noInheritDoc
  */
@@ -42,4 +45,16 @@ export declare class MediaDeviceService extends BaseConferenceService {
      * @param constraints - The [MediaTrackConstraints](https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints#Properties_of_video_tracks).
      */
     selectVideoInput(deviceId: string, constraints: any): Promise<any>;
+    /**
+     * Configures the comfort noise level for output devices in Dolby Voice conferences. This API is only available for the [Native Desktop SDK](doc:native-desktop-sdk) users.
+     *
+     * @param level - The selected comfort noise level.
+     */
+    setComfortNoiseLevel(level: ComfortNoiseLevel): Promise<any>;
+    /**
+     * Retrieves the comfort noise level setting for output devices in Dolby Voice conferences. This API is only available for the [Native Desktop SDK](doc:native-desktop-sdk) users.
+     *
+     * @return The comfort noise level.
+     */
+    getComfortNoiseLevel(): Promise<any>;
 }

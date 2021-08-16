@@ -46,6 +46,10 @@ declare const Events: {
     VideoForwardedChanged: typeof ConferenceEvents.VideoForwardedChanged;
     UpdateToken: typeof ConferenceEvents.UpdateToken;
     ParticipantKicked: typeof ConferenceEvents.ParticipantKicked;
+    ConferenceVideoFilterUpdate: typeof ConferenceEvents.ConferenceVideoFilterUpdate;
+    StreamAdded: typeof ConferenceEvents.StreamAdded;
+    StreamRemoved: typeof ConferenceEvents.StreamRemoved;
+    StreamUpdated: typeof ConferenceEvents.StreamUpdated;
 };
 /**
  * @ignore

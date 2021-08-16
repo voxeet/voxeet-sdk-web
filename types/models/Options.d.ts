@@ -1,5 +1,7 @@
 import { ConferencePermission } from './Conference';
 import { Participant } from './Participant';
+import { InputAudioConfig, OutputAudioConfig, SessionConfig } from '@dolby-dvc/dvwc';
+import { VideoFilter, VideoFilterOptions } from './VideoFilters';
 /**
  * The ListenOptions model allows a participant to join a conference as a listener, with the specified conference options, such as the [conference access token](#conferenceaccesstoken) and the specified [maximum video forwarding](#maxvideoforwarding) parameter.
  */
@@ -103,6 +105,23 @@ export declare class ParticipantPermissions {
     permissions: Set<ConferencePermission>;
 }
 /**
+ * The DvwcParameters model contains information about parameters which are passed to DVWC component.
+ */
+export interface DvwcParameters {
+    /**
+     * Input audio configuration.
+     */
+    inputAudioConfig?: InputAudioConfig;
+    /**
+     * Output audio configuration.
+     */
+    outputAudioConfig?: OutputAudioConfig;
+    /**
+     * Session configuration.
+     */
+    sessionConfig?: SessionConfig;
+}
+/**
  * The JoinOptions model defines how the application expects to join the conference in terms of media preference.
 For more information related to JoinOptions, see [MediaStreamConstraints](https://www.w3.org/TR/mediacapture-streams/#mediastreamconstraints). The JoinOptions model specifies the [conference access token](#conferenceaccesstoken) and information about the [WebRTC constraints](#constraints), [maximum video forwarding](#maxvideoforwarding) parameter, [mixing](#mixing) option, stereo or mono option for [sending](#prefersendmono) and [receiving](#preferrecvmono) audio, and the [Simulcast](#simulcast) option.
  */
@@ -144,4 +163,16 @@ export interface JoinOptions {
      * Allows handling the [beforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event) event on the application level instead of on the SDK level. By default, the SDK listens to the [beforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event) event and leaves a conference when this event is triggered. When the leaveConferenceOnBeforeUnload is set to false, the SDK stops reacting on the [beforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event) event, which allows customizing the [beforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event) handling. When leaveConferenceOnBeforeUnload is set to false, SDK does not react to events, such as closing a tab to leave a conference, and such events need to be also handled on the application level.
      */
     leaveConferenceOnBeforeUnload?: boolean;
+    /**
+     * Joins a conference using DVWC.
+     */
+    dvwc?: boolean | DvwcParameters;
+    /**
+     * The video filter that allows blurring or changing the local participant's background. The video filters are available only for the Dolby Interactivity APIs Native Desktop SDK users.
+     */
+    videoFilter?: VideoFilter;
+    /**
+     * Video filter options that include the image file for the [staticImage](doc:js-client-sdk-model-videofilters#staticimage) filter and information about the video stream on which the video filter should be applied.
+     */
+    videoFilterOptions?: VideoFilterOptions;
 }
