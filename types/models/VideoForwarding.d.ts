@@ -1,5 +1,5 @@
 /**
- * Data which has to be provided to the backend for thee video forwarding strategy
+ * Data which has to be provided to the backend for the video forwarding strategy
  * @ignore
  */
 export default class VideoForwarding {
