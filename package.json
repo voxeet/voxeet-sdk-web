@@ -1,6 +1,6 @@
 {
   "name": "@voxeet/voxeet-web-sdk",
-  "version": "3.3.0-beta.2",
+  "version": "3.3.0-beta.3",
   "description": "The Voxeet Javascript SDK",
   "author": "Thomas Gourgues (tgourgues@voxeet.com)",
   "main": "dist/voxeet-sdk.js",
@@ -14,6 +14,8 @@
     "buffer": false
   },
   "scripts": {
+    "audit": "yarn audit",
+    "licenses": "yarn licenses list",
     "check": "prettier -w --check  src",
     "test": "jest",
     "test:watch": "yarn test -- --watch",
@@ -21,7 +23,7 @@
     "md": "rimraf dist/docs && typedoc --excludeTags asmemberof --plugin typedoc-plugin-markdown,typedoc-plugin-as-member-of,typedoc-plugin-no-inherit --theme ./docs/theme",
     "clean": "rimraf dist types coverage",
     "clean-types": "rimraf types/utils types/api types/packages types/lib types/events/EventBus.d.ts types/events/EventFactory.d.ts types/events/EventBusInstance.d.ts types/models/Telemetry.d.ts types/services/browserevent types/services/conference/ConferenceManager.d.ts types/services/session/SessionClient.d.ts types/services/telemetry types/services/videofilters/VideoFiltersHelper.d.ts types/services/videofilters/VideoFilterInConferenceController.d.ts",
-    "build": "npm run check  && webpack --progress",
+    "build": "npm run check && npm run audit && webpack --progress",
     "postbuild": "npm run clean-types",
     "watch": "webpack --progress --watch",
     "watch:prod": "cross-env NODE_ENV=production npm run watch",
@@ -61,7 +63,6 @@
     "@types/node": "^12.0.2",
     "add-asset-html-webpack-plugin": "^3.1.3",
     "autoprefixer-loader": "^3.1.0",
-    "axios": "^0.16.1",
     "browserslist": "^4.5.2",
     "chai": "^3.5.0",
     "copy-webpack-plugin": "^5.1.1",
@@ -99,14 +100,13 @@
     "webpack-merge": "^5.7.3",
     "webpack-node-externals": "^1.6.0",
     "worklet-loader": "1.0.0",
-    "ws": "^3.0.0",
     "yargs": "^3.17.1"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "bowser": "^2.8.1",
     "browserslist": "^4.5.2",
     "btoa": "^1.1.2",
-    "debug": "^4.3.2",
     "events": "^1.1.0",
     "get-float-time-domain-data": "^0.1.0",
     "global": "^4.4.0",
