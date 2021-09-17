@@ -72,6 +72,9 @@ export declare function ended(): void;
 export declare function switched(): void;
 /**
  * Emitted when a participant is added to the conference. The SDK does not emit the participantAdded event for the local participant.
+ *
+ * To handle large webinars, we disabled the participantAdded events for listeners. Listeners will only receive events about users; they do not receive events for other listeners. In a conference that uses the participantAdded events, users will only receive events about the first 250 listeners, and will receive all events from other users.
+ *
  * @asMemberOf ConferenceService
  * @event
  * @param participant - The invited participant who is added to a conference.
@@ -88,6 +91,8 @@ export declare function participantAdded(participant: Participant): void;
  * Emitted when a participant changes [ParticipantStatus](model/participantstatus). The following graphic shows possible status changes during a conference:
  *
  * <img src="../assets/web_participant_status.png" alt="screen-share" title="Screen share" width="1000"/>
+ *
+ * To handle large webinars, we disabled the participantUpdated events for listeners. Listeners will only receive events about users; they do not receive events for other listeners. In a conference that uses the participantUpdated events, users will only receive events about the first 250 listeners, and will receive all events from other users.
  *
  * @asMemberOf ConferenceService
  * @event

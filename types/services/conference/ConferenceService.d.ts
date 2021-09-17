@@ -95,6 +95,8 @@ export declare class ConferenceService extends BaseConferenceService {
     /**
      * Joins a conference as a listener. You can choose to either [join](#join), [replay](#replay), or [listen](#listen) to a conference. The `listen` method connects to the conference in the receiving only mode which does not allow transmitting video or audio.
      *
+     * **Note**: Conference events from other listeners are not available for listeners. Only users will receive conference events from other listeners.
+     *
      * See also: [join](#join), [replay](#replay)
      *
      * @param conference - The conference object.
