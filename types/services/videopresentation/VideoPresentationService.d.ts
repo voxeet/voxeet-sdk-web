@@ -94,7 +94,7 @@ export declare class VideoPresentationService extends BaseConferenceService {
     private onVideoPresentationPause;
     private onVideoPresentationSeek;
     /**
-     * Returns information about the current video presentation. Use this accessor if you wish to receive information that is available in the [VideoPresentation](model/videopresentation) object, such as [information about the participant](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/videopresentation#owner) who shares the video or the [URL](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/videopresentation#url) of the presented video file.
+     * Returns information about the current video presentation. Use this accessor if you wish to receive information that is available in the [VideoPresentation](model/videopresentation) object, such as [information about the participant](doc:js-client-sdk-model-videopresentation#owner) who shares the video or the [URL](doc:js-client-sdk-model-videopresentation#url) of the presented video file.
      */
     get current(): VideoPresentation | null;
     /**

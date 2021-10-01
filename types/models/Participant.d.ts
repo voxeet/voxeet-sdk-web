@@ -12,6 +12,7 @@ export declare enum ParticipantType {
      */
     USER = "user",
     /**
+     * @ignore
      * A participant who is the active speaker.
      */
     SPEAKER = "speaker",
@@ -114,7 +115,7 @@ export declare class Participant extends EventEmitter {
      */
     status: ParticipantStatus;
     /**
-     * The type of the participant, either `listener`, `user`, or `speaker`.
+     * The type of the participant, either `listener` or `user`.
      */
     type: ParticipantType;
     /**
@@ -159,6 +160,8 @@ export declare class Participant extends EventEmitter {
      * @param id
      * @param status
      * @param type
+     * @param externalId
+     * @param externalName
      */
     constructor(id: string, status?: string, type?: string);
     /**
@@ -213,4 +216,12 @@ export declare class Participant extends EventEmitter {
      * @ignore
      */
     updateName(name: string): void;
+    /**
+     * @ignore
+     */
+    updateAvatarUrl(url: string): void;
+    /**
+     * @ignore
+     */
+    updateExternalId(id: string): void;
 }

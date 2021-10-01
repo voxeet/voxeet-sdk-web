@@ -3,7 +3,7 @@ import { FilePresentation } from '../../models/FilePresentation';
 import FileConverted from '../../models/FileConverted';
 import { ConferenceService } from '../conference/ConferenceService';
 /**
- * The FilePresentationService allows presenting files during a conference. The Dolby Interactivity APIs service converts the user-provided file into multiple pages, as images, accessible through the [image](#image) method.
+ * The FilePresentationService allows presenting files during a conference. The Dolby.io Communications APIs service converts the user-provided file into multiple pages, as images, accessible through the [image](#image) method.
  *
  * **The file presentation workflow:**
  *
@@ -73,7 +73,7 @@ export declare class FilePresentationService extends BaseConferenceService {
      */
     convertUrl(filename: string, url: string): any;
     /**
-     * Starts a file presentation. The Dolby Interactivity APIs allow presenting only the converted files.
+     * Starts a file presentation. The Dolby.io Communications APIs allow presenting only the converted files.
      * @param file - The converted file that the presenter wants to share during the conference.
      */
     start(file: FileConverted): any;
@@ -105,7 +105,7 @@ export declare class FilePresentationService extends BaseConferenceService {
     private onFilePresentationUpdated;
     private onFilePresentationStopped;
     /**
-     * Returns information about the current state of the file presentation. Use this accessor if you wish to receive information that is available in the [FilePresentation](model/filepresentation) object, such as the [file ID](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/filepresentation#id), [the number of images](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/filepresentation#optional-imagecount) in the presentation, information about the [file owner](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/filepresentation#owner), or the current [position](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/filepresentation#optional-position) in the presentation. For example, use the following code to ask about the file owner:
+     * Returns information about the current state of the file presentation. Use this accessor if you wish to receive information that is available in the [FilePresentation](model/filepresentation) object, such as the [file ID](doc:js-client-sdk-model-filepresentation#id), [the number of images](doc:js-client-sdk-model-filepresentation#optional-imagecount) in the presentation, information about the [file owner](doc:js-client-sdk-model-filepresentation#owner), or the current [position](doc:js-client-sdk-model-filepresentation#optional-position) in the presentation. For example, use the following code to ask about the file owner:
      *
      * ```javascript
      * VoxeetSDK.filePresentation.current.owner;

@@ -32,13 +32,13 @@ export interface ConferenceLeaveOptions {
  *
  * During a conference, the conference participants can enable and disable the qualityIndicators statistics.
  *
- * To receive the [qualityIndicators](/developers/interactivity-apis/client-sdk/reference-javascript/conferenceservice#qualityindicators) events, use the following command:
+ * To receive the [qualityIndicators](doc:js-client-sdk-conferenceservice#qualityindicators) events, use the following command:
  *
  *  ```javascript
  *  VoxeetSDK.conference.on('qualityIndicators', handler)
  *  ```
  *
- * To not receive the [qualityIndicators](/developers/interactivity-apis/client-sdk/reference-javascript/conferenceservice#qualityindicators) events, use the following command:
+ * To not receive the [qualityIndicators](doc:js-client-sdk-conferenceservice#qualityindicators) events, use the following command:
  *
  *  ```javascript
  *  VoxeetSDK.conference.off('qualityIndicators', handler)
@@ -58,7 +58,7 @@ export interface QualityIndicator {
     video: number;
 }
 /**
- * The QualityIndicators model represents audio and video quality scores of the remote participants. This model includes a list of [QualityIndicator](/developers/interactivity-apis/client-sdk/reference-javascript/model/qualityindicator)s.
+ * The QualityIndicators model represents audio and video quality scores of the remote participants. This model includes a list of [QualityIndicator](doc:js-client-sdk-model-qualityindicator)s.
  *
  * The SDK displays the audio and video quality using Mean Opinion Score (MOS). The scores represent the participants' audio and video quality. The SDK calculates the audio and video quality scores and displays the values in a rage from 1 to 5, where 1 represents the worst quality and 5 represents the highest quality. In cases when the MOS score is not available, the SDK returns the value -1.
  *
@@ -88,8 +88,8 @@ export declare enum ConferenceStatus {
     /**
      * Informs that the conference is destroyed. This status may be triggered by the following situations:
      * - All conference participants left the conference
-     * - The [time to live](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/conferenceparameters#ttl) or the conference time limit elapsed
-     * - The conference creator used the [Terminate](/developers/interactivity-apis/reference/rest-apis/conference#operation/deleteConference) REST API to terminate an ongoing conference
+     * - The [time to live](doc:js-client-sdk-model-conferenceparameters#ttl) or the conference time limit elapsed
+     * - The conference creator used the [Terminate](reference:deleteconference) REST API to terminate an ongoing conference
      */
     Destroyed = "destroyed",
     /**
@@ -152,7 +152,7 @@ export declare enum ConferencePermission {
 }
 /**
  * The Conference model allows the application to get information about the conference,
- * such as the [ID](#id), [alias](#alias), [PIN code](#pincode), [status](#status), conference [parameters](#params) and [permissions](#permissions), and information if the conference is [new](#isnew).
+ * such as the conference [ID](#id), [alias](#alias), [PIN code](#pincode), [status](#status), conference [parameters](#params), [participants](#participants), [permissions](#permissions), and information if the conference is [new](#isnew).
  */
 export default class Conference {
     #private;
@@ -220,7 +220,6 @@ export default class Conference {
     set params(value: ConferenceParameters);
     /**
      * Provides the list of conference participants.
-     * @ignore
      */
     get participants(): Map<string, Participant>;
     /**

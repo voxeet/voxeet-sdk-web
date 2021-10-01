@@ -9,6 +9,8 @@ export interface ParticipantUpdatedData {
     audio: boolean;
     audioReceivingStopped: boolean;
     name: string;
+    avatarUrl: string;
+    externalId: string;
 }
 /**
  * @ignore
@@ -20,6 +22,8 @@ export default class ParticipantUpdated extends Event {
     audio: boolean;
     audioReceivingStopped: boolean;
     name: string;
+    avatarUrl: string;
+    externalId: string;
     constructor();
     static fromData(data: ParticipantUpdatedData): ParticipantUpdated;
 }

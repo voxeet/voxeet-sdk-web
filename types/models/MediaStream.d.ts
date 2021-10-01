@@ -35,7 +35,7 @@ export declare enum MediaStreamIndex {
  */
 export declare const CustomStreamMinIndex: number;
 /**
- * The MediaStreamWithType model is a WebRTC MediaStream that includes the stream [types](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/mediastreamtype).
+ * The MediaStreamWithType model is a WebRTC MediaStream that includes the stream [types](doc:js-client-sdk-model-mediastreamtype).
  *
  */
 export declare type MediaStreamWithType = MediaStream & VideoType;

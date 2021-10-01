@@ -4,3 +4,4 @@ export { default as ConferenceEndedNotification } from './ConferenceEndedNotific
 export { default as ConferenceStatusNotification } from './ConferenceStatusNotification';
 export { default as ParticipantJoinedNotification } from './ParticipantJoinedNotification';
 export { default as ParticipantLeftNotification } from './ParticipantLeftNotification';
+export { default as ActiveParticipants } from './ActiveParticipants';

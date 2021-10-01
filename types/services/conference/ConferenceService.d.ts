@@ -70,7 +70,7 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     create(options: ConferenceOptions): Promise<Conference>;
     /**
-     * Provides a Conference object that allows joining a conference. For more information about using the fetch method, see the [Conferencing](/developers/interactivity-apis/reference/client-sdk/conferencing#creating-and-joining-conferences-using-the-conference-id) document.
+     * Provides a Conference object that allows joining a conference. For more information about using the fetch method, see the [Conferencing](doc:conferencing#creating-and-joining-conferences-using-the-conference-id) document.
      *
      * @param conferenceId - The conference ID.
      * @return
@@ -81,13 +81,13 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     demo(): Promise<Conference>;
     /**
-     * Replays a previously recorded conference. For more information, see the [Recording mechanisms](/developers/interactivity-apis/guides/recording-mechanisms) article.
+     * Replays a previously recorded conference. For more information, see the [Recording mechanisms](doc:guides-recording-mechanisms) article.
      *
      * See also: [join](#join), [listen](#listen)
      *
      * @param conference - The conference object.
      * @param replayOptions - The replay options.
-     * @param mixingOptions - The model that notifies the server that a participant who replays the conference is a special participant called [Mixer](/developers/interactivity-apis/guides/recording-mechanisms#mixer).
+     * @param mixingOptions - The model that notifies the server that a participant who replays the conference is a special participant called [Mixer](doc:guides-recording-mechanisms#mixer).
      *
      * @returns
      */
@@ -152,7 +152,7 @@ export declare class ConferenceService extends BaseConferenceService {
     join(conference: Conference, options: JoinOptions): Promise<Conference>;
     private _join;
     /**
-     * Updates the participant's conference permissions. If a participant does not have permission to perform a specific action, this action is not available for this participant during a conference, and the participant receives [InsufficientPermissionsError](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/conferenceerror). If a participant started a specific action and then lost permission to perform this action, the SDK stops the blocked action. For example, if a participant started sharing a screen and received the updated permissions that do not allow him to share a screen, the SDK stops the screen sharing session and the participant cannot start sharing the screen again.
+     * Updates the participant's conference permissions. If a participant does not have permission to perform a specific action, this action is not available for this participant during a conference, and the participant receives [InsufficientPermissionsError](doc:js-client-sdk-model-conferenceerror). If a participant started a specific action and then lost permission to perform this action, the SDK stops the blocked action. For example, if a participant started sharing a screen and received the updated permissions that do not allow him to share a screen, the SDK stops the screen sharing session and the participant cannot start sharing the screen again.
      *
      * ```javascript
      * VoxeetSDK.conference.updatePermissions(participantPermissions: Array<ParticipantPermissions>)
@@ -259,8 +259,8 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     stopVideo(participant: Participant): Promise<void>;
     /**
-     * Sets the maximum number of video streams that may be transmitted to the local participant. This method also allows using a pin option to prioritize the specific participant's video streams and display their videos even when these participants do not talk. For more information, see the [Video Forwarding](/developers/interactivity-apis/guides/video-forwarding) article.
-     * @param max - The maximum number of video streams that may be transmitted to the local participant. The valid parameter's values are between 0 and 25 for desktop browsers and between 0 and 4 for mobile browsers. In the case of providing a value smaller than 0 or greater than the valid values, SDK triggers the [VideoForwardingError](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/videoforwardingerror). If the parameter value is not specified, the SDK automatically sets the maximum possible value: 25 for desktop browsers and 4 for mobile browsers.
+     * Sets the maximum number of video streams that may be transmitted to the local participant. This method also allows using a pin option to prioritize the specific participant's video streams and display their videos even when these participants do not talk. For more information, see the [Video Forwarding](doc:guides-video-forwarding) article.
+     * @param max - The maximum number of video streams that may be transmitted to the local participant. The valid parameter's values are between 0 and 25 for desktop browsers and between 0 and 4 for mobile browsers. In the case of providing a value smaller than 0 or greater than the valid values, SDK triggers the [VideoForwardingError](doc:js-client-sdk-model-videoforwardingerror). If the parameter value is not specified, the SDK automatically sets the maximum possible value: 25 for desktop browsers and 4 for mobile browsers.
      * @param participants - The list of the prioritized participants. This parameter allows using a pin option to prioritize specific participant's video streams and display their videos even when these participants do not talk.
      * @return {Promise<Error>}
      */
@@ -273,41 +273,37 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     audioProcessing(participant: Participant, options: AudioProcessingOptions): Promise<void>;
     /**
-     * Notifies the server to either:
+     * Starts audio transmission between the local client and a conference. The startAudio method impacts only the audio streams that the local participant sends and receives; the method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to force sending remote participants’ streams to the conference or to the local participant. Depending on the specified participant in the `participant` parameter, the startAudio method starts the proper audio transmission:
      *
-     * - Start sending the local participant's audio stream to the conference, or
+     * - When the specified participant is the local participant, startAudio ensures sending local participant’s audio from the local client to the conference.
      *
-     * - Start sending a remote participant's audio stream to the local participant
+     * - When the specified participant is a remote participant, startAudio ensures sending remote participant’s audio from the conference to the local client. This allows the local participant to unmute remote participants who are locally muted through the [stopAudio](#stopaudio) method.
      *
-     * If the SDK does not transmit a specific remote participant's audio stream to the local participant, the local participant can enable the transmission of this stream through the startAudio method. In such a case, only the local participant starts receiving the audio stream; the startAudio method does not impact the rest of the conference participants.
+     * The startAudio method in Dolby Voice conferences is not available for listeners and triggers [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
      *
-     * In conferences where Dolby Voice is enabled, listeners share the configuration with all other listeners. Please use the backend API https://api.voxeet.com/v2/conferences/{conference_id}/startAudioForListeners .
+     * The SDK automatically manages audio rendering, which means that the application does not need to implement its own <audio> element. The application can use the [selectAudioInput](doc:js-client-sdk-mediadeviceservice#selectaudioinput) and [selectAudioOutput](doc:js-client-sdk-mediadeviceservice#selectaudiooutput) methods to select the proper audio input and output devices.
      *
-     * If a remote participant does not transmit any audio stream, the local participant cannot change it using the startAudio method.
+     * The startAudio method requires a few seconds to become effective.
      *
-     * The Voxeet SDK automatically manages audio rendering and, therefore, the application does not need to implement its own
-     * `<audio>` element. The application can use [selectAudioInput](mediadeviceservice#selectaudioinput) and
-     * [selectAudioOutput](mediadeviceservice#selectaudiooutput) methods to select the proper audio input and output devices.
-     *
-     * @param participant - The participant who will receive the audio stream.
+     * @param participant - The selected participant. If you wish to transmit the local participant's audio stream to the conference, provide the local participant's object. If you wish to receive the specific remote participants' audio streams, provide these remote participants' objects.
      *
      * @return {Promise<Error>}
      */
     startAudio(participant: Participant): Promise<void>;
     /**
-     * Notifies the server to either:
+     * Stops audio transmission between the local client and a conference. The stopAudio method impacts only the audio streams that the local participant sends and receives; the method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to stop sending remote participants’ streams to the conference. Depending on the specified participant in the `participant` parameter, the stopAudio method stops the proper audio transmission:
      *
-     * - Stop sending the local participant's audio stream to the conference, or
+     * - When the specified participant is the local participant, stopAudio stops sending local participant’s audio from the local client to the conference.
      *
-     * - Stop sending a remote participant's audio stream to the local participant
+     * - When the specified participant is a remote participant, stopAudio stops sending remote participant’s audio from the conference to the local client. This allows the local participant to locally mute remote participants.
      *
-     * If the SDK transmits a specific remote participant's audio stream to the local participant, the local participant can disable the transmission of this stream through the stopAudio method. In such a case, only the local participant stops receiving the audio stream; the stopAudio method does not impact the rest of the conference participants.
+     * The stopAudio method in Dolby Voice conferences is not available for listeners and triggers [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
      *
-     * In conferences where Dolby Voice is enabled, listeners share the configuration with all other listeners. Please use the backend API https://api.voxeet.com/v2/conferences/{conference_id}/stopAudioForListeners .
+     * Leaving a conference resets the stopAudio settings. Participants who rejoin a conference need to provide the desired stopAudio parameters and call the stopAudio method once again.
      *
-     * If a remote participant transmits an audio stream, the local participant cannot change it using the stopAudio method.
+     * The stopAudio method requires a few seconds to become effective.
      *
-     * @param participant - The participant who will stop receiving the audio stream.
+     * @param participant - The selected participant. If you wish to not transmit the local participant's audio stream to the conference, provide the local participant's object. If you wish to not receive the specific remote participants' audio streams, provide these remote participants' objects.
      * @return {Promise<Error>}
      */
     stopAudio(participant: Participant): Promise<void>;
@@ -333,7 +329,7 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     stopScreenShare(): Promise<any>;
     /**
-     * Provides [standard WebRTC statistics](https://www.w3.org/TR/webrtc-stats/#dom-rtcstatstype) for the application. Based on the WebRTC statistics, the SDK computes [audio and video statistics](/developers/interactivity-apis/client-sdk/reference-javascript/model/qualityindicator).
+     * Provides [standard WebRTC statistics](https://www.w3.org/TR/webrtc-stats/#dom-rtcstatstype) for the application. Based on the WebRTC statistics, the SDK computes [audio and video statistics](doc:js-client-sdk-model-qualityindicator).
      * @return {Promise<Statistics>}
      */
     localStats(): WebRTCStats;
@@ -429,7 +425,7 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     get maxVideoForwarding(): number;
     /**
-     * Returns information about the current conference. Use this accessor if you wish to receive information that is available in the [Conference](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/conference) object, such as the conference [alias](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/conference#alias), [ID](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/conference#id), information if the conference [is new](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/conference#isnew), conference [parameters](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/conference#params), local participant's conference [permissions](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/conference#permissions), conference [PIN code](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/conference#pincode), or conference [status](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/conference#status). For example, use the following code to ask about the local participant's conference permissions:
+     * Returns information about the current conference. Use this accessor if you wish to receive information that is available in the [Conference](doc:js-client-sdk-model-conference) object, such as the conference [alias](doc:js-client-sdk-model-conference#alias), [ID](doc:js-client-sdk-model-conference#id), information if the conference [is new](doc:js-client-sdk-model-conference#isnew), conference [parameters](doc:js-client-sdk-model-conference#params), local participant's conference [permissions](doc:js-client-sdk-model-conference#permissions), conference [PIN code](doc:js-client-sdk-model-conference#pincode), or conference [status](doc:js-client-sdk-model-conference#status). For example, use the following code to ask about the local participant's conference permissions:
      *
      * ```JavaScript
      * VoxeetSDK.conference.current.permissions

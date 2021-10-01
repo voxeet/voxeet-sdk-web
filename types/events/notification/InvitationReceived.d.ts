@@ -15,7 +15,7 @@ interface InvitationData {
     };
 }
 /**
- * The InvitationReceived model gathers information about the received conference invitations, such as the conference [alias](#conferencealias), [ID](#conferenceid), and information about the [participant](#participant) who sent the invitation.
+ * The InvitationReceived model gathers information about the received conference invitations, such as the conference [alias](#conferencealias), [ID](#conferenceid), [conference access token](#conferencetoken), and information about the [participant](#participant) who sent the invitation.
  */
 export default class InvitationReceived extends Event {
     /** The conference ID. */
@@ -24,8 +24,7 @@ export default class InvitationReceived extends Event {
     conferenceAlias: string;
     /** The participant who sent the invitation. */
     participant: Participant;
-    /** The conference access token.
-     * @ignore
+    /** The conference access token. This property is only applicable when enhanced conference access control is enabled.
      */
     conferenceToken: string;
     /** @ignore */

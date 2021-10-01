@@ -15,7 +15,7 @@ export declare class RecordingService extends BaseConferenceService {
      */
     constructor(sdk: any);
     /**
-     * Starts recording a conference. For more information, see the [Recording mechanisms](/developers/interactivity-apis/guides/recording-mechanisms) article or the [Recording](/developers/interactivity-apis/reference/client-sdk/recording) document.
+     * Starts recording a conference. For more information, see the [Recording mechanisms](doc:guides-recording-mechanisms) article or the [Recording](doc:recording) document.
      */
     start(): any;
     /**
@@ -26,7 +26,7 @@ export declare class RecordingService extends BaseConferenceService {
     protected onConferenceLeft(event: ConferenceLeft): void;
     private onRecordingStatusUpdated;
     /**
-     * Returns information about the current recording. Use this accessor if you wish to receive information that is available in the [Recording](model/recording) object, such as the [ID](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/recording#participantid) of the participant who started the recording or the [timestamp](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/recording#starttimestamp) that informs when the recording was started.
+     * Returns information about the current recording. Use this accessor if you wish to receive information that is available in the [Recording](model/recording) object, such as the [ID](doc:js-client-sdk-model-recording#participantid) of the participant who started the recording or the [timestamp](doc:js-client-sdk-model-recording#starttimestamp) that informs when the recording was started.
      */
     get current(): Recording | null;
 }

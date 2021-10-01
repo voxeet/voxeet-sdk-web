@@ -7,11 +7,11 @@ import { VideoFilter, VideoFilterOptions } from './VideoFilters';
  */
 export interface ListenOptions {
     /**
-     * Sets the maximum number of video streams that may be transmitted to the joining participant. The valid parameter's values are between 0 and 25 for desktop browsers and between 0 and 4 for mobile browsers. In the case of providing a value smaller than 0 or greater than the valid values, SDK triggers the [VideoForwardingError](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/videoforwardingerror). If the parameter value is not specified, the SDK automatically sets the maximum possible value: 25 for desktop browsers and 4 for mobile browsers.
+     * Sets the maximum number of video streams that may be transmitted to the joining participant. The valid parameter's values are between 0 and 25 for desktop browsers and between 0 and 4 for mobile browsers. In the case of providing a value smaller than 0 or greater than the valid values, SDK triggers the [VideoForwardingError](doc:js-client-sdk-model-videoforwardingerror). If the parameter value is not specified, the SDK automatically sets the maximum possible value: 25 for desktop browsers and 4 for mobile browsers.
      */
     maxVideoForwarding?: number;
     /**
-     * The conference access token that is required to join a protected conference if the conference is created using the [create](/developers/interactivity-apis/reference/rest-apis/conference#operation/postConferenceCreate) REST API. If the conference is created using the [create](/developers/interactivity-apis/reference/client-sdk/reference-javascript/conferenceservice#create) method, the token is managed by the SDK and is not visible to the application users. For more information, see the [Enhanced Conference Access Control](/developers/interactivity-apis/guides/enhanced-conference-access-control) document.
+     * The conference access token that is required to join a protected conference if the conference is created using the [create](reference:postconferencecreate) REST API. If the conference is created using the [create](doc:js-client-sdk-conferenceservice#create) method, the token is managed by the SDK and is not visible to the application users. For more information, see the [Enhanced Conference Access Control](doc:guides-enhanced-conference-access-control) document.
      */
     conferenceAccessToken?: string;
     /**
@@ -20,7 +20,7 @@ export interface ListenOptions {
     leaveConferenceOnBeforeUnload?: boolean;
 }
 /**
- * The MixingOptions model notifies the server that a participant who [joins](/developers/interactivity-apis/reference/client-sdk/reference-javascript/conferenceservice#join) or [replays](/developers/interactivity-apis/reference/client-sdk/reference-javascript/conferenceservice#replay) a conference is a special participant called Mixer. Mixer can use the SDK in a mixer mode to record or replay a conference. For more information, see the [Recording mechanisms](/developers/interactivity-apis/guides/recording-mechanisms) article.
+ * The MixingOptions model notifies the server that a participant who [joins](doc:js-client-sdk-conferenceservice#join) or [replays](doc:js-client-sdk-conferenceservice#replay) a conference is a special participant called Mixer. Mixer can use the SDK in a mixer mode to record or replay a conference. For more information, see the [Recording mechanisms](doc:guides-recording-mechanisms) article.
  */
 export interface MixingOptions {
     /**
@@ -60,7 +60,7 @@ export declare class ParticipantInfo {
      */
     name?: string;
     /**
-     * The external unique identifier that the customer's application can add to the participant while opening a session. If a participant uses the same external ID in conferences, the participant's ID also remains the same across all sessions. When a second participant joins a conference using the same external ID as another participant who has already joined the conference, the SDK removes the first participant who uses this external ID and emits the [switched](/developers/interactivity-apis/client-sdk/reference-javascript/conferenceservice#switched) event (SDK 2.2.3+).
+     * The external unique identifier that the customer's application can add to the participant while opening a session. If a participant uses the same external ID in conferences, the participant's ID also remains the same across all sessions. When a second participant joins a conference using the same external ID as another participant who has already joined the conference, the SDK removes the first participant who uses this external ID and emits the [switched](doc:js-client-sdk-conferenceservice#switched) event (SDK 2.2.3+).
      *
      * **Note**: This property is required to invite participants to a conference.
      */
@@ -147,7 +147,7 @@ export interface JoinOptions {
      */
     mixing?: MixingOptions;
     /**
-     * Sets the maximum number of video streams that may be transmitted to the joining participant. The valid parameter's values are between 0 and 25 for desktop browsers and between 0 and 4 for mobile browsers. In the case of providing a value smaller than 0 or greater than the valid values, SDK triggers the [VideoForwardingError](/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/videoforwardingerror). If the parameter value is not specified, the SDK automatically sets the maximum possible value: 25 for desktop browsers and 4 for mobile browsers.
+     * Sets the maximum number of video streams that may be transmitted to the joining participant. The valid parameter's values are between 0 and 25 for desktop browsers and between 0 and 4 for mobile browsers. In the case of providing a value smaller than 0 or greater than the valid values, SDK triggers the [VideoForwardingError](doc:js-client-sdk-model-videoforwardingerror). If the parameter value is not specified, the SDK automatically sets the maximum possible value: 25 for desktop browsers and 4 for mobile browsers.
      */
     maxVideoForwarding?: number;
     /**
@@ -156,7 +156,7 @@ export interface JoinOptions {
      */
     forwardingStrategy?: boolean;
     /**
-     * The conference access token that is required to join a protected conference if the conference is created using the [create](/developers/interactivity-apis/reference/rest-apis/conference#operation/postConferenceCreate) REST API. If the conference is created using the [create](/developers/interactivity-apis/reference/client-sdk/reference-javascript/conferenceservice#create) method, the token is managed by the SDK and is not visible to the application users. For more information, see the [Enhanced Conference Access Control](/developers/interactivity-apis/guides/enhanced-conference-access-control) document.
+     * The conference access token that is required to join a protected conference if the conference is created using the [create](reference:postConferenceCreate) REST API. If the conference is created using the [create](doc:js-client-sdk-conferenceservice#create) method, the token is managed by the SDK and is not visible to the application users. For more information, see the [Enhanced Conference Access Control](doc:guides-conference-access-control) document.
      */
     conferenceAccessToken?: string;
     /**
@@ -168,7 +168,7 @@ export interface JoinOptions {
      */
     dvwc?: boolean | DvwcParameters;
     /**
-     * The video filter that allows blurring or changing the local participant's background. The video filters are available only for the Dolby Interactivity APIs Native Desktop SDK users.
+     * The video filter that allows blurring or changing the local participant's background. The video filters are available only for the Dolby.io Communications SDK for Desktop users.
      */
     videoFilter?: VideoFilter;
     /**

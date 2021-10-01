@@ -18,6 +18,7 @@ declare const Events: {
     ConferenceStatusNotification: typeof NotificationEvents.ConferenceStatusNotification;
     ParticipantJoinedNotification: typeof NotificationEvents.ParticipantJoinedNotification;
     ParticipantLeftNotification: typeof NotificationEvents.ParticipantLeftNotification;
+    ActiveParticipants: typeof NotificationEvents.ActiveParticipants;
     ConferenceMessageReceived: typeof CommandEvents.ConferenceMessageReceived;
     RecordingStatusUpdated: typeof RecordingEvents.RecordingStatusUpdated;
     VideoPresentationStarted: typeof VideoPresentationEvents.VideoPresentationStarted;

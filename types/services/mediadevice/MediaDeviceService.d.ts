@@ -7,7 +7,7 @@ import ComfortNoiseLevel from '../../models/ComfortNoiseLevel';
  * - Enumerate [audio](#enumerateaudiodevices) and [video](#enumeratevideodevices) devices.
  * - Select [audio](#selectaudioinput) and [video](#selectvideoinput) input devices.
  * - Select [output](#selectaudiooutput) devices.
- * - [Check](#getcomfortnoiselevel) the selected comfort noise level for output devices in Dolby Voice conferences and [change](#setcomfortnoiselevel) the comfort noise level. These functions are only available for the [Native Desktop SDK](doc:native-desktop-sdk) users.
+ * - [Check](#getcomfortnoiselevel) the selected comfort noise level for output devices in Dolby Voice conferences and [change](#setcomfortnoiselevel) the comfort noise level. These functions are only available for the [Desktop SDK](doc:desktop-sdk) users.
  *
  * @noInheritDoc
  */
@@ -46,13 +46,13 @@ export declare class MediaDeviceService extends BaseConferenceService {
      */
     selectVideoInput(deviceId: string, constraints: any): Promise<any>;
     /**
-     * Configures the comfort noise level for output devices in Dolby Voice conferences. This API is only available for the [Native Desktop SDK](doc:native-desktop-sdk) users.
+     * Configures the comfort noise level for output devices in Dolby Voice conferences. This API is only available for the [Desktop SDK](doc:desktop-sdk) users.
      *
      * @param level - The selected comfort noise level.
      */
     setComfortNoiseLevel(level: ComfortNoiseLevel): Promise<any>;
     /**
-     * Retrieves the comfort noise level setting for output devices in Dolby Voice conferences. This API is only available for the [Native Desktop SDK](doc:native-desktop-sdk) users.
+     * Retrieves the comfort noise level setting for output devices in Dolby Voice conferences. This API is only available for the [Desktop SDK](doc:desktop-sdk) users.
      *
      * @return The comfort noise level.
      */

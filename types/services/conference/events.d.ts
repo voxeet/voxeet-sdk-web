@@ -2,9 +2,9 @@ import { Participant } from '../../models/Participant';
 import { MediaStreamWithType } from '../../models/MediaStream';
 import { QualityIndicator, ConferencePermission } from '../../models/Conference';
 /**
- * Emitted when [WebSocketError](https://dolby.io/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/websocketerror), PeerConnectionFailedError, or PeerDisconnectedError occurred.
+ * Emitted when [WebSocketError](doc:js-client-sdk-model-websocketerror), PeerConnectionFailedError, or PeerDisconnectedError occurred.
  *
- * PeerConnectionFailedError and PeerDisconnectedError are [PeerErrors](https://dolby.io/developers/interactivity-apis/reference/client-sdk/reference-javascript/model/peererror) with the `failed` and `disconnected` [PeerConnectionState](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/connectionState) value.
+ * PeerConnectionFailedError and PeerDisconnectedError are [PeerErrors](doc:js-client-sdk-model-peererror) with the `failed` and `disconnected` [PeerConnectionState](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/connectionState) value.
  *
  * @asMemberOf ConferenceService
  * @event
@@ -152,14 +152,28 @@ export declare function autoplayBlocked(): void;
  */
 export declare function streamAdded(participant: Participant, stream: MediaStreamWithType): void;
 /**
- * Emitted when a conference participant updates the `audio and video stream`.
+ * Emitted when a conference participant who is connected to the `audio and video` stream changes the stream by enabling a microphone while using a camera or by enabling a camera while using a microphone. The event is emitted to all conference participants. The following graphic shows this behavior:
  *
- * Each conference participant can be connected to two streams: `audio and video stream` and `screen-share stream`. If a participant enables audio or video, the SDK adds the `audio and video stream` to the participant. However, when a participant who is connected to the `audio and video stream` changes the stream, the SDK updates the `audio and video stream`. For example, this situation occurs when a participant who enabled a microphone also enables a camera. In such a situation, the SDK emits the [streamUpdated](#streamupdated) event. The following graphic shows this behavior:
+ * [block:image]
+ *{
+ *  "images": [
+ *    {
+ *      "image": [
+ *        "https://files.readme.io/21575c1-conference-stream-added.png",
+ *        "conference-stream-added.png",
+ *        3048,
+ *        2060,
+ *        "#f6f7f7"
+ *      ],
+ *      "caption": "The difference between the streamAdded and streamUpdated events"
+ *    }
+ *  ]
+ *}
+ *[/block]
  *
- * <img src="/images/streams_events_3.png" alt="Audio streams map"
- * 	title="Audio streams map" width="1500">
+ * The SDK can also emit the streamUpdated event only for the local participant. When the local participant uses the [stopAudio](#stopaudio) or [startAudio](#startaudio) method to locally mute or unmute a selected remote participant who uses a camera, the local participant receives the streamUpdated event.
  *
- * Based on the stream [type](model/mediastreamwithtype), the application chooses to either render a camera view or a screen-share view.
+ * The streamUpdated event can be also triggered by a load rebalance mechanism that prevents a conference from overloading. When a new participant joins a conference, the SDK creates a PeerConnection with a media server. When too many participants are connected to a specific server, they may overload a conference. To avoid this scenario, the load and rebalance mechanism closes PeerConnection between a participant who may overload a conference and a media server and creates a new PeerConnection with a new server. This mechanism is almost invisible for conference participants; the SDK only emits the streamUpdated event.
  *
  * @asMemberOf ConferenceService
  * @event

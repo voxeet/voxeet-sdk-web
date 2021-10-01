@@ -34,27 +34,27 @@ export default class VoxeetSDK extends EventEmitter {
      */
     private constructor();
     /**
-     * Retrieves the [SessionService](/developers/interactivity-apis/reference/client-sdk/reference-ios/sessionservice) instance that allows the participant to use sessions.
+     * Retrieves the [SessionService](doc:js-client-sdk-sessionservice) instance that allows the participant to use sessions.
      */
     static get session(): SessionService;
     /**
-     * Retrieves the [MediaDeviceService](/developers/interactivity-apis/reference/client-sdk/reference-javascript/mediadeviceservice) instance that allows the participant to interact with devices through the system.
+     * Retrieves the [MediaDeviceService](doc:js-client-sdk-mediadeviceservice) instance that allows the participant to interact with devices through the system.
      */
     static get mediaDevice(): MediaDeviceService;
     /**
-     * Retrieves the [ConferenceService](/developers/interactivity-apis/reference/client-sdk/reference-javascript/conferenceservice) instance that allows the participant to interact with conferences.
+     * Retrieves the [ConferenceService](doc:js-client-sdk-conferenceservice) instance that allows the participant to interact with conferences.
      */
     static get conference(): ConferenceService;
     /**
-     * Retrieves the [RecordingService](/developers/interactivity-apis/reference/client-sdk/reference-javascript/recordingservice) instance that allows the participant to record conferences.
+     * Retrieves the [RecordingService](doc:js-client-sdk-recordingservice) instance that allows the participant to record conferences.
      */
     static get recording(): RecordingService;
     /**
-     * Retrieves the [FilePresentationService](/developers/interactivity-apis/reference/client-sdk/reference-javascript/filepresentationservice) instance that allows the participant to use file presentations.
+     * Retrieves the [FilePresentationService](doc:js-client-sdk-filepresentationservice) instance that allows the participant to use file presentations.
      */
     static get filePresentation(): FilePresentationService;
     /**
-     * Retrieves the [VideoPresentationService](/developers/interactivity-apis/reference/client-sdk/reference-javascript/videopresentationservice) instance that allows the participant to use video presentations.
+     * Retrieves the [VideoPresentationService](doc:js-client-sdk-videopresentationservice) instance that allows the participant to use video presentations.
      */
     static get videoPresentation(): VideoPresentationService;
     /**
@@ -63,15 +63,15 @@ export default class VoxeetSDK extends EventEmitter {
      */
     static get broadcasting(): BroadcastingService;
     /**
-     * Retrieves the [CommandService](/developers/interactivity-apis/reference/client-sdk/reference-javascript/commandservice) instance that allows the participant to send messages to the specified conferences.
+     * Retrieves the [CommandService](doc:js-client-sdk-commandservice) instance that allows the participant to send messages to the specified conferences.
      */
     static get command(): CommandService;
     /**
-     * Returns video filters service
+     * Retrieves the [VideoFiltersService](doc:js-client-sdk-videofiltersservice) instance that allows the local participant to blur the participant's background or use a selected image as the background.
      */
     static get videoFilters(): VideoFiltersService;
     /**
-     * Retrieves the [NotificationService](/developers/interactivity-apis/reference/client-sdk/reference-javascript/notificationservice) instance that allows forwarding notifications from developers to the properly registered managers.
+     * Retrieves the [NotificationService](doc:js-client-sdk-notificationservice) instance that allows forwarding notifications from developers to the properly registered managers.
      *
      *
      */
