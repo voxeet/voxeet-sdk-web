@@ -1,6 +1,6 @@
 {
   "name": "@voxeet/voxeet-web-sdk",
-  "version": "3.3.0-beta.5",
+  "version": "3.4.0-beta.1",
   "description": "The Voxeet Javascript SDK",
   "author": "Thomas Gourgues (tgourgues@voxeet.com)",
   "main": "dist/voxeet-sdk.js",
@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@babel/polyfill": "^7.4.0",
-    "@dolby-dvc/dvwc": "1.1.0-ajarz-jobno1347-5803490-87",
+    "@dolby-dvc/dvwc": "1.1.0-ezuga-jobno1408-5844053-121",
     "@types/bowser": "^1.1.1",
     "@types/debug": "^4.1.4",
     "@types/jest": "^26.0.15",
@@ -67,6 +67,7 @@
     "chai": "^3.5.0",
     "copy-webpack-plugin": "^5.1.1",
     "cross-env": "^2.0.1",
+    "csv": "^5.5.3",
     "docdash": "^0.3.0",
     "eslint": "^1.3.1",
     "eslint-config-defaults": "^7.1.1",

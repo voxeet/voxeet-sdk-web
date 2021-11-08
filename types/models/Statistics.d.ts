@@ -1,13 +1,13 @@
 /**
  * @ignore
  */
-export declare class RTCStats {
+export declare class Stats {
     type: string;
 }
 /**
  * @ignore
  */
-export declare class RTCInboundRTPAudioStreamStats extends RTCStats {
+export declare class RTCInboundRTPAudioStreamStats extends Stats {
     ssrc: number;
     trackId: string;
     mediaType: string;
@@ -20,7 +20,7 @@ export declare class RTCInboundRTPAudioStreamStats extends RTCStats {
 /**
  * @ignore
  */
-export declare class RTCInboundRTPVideoStreamStats extends RTCStats {
+export declare class RTCInboundRTPVideoStreamStats extends Stats {
     ssrc: number;
     trackId: string;
     mediaType: string;
@@ -44,7 +44,7 @@ export declare class RTCInboundRTPVideoStreamStats extends RTCStats {
 /**
  * @ignore
  */
-export declare class RTCOutboundRtpAudioStreamStats extends RTCStats {
+export declare class RTCOutboundRtpAudioStreamStats extends Stats {
     ssrc: number;
     trackId: string;
     mediaType: string;
@@ -57,7 +57,7 @@ export declare class RTCOutboundRtpAudioStreamStats extends RTCStats {
 /**
  * @ignore
  */
-export declare class RTCOutboundRtpVideoStreamStats extends RTCStats {
+export declare class RTCOutboundRtpVideoStreamStats extends Stats {
     ssrc: number;
     trackId: string;
     mediaType: string;
@@ -81,7 +81,7 @@ export declare class RTCOutboundRtpVideoStreamStats extends RTCStats {
 /**
  * @ignore
  */
-export declare class RTCRemoteInboundRTPStreamStats extends RTCStats {
+export declare class RTCRemoteInboundRTPStreamStats extends Stats {
     ssrc: number;
     kind: string;
     packetLost: number;
@@ -91,7 +91,7 @@ export declare class RTCRemoteInboundRTPStreamStats extends RTCStats {
 /**
  * @ignore
  */
-export declare class RTCMediaStreamAudioTrack extends RTCStats {
+export declare class RTCMediaStreamAudioTrack extends Stats {
     id: string;
     kind: string;
     jitterBufferDelay: number;
@@ -102,7 +102,7 @@ export declare class RTCMediaStreamAudioTrack extends RTCStats {
 /**
  * @ignore
  */
-export declare class RTCMediaStreamVideoTrack extends RTCStats {
+export declare class RTCMediaStreamVideoTrack extends Stats {
     id: string;
     kind: string;
     jitterBufferDelay: number;
@@ -115,14 +115,14 @@ export declare class RTCMediaStreamVideoTrack extends RTCStats {
 /**
  * @ignore
  */
-export declare class RTCStreamDescription extends RTCStats {
+export declare class RTCStreamDescription extends Stats {
     streamIdentifier: string;
     trackIds: Array<string>;
 }
 /**
  * @ignore
  */
-export declare class RTCCandidatePairStats extends RTCStats {
+export declare class RTCCandidatePairStats extends Stats {
     id: string;
     availableOutgoingBitrate: number;
     availableIncomingBitrate: number;
@@ -138,6 +138,17 @@ export declare class RTCCandidatePairStats extends RTCStats {
     responsesSent: number;
     consentRequestsSent: number;
     selected?: boolean;
+}
+/**
+ * @ignore
+ */
+export declare class WebAudioStats extends Stats {
+    bufferIsOverrun: boolean;
+    bufferOverrunTimes: number;
+    bufferOverrunLength: number;
+    bufferIsUnderrun: boolean;
+    bufferUnderrunTimes: number;
+    bufferUnderrunLength: number;
 }
 /**
  * @ignore

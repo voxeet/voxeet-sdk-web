@@ -55,6 +55,10 @@ export declare class SessionService extends Service {
      */
     private startAccessTokenExpirationTimeouts;
     /**
+     * If true, indcates that connection with backend is open.
+     */
+    isOpen(): boolean;
+    /**
      * @ignore
      */
     set customerKey(key: string);
