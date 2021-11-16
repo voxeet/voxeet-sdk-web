@@ -96,13 +96,8 @@ export declare enum ParticipantStatus {
  */
 export declare const toParticipantStatus: (status: string) => ParticipantStatus;
 /**
- * The Participant model gathers information about the conference participant, such as:
- * - The participant's [ID](#id), [status](#status-1), and [type](#type)
- * - Information about [streams](/#streams) that the participant uses
- * - Additional [information](#info) about the participant
- * - Information whether the participant's [audio](#audio) is enabled
- *
- * The model also notifies about the participant's [status](#status) changes.
+ * The Participant model includes information about the conference participant, such as the participant's [ID](#id),
+[status](#status-1), [type](#type), [streams](/#streams), additional [information](#info), and information whether the participant's [audio](#audio) is enabled. The model also includes the [status](#status) event that informs about the status changes.
  *
  * @noInheritDoc
  */
