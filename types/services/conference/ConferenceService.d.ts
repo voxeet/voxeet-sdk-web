@@ -2,7 +2,7 @@ import { BaseConferenceService } from '../Service';
 import { ConferenceJoined, ConferenceLeft } from '../../events/conference/index';
 import ConferenceManager from './ConferenceManager';
 import { SessionService } from '..';
-import { JoinOptions, ListenOptions, MixingOptions, ParticipantPermissions, ReplayOptions } from '../../models/Options';
+import { JoinOptions, ListenOptions, MixingOptions, ParticipantPermissions, ReplayOptions, DemoOptions } from '../../models/Options';
 import { Participant } from '../../models/Participant';
 import { MediaStreamType, MediaStreamWithType } from '../../models/MediaStream';
 import Conference, { ConferenceLeaveOptions } from '../../models/Conference';
@@ -10,6 +10,15 @@ import ConferenceOptions from '../../models/ConferenceOptions';
 import { ParticipantQuality } from '../../models/Simulcast';
 import { WebRTCStats } from '../../models/Statistics';
 import AudioProcessingOptions from '../../models/AudioProcessingOptions';
+import { SpatialPosition, SpatialDirection, SpatialScale } from '../../models/SpatialAudio';
+import { ICacheHelper } from '../../models/ICacheHelper';
+/**
+ * @ignore
+ */
+declare type StateDump = {
+    type: 'txt' | 'zip';
+    content: Blob;
+};
 /**
  * The ConferenceService allows the application to manage the conference life-cycle and interact with the conference.
  *
@@ -36,6 +45,9 @@ import AudioProcessingOptions from '../../models/AudioProcessingOptions';
  * - [Kick](#kick) a participant from a conference
  * - [Update](#updatepermissions) the participant's permissions
  * - [Ask](#current) about conference details
+ * - [Set](#setspatialposition) a participant's position to enable the spatial audio experience during a Dolby Voice conference
+ * - [Configure](#setspatialenvironment) a spatial environment of the application for the spatial audio feature
+ * - [Set](#setspatialdirection) the direction a participant is facing during a conference with enabled spatial audio
  *
  * **The ConferenceService introduces events that inform the application that:**
  *
@@ -60,8 +72,9 @@ export declare class ConferenceService extends BaseConferenceService {
      * @ignore
      * @param sdk
      * @param session
+     * @param helper
      */
-    constructor(sdk: any, session: SessionService);
+    constructor(sdk: any, session: SessionService, helper: ICacheHelper<string, MediaStreamTrack[]>);
     /**
      * Creates a conference with [ConferenceOptions](model/conferenceoptions).
      *
@@ -78,8 +91,10 @@ export declare class ConferenceService extends BaseConferenceService {
     fetch(conferenceId: string): Promise<Conference>;
     /**
      * Creates and joins a demo conference.
+     *
+     * @param options - The demo options.
      */
-    demo(): Promise<Conference>;
+    demo(options?: DemoOptions): Promise<Conference>;
     /**
      * Replays a previously recorded conference. For more information, see the [Recording mechanisms](doc:guides-recording-mechanisms) article.
      *
@@ -350,10 +365,10 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     kick(participant: Participant): Promise<any>;
     /**
-     * Generates state dump for purpose of failure investigation. State dump is in ZIP format.
+     * Generates state dump for purpose of failure investigation.
      * @ignore
      */
-    createStateDump(): Promise<any>;
+    createStateDump(): Promise<StateDump>;
     /**
      * @param returns an audio logging length
      * @ignore
@@ -364,6 +379,77 @@ export declare class ConferenceService extends BaseConferenceService {
      * @ignore
      */
     configureStateDump(audioLoggingLength: number): Promise<any>;
+    /**
+     * > 🚀Pre-release
+     * >
+     * > This API is a part of the [Pre-release program](doc:overview-pilot-and-pre-release-programs), as a Closed Beta.
+     *
+     * Sets a participant's position in space to enable the spatial audio experience during a Dolby Voice conference. This method is available only for participants who joined the conference with the [spatialAudio](doc:js-client-sdk-model-joinoptions#spatialaudio) parameter enabled. Otherwise, SDK triggers [UnsupportedError](doc:js-client-sdk-model-unsupportederror). Depending on the specified participant in the `participant` parameter, the setSpatialPosition method impacts the location from which audio is heard or from which audio is rendered:
+     *
+     * - When the specified participant is the local participant, setSpatialPosition sets a location from which the local participant listens to a conference. If the local participant does not have an established location, the participant hears audio from the default location (0, 0, 0).
+     *
+     * - When the specified participant is a remote participant, setSpatialPosition ensures the remote participant's audio is rendered from the specified position in space. If the remote participant does not have an established location, the participant does not have a default position and will remain muted until a position is specified.
+     *
+     * For example, if a local participant Eric, who does not have a set direction, calls setSpatialPosition(VoxeetSDK.session.participant, {x:3,y:0,z:0}), Eric hears audio from the position (3,0,0). If Eric also calls setSpatialPosition(Sophia, {x:7,y:1,z:2}), he hears Sophia from the position (7,1,2). In this case, Eric hears Sophia 4 meters to the right, 1 meter above, and 2 meters in front. The following graphic presents the participants' locations:
+     *
+     * <--A graphic placeholder-->
+     *
+     * If sending the updated positions to the server fails, the SDK generates the ConferenceService event error that includes [SpatialAudioError](doc:js-client-sdk-model-spatialaudioerror).
+     *
+     * @param participant - The selected participant. Using the local participant sets the location from which the participant will hear a conference. Using a remote participant sets the position from which the participant's audio will be rendered.
+     * @param position - The participants' audio location.
+     */
+    setSpatialPosition(participant: Participant, position: NonNullable<SpatialPosition>): void;
+    /**
+     * > 🚀Pre-release
+     * >
+     * > This API is a part of the [Pre-release program](doc:overview-pilot-and-pre-release-programs), as a Closed Beta.
+     *
+     * Sets the direction a participant is facing in space. This method is available only for participants who joined the conference with the [spatialAudio](doc:js-client-sdk-model-joinoptions#spatialaudio) parameter enabled. Otherwise, SDK triggers [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
+     *
+     * Currently, this method is only supported for the local participant. The method changes the direction the local participant is facing. When the specified participant is a remote participant, SDK triggers [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
+     *
+     * If the local participant hears audio from the position (0,0,0) facing down the Z-axis and locates a remote participant in the position (1,0,1), the local participant hears the remote participant from their front-right. If the local participant chooses to change the direction they are facing and rotate +90 degrees about the Y-axis, then instead of hearing the speaker from the front-right position, they hear the speaker from the front-left position. The following graphic presents this example:
+     *
+     * <--A graphic placeholder-->
+     *
+     * For more information, see the [SpatialDirection](doc:js-client-sdk-model-spatialdirection) model.
+     *
+     * If sending the updated positions to the server fails, the SDK generates the ConferenceService event error that includes [SpatialAudioError](doc:js-client-sdk-model-spatialaudioerror).
+     *
+     * @param participant - The selected participant. Using the local participant sets the location from which the participant will hear a conference. Using a remote participant sets the position from which the participant's audio will be rendered.
+     * @param direction - The direction the participant is facing in space.
+     *
+     */
+    setSpatialDirection(participant: Participant, direction: SpatialDirection): void;
+    /**
+     * > 🚀Pre-release
+     * >
+     * > This API is a part of the [Pre-release program](doc:overview-pilot-and-pre-release-programs), as a Closed Beta.
+     *
+     * Configures a spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance.
+     *
+     * This method is available only for participants who joined the conference with the [spatialAudio](doc:js-client-sdk-model-joinoptions#spatialaudio) parameter enabled. Otherwise, SDK triggers [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
+     *
+     * If not called, the SDK uses the default spatial environment, which consists of the following values:
+     *
+     * - `forward` = (0, 0, 1), where +Z axis is in front
+     * - `up` = (0, 1, 0), where +Y axis is above
+     * - `right` = (1, 0, 0), where +X axis is to the right
+     * - `scale` = (1, 1, 1), where one unit on any axis is 1 meter
+     *
+     * The default spatial environment is presented in the following diagram:
+     *
+     * <--A graphic placeholder-->
+     *
+     * If sending the updated positions to the server fails, the SDK generates the ConferenceService event error that includes [SpatialAudioError](doc:js-client-sdk-model-spatialaudioerror).
+     *
+     * @param scale - The application's distance units or scale in application units per one meter. The value must be greater than 0. Otherwise, SDK emits [ParameterError](doc:js-client-sdk-model-parametererror).
+     * @param forward - A vector describing the direction the application considers as forward. The value must be orthogonal to up and right. Otherwise, SDK emits [ParameterError](doc:js-client-sdk-model-parametererror).
+     * @param up - A vector describing the direction the application considers as up. Must be orthogonal to forward and right. Otherwise, SDK emits [ParameterError](doc:js-client-sdk-model-parametererror).
+     * @param right - A vector describing the direction the application considers as right. Must be orthogonal to forward and up. Otherwise, SDK emits [ParameterError](doc:js-client-sdk-model-parametererror).
+     */
+    setSpatialEnvironment(scale: SpatialScale, forward: SpatialPosition, up: SpatialPosition, right: SpatialPosition): void;
     private qualityIndicators;
     protected onConferenceCreated(): void;
     protected onConferenceJoined(e: ConferenceJoined): void;
@@ -442,3 +528,4 @@ export declare class ConferenceService extends BaseConferenceService {
     get manager(): ConferenceManager;
     get leaveConferenceOnBeforeUnload(): boolean;
 }
+export {};
