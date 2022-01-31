@@ -281,7 +281,7 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     videoForwarding(max: number, participants?: Array<Participant>): Promise<any>;
     /**
-     * Enables and disables audio processing for the local participant.
+     * Enables and disables audio processing for the local participant in Dolby Voice conferences.
      * @param participant - The conference participant.
      * @param options - The audio processing information.
      * @return {Promise<Error>}
