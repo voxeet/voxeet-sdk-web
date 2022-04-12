@@ -28,7 +28,7 @@ export interface ConferenceLeaveOptions {
     keepAlive?: boolean;
 }
 /**
- * The QualityIndicator model represents [audio](#audio) and [video](#video) Mean Opinion Scores (MOS). The scores represent the participants' audio and video quality. The SDK calculates the audio and video quality scores and displays the values in a rage from 1 to 5, where 1 represents the worst quality and 5 represents the highest quality. In cases when the MOS score is not available, the SDK returns the value -1.
+ * The QualityIndicator model represents [audio](#audio) and [video](#video) Mean Opinion Scores (MOS). The scores represent the participants' audio and video quality. The SDK calculates the audio and video quality scores and displays the values in a range from 1 to 5, where 1 represents the worst quality and 5 represents the highest quality. In cases when the MOS score is not available, the SDK returns the value -1.
  *
  * During a conference, the conference participants can enable and disable the qualityIndicators statistics.
  *
@@ -47,20 +47,20 @@ export interface ConferenceLeaveOptions {
  */
 export interface QualityIndicator {
     /**
-     * The audio quality MOS score in a rage from 1 to 5, where 1 represents the worst quality and 5 represents the highest quality. In cases when the MOS score is not available, the SDK returns the value -1.
+     * The audio quality MOS score in a range from 1 to 5, where 1 represents the worst quality and 5 represents the highest quality. In cases when the MOS score is not available, the SDK returns the value -1.
      *
      * **Note**: With SDK 3.0, audio Mean Opinion Scores (MOS) are unavailable for web clients connected to Dolby Voice conferences.
      */
     audio: number;
     /**
-     * The video quality MOS score in a rage from 1 to 5, where 1 represents the worst quality and 5 represents the highest quality. In cases when the MOS score is not available, the SDK returns the value -1.
+     * The video quality MOS score in a range from 1 to 5, where 1 represents the worst quality and 5 represents the highest quality. In cases when the MOS score is not available, the SDK returns the value -1.
      */
     video: number;
 }
 /**
  * The QualityIndicators model represents audio and video quality scores of the remote participants. This model includes a list of [QualityIndicator](doc:js-client-sdk-model-qualityindicator)s.
  *
- * The SDK displays the audio and video quality using Mean Opinion Score (MOS). The scores represent the participants' audio and video quality. The SDK calculates the audio and video quality scores and displays the values in a rage from 1 to 5, where 1 represents the worst quality and 5 represents the highest quality. In cases when the MOS score is not available, the SDK returns the value -1.
+ * The SDK displays the audio and video quality using Mean Opinion Score (MOS). The scores represent the participants' audio and video quality. The SDK calculates the audio and video quality scores and displays the values in a range from 1 to 5, where 1 represents the worst quality and 5 represents the highest quality. In cases when the MOS score is not available, the SDK returns the value -1.
  *
  * **Note**: With SDK 3.0, audio Mean Opinion Scores (MOS) are unavailable for web clients connected to Dolby Voice conferences.
  */
@@ -159,12 +159,12 @@ export default class Conference {
     /** @ignore */
     constructor(id: string);
     /**
-     * Provides the conference ID.
+     * The conference ID.
      * @return {string}
      */
     get id(): string;
     /**
-     * Provides the conference alias.
+     * The conference alias. The alias is case insensitive, which means that using "foobar" and "FOObar" aliases results in joining the same conference.
      * @return {string}
      */
     get alias(): string;

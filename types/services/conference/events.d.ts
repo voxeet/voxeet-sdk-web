@@ -206,7 +206,7 @@ export declare function streamUpdated(participant: Participant, stream: MediaStr
  */
 export declare function streamRemoved(participant: Participant, stream: MediaStreamWithType): void;
 /**
- * The Mean Opinion Score (MOS) which represents the participants' audio and video quality. The SDK calculates the audio and video quality scores and displays the values in a rage from 1 to 5, where 1 represents the worst quality and 5 represents the highest quality. In cases when the MOS score is not available, the SDK returns the value -1.
+ * The Mean Opinion Score (MOS) represents the participants' audio and video quality. The SDK calculates the audio and video quality scores and displays the values in a range from 1 to 5, where 1 represents the worst quality and 5 represents the highest quality. In cases when the MOS score is not available, the SDK returns the value -1.
  *
  * **Note**: With SDK 3.0, audio Mean Opinion Scores (MOS) are unavailable for web clients connected to Dolby Voice conferences.
  *

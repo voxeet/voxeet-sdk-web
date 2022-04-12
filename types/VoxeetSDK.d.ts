@@ -17,6 +17,7 @@ export default class VoxeetSDK extends EventEmitter {
     static version: string;
     private static host;
     private static wsHost;
+    private static fileHost;
     private static telemetryHost;
     static enableTelemetry: boolean;
     /**
@@ -87,11 +88,12 @@ export default class VoxeetSDK extends EventEmitter {
      * @param customerSecret - The customer secret.
      * @param __namedParameters Optional parameter to override SDK default configuration
      * @param host host
-     * @param wsHost wshost
+     * @param wsHost websocket host
+     * @param fileHost file conversion host
      * @param enableTelemetry enable telemetry
      * @param telemetryHost telemetry host
      */
-    static initialize(customerKey: string, customerSecret: string, { host, wsHost, enableTelemetry, telemetryHost }?: Configuration): void;
+    static initialize(customerKey: string, customerSecret: string, { host, wsHost, fileHost, enableTelemetry, telemetryHost, }?: Configuration): void;
     /**
      * display SDK settings to the browser console.
      * @ignore
@@ -131,11 +133,12 @@ export default class VoxeetSDK extends EventEmitter {
      * @param callback - A callback returning a promise, called when the access token needs to refreshed
      * @param __namedParameters Optional parameter to override SDK default configuration
      * @param host host
-     * @param wsHost wshost
+     * @param wsHost websocket host
+     * @param fileHost file conversion host
      * @param enableTelemetry enable telemetry
      * @param telemetryHost telemetry host
      */
-    static initializeToken(accessToken: string, callback: Function, { host, wsHost, enableTelemetry, telemetryHost }?: Configuration): void;
+    static initializeToken(accessToken: string, callback: Function, { host, wsHost, fileHost, enableTelemetry, telemetryHost, }?: Configuration): void;
     /**
      * Allows to request for a specific region. This method must be called after initialize and before opening a session.
      * @param region

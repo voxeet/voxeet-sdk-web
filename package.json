@@ -1,6 +1,6 @@
 {
   "name": "@voxeet/voxeet-web-sdk",
-  "version": "3.4.0",
+  "version": "3.5.0-beta.1",
   "description": "The Voxeet Javascript SDK",
   "author": "Thomas Gourgues (tgourgues@voxeet.com)",
   "main": "dist/voxeet-sdk.js",
@@ -16,6 +16,7 @@
   "scripts": {
     "audit": "yarn audit",
     "licenses": "yarn licenses list",
+    "generate-licenses": "yarn licenses  generate-disclaimer --prod --non-interactive --no-progress -s voxeet > dist/licenses.txt",
     "check": "prettier -w --check  src",
     "test": "jest",
     "test:watch": "yarn test -- --watch",
@@ -55,7 +56,7 @@
   },
   "devDependencies": {
     "@babel/polyfill": "^7.4.0",
-    "@dolby-dvc/dvwc": "1.1.0-ezuga-jobno1408-5844053-121",
+    "@dolby-dvc/dvwc": "1.1.0-rc.5",
     "@types/bowser": "^1.1.1",
     "@types/debug": "^4.1.4",
     "@types/jest": "^26.0.15",
@@ -104,16 +105,17 @@
     "yargs": "^3.17.1"
   },
   "dependencies": {
-    "axios": "^0.24.0",
+    "axios": "^0.26.0",
     "bowser": "^2.8.1",
     "browserslist": "^4.5.2",
     "btoa": "^1.1.2",
+    "debug": "^4.3.1",
     "events": "^1.1.0",
     "get-float-time-domain-data": "^0.1.0",
     "global": "^4.4.0",
     "jwt-decode": "3.1.2",
     "lodash.merge": "4.6.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "sdp": "^2.3.0",
     "webrtc-adapter": "^6.3.2"
   },

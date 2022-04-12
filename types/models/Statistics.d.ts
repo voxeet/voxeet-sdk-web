@@ -153,6 +153,26 @@ export declare class WebAudioStats extends Stats {
 /**
  * @ignore
  */
+export declare class DataChannelStats extends Stats {
+    bytesReceived: number;
+    bytesSent: number;
+    dataChannelIdentifier: number;
+    id: string;
+    label: string;
+    messagesReceived: number;
+    messagesSent: number;
+    state: string;
+    timestamp: number;
+}
+export declare class TransportStats extends Stats {
+    id: string;
+    dtlsState: string;
+    selectedCandidatePairChanges: number;
+    selectedCandidatePairId: string;
+}
+/**
+ * @ignore
+ */
 export declare type Statistics = RTCInboundRTPAudioStreamStats | RTCOutboundRtpVideoStreamStats | RTCRemoteInboundRTPStreamStats | RTCCandidatePairStats;
 /**
  * The WebRTCStats model includes WebRTC statistics described in the [WebRTC documentation](https://www.w3.org/TR/webrtc-stats/#dom-rtcstatstype).

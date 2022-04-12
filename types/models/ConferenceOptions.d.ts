@@ -4,7 +4,7 @@ import ConferenceParameters from './ConferenceParameters';
  */
 export default interface ConferenceOptions {
     /**
-     * The conference alias.
+     * The conference alias. The alias needs to be a logical and unique string that consists of up to 250 characters, such as letters, digits, and symbols other than #. The alias is case insensitive, which means that using "foobar" and "FOObar" aliases refers to the same conference.
      */
     alias?: string;
     /**

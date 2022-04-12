@@ -2,7 +2,7 @@ import { BaseConferenceService } from '../Service';
 import { ConferenceJoined, ConferenceLeft } from '../../events/conference/index';
 import ConferenceManager from './ConferenceManager';
 import { SessionService } from '..';
-import { JoinOptions, ListenOptions, MixingOptions, ParticipantPermissions, ReplayOptions, DemoOptions } from '../../models/Options';
+import { DemoOptions, JoinOptions, ListenOptions, MixingOptions, ParticipantPermissions, ReplayOptions } from '../../models/Options';
 import { Participant } from '../../models/Participant';
 import { MediaStreamType, MediaStreamWithType } from '../../models/MediaStream';
 import Conference, { ConferenceLeaveOptions } from '../../models/Conference';
@@ -10,8 +10,9 @@ import ConferenceOptions from '../../models/ConferenceOptions';
 import { ParticipantQuality } from '../../models/Simulcast';
 import { WebRTCStats } from '../../models/Statistics';
 import AudioProcessingOptions from '../../models/AudioProcessingOptions';
-import { SpatialPosition, SpatialDirection, SpatialScale } from '../../models/SpatialAudio';
+import { SpatialDirection, SpatialPosition, SpatialScale } from '../../models/SpatialAudio';
 import { ICacheHelper } from '../../models/ICacheHelper';
+import { MediaManagerInterface } from '../../models/MediaDevice';
 /**
  * @ignore
  */
@@ -73,8 +74,9 @@ export declare class ConferenceService extends BaseConferenceService {
      * @param sdk
      * @param session
      * @param helper
+     * @param mediaManager
      */
-    constructor(sdk: any, session: SessionService, helper: ICacheHelper<string, MediaStreamTrack[]>);
+    constructor(sdk: unknown, session: SessionService, helper: ICacheHelper<string, MediaStreamTrack[]>, mediaManager: MediaManagerInterface);
     /**
      * Creates a conference with [ConferenceOptions](model/conferenceoptions).
      *
@@ -184,7 +186,7 @@ export declare class ConferenceService extends BaseConferenceService {
     /**
      * Allows a specific participant to play audio that is blocked by the browser's auto-play policy.
      */
-    playBlockedAudio(): void;
+    playBlockedAudio(): Promise<void>;
     /**
      * Stops playing the specified remote participants' audio to the local participant or stops playing the local participant's audio to the conference. The mute method does not notify the server to stop audio stream transmission. To stop sending an audio stream to the server or to stop receiving an audio stream from the server, use the [stopAudio](#stopaudio) method.
      *
@@ -507,11 +509,11 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     get peerConnectionStatus(): String;
     /**
-     * Provides a list of conference participants.
+     * Returns a list of [users](doc:js-client-sdk-model-participanttype#user) who are present at a conference. The local participant is also included on the list, even if the local participant is a [listener](doc:js-client-sdk-model-participanttype#listener).
      */
     get participants(): Map<string, Participant>;
     /**
-     * Provides the number of video streams that are transmitted to the local user.
+     * Returns the number of video streams that are transmitted to the local user.
      */
     get maxVideoForwarding(): number;
     /**
