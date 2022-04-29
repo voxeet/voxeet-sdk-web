@@ -15,7 +15,7 @@ import { ConferenceService } from '../conference/ConferenceService';
  *
  * **4.** The presenter calls the [start](#start) method to start presenting the file.
  *
- * **5.** The presenter and the viewers receive the [started](#started) event that informs that the file presentation starts. Receiving the [started](#started) event should trigger calling the [image](#image) method to download the converted file and display the proper page of the file by retrieving the individual images.
+ * **5.** The presenter and the viewers receive the [started](#started) event that informs that the file presentation starts. Upon receiving the [started](#started) event, call the [image](#image) method to get the converted file images URLs and display the proper page of the file by retrieving the individual images.
  *
  * **6.** The application is responsible for coordinating the page flip between the local and the presented files. The presenter calls the [update](#update) method to inform the service to send the updated page number to the participants.
  *
@@ -87,7 +87,7 @@ export declare class FilePresentationService extends BaseConferenceService {
      */
     stop(): Promise<any>;
     /**
-     * Downloads and displays locally the presented file by retrieving URLs of the individual images.
+     * Provides the image's URL that refers to a specific page of the presented file.
      * @param page - The number of the presented page. Files that do not have any pages, for example jpg images, require setting the value of the page parameter to `0`.
      * @param fileId - The file ID that allows presenting files without joining a conference.
      */

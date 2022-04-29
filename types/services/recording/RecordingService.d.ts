@@ -2,8 +2,7 @@ import { BaseConferenceService } from '../Service';
 import Recording from '../../models/Recording';
 import { ConferenceJoined, ConferenceLeft } from '../../events/conference';
 /**
- * The RecordingService allows an application to record conferences by using the [start](#start) and [stop](#stop)
- * methods that turn the recording on and off.
+ * The RecordingService allows an application to record conferences via the [start](#start) and [stop](#stop) methods. The model also [notifies](#statusupdated) about the recording status changes and allows [receiving information](#current) about the current recording.
  *
  * @noInheritDoc
  */

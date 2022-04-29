@@ -1,6 +1,6 @@
 {
   "name": "@voxeet/voxeet-web-sdk",
-  "version": "3.5.0-beta.1",
+  "version": "3.5.0-beta.2",
   "description": "The Voxeet Javascript SDK",
   "author": "Thomas Gourgues (tgourgues@voxeet.com)",
   "main": "dist/voxeet-sdk.js",
@@ -15,8 +15,7 @@
   },
   "scripts": {
     "audit": "yarn audit",
-    "licenses": "yarn licenses list",
-    "generate-licenses": "yarn licenses  generate-disclaimer --prod --non-interactive --no-progress -s voxeet > dist/licenses.txt",
+    "generate-licenses": "yarn licenses generate-disclaimer --prod --non-interactive --no-progress -s voxeet > dist/THIRD_PARTY_LICENSE.md",
     "check": "prettier -w --check  src",
     "test": "jest",
     "test:watch": "yarn test -- --watch",
@@ -41,7 +40,7 @@
     "start:testapp:devssl": "cross-env NODE_ENV=devssl LOCALVERSION=$(npm run --silent get-version)-devssl webpack-dev-server --config webpack.test.js --hot --content-base dist/",
     "start:prod": "cross-env NODE_ENV=production npm run start",
     "start:devssl": "cross-env NODE_ENV=devssl npm run start",
-    "prepublishOnly": "npm run clean && npm run build",
+    "prepublishOnly": "npm run clean && npm run build && npm run generate-licenses",
     "lint": "eslint src; exit 0",
     "jest:ci": "jest --ci --reporters=default --reporters=jest-junit"
   },
@@ -56,7 +55,7 @@
   },
   "devDependencies": {
     "@babel/polyfill": "^7.4.0",
-    "@dolby-dvc/dvwc": "1.1.0-rc.5",
+    "@dolby-dvc/dvwc": "1.1.0-rc.6",
     "@types/bowser": "^1.1.1",
     "@types/debug": "^4.1.4",
     "@types/jest": "^26.0.15",
