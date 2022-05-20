@@ -35,8 +35,7 @@ export default class ConferenceParameters {
     multiSession?: boolean;
     /**
      * Conference mode
-     * @ignore because this was done for a specific customer and will no longer be supported in the future. WalkieTalkie app
-     * does not use this API, instead it toggles mute based on PTT state.
+     * @ignore
      *
      * Possible values: `standard` and `push`, where `push` indicates a Push To Talk (PTT) meeting
      */

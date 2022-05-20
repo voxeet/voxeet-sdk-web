@@ -1,6 +1,6 @@
 {
   "name": "@voxeet/voxeet-web-sdk",
-  "version": "3.5.0-beta.2",
+  "version": "3.5.0-beta.3",
   "description": "The Voxeet Javascript SDK",
   "author": "Thomas Gourgues (tgourgues@voxeet.com)",
   "main": "dist/voxeet-sdk.js",
@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@babel/polyfill": "^7.4.0",
-    "@dolby-dvc/dvwc": "1.1.0-rc.6",
+    "@dolby-dvc/dvwc": "1.1.0-rc.8",
     "@types/bowser": "^1.1.1",
     "@types/debug": "^4.1.4",
     "@types/jest": "^26.0.15",

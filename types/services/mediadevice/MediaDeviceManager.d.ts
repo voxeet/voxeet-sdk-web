@@ -112,6 +112,9 @@ export declare class MediaManager implements MediaManagerInterface {
      * @return current selected device
      */
     getCurrentSelectedDevice(oldCurrent: MediaDeviceInfo, newList: MediaDeviceInfo[]): MediaDeviceInfo;
+    scheduleAudioInputChange(device: MediaDeviceInfo): void;
+    scheduleAudioOutputChange(device: MediaDeviceInfo): void;
+    scheduleVideoInputChange(device: MediaDeviceInfo): void;
     /**
      * get notified when devices list changed (retrieve device list or devices diff)
      * @param option
