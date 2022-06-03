@@ -82,6 +82,11 @@ export default class VoxeetSDK extends EventEmitter {
      */
     static get extensions(): ExtensionsService;
     /**
+     * UxKit version setter
+     * @ignore
+     */
+    static set uxkitVersion(version: string);
+    /**
      * Initializes the SDK using the customer key and secret.
      *
      * @param customerKey - The customer key.

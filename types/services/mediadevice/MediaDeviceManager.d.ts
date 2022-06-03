@@ -79,6 +79,10 @@ export declare class MediaManager implements MediaManagerInterface {
      */
     get audioInputDevices(): MediaDeviceInfo[];
     /**
+     * isOutputSelectorValid getter. Returns true if output audio selection is possible.
+     */
+    get isOutputSelectorValid(): boolean;
+    /**
      * list all connected devices
      */
     getConnectedDevices(): Promise<MediaDeviceInfo[]>;

@@ -24,10 +24,6 @@ export interface ListenOptions {
      */
     leaveConferenceOnBeforeUnload?: boolean;
     /**
-     * > 🚀Pre-release
-     * >
-     * > This API is a part of the [Pre-release program](doc:overview-pilot-and-pre-release-programs), as a Closed Beta.
-     *
      * Allows the local participant to change remote participants' locations and experience spatial audio. By default, this parameter is set to false. When set to true, the application must place the remote participants in a 3D space using the [setSpatialPosition](doc:js-client-sdk-conferenceservice#setspatialposition) method.
      *
      * [block:callout]
@@ -73,10 +69,6 @@ export interface ReplayOptions {
  */
 export interface DemoOptions {
     /**
-     * > 🚀Pre-release
-     * >
-     * > This API is a part of the [Pre-release program](doc:overview-pilot-and-pre-release-programs), as a Closed Beta.
-     *
      * Allows the local participant to change remote participants' locations and experience spatial audio. By default, this parameter is set to false. When set to true, the application must place the remote participants in a 3D space using the [setSpatialPosition](doc:js-client-sdk-conferenceservice#setspatialposition) method.
      *
      * [block:callout]
@@ -149,37 +141,17 @@ export declare class ParticipantPermissions {
     permissions: Set<ConferencePermission>;
 }
 /**
- * The DvwcParameters model contains information about parameters which are passed to DVWC component.
+ * @ignore
  */
 export interface DvwcParameters {
-    /**
-     * Input audio configuration.
-     */
     inputAudioConfig?: InputAudioConfig;
-    /**
-     * Output audio configuration.
-     */
     outputAudioConfig?: OutputAudioConfig;
-    /**
-     * Session configuration.
-     */
     sessionConfig?: SessionConfig;
 }
 /**
- * The JoinOptions model defines how the application expects to join a conference in terms of media preference. The JoinOptions model specifies:
+ * The JoinOptions model defines how the application expects to join a conference.
  *
- * - [Conference access token](#conferenceaccesstoken) that is required to join a protected conference
- * - The [WebRTC constraints](#constraints)
- * - [The maximum number](#maxvideoforwarding) of video streams that may be transmitted to the joining participant
- * - Information whether the joining participant is a [Mixer](#mixing)
- * - Information whether the joining participant wants [sending](#prefersendmono) or [receiving](#preferrecvmono) mono sound
- * - Information whether the joining participant wants to enable [Simulcast](#simulcast)
- * - Information whether the joining participant wants to [handle](#leaveconferenceonbeforeunload) the [beforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event) event on the application level
- * - The [video filter](#videofilter) that allows blurring or changing the participant's background
- * - The [video filters options](#videofilteroptions)
- * - Information whether the joining participant wants to enable [spatial audio](#spatialaudio)
- *
- * For more information related to JoinOptions, see [MediaStreamConstraints](https://www.w3.org/TR/mediacapture-streams/#mediastreamconstraints).
+ * For more information related to JoinOptions in terms of media preference, see [MediaStreamConstraints](https://www.w3.org/TR/mediacapture-streams/#mediastreamconstraints).
  */
 export interface JoinOptions {
     /**
@@ -220,8 +192,7 @@ export interface JoinOptions {
      */
     leaveConferenceOnBeforeUnload?: boolean;
     /**
-     * @ignore
-     * Joins a conference using DVWC.
+     * Changes the audio codec used in Dolby Voice conferences. If set to true, the SDK uses the Dolby Voice Codec. If set to false, the SDK uses Opus. By default, the parameter is set to true. For more information about the supported audio codecs, see the [Dolby Voice](doc:guides-dolby-voice) document.
      */
     dvwc?: boolean | DvwcParameters;
     /**
@@ -233,10 +204,6 @@ export interface JoinOptions {
      */
     videoFilterOptions?: VideoFilterOptions;
     /**
-     * > 🚀Pre-release
-     * >
-     * > This API is a part of the [Pre-release program](doc:overview-pilot-and-pre-release-programs), as a Closed Beta.
-     *
      * Allows the local participant to change remote participants' locations and experience spatial audio. By default, this parameter is set to false. When set to true, the application must place the remote participants in a 3D space using the [setSpatialPosition](doc:js-client-sdk-conferenceservice#setspatialposition) method.
      *
      * [block:callout]

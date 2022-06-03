@@ -13,10 +13,6 @@ export declare type PolarPosition = {
     azimuth: number;
 };
 /**
- * > 🚀Pre-release
- * >
- * > This model is a part of the [Pre-release program](doc:overview-pilot-and-pre-release-programs), as a Closed Beta.
- *
  * The SpatialPosition model represents a participant's audio position. The position is defined using Cartesian coordinates.
  *
  * You can define the direction of each axis in the coordinate system using the [setSpatialEnvironment](doc:js-client-sdk-conferenceservice#setspatialenvironment) method. By default, the environment consists of the following axes:
@@ -30,10 +26,6 @@ export declare type PolarPosition = {
  */
 export declare type SpatialPosition = Vector<number>;
 /**
- * > 🚀Pre-release
- * >
- * > This model is a part of the [Pre-release program](doc:overview-pilot-and-pre-release-programs), as a Closed Beta.
- *
  * The SpatialDirection model defines the direction a participant is facing. The model is specified as a set of three Euler rotations about the corresponding axis in the order of z-x-y:
  *
  * The following properties define a rotation about the specified positive axis:
@@ -50,10 +42,6 @@ export declare type SpatialPosition = Vector<number>;
  */
 export declare type SpatialDirection = Vector<number>;
 /**
- * > 🚀Pre-release
- * >
- * > This model is a part of the [Pre-release program](doc:overview-pilot-and-pre-release-programs), as a Closed Beta.
- *
  * The SpatialScale model defines how to convert units from the application's coordinate system (pixels or centimeters) into meters used by the spatial audio coordinate system. For example, let's assume that SpatialScale is set to (100,100,100), which indicates that 100 of the applications units (cm) map to 1 meter for the audio coordinates. If the listener's location is (0,0,0)cm and a remote participant's location is (200,200,200)cm, the listener has an impression of hearing the remote participant from the (2,2,2)m location.
  *
  * **Note**: A scale value must have a value greater than zero. The default is (1,1,1).

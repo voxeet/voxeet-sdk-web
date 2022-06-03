@@ -346,7 +346,7 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     stopScreenShare(): Promise<any>;
     /**
-     * Provides [standard WebRTC statistics](https://www.w3.org/TR/webrtc-stats/#dom-rtcstatstype) for the application. Based on the WebRTC statistics, the SDK computes [audio and video statistics](doc:js-client-sdk-model-qualityindicator).
+     * Provides [standard WebRTC statistics](https://www.w3.org/TR/webrtc-stats/#dom-rtcstatstype) for the application. Based on the WebRTC statistics, the SDK computes [audio and video statistics](doc:js-client-sdk-model-qualityindicator). Calling this function at a higher frequency than 2Hz will have no effect.
      * @return {Promise<Statistics>}
      */
     localStats(): WebRTCStats;
@@ -382,10 +382,6 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     configureStateDump(audioLoggingLength: number): Promise<any>;
     /**
-     * > 🚀Pre-release
-     * >
-     * > This API is a part of the [Pre-release program](doc:overview-pilot-and-pre-release-programs), as a Closed Beta.
-     *
      * Sets a participant's position in space to enable the spatial audio experience during a Dolby Voice conference. This method is available only for participants who joined the conference with the [spatialAudio](doc:js-client-sdk-model-joinoptions#spatialaudio) parameter enabled. Otherwise, SDK triggers [UnsupportedError](doc:js-client-sdk-model-unsupportederror). Depending on the specified participant in the `participant` parameter, the setSpatialPosition method impacts the location from which audio is heard or from which audio is rendered:
      *
      * - When the specified participant is the local participant, setSpatialPosition sets a location from which the local participant listens to a conference. If the local participant does not have an established location, the participant hears audio from the default location (0, 0, 0).
@@ -403,10 +399,6 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     setSpatialPosition(participant: Participant, position: NonNullable<SpatialPosition>): void;
     /**
-     * > 🚀Pre-release
-     * >
-     * > This API is a part of the [Pre-release program](doc:overview-pilot-and-pre-release-programs), as a Closed Beta.
-     *
      * Sets the direction a participant is facing in space. This method is available only for participants who joined the conference with the [spatialAudio](doc:js-client-sdk-model-joinoptions#spatialaudio) parameter enabled. Otherwise, SDK triggers [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
      *
      * Currently, this method is only supported for the local participant. The method changes the direction the local participant is facing. When the specified participant is a remote participant, SDK triggers [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
@@ -425,10 +417,6 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     setSpatialDirection(participant: Participant, direction: SpatialDirection): void;
     /**
-     * > 🚀Pre-release
-     * >
-     * > This API is a part of the [Pre-release program](doc:overview-pilot-and-pre-release-programs), as a Closed Beta.
-     *
      * Configures a spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance.
      *
      * This method is available only for participants who joined the conference with the [spatialAudio](doc:js-client-sdk-model-joinoptions#spatialaudio) parameter enabled. Otherwise, SDK triggers [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
