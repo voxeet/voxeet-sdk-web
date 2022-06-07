@@ -192,7 +192,12 @@ export interface JoinOptions {
      */
     leaveConferenceOnBeforeUnload?: boolean;
     /**
-     * Changes the audio codec used in Dolby Voice conferences. If set to true, the SDK uses the Dolby Voice Codec. If set to false, the SDK uses Opus. By default, the parameter is set to true. For more information about the supported audio codecs, see the [Dolby Voice](doc:guides-dolby-voice) document.
+     * Changes the audio codec used in Dolby Voice conferences in SDK 3.5 and later versions:
+     *
+     * - If set to true, the SDK uses the Dolby Voice Codec (DVC) on Chrome and Edge on desktop operating systems; on other browsers and mobile operating systems, the SDK uses Opus. In a case of a problem with using DVC in a conference, the SDK automatically switches to Opus.
+     * - If set to false, the SDK uses Opus.
+     *
+     * By default, this parameter is set to false. For more information about the supported audio codecs, see the [Dolby Voice](doc:guides-dolby-voice) document.
      */
     dvwc?: boolean | DvwcParameters;
     /**
