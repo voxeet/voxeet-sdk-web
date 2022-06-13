@@ -30,9 +30,6 @@ export default class VoxeetSDK extends EventEmitter {
      * @ignore
      */
     userId: string;
-    /**
-     * @deprecated Will became private
-     */
     private constructor();
     /**
      * Retrieves the [SessionService](doc:js-client-sdk-sessionservice) instance that allows the participant to use sessions.
