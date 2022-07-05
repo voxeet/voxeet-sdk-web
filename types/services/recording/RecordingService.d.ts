@@ -14,7 +14,7 @@ export declare class RecordingService extends BaseConferenceService {
      */
     constructor(sdk: any);
     /**
-     * Starts recording a conference. For more information, see the [Recording mechanisms](doc:guides-recording-mechanisms) article or the [Recording](doc:recording) document.
+     * Starts recording a conference. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article.
      */
     start(): any;
     /**

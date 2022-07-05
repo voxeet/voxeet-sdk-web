@@ -2,19 +2,23 @@ import { ConferencePermission } from './Conference';
 import { Participant } from './Participant';
 import { InputAudioConfig, OutputAudioConfig, SessionConfig } from '@dolby-dvc/dvwc';
 import { VideoFilter, VideoFilterOptions } from './VideoFilters';
+import { SupportedSpatialAudioStyles } from './SpatialAudio';
+import { VideoForwardingStrategy } from './VideoForwarding';
 /**
- * The ListenOptions model allows specifying media preference for a listener. The ListenOptions model specifies:
  *
- * - [Conference access token](#conferenceaccesstoken) that is required to join a protected conference
- * - [The maximum number](#maxvideoforwarding) of video streams that may be transmitted to the joining participant
- * - Information whether the joining participant wants to [handle](#leaveconferenceonbeforeunload) the [beforeunload](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event) event on the application level
- * - Information whether the joining participant wants to enable [spatial audio](#spatialaudio)
+The ListenOptions model defines how the application expects to join a conference using the [listen](doc:js-client-sdk-conferenceservice#listen) method.
  */
 export interface ListenOptions {
     /**
      * Sets the maximum number of video streams that may be transmitted to the joining participant. The valid parameter's values are between 0 and 25 for desktop browsers and between 0 and 4 for mobile browsers. In the case of providing a value smaller than 0 or greater than the valid values, SDK triggers the [VideoForwardingError](doc:js-client-sdk-model-videoforwardingerror). If the parameter value is not specified, the SDK automatically sets the maximum possible value: 25 for desktop browsers and 4 for mobile browsers.
+     *
+     * This property is available in SDK 3.1 and later.
      */
     maxVideoForwarding?: number;
+    /**
+     * Changes the [video forwarding strategy](doc:js-client-sdk-model-videoforwardingstrategy) for the local participant. This method is available only in SDK 3.6 and later.
+     */
+    forwardingStrategy?: VideoForwardingStrategy;
     /**
      * The conference access token that is required to join a protected conference if the conference is created using the [create](reference:postconferencecreate) REST API. If the conference is created using the [create](doc:js-client-sdk-conferenceservice#create) method, the token is managed by the SDK and is not visible to the application users. For more information, see the [Enhanced Conference Access Control](doc:guides-enhanced-conference-access-control) document.
      */
@@ -24,20 +28,12 @@ export interface ListenOptions {
      */
     leaveConferenceOnBeforeUnload?: boolean;
     /**
-     * Allows the local participant to change remote participants' locations and experience spatial audio. By default, this parameter is set to false. When set to true, the application must place the remote participants in a 3D space using the [setSpatialPosition](doc:js-client-sdk-conferenceservice#setspatialposition) method.
-     *
-     * [block:callout]
-     * {
-     * "type": "danger",
-     * "title": "Warning",
-     * "body": "Remote participants' audio is disabled until the participants are assigned to specific locations. We recommend calling [setSpatialPosition](doc:js-client-sdk-conferenceservice#setspatialposition) from the [participantAdded](doc:js-client-sdk-conferenceservice#participantadded) event to ensure that all participants are assigned to specific positions."
-     * }
-     * [/block]
+     * Enables spatial audio for the local participant who joins a Dolby Voice conference. By default, this parameter is set to false.
      */
     spatialAudio?: boolean;
 }
 /**
- * The MixingOptions model notifies the server that a participant who [joins](doc:js-client-sdk-conferenceservice#join) or [replays](doc:js-client-sdk-conferenceservice#replay) a conference is a special participant called Mixer. Mixer can use the SDK in a mixer mode to record or replay a conference. For more information, see the [Recording mechanisms](doc:guides-recording-mechanisms) article.
+ * The MixingOptions model notifies the server that a participant who [joins](doc:js-client-sdk-conferenceservice#join) or [replays](doc:js-client-sdk-conferenceservice#replay) a conference is a special participant called Mixer. Mixer can use the SDK in a mixer mode to record or replay a conference. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article.
  */
 export interface MixingOptions {
     /**
@@ -176,13 +172,14 @@ export interface JoinOptions {
     mixing?: MixingOptions;
     /**
      * Sets the maximum number of video streams that may be transmitted to the joining participant. The valid parameter's values are between 0 and 25 for desktop browsers and between 0 and 4 for mobile browsers. In the case of providing a value smaller than 0 or greater than the valid values, SDK triggers the [VideoForwardingError](doc:js-client-sdk-model-videoforwardingerror). If the parameter value is not specified, the SDK automatically sets the maximum possible value: 25 for desktop browsers and 4 for mobile browsers.
+     *
+     * This property is available in SDK 3.1 and later.
      */
     maxVideoForwarding?: number;
     /**
-     * Activates the video forwarding strategy for the backend, unchangeable.
-     * @ignore
+     * Changes the [video forwarding strategy](doc:js-client-sdk-model-videoforwardingstrategy) for the local participant. This method is available only in SDK 3.6 and later.
      */
-    forwardingStrategy?: boolean;
+    forwardingStrategy?: VideoForwardingStrategy;
     /**
      * The conference access token that is required to join a protected conference if the conference is created using the [create](reference:postConferenceCreate) REST API. If the conference is created using the [create](doc:js-client-sdk-conferenceservice#create) method, the token is managed by the SDK and is not visible to the application users. For more information, see the [Enhanced Conference Access Control](doc:guides-conference-access-control) document.
      */
@@ -209,15 +206,20 @@ export interface JoinOptions {
      */
     videoFilterOptions?: VideoFilterOptions;
     /**
-     * Allows the local participant to change remote participants' locations and experience spatial audio. By default, this parameter is set to false. When set to true, the application must place the remote participants in a 3D space using the [setSpatialPosition](doc:js-client-sdk-conferenceservice#setspatialposition) method.
+     * Enables spatial audio for the local participant who joins a Dolby Voice conference. By default, this parameter is set to false. When set to true in a conference that uses the individual [spatial audio style](doc:js-client-sdk-model-spatialaudiostyle), the application must place remote participants in a 3D space using the [setSpatialPosition](doc:js-client-sdk-conferenceservice#setspatialposition) method.
      *
      * [block:callout]
      * {
      * "type": "danger",
      * "title": "Warning",
-     * "body": "Remote participants' audio is disabled until the participants are assigned to specific locations. We recommend calling [setSpatialPosition](doc:js-client-sdk-conferenceservice#setspatialposition) from the [participantAdded](doc:js-client-sdk-conferenceservice#participantadded) event to ensure that all participants are assigned to specific positions."
+     * "body": "In the individual spatial audio style, remote participants' audio is disabled until the participants are assigned to specific locations. We recommend calling [setSpatialPosition](doc:js-client-sdk-conferenceservice#setspatialposition) from the [participantUpdated](doc:js-client-sdk-conferenceservice#participantupdated) event to ensure that all participants are assigned to specific positions."
      * }
      * [/block]
      */
     spatialAudio?: boolean;
+    /**
+     * @ignore
+     * Checks the available [spatial audio styles](#spatialaudiostyle). The list of the available styles is based on the version of the used SDK and the spatial audio style selected during a conference creation.
+     */
+    supportedSpatialAudioStyles?: SupportedSpatialAudioStyles;
 }

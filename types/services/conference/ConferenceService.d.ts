@@ -10,9 +10,10 @@ import ConferenceOptions from '../../models/ConferenceOptions';
 import { ParticipantQuality } from '../../models/Simulcast';
 import { WebRTCStats } from '../../models/Statistics';
 import AudioProcessingOptions from '../../models/AudioProcessingOptions';
-import { SpatialDirection, SpatialPosition, SpatialScale } from '../../models/SpatialAudio';
+import { SpatialAudioStyle, SpatialDirection, SpatialPosition, SpatialScale } from '../../models/SpatialAudio';
 import { ICacheHelper } from '../../models/ICacheHelper';
 import { MediaManagerInterface } from '../../models/MediaDevice';
+import { VideoForwardingOptions, VideoForwardingStrategy } from '../../models/VideoForwarding';
 /**
  * @ignore
  */
@@ -98,13 +99,13 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     demo(options?: DemoOptions): Promise<Conference>;
     /**
-     * Replays a previously recorded conference. For more information, see the [Recording mechanisms](doc:guides-recording-mechanisms) article.
+     * Replays a previously recorded conference. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article.
      *
      * See also: [join](#join), [listen](#listen)
      *
      * @param conference - The conference object.
      * @param replayOptions - The replay options.
-     * @param mixingOptions - The model that notifies the server that a participant who replays the conference is a special participant called [Mixer](doc:guides-recording-mechanisms#mixer).
+     * @param mixingOptions - The model that notifies the server that a participant who replays the conference is a special participant called Mixer.
      *
      * @returns
      */
@@ -276,12 +277,25 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     stopVideo(participant: Participant): Promise<void>;
     /**
-     * Sets the maximum number of video streams that may be transmitted to the local participant. This method also allows using a pin option to prioritize the specific participant's video streams and display their videos even when these participants do not talk. For more information, see the [Video Forwarding](doc:guides-video-forwarding) article.
+     * Sets the maximum number of video streams that may be transmitted to the local participant. This method also allows the local participant to use a pin option to prioritize the specific participant's video streams and display their videos even when these participants do not talk. For more information, see the [Video Forwarding](doc:guides-video-forwarding) article.
+     * This method was introduced in SDK 3.1 and deprecated in SDK 3.6.
      * @param max - The maximum number of video streams that may be transmitted to the local participant. The valid parameter's values are between 0 and 25 for desktop browsers and between 0 and 4 for mobile browsers. In the case of providing a value smaller than 0 or greater than the valid values, SDK triggers the [VideoForwardingError](doc:js-client-sdk-model-videoforwardingerror). If the parameter value is not specified, the SDK automatically sets the maximum possible value: 25 for desktop browsers and 4 for mobile browsers.
      * @param participants - The list of the prioritized participants. This parameter allows using a pin option to prioritize specific participant's video streams and display their videos even when these participants do not talk.
      * @return {Promise<Error>}
+     * @deprecated
      */
-    videoForwarding(max: number, participants?: Array<Participant>): Promise<any>;
+    videoForwarding(max: number, participants?: Array<Participant>): Promise<void>;
+    /**
+     * Sets the video forwarding functionality for the local participant. The method allows:
+     * - Setting the maximum number of video streams that may be transmitted to the local participant
+     * - Prioritizing specific participants' video streams that need to be transmitted to the local participant
+     * - Changing the [video forwarding strategy](doc:js-client-sdk-model-videoforwardingstrategy) that defines how the SDK should select conference participants whose videos will be received by the local participant
+     *
+     * This method is available only in SDK 3.6 and later.
+     * @param VideoForwardingOptions - The video forwarding options.
+     * @return {Promise<Error>}
+     */
+    videoForwarding({ strategy, max, participants }: VideoForwardingOptions): Promise<void>;
     /**
      * Enables and disables audio processing for the local participant in Dolby Voice conferences.
      * @param participant - The conference participant.
@@ -382,36 +396,52 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     configureStateDump(audioLoggingLength: number): Promise<any>;
     /**
-     * Sets a participant's position in space to enable the spatial audio experience during a Dolby Voice conference. This method is available only for participants who joined the conference with the [spatialAudio](doc:js-client-sdk-model-joinoptions#spatialaudio) parameter enabled. Otherwise, SDK triggers [UnsupportedError](doc:js-client-sdk-model-unsupportederror). Depending on the specified participant in the `participant` parameter, the setSpatialPosition method impacts the location from which audio is heard or from which audio is rendered:
+     * Sets a participant's position in space to enable the spatial audio experience during a Dolby Voice conference. This method is available only for participants who joined the conference using the [join](#join) method with the [spatialAudio](doc:js-client-sdk-model-joinoptions#spatialaudio) parameter enabled. Otherwise, SDK triggers the [UnsupportedError](doc:js-client-sdk-model-unsupportederror) error. To set a spatial position for listeners, use the [Set Spatial Listeners Audio](ref:set-spatial-listeners-audio) REST API.
+     *
+     * Depending on the specified participant in the `participant` parameter, the setSpatialPosition method impacts the location from which audio is heard or from which audio is rendered:
      *
      * - When the specified participant is the local participant, setSpatialPosition sets a location from which the local participant listens to a conference. If the local participant does not have an established location, the participant hears audio from the default location (0, 0, 0).
      *
-     * - When the specified participant is a remote participant, setSpatialPosition ensures the remote participant's audio is rendered from the specified position in space. If the remote participant does not have an established location, the participant does not have a default position and will remain muted until a position is specified.
+     * - When the specified participant is a remote participant, setSpatialPosition ensures the remote participant's audio is rendered from the specified location in space. Setting the remote participants’ positions is required in conferences that use the individual [spatial audio style](doc:js-client-sdk-model-spatialaudiostyle). In these conferences, if a remote participant does not have an established location, the participant does not have a default position and will remain muted until a position is specified. The shared spatial audio style does not support setting the remote participants' positions. In conferences that use the shared style, the spatial scene is shared by all participants, so that each client can set a position and participate in the shared scene.
      *
-     * For example, if a local participant Eric, who does not have a set direction, calls setSpatialPosition(VoxeetSDK.session.participant, {x:3,y:0,z:0}), Eric hears audio from the position (3,0,0). If Eric also calls setSpatialPosition(Sophia, {x:7,y:1,z:2}), he hears Sophia from the position (7,1,2). In this case, Eric hears Sophia 4 meters to the right, 1 meter above, and 2 meters in front. The following graphic presents the participants' locations:
+     * For example, if a local participant Eric, who uses the individual spatial audio style and does not have a set direction, calls setSpatialPosition(VoxeetSDK.session.participant, {x:3,y:0,z:0}), Eric hears audio from the position (3,0,0). If Eric also calls setSpatialPosition(Sophia, {x:7,y:1,z:2}), he hears Sophia from the position (7,1,2). In this case, Eric hears Sophia 4 meters to the right, 1 meter above, and 2 meters in front. The following graphic presents the participants' locations:
      *
-     * <--A graphic placeholder-->
      *
-     * If sending the updated positions to the server fails, the SDK generates the ConferenceService event error that includes [SpatialAudioError](doc:js-client-sdk-model-spatialaudioerror).
+     * [block:image]
+     * {
+     *   "images": [
+     *     {
+     *       "image": [
+     *         "https://files.readme.io/d4d9f7a-05_Axis_People_v04_220202.png",
+     *         "05_Axis_People_v04_220202.png",
+     *         1920,
+     *         1080,
+     *         "#264159"
+     *       ],
+     *       "sizing": "full"
+     *     }
+     *   ]
+     * }
+     * [/block]
      *
      * @param participant - The selected participant. Using the local participant sets the location from which the participant will hear a conference. Using a remote participant sets the position from which the participant's audio will be rendered.
      * @param position - The participants' audio location.
      */
     setSpatialPosition(participant: Participant, position: NonNullable<SpatialPosition>): void;
     /**
-     * Sets the direction a participant is facing in space. This method is available only for participants who joined the conference with the [spatialAudio](doc:js-client-sdk-model-joinoptions#spatialaudio) parameter enabled. Otherwise, SDK triggers [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
+     * Sets the direction the local participant is facing in space. This method is available only for participants who joined the conference using the [join](#join) method with the [spatialAudio](doc:js-client-sdk-model-joinoptions#spatialaudio) parameter enabled. Otherwise, SDK triggers the [UnsupportedError](doc:js-client-sdk-model-unsupportederror) error. To set a spatial direction for listeners, use the [Set Spatial Listeners Audio](ref:set-spatial-listeners-audio) REST API.
      *
-     * Currently, this method is only supported for the local participant. The method changes the direction the local participant is facing. When the specified participant is a remote participant, SDK triggers [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
+     * If the local participant hears audio from the position (0,0,0) facing down the Z-axis and locates a remote participant in the position (1,0,1), the local participant hears the remote participant from their front-right. If the local participant chooses to change the direction they are facing and rotate +90 degrees about the Y-axis, then instead of hearing the speaker from the front-right position, they hear the speaker from the front-left position. The following video presents this example:
      *
-     * If the local participant hears audio from the position (0,0,0) facing down the Z-axis and locates a remote participant in the position (1,0,1), the local participant hears the remote participant from their front-right. If the local participant chooses to change the direction they are facing and rotate +90 degrees about the Y-axis, then instead of hearing the speaker from the front-right position, they hear the speaker from the front-left position. The following graphic presents this example:
-     *
-     * <--A graphic placeholder-->
+     * [block:html]
+     * {
+     *   "html": "<div style=\"text-align:center\">\n<video controls width=\"289\">\n\n <source src=\"https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/07_setSpatialDirection_v03_220131.mp4\"\n type=\"video/mp4\">\n\n Sorry, your browser doesn't support embedded videos.\n</video>\n\n</div>"
+     * }
+     * [/block]
      *
      * For more information, see the [SpatialDirection](doc:js-client-sdk-model-spatialdirection) model.
      *
-     * If sending the updated positions to the server fails, the SDK generates the ConferenceService event error that includes [SpatialAudioError](doc:js-client-sdk-model-spatialaudioerror).
-     *
-     * @param participant - The selected participant. Using the local participant sets the location from which the participant will hear a conference. Using a remote participant sets the position from which the participant's audio will be rendered.
+     * @param participant - The local participant.
      * @param direction - The direction the participant is facing in space.
      *
      */
@@ -419,7 +449,7 @@ export declare class ConferenceService extends BaseConferenceService {
     /**
      * Configures a spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance.
      *
-     * This method is available only for participants who joined the conference with the [spatialAudio](doc:js-client-sdk-model-joinoptions#spatialaudio) parameter enabled. Otherwise, SDK triggers [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
+     * This method is available only for participants who joined a conference using the [join](#join) method with the [spatialAudio](doc:js-client-sdk-model-joinoptions#spatialaudio) parameter enabled. Otherwise, SDK triggers the [UnsupportedError](doc:js-client-sdk-model-unsupportederror) error. To set a spatial environment for listeners, use the [Set Spatial Listeners Audio](ref:set-spatial-listeners-audio) REST API.
      *
      * If not called, the SDK uses the default spatial environment, which consists of the following values:
      *
@@ -429,12 +459,24 @@ export declare class ConferenceService extends BaseConferenceService {
      * - `scale` = (1, 1, 1), where one unit on any axis is 1 meter
      *
      * The default spatial environment is presented in the following diagram:
+     * [block:image]
+     * {
+     *   "images": [
+     *     {
+     *       "image": [
+     *         "https://files.readme.io/e43475b-defaultEnv.png",
+     *         "defaultEnv.png",
+     *         1920,
+     *         1080,
+     *         "#163b58"
+     *       ],
+     *       "sizing": "full"
+     *     }
+     *   ]
+     * }
+     * [/block]
      *
-     * <--A graphic placeholder-->
-     *
-     * If sending the updated positions to the server fails, the SDK generates the ConferenceService event error that includes [SpatialAudioError](doc:js-client-sdk-model-spatialaudioerror).
-     *
-     * @param scale - The application's distance units or scale in application units per one meter. The value must be greater than 0. Otherwise, SDK emits [ParameterError](doc:js-client-sdk-model-parametererror).
+     * @param scale - A scale that defines how to convert units from the coordinate system of an application (pixels or centimeters) into meters used by the spatial audio coordinate system. For example, if SpatialScale is set to (100,100,100), it indicates that 100 of the applications units (cm) map to 1 meter for the audio coordinates. In such a case, if the listener's location is (0,0,0)cm and a remote participant's location is (200,200,200)cm, the listener has an impression of hearing the remote participant from the (2,2,2)m location. The scale value must be greater than 0. For more information, see the [Spatial Audio](doc:guides-integrating-spatial-audio#configure-the-spatial-environment-scale) article.
      * @param forward - A vector describing the direction the application considers as forward. The value must be orthogonal to up and right. Otherwise, SDK emits [ParameterError](doc:js-client-sdk-model-parametererror).
      * @param up - A vector describing the direction the application considers as up. Must be orthogonal to forward and right. Otherwise, SDK emits [ParameterError](doc:js-client-sdk-model-parametererror).
      * @param right - A vector describing the direction the application considers as right. Must be orthogonal to forward and up. Otherwise, SDK emits [ParameterError](doc:js-client-sdk-model-parametererror).
@@ -504,6 +546,7 @@ export declare class ConferenceService extends BaseConferenceService {
      * Returns the number of video streams that are transmitted to the local user.
      */
     get maxVideoForwarding(): number;
+    get videoForwardingStrategy(): VideoForwardingStrategy;
     /**
      * Returns information about the current conference. Use this accessor if you wish to receive information that is available in the [Conference](doc:js-client-sdk-model-conference) object, such as the conference [alias](doc:js-client-sdk-model-conference#alias), [ID](doc:js-client-sdk-model-conference#id), information if the conference [is new](doc:js-client-sdk-model-conference#isnew), conference [parameters](doc:js-client-sdk-model-conference#params), local participant's conference [permissions](doc:js-client-sdk-model-conference#permissions), conference [PIN code](doc:js-client-sdk-model-conference#pincode), or conference [status](doc:js-client-sdk-model-conference#status). For example, use the following code to ask about the local participant's conference permissions:
      *
@@ -516,6 +559,7 @@ export declare class ConferenceService extends BaseConferenceService {
      * @ignore
      */
     get manager(): ConferenceManager;
+    get spatialAudioStyle(): SpatialAudioStyle | null;
     get leaveConferenceOnBeforeUnload(): boolean;
 }
 export {};

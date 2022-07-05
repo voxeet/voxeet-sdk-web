@@ -1,4 +1,54 @@
 import { Participant } from './Participant';
+/**
+ * The SpatialAudioStyle model defines how the spatial location is communicated between SDK and the Dolby.io server. The style can be defined during a conference creation, although its value for each participant depends on the participant's spatial audio setting. The shared spatial audio style is only available for participants who joined a conference with spatial audio enabled. Setting the spatial audio style is supported only on SDK 3.6 and later. The earlier SDK versions support only the individual mode and do not allow participants to join conferences created with the spatial audio style set to shared. The following table lists the possible spatial audio style settings for the local participant:
+ *
+ * | Create: SpatialAudioStyle | Join: SpatialAudio | Result                            |
+ * |---------------------------|--------------------|-----------------------------------|
+ * | Individual                | True               | Success                           |
+ * | Individual                | False              | Success                           |
+ * | Shared                    | True               | Success only on SDK 3.6 and later |
+ * | Shared                    | False              | Rejected                          |
+ * | Disabled                  | True               | Rejected                          |
+ * | Disabled                  | False              | Success                           |
+ *
+ */
+export declare enum SpatialAudioStyle {
+    /**
+     * Disables spatial audio in a conference.
+     */
+    Disabled = "disabled",
+    /**
+     * Sets the spatial location that is based on the spatial scene, local participant's position, and remote participants' positions. This allows a client to control the position using the local, self-contained logic. However, the client has to communicate a large set of requests constantly to the server, which increases network traffic, log subsystem pressure, and complexity of the client-side application. This option is selected by default. We recommend this mode for A/V congruence scenarios in video conferencing and similar applications.
+     */
+    Individual = "individual",
+    /**
+     * Sets the spatial location that is based on the spatial scene and the local participant's position, while the relative positions among participants are calculated by the Dolby.io server. This way, the spatial scene is shared by all participants, so that each client can set a position and participate in the shared scene. This approach simplifies communication between the client and the server and decreases network traffic. We recommend this mode for 2D virtual space scenarios, such as 2D games, trade shows, water cooler scenarios, etc.
+     */
+    Shared = "shared"
+}
+export declare type SpatialAudioStyleValuesUnion = typeof SpatialAudioStyle[keyof typeof SpatialAudioStyle];
+export declare type SupportedSpatialAudioStyles = SpatialAudioStyleValuesUnion[];
+export declare type SpatialEnvironmentKey = keyof SpatialEnvironment;
+export declare type ConversionMatrixItem = Record<SpatialEnvironmentKey, {
+    axis: string;
+    value: number;
+}>;
+export declare type ConversionMatrix = Record<string, {
+    axis: string;
+    scale: number;
+}>;
+export declare type SpatialPositionKey = keyof SpatialPosition;
+export interface SpatialAudioManager {
+    setEnvironment: (environment: SpatialEnvironment) => void;
+    setParticipantPosition: (participant: Participant, position: SpatialPosition) => void;
+    setLocalDirection: (direction: SpatialDirection) => void;
+    removeParticipant?: (participantId: string) => void;
+}
+export declare type CreateSpatialAudioManager = (option: {
+    style: SpatialAudioStyle;
+    conferenceId: string;
+    participantId: string;
+}) => SpatialAudioManager | undefined;
 export declare type Vector<T> = {
     x: T;
     y: T;

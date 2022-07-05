@@ -1,3 +1,4 @@
+import { SpatialAudioStyle } from './SpatialAudio';
 /**
  * @ignore
  */
@@ -12,6 +13,7 @@ export interface JoinParametersData {
     stats: boolean;
     ttl: number;
     videoCodec: string;
+    spatialAudioStyle?: SpatialAudioStyle;
 }
 /**
  * The ConferenceParameters model allows the application to:
@@ -79,6 +81,10 @@ export default class ConferenceParameters {
     dolbyVoice?: boolean;
     /** A boolean that indicates whether the application wishes to create an audio-only conference. Setting this parameter to true results in creating a conference that does not allow participants to [enable their videos](doc:js-client-sdk-conferenceservice#startvideo). If a participant calls the [startVideo](doc:js-client-sdk-conferenceservice#startvideo) method in an audio-only conference, the SDK returns [ServerError](js-client-sdk-model-servererror). */
     audioOnly?: boolean;
+    /**
+     * The conference spatial audio style.
+     */
+    spatialAudioStyle?: SpatialAudioStyle;
     /**
      * @ignore
      */

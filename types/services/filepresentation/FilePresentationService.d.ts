@@ -48,7 +48,7 @@ export declare class FilePresentationService extends BaseConferenceService {
      */
     constructor(sdk: any, conferenceService: ConferenceService);
     /**
-     * Converts the user-provided file into multiple pages, as images, that can be shared during the file presentation. The file is uploaded as FormData.
+     * Converts the user-provided file into multiple pages, as images, that can be shared during the file presentation. The file is uploaded as FormData. The maximum possible size of the uploaded file is 250 MB. In the case of uploading a file that exceeds 250 MB, the SDK triggers an error.
      *
      * Supported file formats are:
      *
