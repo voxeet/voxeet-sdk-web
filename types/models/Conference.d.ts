@@ -89,7 +89,7 @@ export declare enum ConferenceStatus {
      * Informs that the conference is destroyed. This status may be triggered by the following situations:
      * - All conference participants left the conference
      * - The [time to live](doc:js-client-sdk-model-conferenceparameters#ttl) or the conference time limit elapsed
-     * - The conference creator used the [Terminate](reference:deleteconference) REST API to terminate an ongoing conference
+     * - The conference creator used the [Terminate](reference:terminate-conference) REST API to terminate an ongoing conference
      */
     Destroyed = "destroyed",
     /**

@@ -20,7 +20,7 @@ export interface ListenOptions {
      */
     forwardingStrategy?: VideoForwardingStrategy;
     /**
-     * The conference access token that is required to join a protected conference if the conference is created using the [create](reference:postconferencecreate) REST API. If the conference is created using the [create](doc:js-client-sdk-conferenceservice#create) method, the token is managed by the SDK and is not visible to the application users. For more information, see the [Enhanced Conference Access Control](doc:guides-enhanced-conference-access-control) document.
+     * The conference access token that is required to join a protected conference if the conference is created using the [create](reference:create-conference) REST API. If the conference is created using the [create](doc:js-client-sdk-conferenceservice#create) method, the token is managed by the SDK and is not visible to the application users. For more information, see the [Enhanced Conference Access Control](doc:guides-enhanced-conference-access-control) document.
      */
     conferenceAccessToken?: string;
     /**
@@ -181,7 +181,7 @@ export interface JoinOptions {
      */
     forwardingStrategy?: VideoForwardingStrategy;
     /**
-     * The conference access token that is required to join a protected conference if the conference is created using the [create](reference:postConferenceCreate) REST API. If the conference is created using the [create](doc:js-client-sdk-conferenceservice#create) method, the token is managed by the SDK and is not visible to the application users. For more information, see the [Enhanced Conference Access Control](doc:guides-conference-access-control) document.
+     * The conference access token that is required to join a protected conference if the conference is created using the [create](reference:create-conference) REST API. If the conference is created using the [create](doc:js-client-sdk-conferenceservice#create) method, the token is managed by the SDK and is not visible to the application users. For more information, see the [Enhanced Conference Access Control](doc:guides-conference-access-control) document.
      */
     conferenceAccessToken?: string;
     /**

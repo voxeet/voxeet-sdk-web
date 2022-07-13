@@ -37,6 +37,7 @@ declare const Events: {
     OfferCreated: typeof ConferenceEvents.OfferCreated;
     ParticipantAdded: typeof ConferenceEvents.ParticipantAdded;
     ParticipantUpdated: typeof ConferenceEvents.ParticipantUpdated;
+    ConferenceLeaving: typeof ConferenceEvents.ConferenceLeaving;
     ConferenceEnded: typeof ConferenceEvents.ConferenceEnded;
     ConferenceGlobalError: typeof ConferenceEvents.ConferenceGlobalError;
     ParticipantSwitched: typeof ConferenceEvents.ParticipantSwitched;

@@ -1,5 +1,4 @@
 import ConferenceParameters from './ConferenceParameters';
-import { SpatialAudioStyle } from './SpatialAudio';
 /**
  * The ConferenceOptions model allows defining details of a conference.
  */
@@ -25,10 +24,4 @@ export default interface ConferenceOptions {
      * The conference parameters.
      */
     params?: ConferenceParameters;
-    /**
-     * Defines how the spatial location should be communicated between the SDK and the Dolby.io server.
-     *
-     * Setting the spatial audio style is supported only on SDK 3.6 and later. The earlier SDK versions support only the individual mode.
-     */
-    spatialAudioStyle?: SpatialAudioStyle;
 }

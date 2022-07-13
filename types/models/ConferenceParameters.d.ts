@@ -70,7 +70,7 @@ export default class ConferenceParameters {
      * Turns the live recording on and off. Specify this parameter during the conference creation.
      *
      * - When set to `true`, the recorded file is available at the end of the call and can be downloaded immediately.
-     * - When set to `false`, the [remix API](reference:postconferencemixstart) must be called after the conference to generate and retrieve the recorded file.
+     * - When set to `false`, the [remix API](reference:start-conference-remix) must be called after the conference to generate and retrieve the recorded file.
      *
      * This parameter does not start the recording; use the [start](doc:js-client-sdk-recordingservice#start) method to turn it on.
      *
@@ -82,7 +82,9 @@ export default class ConferenceParameters {
     /** A boolean that indicates whether the application wishes to create an audio-only conference. Setting this parameter to true results in creating a conference that does not allow participants to [enable their videos](doc:js-client-sdk-conferenceservice#startvideo). If a participant calls the [startVideo](doc:js-client-sdk-conferenceservice#startvideo) method in an audio-only conference, the SDK returns [ServerError](js-client-sdk-model-servererror). */
     audioOnly?: boolean;
     /**
-     * The conference spatial audio style.
+     * Defines how the spatial location should be communicated between the SDK and the Dolby.io server.
+     *
+     * Setting the spatial audio style is supported only on SDK 3.6 and later. The earlier SDK versions support only the individual mode.
      */
     spatialAudioStyle?: SpatialAudioStyle;
     /**

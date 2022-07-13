@@ -4,6 +4,7 @@ export { default as ConferenceLeft } from './ConferenceLeft';
 export { default as OfferCreated } from './OfferCreated';
 export { default as ParticipantAdded } from './ParticipantAdded';
 export { default as ParticipantUpdated } from './ParticipantUpdated';
+export { default as ConferenceLeaving } from './ConferenceLeaving';
 export { default as ConferenceEnded } from './ConferenceEnded';
 export { default as ConferenceGlobalError } from './ConferenceGlobalError';
 export { default as ParticipantSwitched } from './ParticipantSwitched';
