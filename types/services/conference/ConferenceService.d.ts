@@ -14,6 +14,7 @@ import { SpatialAudioStyle, SpatialDirection, SpatialPosition, SpatialScale } fr
 import { ICacheHelper } from '../../models/ICacheHelper';
 import { MediaManagerInterface } from '../../models/MediaDevice';
 import { VideoForwardingOptions, VideoForwardingStrategy } from '../../models/VideoForwarding';
+import { VideoManager } from '../video/VideoManager';
 /**
  * @ignore
  */
@@ -33,7 +34,7 @@ declare type StateDump = {
  * - Configure the quality of the received [Simulcast](#simulcast) streams
  * - Create a [demo](#demo) conference and join it
  * - [Start](#startaudio) and [stop](#stopaudio) audio transmission
- * - [Start](#startvideo) and [stop](#stopvideo) video transmission
+ * - [Enable](#enablevideo) and [disable](#disablevideo) video transmission
  * - [Start](#startscreenshare) and [stop](#stopscreenshare) sharing the screen
  * - Control the [mute](#mute) state of the conference participants
  * - Get the current [mute state](#ismuted) of the local participant
@@ -77,7 +78,7 @@ export declare class ConferenceService extends BaseConferenceService {
      * @param helper
      * @param mediaManager
      */
-    constructor(sdk: unknown, session: SessionService, helper: ICacheHelper<string, MediaStreamTrack[]>, mediaManager: MediaManagerInterface);
+    constructor(sdk: unknown, session: SessionService, helper: ICacheHelper<string, MediaStreamTrack[]>, mediaManager: MediaManagerInterface, videoManager?: VideoManager);
     /**
      * Creates a conference with [ConferenceOptions](model/conferenceoptions).
      *
@@ -246,6 +247,8 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     stopStream(stream: MediaStream): void;
     /**
+     * **Note**: This method is deprecated in SDK 3.7 and replaced with a new [startVideo](doc:js-client-sdk-videoservice#startvideo) method that starts the local camera stream. Additionally, SDK 3.7 also offers the [enableVideo](doc:js-client-sdk-conferenceservice#denablevideo) method that adds the participant's video stream to the conference.
+     *
      * Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream to the local participant. The startVideo method does not control the remote participant's video stream; if a remote participant does not transmit any video stream, the local participant cannot change it using the startVideo method.
      *
      * @param participant - The participant who will receive the video stream, either remote or local.
@@ -271,11 +274,28 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     startVideo(participant: Participant, constraints: any): Promise<any>;
     /**
+     * **Note**: This method is deprecated in SDK 3.7 and replaced with a new [stopVideo](doc:js-client-sdk-videoservice#stopvideo) method that stops the local camera stream. Additionally, SDK 3.7 also offers the [disableVideo](doc:js-client-sdk-conferenceservice#disablevideo) method that removes the participant's video stream from the conference.
+     *
      * Notifies the server to either stop sending the local participant's video stream to the conference or stop sending a remote participant's video stream to the local participant.
      * @param participant - The participant who will stop receiving the video stream.
      * @return {Promise<Error>}
      */
     stopVideo(participant: Participant): Promise<void>;
+    /**
+     * Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream to the local participant. The enableVideo method does not control participants' cameras. To enable a camera, the local participant needs to use the [startVideo](doc:js-client-sdk-videoservice#startvideo) method.
+     *
+     * @param participant - The participant who will receive the video stream, either remote or local.
+     *
+     * @return {Promise<void>}
+     */
+    enableVideo(participant: Participant): Promise<void>;
+    /**
+     * Notifies the server to either stop sending the local participant's video stream to the conference or stop sending a remote participant's video stream to the local participant. The disableVideo method does not control participants' cameras. To disable a camera, the local participant needs to use the [stopVideo](doc:js-client-sdk-videoservice#stopvideo) method.
+     *
+     * @param participant - The participant who will stop receiving the video stream.
+     * @return {Promise<void>}
+     */
+    disableVideo(participant: Participant): Promise<void>;
     /**
      * Sets the maximum number of video streams that may be transmitted to the local participant. This method also allows the local participant to use a pin option to prioritize the specific participant's video streams and display their videos even when these participants do not talk. For more information, see the [Video Forwarding](doc:guides-video-forwarding) article.
      * This method was introduced in SDK 3.1 and deprecated in SDK 3.6.
@@ -561,5 +581,7 @@ export declare class ConferenceService extends BaseConferenceService {
     get manager(): ConferenceManager;
     get spatialAudioStyle(): SpatialAudioStyle | null;
     get leaveConferenceOnBeforeUnload(): boolean;
+    private onCameraStarted;
+    private onCameraStopped;
 }
 export {};
