@@ -17,4 +17,5 @@ export declare class VideoManager {
     private startCameraStream;
     private stopCameraStream;
     changeCameraDeviceId(deviceId: string): Promise<void>;
+    private onBandwidthRestrictionChanged;
 }

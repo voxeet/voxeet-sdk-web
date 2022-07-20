@@ -1,6 +1,6 @@
 import { ConferenceCreatedNotification, ConferenceEndedNotification, ParticipantLeftNotification, ParticipantJoinedNotification, ConferenceStatusNotification, InvitationReceived, ActiveParticipants } from '../../events/notification';
 /**
- * Emitted when an application user received an invitation. This notification is subscribed by default. For more information about invitations, see the [Inviting Participants](doc:guides-inviting-participants) document.
+ * Emitted when an application user received an invitation. This notification is subscribed by default. For more information about invitations, see the [Inviting Participants](doc:inviting-participants-javascript) document.
  *
  * @asMemberOf NotificationService
  * @event

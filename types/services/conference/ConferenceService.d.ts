@@ -87,7 +87,7 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     create(options: ConferenceOptions): Promise<Conference>;
     /**
-     * Provides a Conference object that allows joining a conference. For more information about using the fetch method, see the [Conferencing](doc:conferencing#creating-and-joining-conferences-using-the-conference-id) document.
+     * Provides a Conference object that allows joining a conference. For more information about using the fetch method, see the [Conferencing](doc:conferencing-javascript#joining-conferences-using-the-conference-id) document.
      *
      * @param conferenceId - The conference ID.
      * @return
@@ -272,7 +272,7 @@ export declare class ConferenceService extends BaseConferenceService {
      * VoxeetSDK.conference.startVideo(VoxeetSDK.session.participant, videoConstraints).then(() => { });
      * ```
      */
-    startVideo(participant: Participant, constraints: any): Promise<any>;
+    startVideo(participant: Participant, constraints: any): Promise<void> | Promise<MediaStream>;
     /**
      * **Note**: This method is deprecated in SDK 3.7 and replaced with a new [stopVideo](doc:js-client-sdk-videoservice#stopvideo) method that stops the local camera stream. Additionally, SDK 3.7 also offers the [disableVideo](doc:js-client-sdk-conferenceservice#disablevideo) method that removes the participant's video stream from the conference.
      *

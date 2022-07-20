@@ -28,16 +28,6 @@ export declare enum SpatialAudioStyle {
 }
 export declare type SpatialAudioStyleValuesUnion = typeof SpatialAudioStyle[keyof typeof SpatialAudioStyle];
 export declare type SupportedSpatialAudioStyles = SpatialAudioStyleValuesUnion[];
-export declare type SpatialEnvironmentKey = keyof SpatialEnvironment;
-export declare type AxesConversionItem = Record<SpatialEnvironmentKey, {
-    axis: string;
-    value: number;
-}>;
-export declare type AxesConversion = Record<string, {
-    axis: string;
-    scale: number;
-}>;
-export declare type SpatialPositionKey = keyof SpatialPosition;
 export interface SpatialAudioManager {
     setEnvironment: (environment: SpatialEnvironment) => void;
     setParticipantPosition: (participant: Participant, position: SpatialPosition) => void;

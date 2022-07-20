@@ -50,7 +50,7 @@ export declare class NotificationService extends Service {
      * VoxeetSDK.notification.invite(conference, participants).then(() => { });
      * ```
      *
-     * For more information about invitations, see the [Inviting Participants](doc:guides-inviting-participants) article.
+     * For more information about invitations, see the [Inviting Participants](doc:inviting-participants-javascript) article.
      *
      * @param conference - The conference object.
      * @param participants - Information about the invited application users.
