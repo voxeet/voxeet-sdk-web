@@ -20,12 +20,7 @@ export declare enum MediaStreamType {
      * User added custom stream.
      * @ignore
      */
-    Custom = "Custom",
-    /**
-     * User added custom stream.
-     * @ignore
-     */
-    CustomVideo = "CustomVideo"
+    Custom = "Custom"
 }
 /**
  * @ignore

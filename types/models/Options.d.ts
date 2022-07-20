@@ -152,10 +152,6 @@ export interface DvwcParameters {
 export interface JoinOptions {
     /**
      * Sets the conference [WebRTC constraints](https://webrtc.org/getting-started/media-capture-and-constraints#constraints). By default, only audio is enabled: `{audio: true, video: false}`.
-     *
-     * Disabling video in the constrains structure `joinOptions.constrains =  { video: false }` does not impact a video stream started by [VideoService](doc:js-client-sdk-videoservice) APIs. It only prevents SDK from adding the participant's video stream to the conference.
-     *
-     * Enabling video in the constrains structure `joinOptions.constrains =  { video: {...} }` without calling the [startVideo](doc:js-client-sdk-videoservice#startvideo) or [startCustomVideo](doc:js-client-sdk-videoservice#startcustomvideo) method first, starts a new video stream. However, if one of these methods is called before enabling video via constrains, the SDK triggers a warning message and does not allow setting constraints. To set the constraints, the participant needs to start a new video stream by calling the [startVideo](doc:js-client-sdk-videoservice#startvideo) or [startCustomVideo](doc:js-client-sdk-videoservice#startcustomvideo) method and pass the requested constrains as an argument.
      */
     constraints?: any;
     /**

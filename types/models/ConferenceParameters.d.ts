@@ -79,7 +79,7 @@ export default class ConferenceParameters {
     liveRecording?: boolean;
     /** A boolean that indicates whether the application wishes to create a conference with Dolby Voice enabled. For more information about Dolby Voice, see [this article](doc:guides-dolby-voice).*/
     dolbyVoice?: boolean;
-    /** A boolean that indicates whether the application wishes to create an audio-only conference. Setting this parameter to true results in creating a conference that does not allow participants to enable their videos. If a participant calls the [startVideo](doc:js-client-sdk-videoservice#startvideo) method in an audio-only conference, the SDK returns [ServerError](js-client-sdk-model-servererror). */
+    /** A boolean that indicates whether the application wishes to create an audio-only conference. Setting this parameter to true results in creating a conference that does not allow participants to [enable their videos](doc:js-client-sdk-conferenceservice#startvideo). If a participant calls the [startVideo](doc:js-client-sdk-conferenceservice#startvideo) method in an audio-only conference, the SDK returns [ServerError](js-client-sdk-model-servererror). */
     audioOnly?: boolean;
     /**
      * Defines how the spatial location should be communicated between the SDK and the Dolby.io server.

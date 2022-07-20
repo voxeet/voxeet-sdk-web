@@ -2,8 +2,7 @@ import { DeviceChangeOption, GetComfortNoiseLevel, MediaManagerInterface, Select
 export declare class MediaManager implements MediaManagerInterface {
     #private;
     constructor();
-    initSelectAudioDevice(): void;
-    initSelectVideoDevice(): void;
+    initSelectDevice(): void;
     /**
      * Retrieves selected audio inout device.
      */
