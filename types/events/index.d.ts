@@ -6,10 +6,13 @@ import * as RecordingEvents from './recording/index';
 import * as CommandEvents from './command/index';
 import * as NotificationEvents from './notification/index';
 import * as SessionEvents from './session/index';
+import * as VideoEvents from './video/index';
 /**
  * @ignore
  */
 declare const Events: {
+    CameraStarted: typeof VideoEvents.CameraStarted;
+    CameraStopped: typeof VideoEvents.CameraStopped;
     SessionOpened: typeof SessionEvents.SessionOpened;
     SessionClosed: typeof SessionEvents.SessionOpened;
     InvitationReceived: typeof NotificationEvents.InvitationReceived;
@@ -52,6 +55,7 @@ declare const Events: {
     StreamAdded: typeof ConferenceEvents.StreamAdded;
     StreamRemoved: typeof ConferenceEvents.StreamRemoved;
     StreamUpdated: typeof ConferenceEvents.StreamUpdated;
+    BandwidthRestrictionChanged: typeof ConferenceEvents.BandwidthRestrictionChanged;
 };
 /**
  * @ignore
