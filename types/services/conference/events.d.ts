@@ -81,7 +81,7 @@ export declare function switched(): void;
  *
  * @example
  * ```javascript
- * VoxeetSDK.conference.on('participantAdded', (user) => {
+ * VoxeetSDK.conference.on('participantAdded', (participant) => {
  *
  * });
  * ```

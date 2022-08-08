@@ -21,7 +21,7 @@ export default class FileConverted {
     /**
      * The number of images within the converted file.
      */
-    imageCount: number;
+    imageCount?: number;
     /**
      * @ignore
      */
