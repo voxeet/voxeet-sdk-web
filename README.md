@@ -1,6 +1,6 @@
 <p align="center">
   <b>Dolby.io Communications SDK for Web</b><br><br>
-  <img src="https://cdn.dolby.io/wp-content/uploads/2020/05/Dolbyio-white-horizontal-e1589344433251.jpg" alt="Voxeet SDK logo" title="Voxeet SDK logo" width="200"/>
+  <img src="https://avatars.githubusercontent.com/u/18720732?s=400&u=45d941e2da8503d7e226d1b868accdc132327652&v=4" alt="Dolby.io SDK logo" title="Dolby.io SDK logo" width="200"/>
 </p>
 
 
