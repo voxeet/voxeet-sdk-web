@@ -3,6 +3,8 @@
  */
 export interface VslInitOptions {
     passthrough?: boolean;
+    wasm_filepath?: string;
+    model_filepath?: string;
 }
 /**
  * @ignore

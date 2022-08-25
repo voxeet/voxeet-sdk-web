@@ -1,6 +1,7 @@
 import Service from '../Service';
 import { ParticipantInfo } from '../../models/Options';
 import { Participant } from '../../models/Participant';
+import { ConferenceLeaving, ConferenceLeft } from '../../events/conference/index';
 /**
  *
  * The SessionService allows [opening](#open) and [closing](#close) sessions. Opening a session is mandatory before interacting with any service.
@@ -20,6 +21,21 @@ export declare class SessionService extends Service {
      * @param sdk
      */
     constructor(sdk: any);
+    /**
+     * On leaving the conference.
+     * @ignore
+     */
+    protected onConferenceLeaving(e: ConferenceLeaving): Promise<void>;
+    /**
+     * On left the conference.
+     * @ignore
+     */
+    protected onConferenceLeft(e: ConferenceLeft): Promise<void>;
+    /**
+     * On leaving the conference expired.
+     * @ignore
+     */
+    private leaveConferenceTimeoutExpired;
     /**
      * Getting an access token from voxeet servers.
      * @ignore

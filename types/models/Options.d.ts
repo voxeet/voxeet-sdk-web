@@ -226,4 +226,8 @@ export interface JoinOptions {
      * Checks the available [spatial audio styles](#spatialaudiostyle). The list of the available styles is based on the version of the used SDK and the spatial audio style selected during a conference creation.
      */
     supportedSpatialAudioStyles?: SupportedSpatialAudioStyles;
+    /**
+     * @ignore
+     */
+    supportedAVSyncFakeAudio?: boolean;
 }

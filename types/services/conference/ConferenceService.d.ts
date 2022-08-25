@@ -247,7 +247,7 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     stopStream(stream: MediaStream): void;
     /**
-     * **Note**: This method is deprecated in SDK 3.7 and replaced with a new [startVideo](doc:js-client-sdk-videoservice#startvideo) method that starts the local camera stream. Additionally, SDK 3.7 also offers the [enableVideo](doc:js-client-sdk-conferenceservice#denablevideo) method that adds the participant's video stream to the conference.
+     * **Note**: This method is deprecated in SDK 3.7 and replaced with a new [startVideo](doc:js-client-sdk-videoservice#startvideo) method that starts the local camera stream. Additionally, SDK 3.7 also offers the [enableVideo](doc:js-client-sdk-conferenceservice#enablevideo) method that adds the participant's video stream to the conference.
      *
      * Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream to the local participant. The startVideo method does not control the remote participant's video stream; if a remote participant does not transmit any video stream, the local participant cannot change it using the startVideo method.
      *

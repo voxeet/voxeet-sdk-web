@@ -67,7 +67,7 @@ export default class ConferenceParameters {
      */
     videoCodec?: string;
     /**
-     * Turns the live recording on and off. Specify this parameter during the conference creation.
+     * Turns the live recording on and off.
      *
      * - When set to `true`, the recorded file is available at the end of the call and can be downloaded immediately.
      * - When set to `false`, the [remix API](reference:start-conference-remix) must be called after the conference to generate and retrieve the recorded file.
