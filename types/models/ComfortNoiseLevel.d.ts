@@ -3,7 +3,7 @@
  */
 declare enum ComfortNoiseLevel {
     /**
-     * The default comfort noise level for the [Desktop SDK](doc:desktop-sdk) that is based on the device database. The database includes the optimal comfort noise levels, individual for all devices. This value is not available for the Web SDK.
+     * The default comfort noise level for the [Desktop SDK](doc:desktop-sdk) that is based on the device database. The database contains the optimal comfort noise levels, individual for all devices. This value is not available for the Web SDK.
      */
     Default = "default",
     /**
@@ -28,5 +28,5 @@ export declare function comfortNoiseLevelToDvwc(level: ComfortNoiseLevel): any;
  * Translate DVWC comfort noise level to SDK comfort noise level
  * @ignore
  */
-export declare function dvwcTocomfortNoiseLevel(level: any): ComfortNoiseLevel;
+export declare function dvwcToComfortNoiseLevel(level: any): ComfortNoiseLevel;
 export default ComfortNoiseLevel;

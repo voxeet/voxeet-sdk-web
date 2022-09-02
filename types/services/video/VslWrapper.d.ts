@@ -7,6 +7,8 @@ export interface VslInitOptions {
     model_filepath?: string;
 }
 /**
+ * Wrapps @dolbyio/vsl package which isn't a TypeScript module.
+ *
  * @ignore
  */
 export declare class VslWrapper {

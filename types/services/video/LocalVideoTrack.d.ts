@@ -1,4 +1,6 @@
 /**
+ * Base class for local video tracks like camera or custom video track.
+ *
  * @ignore
  */
 export declare class LocalVideoTrack {

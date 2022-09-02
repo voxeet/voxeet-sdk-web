@@ -1,6 +1,6 @@
 /// <reference types="node" />
 import { EventEmitter } from 'events';
-import { BroadcastingService, CommandService, ConferenceService, ExtensionsService, FilePresentationService, MediaDeviceService, NotificationService, RecordingService, SessionService, VideoPresentationService, VideoFiltersService, VideoService } from './services';
+import { BroadcastingService, CommandService, ConferenceService, ExtensionsService, FilePresentationService, MediaDeviceService, NotificationService, RecordingService, SessionService, VideoPresentationService, VideoFiltersService, VideoService, AudioService } from './services';
 import { Configuration } from './models/Configuration';
 /**
  * VoxeetSDK is the main object that allows the application to interact with Voxeet services. The SDK is asynchronous and uses promise at its core.
@@ -69,7 +69,7 @@ export default class VoxeetSDK extends EventEmitter {
      */
     static get videoFilters(): VideoFiltersService;
     /**
-     * Retrieves the [VideoService](doc:js-client-sdk-videoservice) instance that allows the local participant to create a local video track.
+     * Retrieves the [VideoService](doc:js-client-sdk-videoservice) instance that allows conference participants to enable and disable video.
      */
     static get video(): VideoService;
     /**
@@ -78,6 +78,10 @@ export default class VoxeetSDK extends EventEmitter {
      *
      */
     static get notification(): NotificationService;
+    /**
+     * Retrieves the [AudioService](doc:js-client-sdk-audioservice) instance that allows enabling and disabling audio.
+     */
+    static get audio(): AudioService;
     /**
      * @ignore
      */

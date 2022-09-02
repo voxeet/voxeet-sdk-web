@@ -4,5 +4,5 @@ import { LocalVideoTrack } from './LocalVideoTrack';
  */
 export declare class CustomVideoTrack extends LocalVideoTrack {
     static create(track: MediaStreamTrack): CustomVideoTrack;
-    constructor(track: MediaStreamTrack);
+    protected constructor(track: MediaStreamTrack);
 }

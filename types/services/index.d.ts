@@ -12,3 +12,4 @@ export * from './telemetry/TelemetryService';
 export * from './browserevent/BrowserEventService';
 export * from './videofilters/VideoFiltersService';
 export * from './video/VideoService';
+export * from './audio/AudioService';

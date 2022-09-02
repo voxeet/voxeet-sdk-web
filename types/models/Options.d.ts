@@ -4,6 +4,7 @@ import { InputAudioConfig, OutputAudioConfig, SessionConfig } from '@dolby-dvc/d
 import { VideoFilter, VideoFilterOptions } from './VideoFilters';
 import { SupportedSpatialAudioStyles } from './SpatialAudio';
 import { VideoForwardingStrategy } from './VideoForwarding';
+import { VideoProcessor } from './VideoProcessor';
 /**
  *
 The ListenOptions model defines how the application expects to join a conference using the [listen](doc:js-client-sdk-conferenceservice#listen) method.
@@ -230,4 +231,8 @@ export interface JoinOptions {
      * @ignore
      */
     supportedAVSyncFakeAudio?: boolean;
+    /**
+     * The video processor that allows blurring or changing the local participant's background. This property is available only in SDK 3.7 and later.
+     */
+    videoProcessor?: VideoProcessor;
 }

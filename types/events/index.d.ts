@@ -7,12 +7,14 @@ import * as CommandEvents from './command/index';
 import * as NotificationEvents from './notification/index';
 import * as SessionEvents from './session/index';
 import * as VideoEvents from './video/index';
+import * as AudioEvents from './audio/index';
 /**
  * @ignore
  */
 declare const Events: {
-    CameraStarted: typeof VideoEvents.CameraStarted;
-    CameraStopped: typeof VideoEvents.CameraStopped;
+    AudioUpdated: typeof AudioEvents.AudioUpdated;
+    LocalVideoStarted: typeof VideoEvents.LocalVideoStarted;
+    LocalVideoStopped: typeof VideoEvents.LocalVideoStopped;
     SessionOpened: typeof SessionEvents.SessionOpened;
     SessionClosed: typeof SessionEvents.SessionOpened;
     InvitationReceived: typeof NotificationEvents.InvitationReceived;

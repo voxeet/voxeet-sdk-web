@@ -5,16 +5,16 @@
  *
  * @asMemberOf VideoService
  * @event
- * @param result - A new MediaStream object.
+ * @param result - A new MediaStreamTrack object.
  *
  * @example
  * ```javascript
- * VoxeetSDK.video.on('videoStarted', (result) => {
+ * VoxeetSDK.video.on('localVideoStarted', (result) => {
  *
  * });
  * ```
  */
-export declare function videoStarted(result: MediaStream): void;
+export declare function localVideoStarted(result: MediaStreamTrack): void;
 /**
  * Emitted whenever the local participant successfully stops video transmission. The event can be triggered by the [stopVideo](doc:js-client-sdk-videoservice#stopvideo) or [leave](doc:js-client-sdk-conferenceservice#leave) method.
  *
@@ -22,13 +22,13 @@ export declare function videoStarted(result: MediaStream): void;
  *
  * @asMemberOf VideoService
  * @event
- * @param result - The stopped MediaStream object.
+ * @param result - The stopped MediaStreamTrack object.
  *
  * @example
  * ```javascript
- * VoxeetSDK.video.on('videoStopped', (result) => {
+ * VoxeetSDK.video.on('localVideoStopped', (result) => {
  *
  * });
  * ```
  */
-export declare function videoStopped(result: MediaStream): void;
+export declare function localVideoStopped(result: MediaStreamTrack): void;

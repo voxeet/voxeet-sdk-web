@@ -1,5 +1,5 @@
 import { LocalVideoTrack } from './LocalVideoTrack';
-import { VideoProcessor } from './VideoProcessor';
+import { VideoProcessor } from '../../models/VideoProcessor';
 import { VideoProcessorEngine } from './VideoProcessorEngine';
 /**
  * @ignore

@@ -1,0 +1,35 @@
+import { Participant } from '../../models/Participant';
+import { ConferenceService } from '../conference/ConferenceService';
+import { BaseConferenceService } from '../Service';
+import { SessionService } from '../session/SessionService';
+import { AudioService } from '../index';
+/**
+ * The RemoteAudio model allows the local participant to locally mute and unmute remote participants.
+ *
+ * This model is supported only in SDK 3.7 and later.
+ */
+export declare class RemoteAudio extends BaseConferenceService {
+    #private;
+    constructor(audioService: AudioService, sdk: any, conference: ConferenceService, session: SessionService);
+    /**
+     * Allows the local participant to unmute a specific remote participant who is locally muted through the [stop](#stop) method. The start method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to force sending remote participants’ streams to the conference or to the local participant. This method is not available for listeners and triggers the [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
+     *
+     * The SDK automatically manages audio rendering, which means that the application does not need to implement its own <audio> element. The application can use the [selectAudioInput](doc:js-client-sdk-mediadeviceservice#selectaudioinput) and [selectAudioOutput](doc:js-client-sdk-mediadeviceservice#selectaudiooutput) methods to select the proper audio input and output devices.
+     *
+     * The startAudio method requires a few seconds to become effective.
+     *
+     * @param participant - The selected remote participant who is locally muted through the [stop](#stop) method.
+     *
+     * @return {Promise<Error>}
+     */
+    start(participant: Participant): Promise<void>;
+    /**
+     * Allows the local participant to locally mute specific remote participants. This method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to stop sending remote participants’ streams to the conference. The method is not available for listeners and triggers [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
+     *
+     * The stopAudio method requires a few seconds to become effective.
+     *
+     * @param participant - The selected remote participant who should be locally muted.
+     * @return {Promise<Error>}
+     */
+    stop(participant: Participant): Promise<void>;
+}

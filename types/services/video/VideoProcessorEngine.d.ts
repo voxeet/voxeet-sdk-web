@@ -1,6 +1,9 @@
 import { VslWrapper } from './VslWrapper';
-import { VideoProcessor } from './VideoProcessor';
+import { VideoProcessor } from '../../models/VideoProcessor';
 /**
+ * The class provides a simple interface for managing a video processor aka. VSL.
+ * All VSL stuff like initialization, VSL's error handling, managing VSL instance's
+ * life-cycle are handled here.
  * @ignore
  */
 export declare class VideoProcessorEngine {

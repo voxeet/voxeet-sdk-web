@@ -24,11 +24,22 @@ export declare class MediaDeviceService extends BaseConferenceService implements
      */
     constructor(sdk: unknown, manager: MediaManagerInterface);
     /**
-     * Retrieves the comfort noise level setting for output devices in Dolby Voice conferences. This API is only supported on the [Desktop SDK](doc:desktop-sdk) and Web SDK 3.5 and later versions.
+     * @deprecated
+     * **Note**: This method is deprecated in SDK 3.7 and replaced with the **getComfortNoiseLevel** method available in the [LocalAudio](doc:js-client-sdk-model-localaudio) model.
+     *
+     * Retrieves the comfort noise level setting for output devices in Dolby Voice conferences. This API is only supported on the [Desktop SDK](doc:desktop-sdk) and Web SDK 3.5 and Web SDK 3.6.
+     *
+     * This API is deprecated in SDK 3.7 and moved in AudioService.
      */
     getComfortNoiseLevel(): Promise<Error | ComfortNoiseLevel>;
     /**
-     * Configures the comfort noise level for output devices in Dolby Voice conferences. This API is only supported on the [Desktop SDK](doc:desktop-sdk) and Web SDK 3.5 and later versions.
+     * @deprecated
+     * **Note**: This method is deprecated in SDK 3.7 and replaced with the **setComfortNoiseLevel** method available in the [LocalAudio](doc:js-client-sdk-model-localaudio) model.
+     *
+     * Configures the comfort noise level for output devices in Dolby Voice conferences. This API is only supported on the [Desktop SDK](doc:desktop-sdk) and Web SDK 3.5 and Web SDK 3.6.
+     *
+     * This API is deprecated in SDK 3.7 and moved in AudioService.
+     *
      * @param {ComfortNoiseLevel} level - The comfort noise level.
      */
     setComfortNoiseLevel(level: ComfortNoiseLevel): Promise<void | Error>;

@@ -1,2 +1,2 @@
-export { default as CameraStarted } from './CameraStarted';
-export { default as CameraStopped } from './CameraStopped';
+export { default as LocalVideoStarted } from './LocalVideoStarted';
+export { default as LocalVideoStopped } from './LocalVideoStopped';

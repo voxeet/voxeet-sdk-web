@@ -1,6 +1,6 @@
 {
   "name": "@voxeet/voxeet-web-sdk",
-  "version": "3.7.0-beta.5",
+  "version": "3.7.0-beta.6",
   "description": "The Voxeet Javascript SDK",
   "author": "Thomas Gourgues (tgourgues@voxeet.com)",
   "main": "dist/voxeet-sdk.js",
@@ -83,6 +83,7 @@
     "jest-extended": "^0.11.5",
     "jest-html-reporters": "^2.1.0",
     "jest-junit": "^12.0.0",
+    "jest-mock-extended": "^2.0.7",
     "loglevel": "^1.4.1",
     "md5": "^2.3.0",
     "moment-locales-webpack-plugin": "1.2.0",
