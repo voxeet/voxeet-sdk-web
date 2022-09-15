@@ -3,14 +3,12 @@
  */
 export declare class VslResources {
     private static readonly dolbyIoVslVersionHash;
-    private static readonly dolbyIoVslModelFile;
-    private static readonly dolbyIoVslWasmFile;
     /**
      * Returns the relative path of the VSL's model file requires to fetch.
      */
-    static getModelFilePath(): string;
+    static get modelFileUrl(): string;
     /**
      * Returns the relative path of the VSL's wasm file requires to fetch.
      */
-    static getWasmFilePath(): string;
+    static get wasmFileUrl(): string;
 }

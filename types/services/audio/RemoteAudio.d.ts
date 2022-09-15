@@ -2,7 +2,7 @@ import { Participant } from '../../models/Participant';
 import { ConferenceService } from '../conference/ConferenceService';
 import { BaseConferenceService } from '../Service';
 import { SessionService } from '../session/SessionService';
-import { AudioService } from '../index';
+import { LocalAudio } from './LocalAudio';
 /**
  * The RemoteAudio model allows the local participant to locally mute and unmute remote participants.
  *
@@ -10,7 +10,7 @@ import { AudioService } from '../index';
  */
 export declare class RemoteAudio extends BaseConferenceService {
     #private;
-    constructor(audioService: AudioService, sdk: any, conference: ConferenceService, session: SessionService);
+    constructor(sdk: any, localAudio: LocalAudio, conference: ConferenceService, session: SessionService);
     /**
      * Allows the local participant to unmute a specific remote participant who is locally muted through the [stop](#stop) method. The start method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to force sending remote participants’ streams to the conference or to the local participant. This method is not available for listeners and triggers the [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
      *
@@ -22,7 +22,7 @@ export declare class RemoteAudio extends BaseConferenceService {
      *
      * @return {Promise<Error>}
      */
-    start(participant: Participant): Promise<void>;
+    start(participant: Participant): Promise<any>;
     /**
      * Allows the local participant to locally mute specific remote participants. This method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to stop sending remote participants’ streams to the conference. The method is not available for listeners and triggers [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
      *
@@ -31,5 +31,5 @@ export declare class RemoteAudio extends BaseConferenceService {
      * @param participant - The selected remote participant who should be locally muted.
      * @return {Promise<Error>}
      */
-    stop(participant: Participant): Promise<void>;
+    stop(participant: Participant): Promise<any>;
 }

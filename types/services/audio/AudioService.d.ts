@@ -1,5 +1,3 @@
-import { ConferenceService } from '../conference/ConferenceService';
-import { SessionService } from '../session/SessionService';
 import { LocalAudio } from './LocalAudio';
 import { RemoteAudio } from './RemoteAudio';
 /**
@@ -9,7 +7,7 @@ import { RemoteAudio } from './RemoteAudio';
  */
 export declare class AudioService {
     #private;
-    constructor(sdk: any, conference: ConferenceService, session: SessionService);
+    constructor(localAudio: LocalAudio, remoteAudio: RemoteAudio);
     /**
      * Audio settings for the local participant.
      */

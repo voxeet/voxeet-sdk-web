@@ -1,6 +1,6 @@
 {
   "name": "@voxeet/voxeet-web-sdk",
-  "version": "3.7.0-beta.6",
+  "version": "3.7.0-beta.7",
   "description": "The Voxeet Javascript SDK",
   "author": "Thomas Gourgues (tgourgues@voxeet.com)",
   "main": "dist/voxeet-sdk.js",
@@ -54,7 +54,7 @@
     "url": "https://github.com/voxeet/web-sdk-sample.git"
   },
   "devDependencies": {
-    "@dolby-dvc/dvwc": "1.2.0",
+    "@dolby-dvc/dvwc": "1.2.1",
     "@dolbyio/vsl": "1.0.0-develop-5eff59e2-477406",
     "@types/bowser": "^1.1.1",
     "@types/debug": "^4.1.4",

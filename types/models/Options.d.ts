@@ -152,11 +152,9 @@ export interface DvwcParameters {
  */
 export interface JoinOptions {
     /**
-     * Sets the conference [WebRTC constraints](https://webrtc.org/getting-started/media-capture-and-constraints#constraints). By default, only audio is enabled: `{audio: true, video: false}`.
+     * Sets the conference [WebRTC constraints](https://webrtc.org/getting-started/media-capture-and-constraints#constraints). By default, only audio is enabled: `{audio: true, video: false}` unless a video has been started before joining a conference.
      *
-     * Disabling video in the constrains structure `joinOptions.constrains =  { video: false }` does not impact a video stream started by [VideoService](doc:js-client-sdk-videoservice) APIs. It only prevents SDK from adding the participant's video stream to the conference.
-     *
-     * Enabling video in the constrains structure `joinOptions.constrains =  { video: {...} }` without calling the [startVideo](doc:js-client-sdk-videoservice#startvideo) or [startCustomVideo](doc:js-client-sdk-videoservice#startcustomvideo) method first, starts a new video stream. However, if one of these methods is called before enabling video via constrains, the SDK triggers a warning message and does not allow setting constraints. To set the constraints, the participant needs to start a new video stream by calling the [startVideo](doc:js-client-sdk-videoservice#startvideo) or [startCustomVideo](doc:js-client-sdk-videoservice#startcustomvideo) method and pass the requested constrains as an argument.
+     * **Note**: A video started before joining a conference will be added to the conference if video constraints are unfilled.
      */
     constraints?: any;
     /**
@@ -172,7 +170,7 @@ export interface JoinOptions {
      */
     preferRecvMono?: boolean;
     /**
-     * Allows joining conferences as Mixer. For Dolby Voice conferences, the web client sends mono Opus and receives stereo Opus. The two options do not affect clients connecting to Dolby Voice conferences; the behavior is hard-coded.
+     * Allows joining conferences as Mixer.
      */
     mixing?: MixingOptions;
     /**
@@ -235,4 +233,8 @@ export interface JoinOptions {
      * The video processor that allows blurring or changing the local participant's background. This property is available only in SDK 3.7 and later.
      */
     videoProcessor?: VideoProcessor;
+    /**
+     * A custom video track object to add to a conference. Defining this property causes ignoring video constraints defined in the constraints property.
+     */
+    customVideoTrack?: MediaStreamTrack;
 }

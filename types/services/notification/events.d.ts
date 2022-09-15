@@ -25,7 +25,7 @@ export declare function invitation(e: InvitationReceived): void;
  * @example
  *
  * ```javascript
- * VoxeetSDK.notification.on("conferenceStatus", () => {
+ * VoxeetSDK.notification.on("conferenceStatus", (e) => {
  *
  * });
  * ```
@@ -40,7 +40,7 @@ export declare function conferenceStatus(e: ConferenceStatusNotification): void;
  * @example
  *
  * ```javascript
- * VoxeetSDK.notification.on("conferenceCreated", () => {
+ * VoxeetSDK.notification.on("conferenceCreated", (e) => {
  *
  * });
  * ```
@@ -55,7 +55,7 @@ export declare function conferenceCreated(e: ConferenceCreatedNotification): voi
  * @example
  *
  * ```javascript
- * VoxeetSDK.notification.on("conferenceEnded", () => {
+ * VoxeetSDK.notification.on("conferenceEnded", (e) => {
  *
  * });
  * ```
@@ -70,7 +70,7 @@ export declare function conferenceEnded(e: ConferenceEndedNotification): void;
  * @example
  *
  * ```javascript
- * VoxeetSDK.notification.on("participantJoined", () => {
+ * VoxeetSDK.notification.on("participantJoined", (e) => {
  *
  * });
  * ```
@@ -85,7 +85,7 @@ export declare function participantJoined(e: ParticipantJoinedNotification): voi
  * @example
  *
  * ```javascript
- * VoxeetSDK.notification.on("participantLeft", () => {
+ * VoxeetSDK.notification.on("participantLeft", (e) => {
  *
  * });
  * ```
@@ -101,7 +101,7 @@ export declare function participantLeft(e: ParticipantLeftNotification): void;
  * @example
  *
  * ```javascript
- * VoxeetSDK.notification.on("activeParticipants", () => {
+ * VoxeetSDK.notification.on("activeParticipants", (e) => {
  *
  * });
  * ```

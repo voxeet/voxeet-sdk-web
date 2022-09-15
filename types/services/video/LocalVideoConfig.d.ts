@@ -36,10 +36,11 @@ export declare class LocalVideoConfig {
     protected constructor(sourceType: LocalVideoSourceType, processor?: VideoProcessor);
     get sourceType(): LocalVideoSourceType;
     get processor(): VideoProcessor | undefined;
+    set processor(processor: VideoProcessor | undefined);
     isCamera(): boolean;
     isCustom(): boolean;
-    asCameraConfig(): CameraLocalVideoConfig;
-    asCustomConfig(): CustomLocalVideoConfig;
+    asCamera(): CameraLocalVideoConfig;
+    asCustom(): CustomLocalVideoConfig;
 }
 /**
  * Video configuration for camera device.

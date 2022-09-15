@@ -9,6 +9,7 @@ interface ConferenceCreateData {
     conferencePincode: string;
     isNew: boolean;
     isProtected: boolean;
+    isAudioOnly: boolean;
 }
 /**
  * The ConferenceLeaveOptions model includes parameters responsible for leaving conferences.
@@ -174,6 +175,16 @@ export default class Conference {
      */
     get isNew(): boolean;
     /**
+     * A boolean that indicates whether a conference uses a conference access token and enhanced conference access control.
+     * @return {boolean}
+     */
+    get isProtected(): boolean;
+    /**
+     * A boolean that indicates whether a conference was created as audio-only.
+     * @return {boolean}
+     */
+    get isAudioOnly(): boolean;
+    /**
      * Provides the PIN code of the conference.
      * @return {string}
      */
@@ -203,6 +214,16 @@ export default class Conference {
      * @param {string} value
      */
     set alias(value: string);
+    /**
+     * Changes a conference type to either protected or unprotected. A protected conference requires using a conference access token and enhanced conference access control.
+     * @param {boolean} value
+     */
+    set isProtected(value: boolean);
+    /**
+     * Changes a conference type to either audio-only or audio and video.
+     * @param {boolean} value
+     */
+    set isAudioOnly(value: boolean);
     /**
      * Setter isNew
      * @param {boolean} value

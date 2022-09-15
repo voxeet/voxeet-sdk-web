@@ -1,7 +1,5 @@
 /**
- * Emitted whenever the local participant successfully starts video transmission. The event can be triggered by the [startVideo](doc:js-client-sdk-videoservice#startvideo), [startCustomVideo](doc:js-client-sdk-videoservice#startcustomvideo), or [join](doc:js-client-sdk-conferenceservice#join) method.
- *
- * When a video input device is successfully changed during ongoing video transmission, the SDK emits two events: [videoStopped](#videostopped) and videoStarted. VideoStopped indicates that a video from the previous device is stopped. VideoStarted indicates that a video from a new device is started.
+ * Emitted when the local participant's camera or a custom video has been enabled.
  *
  * @asMemberOf VideoService
  * @event
@@ -9,16 +7,14 @@
  *
  * @example
  * ```javascript
- * VoxeetSDK.video.on('localVideoStarted', (result) => {
+ * VoxeetSDK.video.on('videoStarted', (result) => {
  *
  * });
  * ```
  */
-export declare function localVideoStarted(result: MediaStreamTrack): void;
+export declare function videoStarted(result: MediaStreamTrack): void;
 /**
- * Emitted whenever the local participant successfully stops video transmission. The event can be triggered by the [stopVideo](doc:js-client-sdk-videoservice#stopvideo) or [leave](doc:js-client-sdk-conferenceservice#leave) method.
- *
- * When a video input device is successfully changed during ongoing video transmission, the SDK emits two events: videoStopped and [videoStarted](#videoStarted). VideoStopped indicates that a video from the previous device is stopped. VideoStarted indicates that a video from a new device is started.
+ * Emitted when the local participant's camera or a custom video has been disabled.
  *
  * @asMemberOf VideoService
  * @event
@@ -26,9 +22,28 @@ export declare function localVideoStarted(result: MediaStreamTrack): void;
  *
  * @example
  * ```javascript
- * VoxeetSDK.video.on('localVideoStopped', (result) => {
+ * VoxeetSDK.video.on('videoStopped', (result) => {
  *
  * });
  * ```
  */
-export declare function localVideoStopped(result: MediaStreamTrack): void;
+export declare function videoStopped(result: MediaStreamTrack): void;
+/**
+ * Emitted whenever a video captured by the local participant's camera or a custom video is updated.
+ *
+ * The event is emitted in the following situations:
+ *  - A video input device is changed successfully when the local participant's video is enabled.
+ *  - A video processing is enabled or disabled when the local participant's video is enabled.
+ *
+ * @asMemberOf VideoService
+ * @event
+ * @param result - The updated MediaStreamTrack object.
+ *
+ * @example
+ * ```javascript
+ * VoxeetSDK.video.on('videoUpdated', (result) => {
+ *
+ * });
+ * ```
+ */
+export declare function videoUpdated(result: MediaStreamTrack): void;

@@ -11,5 +11,6 @@ export declare class ProcessedVideoTrack extends LocalVideoTrack {
     setProcessor(processor: VideoProcessor): Promise<void>;
     getProcessor(): VideoProcessor;
     getInputTrack(): LocalVideoTrack;
+    setInputTrack(track: LocalVideoTrack): Promise<void>;
     stop(): Promise<void>;
 }

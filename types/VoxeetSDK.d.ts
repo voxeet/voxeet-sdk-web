@@ -92,6 +92,18 @@ export default class VoxeetSDK extends EventEmitter {
      */
     static set uxkitVersion(version: string);
     /**
+     * Sets the URL prefix that is responsible for fetching SDK package files. By default, the prefix is generated automatically based on the main JavaScript file path. For example, when the prefix is set to "https://example.com/lib/dist/", the binary file will be fetched using the "https://example.com/lib/dist/dvwc_impl.wasm" URL.
+     *
+     * If you want to set a new value of the prefix, the value needs to be a string. If you want to reset the prefix to the default value, set the prefix to null, false, or undefined. Any other values trigger the [ParameterError](js-client-sdk-model-parametererror).
+     *
+     * The prefix must contain the '/' character at the end. If the prefix ends with any other character, the SDK automatically adds '/' at its end.
+     */
+    static set packageUrlPrefix(prefix: string);
+    /**
+     * Retrieves the URL prefix that is responsible for fetching SDK package files.
+     */
+    static get packageUrlPrefix(): string;
+    /**
      * Initializes the SDK using the customer key and secret.
      *
      * @param customerKey - The customer key.

@@ -15,6 +15,7 @@ declare const Events: {
     AudioUpdated: typeof AudioEvents.AudioUpdated;
     LocalVideoStarted: typeof VideoEvents.LocalVideoStarted;
     LocalVideoStopped: typeof VideoEvents.LocalVideoStopped;
+    LocalVideoUpdated: typeof VideoEvents.LocalVideoUpdated;
     SessionOpened: typeof SessionEvents.SessionOpened;
     SessionClosed: typeof SessionEvents.SessionOpened;
     InvitationReceived: typeof NotificationEvents.InvitationReceived;

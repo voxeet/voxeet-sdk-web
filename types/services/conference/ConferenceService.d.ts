@@ -591,5 +591,6 @@ export declare class ConferenceService extends BaseConferenceService {
     get leaveConferenceOnBeforeUnload(): boolean;
     private onLocalVideoStarted;
     private onLocalVideoStopped;
+    private onLocalVideoUpdated;
 }
 export {};

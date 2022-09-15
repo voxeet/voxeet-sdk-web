@@ -1,9 +1,8 @@
 import { AudioCaptureModeOptions } from '../../models/Audio';
-import { ConferenceService } from '../conference/ConferenceService';
 import { BaseConferenceService } from '../Service';
-import { SessionService } from '../session/SessionService';
-import { AudioService } from '../index';
 import ComfortNoiseLevel from '../../models/ComfortNoiseLevel';
+import { ConferenceJoined } from '../../events/conference';
+import { SessionService } from '../session/SessionService';
 /**
  * The LocalAudio model allows enabling and disabling the local participant's audio as well as setting and checking the capture mode and comfort noise level.
  *
@@ -11,7 +10,7 @@ import ComfortNoiseLevel from '../../models/ComfortNoiseLevel';
  */
 export declare class LocalAudio extends BaseConferenceService {
     #private;
-    constructor(audioService: AudioService, sdk: any, conference: ConferenceService, session: SessionService);
+    constructor(sdk: any, session: SessionService);
     /**
      * Returns the local participant's audio capture mode in Dolby Voice conferences.
      * @return {Promise<AudioCaptureModeOptions>}
@@ -47,4 +46,5 @@ export declare class LocalAudio extends BaseConferenceService {
      *
      */
     stop(): Promise<any>;
+    protected onConferenceJoined(e: ConferenceJoined): Promise<void>;
 }

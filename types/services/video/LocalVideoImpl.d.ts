@@ -1,3 +1,4 @@
+import { BaseConferenceService } from '../Service';
 import { LocalVideo } from '../../models/LocalVideo';
 import { VideoDeviceHelper } from './VideoDeviceHelper';
 import { VideoProcessor } from '../../models/VideoProcessor';
@@ -6,9 +7,9 @@ import { VideoProcessor } from '../../models/VideoProcessor';
  *
  * @ignore
  */
-export declare class LocalVideoImpl implements LocalVideo {
+export declare class LocalVideoImpl extends BaseConferenceService implements LocalVideo {
     #private;
-    constructor(videoDeviceHelper?: VideoDeviceHelper);
+    constructor(sdk: any, videoDeviceHelper: VideoDeviceHelper);
     /**
      * @implements LocalVideo.start()
      */
@@ -25,11 +26,22 @@ export declare class LocalVideoImpl implements LocalVideo {
      * @implements LocalVideo.disableProcessing()
      */
     disableProcessing(): Promise<void>;
-    private initCamera;
-    private initCustom;
-    private isLocalVideoStarted;
-    private startLocalVideo;
-    private stopLocalVideo;
-    changeCameraDeviceId(deviceId: string): Promise<void>;
+    private emitLocalVideoStarted;
+    private emitLocalVideoStopped;
+    private emitLocalVideoUpdated;
+    private changeCameraDeviceId;
     private onBandwidthRestrictionChanged;
+    private getLocalVideo;
+    private getLocalVideoAsCamera;
+    private isLocalVideoCamera;
+    private isLocalVideoCustom;
+    private attachLocalVideo;
+    private detachLocalVideo;
+    private isLocalVideoAttached;
+    private createLocalVideo;
+    private getProcessedVideo;
+    private attachProcessedVideo;
+    private detachProcessedVideo;
+    private isProcessedVideoAttached;
+    private initVideoProcessing;
 }

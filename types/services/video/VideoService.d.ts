@@ -1,6 +1,11 @@
 import { BaseConferenceService } from '../Service';
 import { LocalVideo } from '../../models/LocalVideo';
 import { RemoteVideo } from '../../models/RemoteVideo';
+/**
+ * The VideoService allows enabling and disabling video for the local and remote participants.
+ *
+ * This service is available in SDK 3.7 and later.
+ */
 export declare class VideoService extends BaseConferenceService {
     #private;
     /**
@@ -19,12 +24,4 @@ export declare class VideoService extends BaseConferenceService {
      * @return RemoteVideo interface
      */
     get remote(): RemoteVideo;
-    /**
-     * @ignore
-     */
-    private onLocalVideoStarted;
-    /**
-     * @ignore
-     */
-    private onLocalVideoStopped;
 }
