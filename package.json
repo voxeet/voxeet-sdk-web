@@ -1,6 +1,6 @@
 {
   "name": "@voxeet/voxeet-web-sdk",
-  "version": "3.7.0-beta.7",
+  "version": "3.7.0",
   "description": "The Voxeet Javascript SDK",
   "author": "Thomas Gourgues (tgourgues@voxeet.com)",
   "main": "dist/voxeet-sdk.js",
@@ -32,12 +32,14 @@
     "build:testapp": "npm run build -- --config webpack.test.js",
     "build:prod": "cross-env NODE_ENV=production npm run build",
     "build:staging": "cross-env NODE_ENV=staging npm run build",
+    "build:development": "cross-env NODE_ENV=development npm run build",
     "build:devssl": "cross-env NODE_ENV=devssl npm run build",
     "get-version": "echo $npm_package_version",
     "start": "webpack-dev-server --hot --content-base samples/",
     "start:testapp": "cross-env NODE_ENV=staging LOCALVERSION=$(npm run --silent get-version)-staging webpack-dev-server --config webpack.test.js --hot",
     "start:testapp:prod": "cross-env NODE_ENV=production LOCALVERSION=$(npm run --silent get-version)-production webpack-dev-server --config webpack.test.js --hot",
     "start:testapp:devssl": "cross-env NODE_ENV=devssl LOCALVERSION=$(npm run --silent get-version)-devssl webpack-dev-server --config webpack.test.js --hot",
+    "start:testapp:development": "cross-env NODE_ENV=development LOCALVERSION=$(npm run --silent get-version)-development webpack-dev-server --config webpack.test.js --hot",
     "start:prod": "cross-env NODE_ENV=production npm run start",
     "start:devssl": "cross-env NODE_ENV=devssl npm run start",
     "prepublishOnly": "npm run clean && npm run build && npm run generate-licenses",
@@ -54,7 +56,7 @@
     "url": "https://github.com/voxeet/web-sdk-sample.git"
   },
   "devDependencies": {
-    "@dolby-dvc/dvwc": "1.2.1",
+    "@dolby-dvc/dvwc": "1.2.2",
     "@dolbyio/vsl": "1.0.0-develop-5eff59e2-477406",
     "@types/bowser": "^1.1.1",
     "@types/debug": "^4.1.4",

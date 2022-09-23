@@ -8,7 +8,7 @@ export declare class PlatformUtils {
     private static readonly mIsChrome;
     private static readonly mIsEdge;
     /**
-     * Video processing is supportd for Chrome v91+ and Edge v91+ platforms.
+     * Video processing is supported for Chrome v91+ and Edge v91+ browsers on the desktop platform.
      *
      * VSL requires SIMD support, chrome-based browsers support SIMD from v91.x
      */
