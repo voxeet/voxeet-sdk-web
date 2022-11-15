@@ -12,12 +12,10 @@ export declare enum SubscriptionType {
 /**
  * The SubscriptionType model includes types of subscription.
  *
- * @noInheritDoc
  */
 /**
  * The BaseSubscription model is an interface for all subscription [types](#type).
  *
- * @noInheritDoc
  */
 export interface BaseSubscription {
     /** The subscription type. */

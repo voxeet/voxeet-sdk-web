@@ -13,7 +13,6 @@ import { MediaDeviceServiceInterface, MediaManagerInterface } from '../../models
  * - Return the selected [audio input device](#selectedaudioinputdevice), [audio output device](#selectedaudiooutputdevice), and [video input device](#selectedvideoinputdevice)
  * - [Notify](#devicechange) about the added, updated, and removed devices
  *
- * @noInheritDoc
  */
 export declare class MediaDeviceService extends BaseConferenceService implements MediaDeviceServiceInterface {
     #private;
@@ -66,6 +65,9 @@ export declare class MediaDeviceService extends BaseConferenceService implements
     selectAudioInput(device: MediaDeviceInfo | string): Promise<string>;
     /**
      * Selects a specific local participant's audio output device for playing audio during a conference. A joining participant can either use the default audio device or select a different device. All operating systems recognize one default device, however on Windows there is an additional device called the [default communication device](https://docs.microsoft.com/en-us/windows/win32/coreaudio/using-the-communication-device). Selecting an audio device by providing the `communications` (only on Windows) or `default` [deviceId](https://developer.mozilla.org/en-US/docs/Web/API/MediaDeviceInfo/deviceId) causes that the SDK uses the selected device as long as the device is recognized by the operating system as the default device. After changing the default device in the system settings or disconnecting the current default device, the SDK switches to the new default device. When the participant selects the audio device by providing the actual deviceId, the SDK uses the selected device as long as it is available. After disconnecting the selected device, the SDK switches to the default device.
+     *
+     * This method is currently not supported on Chrome on Android devices.
+     *
      * @param {MediaDeviceInfo} device - The [MediaDeviceInfo](https://developer.mozilla.org/en-US/docs/Web/API/MediaDeviceInfo) interface that contains information about the device.
      */
     selectAudioOutput(device: MediaDeviceInfo | string): Promise<string>;

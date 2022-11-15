@@ -96,31 +96,24 @@ export declare enum ParticipantStatus {
  */
 export declare const toParticipantStatus: (status: string) => ParticipantStatus;
 /**
- * The Participant model gathers information about the conference participant, such as:
- * - The participant's [ID](#id), [status](#status-1), and [type](#type)
- * - Information about [streams](/#streams) that the participant uses
- * - Additional [information](#info) about the participant
- * - Information whether the participant's [audio](#audio) is enabled
+ * The Participant model contains information about a conference participant.
  *
- * The model also notifies about the participant's [status](#status) changes.
- *
- * @noInheritDoc
  */
 export declare class Participant extends EventEmitter {
     /**
-     * The participant's ID.
+     * The participant ID.
      */
     id: string;
     /**
-     * The information about the conference participant.
+     * Information about the conference participant.
      */
     info: ParticipantInfo;
     /**
-     * The participant's status.
+     * The participant status.
      */
     status: ParticipantStatus;
     /**
-     * The type of the participant, either `listener` or `user`.
+     * The participant type.
      */
     type: ParticipantType;
     /**
@@ -143,12 +136,17 @@ export declare class Participant extends EventEmitter {
      */
     audioQuality: number;
     /**
-     * The participant's audio transmitting status modified using startAudio()/stopAudio() on the local participant.
+     * The status of audio transmission. True indicates that a participant's audio is transmitted to a conference, false indicates that the participant is muted.
      *
-     * This property is true when the participant is transmitting audio to the conference.
-     * If this property is false then it indicates that the participant is muted into the conference.
+     * **Note**: This property is available in SDK 3.2 and later.
      */
     audioTransmitting: boolean;
+    /**
+     * The status of video transmission. True indicates that a participant's video is transmitted to a conference.
+     *
+     * **Note**: This property is available in SDK 3.8 and later.
+     */
+    videoTransmitting: boolean;
     /**
      * Identifies if the local client has requested to stopAudio or mute the remote participant.
      *
@@ -184,6 +182,11 @@ export declare class Participant extends EventEmitter {
      * @param audioTransmitting
      */
     updateAudioTransmitting(audioTransmitting: boolean): void;
+    /**
+     * @ignore
+     * @param videoTransmitting
+     */
+    updateVideoTransmitting(videoTransmitting: boolean): void;
     /**
      * @ignore
      * @param audioReceivingStopped

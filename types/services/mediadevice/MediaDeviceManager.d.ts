@@ -120,6 +120,7 @@ export declare class MediaManager implements MediaManagerInterface {
     scheduleAudioInputChange(device: MediaDeviceInfo): void;
     scheduleAudioOutputChange(device: MediaDeviceInfo): void;
     scheduleVideoInputChange(device: MediaDeviceInfo): void;
+    isDeviceListUpdated(first: MediaDeviceInfo[], second: MediaDeviceInfo[]): boolean;
     /**
      * get notified when devices list changed (retrieve device list or devices diff)
      * @param option

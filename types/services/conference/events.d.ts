@@ -11,10 +11,9 @@ import { QualityIndicator, ConferencePermission } from '../../models/Conference'
  * @param error - The received error.
  *
  * @example
- *
  * ```javascript
- * VoxeetSDK.conference.on("error", error => {
- *
+ * VoxeetSDK.conference.on("error", (error) => {
+ *   console.error(error);
  * });
  * ```
  */
@@ -25,7 +24,6 @@ export declare function error(error: Error): void;
  * @event
  *
  * @example
- *
  * ```javascript
  * VoxeetSDK.conference.on("joined", () => {
  *
@@ -39,7 +37,6 @@ export declare function joined(): void;
  * @event
  *
  * @example
- *
  * ```javascript
  * VoxeetSDK.conference.on("left", () => {
  *
@@ -53,10 +50,9 @@ export declare function left(): void;
  * @event
  *
  * @example
- *
  * ```javascript
  * VoxeetSDK.conference.on("ended", () => {
- *
+ *   // The conference has ended
  * });
  * ```
  */
@@ -117,8 +113,8 @@ export declare function participantUpdated(participant: Participant): void;
  * ```javascript
  * VoxeetSDK.conference.on('autoplayBlocked', () => {
  * 		const button = document.getElementById("unmute_audio")
- *		button.onclick = () => {
- *			VoxeetSDK.conference.playBlockedAudio();
+ *		button.onclick = async () => {
+ *			await VoxeetSDK.conference.playBlockedAudio();
  *		}
  * });
  * ```

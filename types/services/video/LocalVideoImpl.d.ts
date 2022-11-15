@@ -1,4 +1,5 @@
 import { BaseConferenceService } from '../Service';
+import { ConferenceJoined, ConferenceLeft } from '../../events/conference/index';
 import { LocalVideo } from '../../models/LocalVideo';
 import { VideoDeviceHelper } from './VideoDeviceHelper';
 import { VideoProcessor } from '../../models/VideoProcessor';
@@ -29,8 +30,10 @@ export declare class LocalVideoImpl extends BaseConferenceService implements Loc
     private emitLocalVideoStarted;
     private emitLocalVideoStopped;
     private emitLocalVideoUpdated;
+    private reportError;
     private changeCameraDeviceId;
     private onBandwidthRestrictionChanged;
+    private handleProcessingError;
     private getLocalVideo;
     private getLocalVideoAsCamera;
     private isLocalVideoCamera;
@@ -43,5 +46,8 @@ export declare class LocalVideoImpl extends BaseConferenceService implements Loc
     private attachProcessedVideo;
     private detachProcessedVideo;
     private isProcessedVideoAttached;
-    private initVideoProcessing;
+    private createProcessedVideo;
+    private verifyVideoProcessorOrThrow;
+    protected onConferenceJoined(e: ConferenceJoined): void;
+    protected onConferenceLeft(e: ConferenceLeft): void;
 }

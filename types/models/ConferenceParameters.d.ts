@@ -27,8 +27,7 @@ export interface JoinParametersData {
  */
 export default class ConferenceParameters {
     /**
-     * The time to live that enables customizing the waiting time (in seconds) and terminating empty conferences.
-     * The Voxeet service terminates conferences after the established time if no one has joined the new conference or the last participant has left it. The default value is 0 seconds.
+     * The time to live defines the number of seconds a conference is kept running when empty. A minimum of 30 seconds is given when creating the conference to allow time for participants to join. The default value is 0.
      */
     ttl?: number;
     /**

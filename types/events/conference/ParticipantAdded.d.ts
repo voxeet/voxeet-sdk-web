@@ -9,6 +9,7 @@ export interface ParticipantAddedData {
     participantType: string;
     audio: boolean;
     audioReceivingStopped: boolean;
+    video: boolean;
 }
 export default class ParticipantAdded extends Event {
     userId: string;
@@ -20,6 +21,7 @@ export default class ParticipantAdded extends Event {
     participantType: string;
     audio: boolean;
     audioReceivingStopped: boolean;
+    video: boolean;
     constructor();
     static fromData(data: ParticipantAddedData): ParticipantAdded;
 }

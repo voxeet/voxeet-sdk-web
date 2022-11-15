@@ -49,7 +49,6 @@ export declare enum VideoPresentationServiceEvents {
  * <br>
  *
  * ---
- * @noInheritDoc
  */
 export declare class VideoPresentationService extends BaseConferenceService {
     #private;

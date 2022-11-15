@@ -73,6 +73,8 @@ export declare class RTCOutboundRtpVideoStreamStats extends Stats {
     qualityLimitationReason: string;
     framesEncoded: number;
     framesSent: number;
+    frameWidth: number;
+    frameHeight: number;
     keyFramesEncoded: number;
     totalPacketSendDelay: number;
     encoderImplementation: string;

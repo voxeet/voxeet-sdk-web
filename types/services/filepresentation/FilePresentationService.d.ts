@@ -37,7 +37,6 @@ import { ConferenceService } from '../conference/ConferenceService';
  *
  * <br>
  *
- * @noInheritDoc
  */
 export declare class FilePresentationService extends BaseConferenceService {
     #private;

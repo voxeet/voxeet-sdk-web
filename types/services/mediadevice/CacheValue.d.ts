@@ -3,7 +3,7 @@ export declare class ErrorOverrideValue extends Error {
 }
 /**
  * CacheValue
- *
+ * @ignore
  * Use this mechanism to cache get value and posponde function call.
  */
 export declare class CacheValue<Type> {

@@ -10,9 +10,9 @@ import { Participant } from '../../models/Participant';
  * @example
  * ```javascript
  *
- * VoxeetSDK.command.on("received", (participant: Participant, message: Object) => {
+ * VoxeetSDK.command.on("received", (participant: Participant, message: string) => {
  *
  * });
  * ```
  */
-export declare function received(participant: Participant, message: Object): void;
+export declare function received(participant: Participant, message: string): void;

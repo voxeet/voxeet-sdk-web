@@ -4,13 +4,17 @@ import Recording from '../../models/Recording';
  *
  * @asMemberOf RecordingService
  * @event
- * @param recording - The current recording.
  * @param isRecording - The status of the recording.
+ * @param recording - The current recording.
  *
  * @example
  * ```javascript
- * VoxeetSDK.recording.on("statusUpdated", (recording, isRecording) => {
- *
+ * VoxeetSDK.recording.on("statusUpdated", (isRecording, recording) => {
+ *   if (isRecording) {
+ *     console.log('Recording has started.');
+ *   } else {
+ *     console.log('Recording has stopped.');
+ *   }
  * });
  * ```
  */

@@ -11,6 +11,7 @@ export interface ParticipantUpdatedData {
     name: string;
     avatarUrl: string;
     externalId: string;
+    video: boolean;
 }
 /**
  * @ignore
@@ -24,6 +25,7 @@ export default class ParticipantUpdated extends Event {
     name: string;
     avatarUrl: string;
     externalId: string;
+    video: boolean;
     constructor();
     static fromData(data: ParticipantUpdatedData): ParticipantUpdated;
 }

@@ -11,7 +11,6 @@ import { ParticipantQuality } from '../../models/Simulcast';
 import { WebRTCStats } from '../../models/Statistics';
 import AudioProcessingOptions from '../../models/AudioProcessingOptions';
 import { SpatialAudioStyle, SpatialDirection, SpatialPosition, SpatialScale } from '../../models/SpatialAudio';
-import { ICacheHelper } from '../../models/ICacheHelper';
 import { MediaManagerInterface } from '../../models/MediaDevice';
 import { VideoForwardingOptions, VideoForwardingStrategy } from '../../models/VideoForwarding';
 import { LocalVideo } from '../../models/LocalVideo';
@@ -67,7 +66,6 @@ declare type StateDump = {
  * If a browser blocks the received audio streams due to auto-play policy, the application can call the [autoplayBlocked](#autoplayblocked) and [playBlockedAudio](#playblockedaudio) APIs to enable playing the received audio.
  *
  * ---
- * @noInheritDoc
  */
 export declare class ConferenceService extends BaseConferenceService {
     #private;
@@ -78,25 +76,48 @@ export declare class ConferenceService extends BaseConferenceService {
      * @param helper
      * @param mediaManager
      */
-    constructor(sdk: unknown, session: SessionService, helper: ICacheHelper<string, MediaStreamTrack[]>, mediaManager: MediaManagerInterface, localVideo: LocalVideo);
+    constructor(sdk: unknown, session: SessionService, mediaManager: MediaManagerInterface, localVideo: LocalVideo);
     /**
      * Creates a conference with [ConferenceOptions](model/conferenceoptions).
      *
      * @param options - The conference options.
-     * @returns
+     * @return {Promise<Conference>}
+     *
+     * @example
+     *```javascript
+     * const createOptions = {
+     *   alias: 'My Conference',
+     *   params: {
+     *     dolbyVoice: true
+     *   }
+     * };
+     *
+     * const conference = await VoxeetSDK.conference.create(createOptions);
+     * ```
      */
     create(options: ConferenceOptions): Promise<Conference>;
     /**
      * Provides a Conference object that allows joining a conference. For more information about using the fetch method, see the [Conferencing](doc:conferencing-javascript#joining-conferences-using-the-conference-id) document.
      *
      * @param conferenceId - The conference ID.
-     * @return
+     * @return {Promise<Conference>}
+     *
+     * @example
+     *```javascript
+     * const conference = await VoxeetSDK.conference.fetch('conferenceId');
+     * ```
      */
     fetch(conferenceId: string): Promise<Conference>;
     /**
      * Creates and joins a demo conference.
      *
      * @param options - The demo options.
+     * @return {Promise<Conference|Error>}
+     *
+     * @example
+     *```javascript
+     * const conference = await VoxeetSDK.conference.demo();
+     * ```
      */
     demo(options?: DemoOptions): Promise<Conference>;
     /**
@@ -107,8 +128,12 @@ export declare class ConferenceService extends BaseConferenceService {
      * @param conference - The conference object.
      * @param replayOptions - The replay options.
      * @param mixingOptions - The model that notifies the server that a participant who replays the conference is a special participant called Mixer.
+     * @return {Promise<Conference|Error>}
      *
-     * @returns
+     * @example
+     *```javascript
+     * await VoxeetSDK.conference.replay(conference);
+     * ```
      */
     replay(conference: Conference, replayOptions?: ReplayOptions, mixingOptions?: MixingOptions): Promise<Conference>;
     /**
@@ -120,6 +145,12 @@ export declare class ConferenceService extends BaseConferenceService {
      *
      * @param conference - The conference object.
      * @param options - The additional options for the joining listener.
+     * @return {Promise<Conference|Error>}
+     *
+     * @example
+     *```javascript
+     * await VoxeetSDK.conference.listen(conference);
+     * ```
      */
     listen(conference: Conference, options?: ListenOptions): Promise<Conference>;
     /**
@@ -144,7 +175,7 @@ export declare class ConferenceService extends BaseConferenceService {
      * @example
      *```javascript
      * // For example
-     * const constraints = {
+     * let constraints = {
      *   audio: true,
      *   video: {
      *     width: {
@@ -159,13 +190,9 @@ export declare class ConferenceService extends BaseConferenceService {
      * };
      *
      * // A simplest example of constraints would be:
-     * const constraints = {audio: true, video: true};
+     * constraints = { audio: true, video: true };
      *
-     * VoxeetSDK.conference.join(conference, {constraints: constraints})
-     *   .then((info) => {
-     *   })
-     *   .catch((error) => {
-     *   });
+     * await VoxeetSDK.conference.join(conference, {constraints: constraints});
      * ```
      */
     join(conference: Conference, options: JoinOptions): Promise<Conference>;
@@ -178,11 +205,27 @@ export declare class ConferenceService extends BaseConferenceService {
      * ```
      *
      * @param participantPermissions - The updated participant's permissions.
+     *
+     * @example
+     *```javascript
+     * const participant = VoxeetSDK.conference.participants.get('participantId');
+     * await VoxeetSDK.conference.updatePermissions([
+     *   {
+     *     participant: participant,
+     *     permissions: [ 'JOIN', 'SEND_AUDIO', 'SEND_VIDEO', 'SEND_MESSAGE' ]
+     *   }
+     * ]);
+     * ```
      */
     updatePermissions(participantPermissions: Array<ParticipantPermissions>): Promise<any>;
     /**
      * Leaves the conference.
      * @param options
+     *
+     * @example
+     *```javascript
+     * await VoxeetSDK.conference.leave();
+     * ```
      */
     leave(options?: ConferenceLeaveOptions): Promise<void>;
     /**
@@ -200,7 +243,16 @@ export declare class ConferenceService extends BaseConferenceService {
      * **Note**: In SDK 2.4 and prior releases, if a conference participant calls the mute method, empty frames are sent to the other participants. Due to a Safari issue, participants who join a conference using Safari and start receiving the empty frames can experience a Safari crash. Due to a different API implementation in SDK 3.0, this problem does not occur during Dolby Voice conferences.
      *
      * @param participant - The local or remote conference participant.
-     * @param isMuted - The mute state, `true` indicates that a participant is muted, `false` indicates that a participant is not muted.
+     * @param isMuted - The mute state, `true` indicates that a participant will be muted, `false` indicates that a participant will be unmuted.
+     *
+     * @example
+     *```javascript
+     * // Mute a remote participant
+     * VoxeetSDK.conference.mute(participant, true);
+     *
+     * // Unmute a remote participant
+     * VoxeetSDK.conference.mute(participant, false);
+     * ```
      */
     mute(participant: Participant, isMuted: boolean): void;
     /**
@@ -225,6 +277,14 @@ export declare class ConferenceService extends BaseConferenceService {
      *
      * @param participant - The conference participant.
      * @param callback - The callback that retrieves the audio level.
+     *
+     * @example
+     *```javascript
+     * const participant = VoxeetSDK.session.participant;
+     * VoxeetSDK.conference.audioLevel(participant, (audioLevel) => {
+     *   console.log(`Audio level: ${audioLevel}`);
+     * });
+     * ```
      */
     audioLevel(participant: Participant, callback: Function): any;
     /**
@@ -232,6 +292,13 @@ export declare class ConferenceService extends BaseConferenceService {
      * @param participant - The conference participant.
      * @param callback - The callback that accepts a boolean value indicating the participant's current speaking status. If the participant actively uses a microphone, the callback marks the participant as an active speaker.
      *
+     * @example
+     *```javascript
+     * const participant = VoxeetSDK.session.participant;
+     * VoxeetSDK.conference.isSpeaking(participant, (isSpeaking) => {
+     *   console.log(`Is speaking: ${isSpeaking}`);
+     * });
+     * ```
      */
     isSpeaking(participant: Participant, callback: Function): any;
     /**
@@ -270,7 +337,7 @@ export declare class ConferenceService extends BaseConferenceService {
      *     }
      * };
      *
-     * VoxeetSDK.conference.startVideo(VoxeetSDK.session.participant, videoConstraints).then(() => { });
+     * await VoxeetSDK.conference.startVideo(VoxeetSDK.session.participant, videoConstraints);
      * ```
      */
     startVideo(participant: Participant, constraints: any): Promise<void>;
@@ -310,7 +377,18 @@ export declare class ConferenceService extends BaseConferenceService {
      *
      * This method is available only in SDK 3.6 and later.
      * @param VideoForwardingOptions - The video forwarding options.
-     * @return {Promise<Error>}
+     * @return {Promise<void>}
+     *
+     * @example
+     *```javascript
+     * // Request the last 3 active speakers and always receive the video
+     * // from participantA and participantB.
+     * await VoxeetSDK.conference.videoForwarding({
+     *   strategy: 'lastSpeakerStrategy',
+     *   max: 5,
+     *   participants: [ participantA, participantB ]
+     * });
+     * ```
      */
     videoForwarding({ strategy, max, participants }: VideoForwardingOptions): Promise<void>;
     /**
@@ -371,19 +449,18 @@ export declare class ConferenceService extends BaseConferenceService {
      *
      * @example
      *```javascript
-     * VoxeetSDK.conference.startScreenShare()
-     *   .then(() => {
-     *
-     *   })
-     *   .catch(e => {
-     *
-     *   });
-     * ````
+     * await VoxeetSDK.conference.startScreenShare();
+     * ```
      */
     startScreenShare(sourceId?: any): any;
     /**
      * Stops the screen-sharing session.
      * @return {Promise<Error>}
+     *
+     * @example
+     *```javascript
+     * await VoxeetSDK.conference.stopScreenShare();
+     * ```
      */
     stopScreenShare(): Promise<any>;
     /**
@@ -400,11 +477,12 @@ export declare class ConferenceService extends BaseConferenceService {
     /**
      * Allows the conference owner, or a participant with adequate permissions, to kick another participant from the conference by revoking the conference access token. The kicked participant cannot join the conference again.
      *
-     * ```javascript
-     * VoxeetSDK.conference.kick(participant: Participant)
-     * ```
-     *
      * @param participant - The participant who needs to be kicked from the conference.
+     *
+     * @example
+     *```javascript
+     * await VoxeetSDK.conference.kick(participant);
+     * ```
      */
     kick(participant: Participant): Promise<any>;
     /**
@@ -413,7 +491,7 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     createStateDump(): Promise<StateDump>;
     /**
-     * @param returns an audio logging length
+     * @returns an audio logging length
      * @ignore
      */
     getStateDumpConfiguration(): Promise<any>;
@@ -453,6 +531,16 @@ export declare class ConferenceService extends BaseConferenceService {
      *
      * @param participant - The selected participant. Using the local participant sets the location from which the participant will hear a conference. Using a remote participant sets the position from which the participant's audio will be rendered.
      * @param position - The participants' audio location.
+     *
+     * @example
+     *```javascript
+     * const participant = VoxeetSDK.session.participant;
+     * VoxeetSDK.conference.setSpatialPosition(participant, {
+     *   x: 10,
+     *   y: 10,
+     *   z: 0
+     * });
+     * ```
      */
     setSpatialPosition(participant: Participant, position: NonNullable<SpatialPosition>): void;
     /**
@@ -460,17 +548,22 @@ export declare class ConferenceService extends BaseConferenceService {
      *
      * If the local participant hears audio from the position (0,0,0) facing down the Z-axis and locates a remote participant in the position (1,0,1), the local participant hears the remote participant from their front-right. If the local participant chooses to change the direction they are facing and rotate +90 degrees about the Y-axis, then instead of hearing the speaker from the front-right position, they hear the speaker from the front-left position. The following video presents this example:
      *
-     * [block:html]
-     * {
-     *   "html": "<div style=\"text-align:center\">\n<video controls width=\"289\">\n\n <source src=\"https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/07_setSpatialDirection_v03_220131.mp4\"\n type=\"video/mp4\">\n\n Sorry, your browser doesn't support embedded videos.\n</video>\n\n</div>"
-     * }
-     * [/block]
+     * [VIDEO] ("https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/07_setSpatialDirection_v03_220131.mp4)
      *
      * For more information, see the [SpatialDirection](doc:js-client-sdk-model-spatialdirection) model.
      *
      * @param participant - The local participant.
      * @param direction - The direction the participant is facing in space.
      *
+     * @example
+     *```javascript
+     * const participant = VoxeetSDK.session.participant;
+     * VoxeetSDK.conference.setSpatialDirection(participant, {
+     *   x: 1,
+     *   y: 1,
+     *   z: 1
+     * });
+     * ```
      */
     setSpatialDirection(participant: Participant, direction: SpatialDirection): void;
     /**
@@ -486,27 +579,20 @@ export declare class ConferenceService extends BaseConferenceService {
      * - `scale` = (1, 1, 1), where one unit on any axis is 1 meter
      *
      * The default spatial environment is presented in the following diagram:
-     * [block:image]
-     * {
-     *   "images": [
-     *     {
-     *       "image": [
-     *         "https://files.readme.io/e43475b-defaultEnv.png",
-     *         "defaultEnv.png",
-     *         1920,
-     *         1080,
-     *         "#163b58"
-     *       ],
-     *       "sizing": "full"
-     *     }
-     *   ]
-     * }
-     * [/block]
      *
      * @param scale - A scale that defines how to convert units from the coordinate system of an application (pixels or centimeters) into meters used by the spatial audio coordinate system. For example, if SpatialScale is set to (100,100,100), it indicates that 100 of the applications units (cm) map to 1 meter for the audio coordinates. In such a case, if the listener's location is (0,0,0)cm and a remote participant's location is (200,200,200)cm, the listener has an impression of hearing the remote participant from the (2,2,2)m location. The scale value must be greater than 0. For more information, see the [Spatial Audio](doc:guides-integrating-spatial-audio#configure-the-spatial-environment-scale) article.
      * @param forward - A vector describing the direction the application considers as forward. The value must be orthogonal to up and right. Otherwise, SDK emits [ParameterError](doc:js-client-sdk-model-parametererror).
      * @param up - A vector describing the direction the application considers as up. Must be orthogonal to forward and right. Otherwise, SDK emits [ParameterError](doc:js-client-sdk-model-parametererror).
      * @param right - A vector describing the direction the application considers as right. Must be orthogonal to forward and up. Otherwise, SDK emits [ParameterError](doc:js-client-sdk-model-parametererror).
+     *
+     * @example
+     *```javascript
+     * const scale = { x: 100, y: 100, z: 1 };
+     * const forward = { x: 0, y: -1, z: 0 };
+     * const up = { x: 0, y: 0, z: 1 };
+     * const right = { x: 1, y: 0, z: 0 };
+     * VoxeetSDK.conference.setSpatialDirection(scale, forward, up, right);
+     * ```
      */
     setSpatialEnvironment(scale: SpatialScale, forward: SpatialPosition, up: SpatialPosition, right: SpatialPosition): void;
     private qualityIndicators;

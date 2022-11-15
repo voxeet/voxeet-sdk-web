@@ -5,6 +5,7 @@ import { VideoFilter, VideoFilterOptions } from './VideoFilters';
 import { SupportedSpatialAudioStyles } from './SpatialAudio';
 import { VideoForwardingStrategy } from './VideoForwarding';
 import { VideoProcessor } from './VideoProcessor';
+import { AudioBitrate } from './Audio';
 /**
  *
 The ListenOptions model defines how the application expects to join a conference using the [listen](doc:js-client-sdk-conferenceservice#listen) method.
@@ -237,4 +238,8 @@ export interface JoinOptions {
      * A custom video track object to add to a conference. Defining this property causes ignoring video constraints defined in the constraints property.
      */
     customVideoTrack?: MediaStreamTrack;
+    /**
+     * The preferred outgoing audio bitrate. Setting this property is available only while joining a non-Dolby Voice conference. Otherwise, the SDK triggers an error.
+     */
+    audioBitrate?: AudioBitrate;
 }

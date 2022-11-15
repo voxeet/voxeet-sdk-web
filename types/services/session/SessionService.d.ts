@@ -8,7 +8,6 @@ import { ConferenceLeaving, ConferenceLeft } from '../../events/conference/index
  *
  * ---
  *
- * @noInheritDoc
  */
 export declare class SessionService extends Service {
     #private;
@@ -45,10 +44,24 @@ export declare class SessionService extends Service {
      * Opens a new session.
      *
      * @param info - The optional information about the local participant.
+     *
+     * @example
+     * ```javascript
+     * // Open a session as John Doe
+     * await VoxeetSDK.session.open({
+     *   name: 'John Doe',
+     *   externalId: 'john.doe'
+     * });
+     * ```
      */
     open(info?: ParticipantInfo): Promise<void>;
     /**
      * Closes the current session.
+     *
+     * @example
+     * ```javascript
+     * await VoxeetSDK.session.close();
+     * ```
      */
     close(): Promise<void>;
     private refreshToken;

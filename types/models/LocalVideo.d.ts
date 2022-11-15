@@ -34,6 +34,8 @@ export interface LocalVideo {
      *
      * The method triggers the [videoStarted](#videostarted) event. Adding a new video stream to a conference additionally triggers the [streamAdded](js-client-sdk-conferenceservice#streamadded) or [streamUpdated](js-client-sdk-conferenceservice#streamupdated) events.
      *
+     * This method is not available for listeners and triggers the [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
+     *
      * [block:callout]
      * {
      *   "type": "info",
@@ -55,7 +57,7 @@ export interface LocalVideo {
      *   },
      * ;
      *
-     * await VoxeetSDK.video.local.start(videoConstraints);
+     * let videoTrack = await VoxeetSDK.video.local.start(videoConstraints);
      * ```
      *
      * @param configuration - The local participant's video configuration.
@@ -70,6 +72,8 @@ export interface LocalVideo {
      * If the participant calls this method when their video is already enabled, the SDK stops the existing video stream and starts a new one with new constraints.
      *
      * The method triggers the [videoStarted](#videostarted) event. Adding a new video stream to a conference additionally triggers the [streamAdded](js-client-sdk-conferenceservice#streamadded) or [streamUpdated](js-client-sdk-conferenceservice#streamupdated) events.
+     *
+     * This method is not available for listeners and triggers the [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
      *
      * [block:callout]
      * {

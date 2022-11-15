@@ -13,7 +13,6 @@ import { SessionService } from '../session/SessionService';
  * - [Participants joining conferences](#participantjoined)
  * - [Participants leaving conferences](#participantleft)
  *
- * @noInheritDoc
  */
 export declare class NotificationService extends Service {
     #private;

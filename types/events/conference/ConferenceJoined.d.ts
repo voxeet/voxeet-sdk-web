@@ -9,6 +9,7 @@ export interface ConferenceJoinedData {
     recordingUser: string;
     startRecordTimestamp: number;
     metadata: JoinParametersData;
+    listenOnly: boolean;
 }
 /**
  * @name ConferenceJoined
@@ -20,6 +21,7 @@ export default class ConferenceJoined extends Event {
     recordingParticipant: string;
     recordingStartTimestamp: number;
     parameters: ConferenceParameters;
+    listenOnly: boolean;
     constructor();
     static fromData(data: ConferenceJoinedData): ConferenceJoined;
 }

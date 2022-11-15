@@ -2,7 +2,6 @@ import { BaseConferenceService } from '../Service';
 /**
  * A service for broadcasting video streams. It allows you to start and stop broadcasting.
  * @ignore
- * @noInheritDoc
  */
 export declare class BroadcastingService extends BaseConferenceService {
     /**

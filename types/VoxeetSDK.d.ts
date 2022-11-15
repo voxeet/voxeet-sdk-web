@@ -5,7 +5,7 @@ import { Configuration } from './models/Configuration';
 /**
  * VoxeetSDK is the main object that allows the application to interact with Voxeet services. The SDK is asynchronous and uses promise at its core.
  *
- * @noInheritDoc
+ *
  */
 export default class VoxeetSDK extends EventEmitter {
     #private;
@@ -25,6 +25,14 @@ export default class VoxeetSDK extends EventEmitter {
      * the current sdk flavor
      */
     static readonly flavor: string;
+    /**
+     * Register component information in the VoxeetSDK.
+     *
+     * @param name    Component name
+     * @param version Component version
+     * @ignore
+     */
+    static registerComponentVersion(name: string, version: string): void;
     /**
      * @deprecated
      * @ignore
@@ -88,6 +96,7 @@ export default class VoxeetSDK extends EventEmitter {
     static get extensions(): ExtensionsService;
     /**
      * UxKit version setter
+     * @deprecated
      * @ignore
      */
     static set uxkitVersion(version: string);
