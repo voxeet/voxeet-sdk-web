@@ -20,16 +20,16 @@ export interface ActiveParticipantsData {
     participantCount: number;
 }
 /**
- * The ActiveParticipants model gathers information about all participants who joined a specific conference. The model includes the conference [alias](#conferencealias) and [ID](#conferenceid), the [list](#participants) of conference participants, and the [number](#participantcount) of all participants who joined the conference.
+ * The ActiveParticipants model gathers information about all participants who joined a specific conference.
  */
 export default class ActiveParticipants extends Event {
-    /** Participants who joined the conference.*/
+    /** The objects of participants who joined the conference. This property contains external IDs, IDs, and names. All other properties of the Participant objects contain the default values. */
     participants: Participant[];
     /** The conference alias.*/
     conferenceAlias: string;
     /** The conference ID.*/
     conferenceId: string;
-    /** The number of all participants who joined the conference.*/
+    /** The number of participants who joined the conference.*/
     participantCount: number;
     /** @ignore */
     constructor();

@@ -1,5 +1,5 @@
 /**
- * The Recording model includes the recording [timestamp](#starttimestamp) that informs when the recording was started and the [ID](#participantid) of a participant who started the recording.
+ * The Recording model contains additional information about a conference recording.
  */
 export default class Recording {
     /**

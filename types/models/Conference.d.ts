@@ -12,7 +12,8 @@ interface ConferenceCreateData {
     isAudioOnly: boolean;
 }
 /**
- * The ConferenceLeaveOptions model includes parameters responsible for leaving conferences.
+ * @ignore
+ * The ConferenceLeaveOptions model gathers parameters responsible for leaving conferences.
  */
 export interface ConferenceLeaveOptions {
     /**
@@ -31,15 +32,15 @@ export interface ConferenceLeaveOptions {
 /**
  * The QualityIndicator model represents [audio](#audio) and [video](#video) Mean Opinion Scores (MOS). The scores represent the participants' audio and video quality. The SDK calculates the audio and video quality scores and displays the values in a range from 1 to 5, where 1 represents the worst quality and 5 represents the highest quality. In cases when the MOS score is not available, the SDK returns the value -1.
  *
- * During a conference, the conference participants can enable and disable the qualityIndicators statistics.
+ * During a conference, conference participants can enable and disable the qualityIndicators statistics.
  *
- * To receive the [qualityIndicators](doc:js-client-sdk-conferenceservice#qualityindicators) events, use the following command:
+ * To receive the [qualityIndicators](./../classes/services_conference_ConferenceService.ConferenceService.html#qualityindicators) events, use the following command:
  *
  *  ```javascript
  *  VoxeetSDK.conference.on('qualityIndicators', handler)
  *  ```
  *
- * To not receive the [qualityIndicators](doc:js-client-sdk-conferenceservice#qualityindicators) events, use the following command:
+ * To not receive the [qualityIndicators](./../classes/services_conference_ConferenceService.ConferenceService.html#qualityindicators) events, use the following command:
  *
  *  ```javascript
  *  VoxeetSDK.conference.off('qualityIndicators', handler)
@@ -48,18 +49,18 @@ export interface ConferenceLeaveOptions {
  */
 export interface QualityIndicator {
     /**
-     * The audio quality MOS score in a range from 1 to 5, where 1 represents the worst quality and 5 represents the highest quality. In cases when the MOS score is not available, the SDK returns the value -1.
+     * The audio quality Mean Opinion Score (MOS) in a range from 1 to 5, where 1 represents the worst quality and 5 represents the highest quality. In cases when the MOS score is not available, the SDK returns the value -1.
      *
-     * **Note**: With SDK 3.0, audio Mean Opinion Scores (MOS) are unavailable for web clients connected to Dolby Voice conferences.
+     * **Note**: This property is available in Dolby Voice conference only in SDK 3.5 and later.
      */
     audio: number;
     /**
-     * The video quality MOS score in a range from 1 to 5, where 1 represents the worst quality and 5 represents the highest quality. In cases when the MOS score is not available, the SDK returns the value -1.
+     * The video quality Mean Opinion Score (MOS) in a range from 1 to 5, where 1 represents the worst quality and 5 represents the highest quality. In cases when the MOS score is not available, the SDK returns the value -1.
      */
     video: number;
 }
 /**
- * The QualityIndicators model represents audio and video quality scores of the remote participants. This model includes a list of [QualityIndicator](doc:js-client-sdk-model-qualityindicator)s.
+ * The QualityIndicators model represents audio and video quality scores of the remote participants. This model contains a list of [QualityIndicator](./../interfaces/models_Conference.QualityIndicator.html)s.
  *
  * The SDK displays the audio and video quality using Mean Opinion Score (MOS). The scores represent the participants' audio and video quality. The SDK calculates the audio and video quality scores and displays the values in a range from 1 to 5, where 1 represents the worst quality and 5 represents the highest quality. In cases when the MOS score is not available, the SDK returns the value -1.
  *
@@ -71,30 +72,30 @@ export declare type QualityIndicators = Map<string, QualityIndicator>;
  */
 export declare enum ConferenceStatus {
     /**
-     * Informs that a new conference is created.
+     * The conference has been just created.
      */
     Created = "created",
     /**
-     * Informs that the local participant successfully joined a conference.
+     * The local participant successfully joined the conference.
      */
     Joined = "joined",
     /**
-     * Informs that a conference is ended.
+     * The conference is ended.
      */
     Ended = "ended",
     /**
-     * Informs that the local participant successfully left a conference.
+     * The local participant successfully left the conference.
      */
     Left = "left",
     /**
-     * Informs that the conference is destroyed. This status may be triggered by the following situations:
+     * The conference is destroyed. This status may be triggered by the following situations:
      * - All conference participants left the conference
-     * - The [time to live](doc:js-client-sdk-model-conferenceparameters#ttl) or the conference time limit elapsed
-     * - The conference creator used the [Terminate](reference:terminate-conference) REST API to terminate an ongoing conference
+     * - The [time to live](./../classes/models_ConferenceParameters.ConferenceParameters.html#ttl) or the conference time limit elapsed
+     * - The conference creator used the [Terminate](https://docs.dolby.io/communications-apis/reference/terminate-conference) REST API to terminate an ongoing conference
      */
     Destroyed = "destroyed",
     /**
-     * Informs that an error occurred during a conference.
+     * An error occurred during the conference.
      */
     Error = "error"
 }
@@ -152,105 +153,112 @@ export declare enum ConferencePermission {
     Stream = "STREAM"
 }
 /**
- * The Conference model allows the application to get information about the conference,
- * such as the conference [ID](#id), [alias](#alias), [PIN code](#pincode), [status](#status), conference [parameters](#params), [participants](#participants), [permissions](#permissions), and information if the conference is [new](#isnew).
+ * The Conference model allows the application to get information about a conference.
  */
 export default class Conference {
     #private;
     /** @ignore */
     constructor(id: string);
     /**
-     * The conference ID.
+     * Gets the conference ID.
      * @return {string}
      */
     get id(): string;
     /**
-     * The conference alias. The alias is case insensitive, which means that using "foobar" and "FOObar" aliases results in joining the same conference.
+     * Gets the conference alias.
      * @return {string}
      */
     get alias(): string;
     /**
-     * The property indicating if the created conference is new.
+     * Checks whether a conference is new.
      * @return {boolean}
      */
     get isNew(): boolean;
     /**
-     * A boolean that indicates whether a conference uses a conference access token and enhanced conference access control.
+     * Checks whether a conference uses a conference access token and enhanced conference access control.
      * @return {boolean}
      */
     get isProtected(): boolean;
     /**
-     * A boolean that indicates whether a conference was created as audio-only.
+     * Checks whether a conference was created as audio-only.
      * @return {boolean}
      */
     get isAudioOnly(): boolean;
     /**
-     * Provides the PIN code of the conference.
+     * Gets the conference PIN code.
      * @return {string}
      */
     get pinCode(): string;
     /**
-     * Provides the conference status.
+     * Gets the conference status.
      * @return {ConferenceStatus}
      */
     get status(): ConferenceStatus;
     /**
+     * @ignore
      * Setter status
      * @param {ConferenceStatus} value
      */
     set status(value: ConferenceStatus);
     /**
-     * Provides the conference parameters.
+     * Gets the conference parameters.
      * @return {ConferenceParameters}
      */
     get params(): ConferenceParameters;
     /**
+     * @ignore
      * Setter id
      * @param {string} value
      */
     set id(value: string);
     /**
+     * @ignore
      * Setter alias
      * @param {string} value
      */
     set alias(value: string);
     /**
+     * @ignore
      * Changes a conference type to either protected or unprotected. A protected conference requires using a conference access token and enhanced conference access control.
      * @param {boolean} value
      */
     set isProtected(value: boolean);
     /**
+     * @ignore
      * Changes a conference type to either audio-only or audio and video.
      * @param {boolean} value
      */
     set isAudioOnly(value: boolean);
     /**
+     * @ignore
      * Setter isNew
      * @param {boolean} value
      */
     set isNew(value: boolean);
     /**
+     * @ignore
      * Setter pinCode
      * @param {string} value
      */
     set pinCode(value: string);
     /**
+     * @ignore
      * Setter params
      * @param {ConferenceParameters} value
      */
     set params(value: ConferenceParameters);
     /**
-     * Provides the list of conference participants.
+     * Gets the participants list.
      */
     get participants(): Map<string, Participant>;
     /**
-     * Provides a list of the local participant's conference permissions.
+     * Gets a list of the local participant's conference permissions.
      */
     get permissions(): Set<ConferencePermission>;
     /**
+     * @ignore
      * Setter permissions
      * @param {Set<ConferencePermission>} value
-     * @ignore
      */
     set permissions(value: Set<ConferencePermission>);
     /**

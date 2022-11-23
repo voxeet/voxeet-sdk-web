@@ -2,9 +2,9 @@ import { Participant } from '../../models/Participant';
 import { MediaStreamWithType } from '../../models/MediaStream';
 import { QualityIndicator, ConferencePermission } from '../../models/Conference';
 /**
- * Emitted when [WebSocketError](doc:js-client-sdk-model-websocketerror), PeerConnectionFailedError, or PeerDisconnectedError occurred.
+ * Emitted when [WebSocketError](./../classes/lib_Exceptions.WebSocketError.html), PeerConnectionFailedError, or PeerDisconnectedError occurs.
  *
- * PeerConnectionFailedError and PeerDisconnectedError are [PeerErrors](doc:js-client-sdk-model-peererror) with the `failed` and `disconnected` [PeerConnectionState](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/connectionState) value.
+ * PeerConnectionFailedError and PeerDisconnectedError are [PeerErrors](./../classes/lib_Exceptions.PeerError.html) with the `failed` and `disconnected` [PeerConnectionState](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/connectionState) value.
  *
  * @asMemberOf ConferenceService
  * @event
@@ -19,7 +19,7 @@ import { QualityIndicator, ConferencePermission } from '../../models/Conference'
  */
 export declare function error(error: Error): void;
 /**
- * Emitted when the application has successfully joined the conference.
+ * Emitted when an application successfully joins a conference.
  * @asMemberOf ConferenceService
  * @event
  *
@@ -32,7 +32,7 @@ export declare function error(error: Error): void;
  */
 export declare function joined(): void;
 /**
- * Emitted when the application has left the conference.
+ * Emitted when an application leaves a conference.
  * @asMemberOf ConferenceService
  * @event
  *
@@ -45,7 +45,7 @@ export declare function joined(): void;
  */
 export declare function left(): void;
 /**
- * Emitted when the replayed conference has ended.
+ * Emitted when a replayed conference ends.
  * @asMemberOf ConferenceService
  * @event
  *
@@ -67,9 +67,7 @@ export declare function ended(): void;
  */
 export declare function switched(): void;
 /**
- * Emitted when a participant is added to the conference. The SDK does not emit the participantAdded event for the local participant.
- *
- * To handle large webinars, we disabled the participantAdded events for listeners. Listeners will only receive events about users; they do not receive events for other listeners. In a conference that uses the participantAdded events, users will only receive events about the first 250 listeners, and will receive all events from other users.
+ * Emitted when a new participant is invited to a conference. The SDK does not emit the participantAdded event for the local participant. Listeners only receive the participantAdded events about users; they do not receive events for other listeners. In SDK 3.2 and prior releases, users receive events about users and the first 1000 listeners. However, in SDK 3.3 and next releases, users receive the participantAdded events about users and do not receive any events about listeners. To notify all application users about the number of participants who are present at a conference, the Web SDK 3.3 introduces the [activeParticipants](./services_notification_NotificationService.NotificationService.html#activeParticipants) events.
  *
  * @asMemberOf ConferenceService
  * @event
@@ -84,11 +82,11 @@ export declare function switched(): void;
  */
 export declare function participantAdded(participant: Participant): void;
 /**
- * Emitted when a participant changes [ParticipantStatus](model/participantstatus). The following graphic shows possible status changes during a conference:
+ * Emitted when a participant changes [ParticipantStatus](./../enums/models_Participant.ParticipantStatus.html). Listeners only receive the participantUpdated events about users; they do not receive events for other listeners. In SDK 3.2 and prior releases, users receive events about users and the first 1000 listeners. However, in SDK 3.3 and next releases, users receive the participantUpdated events about users and do not receive any events about listeners. To notify all application users about the number of participants who are present at a conference, the Web SDK 3.3 introduces the [activeParticipants](./services_notification_NotificationService.NotificationService.html#activeParticipants) events.
  *
- * <img src="../assets/web_participant_status.png" alt="screen-share" title="Screen share" width="1000"/>
+ * The following graphic shows possible status changes during a conference:
  *
- * To handle large webinars, we disabled the participantUpdated events for listeners. Listeners will only receive events about users; they do not receive events for other listeners. In a conference that uses the participantUpdated events, users will only receive events about the first 250 listeners, and will receive all events from other users.
+ * <img src="https://files.readme.io/2105b14-js-swift-conferenceService-participantUpdated.png" title="Screen share" width="1000"/>
  *
  * @asMemberOf ConferenceService
  * @event
@@ -121,16 +119,15 @@ export declare function participantUpdated(participant: Participant): void;
  */
 export declare function autoplayBlocked(): void;
 /**
- * Emitted in the following situations:
- * - A conference participant with disabled audio and video enables audio or video
- * - A conference participant starts sharing a screen
+ * Emitted when the SDK adds a new stream to a conference participant. Each conference participant can be connected to two streams: the `audio and video` stream and the `screen-share` stream. If a participant enables audio or video, the SDK adds the `audio and video` stream to the participant and emits the streamAdded event to all participants. When a participant is connected to the `audio and video` stream and changes the stream, for example, enables a camera while using a microphone, the SDK updates the `audio and video` stream and emits the [streamUpdated](#streamupdated) event. When a participant starts sharing a screen, the SDK adds the `screen-share` stream to this participants and emits the streamAdded event to all participants. The following graphic shows this behavior:
  *
- * Each conference participant can be connected to two streams: `audio and video stream` and `screen-share stream`. If a participant enables audio or video, the SDK adds the `audio and video stream` to the participant. However, when a participant who is connected to the `audio and video stream` changes the stream, the SDK updates the `audio and video stream`. For example, this situation occurs when a participant who enabled a microphone also enables a camera. In such a situation, the SDK emits the [streamUpdated](#streamupdated) event. The following graphic shows this behavior:
+ *  <img src="https://files.readme.io/21575c1-conference-stream-added.png" alt="Audio streams map"	title="Audio streams map" width="1500">
  *
- * <img src="/images/streams_events_3.png" alt="Audio streams map"
- * 	title="Audio streams map" width="1500">
+ * Based on the stream [type](./../enums/models_MediaStream.MediaStreamType.html), the application chooses to either render a camera view or a screen-share view.
  *
- * When a participant joins a conference with enabled audio and video, the SDK emits the streamAdded event that includes audio and video tracks.
+ * When a new participant joins a conference with enabled audio and video, the SDK emits the streamAdded event that includes audio and video tracks.
+ *
+ * The SDK can also emit the streamAdded event only for the local participant. When the local participant uses the [stopAudio](#stopaudio) method to locally mute the selected remote participant who does not use a camera, the local participant receives the [streamRemoved](#streamremoved) event. After using the [startAudio](#startaudio) method for this remote participant, the local participant receives the streamAdded event.
  *
  * **Note**: In Dolby Voice conferences, each conference participant receives only one mixed audio stream from the server. To keep backward compatibility with the customers' implementation, SDK 3.0 introduces a faked audio track for audio transmission. The faked audio track is included in the streamAdded and [streamRemoved](#streamremoved) events. The SDK 3.0 takes the audio stream information from the [participantAdded](#participantadded) and [participantUpdated](#participantupdated) events.
  *
@@ -150,26 +147,10 @@ export declare function streamAdded(participant: Participant, stream: MediaStrea
 /**
  * Emitted when a conference participant who is connected to the `audio and video` stream changes the stream by enabling a microphone while using a camera or by enabling a camera while using a microphone. The event is emitted to all conference participants. The following graphic shows this behavior:
  *
- * [block:image]
- *{
- *  "images": [
- *    {
- *      "image": [
- *        "https://files.readme.io/21575c1-conference-stream-added.png",
- *        "conference-stream-added.png",
- *        3048,
- *        2060,
- *        "#f6f7f7"
- *      ],
- *      "caption": "The difference between the streamAdded and streamUpdated events"
- *    }
- *  ]
- *}
- *[/block]
+ * <img src="https://files.readme.io/21575c1-conference-stream-added.png" alt="The difference between the streamAdded and streamUpdated events" title="The difference between the streamAdded and streamUpdated events" width="700"/>
  *
  * The SDK can also emit the streamUpdated event only for the local participant. When the local participant uses the [stopAudio](#stopaudio) or [startAudio](#startaudio) method to locally mute or unmute a selected remote participant who uses a camera, the local participant receives the streamUpdated event.
  *
- * The streamUpdated event can be also triggered by a load rebalance mechanism that prevents a conference from overloading. When a new participant joins a conference, the SDK creates a PeerConnection with a media server. When too many participants are connected to a specific server, they may overload a conference. To avoid this scenario, the load and rebalance mechanism closes PeerConnection between a participant who may overload a conference and a media server and creates a new PeerConnection with a new server. This mechanism is almost invisible for conference participants; the SDK only emits the streamUpdated event.
  *
  * @asMemberOf ConferenceService
  * @event
@@ -185,7 +166,9 @@ export declare function streamAdded(participant: Participant, stream: MediaStrea
  */
 export declare function streamUpdated(participant: Participant, stream: MediaStreamWithType): void;
 /**
- * Emitted when a participant removes `audio and video stream` or `screen-share stream` by disabling audio and video or by stopping a screen-share presentation.
+ * Emitted when the SDK removes a stream from a conference participant. Each conference participant can be connected to two streams: the `audio and video` stream and the `screen-share` stream. If a participant disables audio and video or stops a screen-share presentation, the SDK removes the proper stream and emits the streamRemoved event to all conference participants.
+ *
+ * The SDK can also emit the streamRemoved event only for the local participant. When the local participant uses the [stopAudio](#stopaudio) method to locally mute a selected remote participant who does not use a camera, the local participant receives the streamRemoved event.
  *
  * **Note**: In Dolby Voice conferences, each conference participant receives only one mixed audio stream from the server. To keep backward compatibility with the customers' implementation, SDK 3.0 introduces a faked audio track for audio transmission. The faked audio track is included in the [streamAdded](#streamAdded) and streamRemoved events. The SDK 3.0 takes the audio stream information from the [participantAdded](#participantadded) and [participantUpdated](#participantupdated) events.
  *
@@ -204,11 +187,13 @@ export declare function streamRemoved(participant: Participant, stream: MediaStr
 /**
  * The Mean Opinion Score (MOS) represents the participants' audio and video quality. The SDK calculates the audio and video quality scores and displays the values in a range from 1 to 5, where 1 represents the worst quality and 5 represents the highest quality. In cases when the MOS score is not available, the SDK returns the value -1.
  *
- * **Note**: With SDK 3.0, audio Mean Opinion Scores (MOS) are unavailable for web clients connected to Dolby Voice conferences.
+ * **Note**:
+ * - From SDK 3.0 to SDK 3.4.x, the audio Mean Opinion Scores (MOS) are unavailable for all web clients connected to Dolby Voice conferences.
+ * - Since SDK 3.5.0, the Mean Opinion Scores (MOS) are available when using the DVC codec on web clients.
  *
  * @asMemberOf ConferenceService
  * @event
- * @param indicators - A map that includes all conference participants' quality indicators.
+ * @param indicators - A map that contains all conference participants' quality indicators.
  */
 export declare function qualityIndicators(indicators: Map<string, QualityIndicator>): void;
 /**

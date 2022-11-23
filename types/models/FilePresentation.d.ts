@@ -1,6 +1,6 @@
 import { Participant } from './Participant';
 /**
- *The FilePresentation model includes information about the presented file, such as the file [ID](#id), information about the[participant who presents the file](#owner), [number of images within the shared file](#optional-imagecount), and the [current position](#optional-position) that informs which image is currently presented.
+ *The FilePresentation model contains information about the presented file.
  */
 export declare class FilePresentation {
     /**

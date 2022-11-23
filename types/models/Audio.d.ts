@@ -1,8 +1,6 @@
 /**
  * The AudioCaptureMode model allows selecting the preferred mode for capturing the local participant's audio.
  *
- * By default, the Dolby Voice audio processing algorithm is enabled in Dolby Voice conferences to improve voice quality. However, audio processing lowers the quality of non-voice audio. To send non-voice audio, such as music, use the Music mode or disable audio processing by using the Unprocessed mode.
- *
  * This model is available in SDK 3.7 and later.
  */
 export declare enum AudioCaptureMode {
@@ -11,11 +9,15 @@ export declare enum AudioCaptureMode {
      */
     Unprocessed = "unprocessed",
     /**
-     * Enables audio processing to improve voice quality.
+     * Optimizes captured audio for speech by aggressively removing non-speech content, such as background noise. This mode additionally enhances speech perceptibility to create a conversation-focused conference environment.
      */
     Standard = "standard",
     /**
-     * Allows sending high-quality music and voice at the same time. The mode distinguishes voice streams from music streams and processes them differently to improve voice quality without impacting the quality of music. We recommend using this mode during virtual music lessons, webinars with music, or interactive music events.
+     * Allows transmitting a high-quality audio stream with audio enhancements designed to improve the perceptual quality of music content. This mode is perfect for music lessons, virtual concerts, and music-focused webinars. We highly recommend using headphones and [disabling echo cancellation](./models_Audio.AudioEchoCancellation.html) while using the mode.
+     *
+     * Due to higher levels of background noise, we do not recommend using the Music mode in conferences focused on conversation. In the case of experiencing issues while using the mode, see the [Troubleshooting](https://docs.dolby.io/communications-apis/docs/troubleshooting-audio-issues-in-music-mode) guide.
+     *
+     * This mode is available in SDK 3.8 and later.
      */
     Music = "music"
 }
@@ -36,6 +38,8 @@ export declare enum NoiseReductionLevel {
 }
 /**
  * The AudioEchoCancellation model allows modifying the echo management setting.
+ *
+ * This mode is available in SDK 3.8 and later.
  */
 export declare enum AudioEchoCancellation {
     /**
@@ -60,26 +64,26 @@ export declare enum AudioBitrate {
     /**
      * Sets the bitrate to 18 kbps.
      */
-    Bitrate18k = "18Kbps"
+    Bitrate18k = "18Kbps",
     /**
      * Sets the bitrate to 64 kbps.
-     */ ,
-    Bitrate64k = "64Kbps"
+     */
+    Bitrate64k = "64Kbps",
     /**
      * Sets the bitrate to 80 kbps.
-     */ ,
-    Bitrate80k = "80Kbps"
+     */
+    Bitrate80k = "80Kbps",
     /**
      * Sets the bitrate to 96 kbps.
-     */ ,
-    Bitrate96k = "96Kbps"
+     */
+    Bitrate96k = "96Kbps",
     /**
      * Sets the bitrate to 128 kbps.
-     */ ,
+     */
     Bitrate128k = "128Kbps"
 }
 /**
- * The AudioCaptureModeStandardOptions model allows selecting the preferred audio mode options, such as the noise reduction level.
+ * The AudioCaptureModeStandardOptions model allows selecting the preferred audio mode options.
  *
  * This model is available in SDK 3.7 and later.
  */
@@ -90,7 +94,9 @@ export interface AudioCaptureModeStandardOptions {
     noiseReductionLevel?: NoiseReductionLevel;
 }
 /**
- * The AudioCaptureModeMusicOptions model allows configuring additional audio options for the Music mode.
+ * The AudioCaptureModeMusicOptions model allows configuring additional audio options for the [Music](./../enums/models_Audio.AudioCaptureMode.html#Music) mode.
+ *
+ * This model is available in SDK 3.8 and later.
  */
 export interface AudioCaptureModeMusicOptions {
     /**
@@ -105,7 +111,7 @@ export interface AudioCaptureModeMusicOptions {
  */
 export interface AudioCaptureModeOptions {
     /**
-     * The preferred audio mode that allows enabling and disabling audio processing.
+     * The preferred audio mode.
      */
     mode: AudioCaptureMode;
     /**

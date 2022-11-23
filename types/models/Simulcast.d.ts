@@ -8,7 +8,7 @@ export declare enum Quality {
     Auto = "auto"
 }
 /**
- * The ParticipantQuality model enables choosing quality of the received Simulcast video streams for conference participants. The model includes information about the participant's [ID](#id) and the [quality](#quality) of the received Simulcast video stream.
+ * The ParticipantQuality model allows choosing the quality of the received Simulcast video streams for conference participants.
  */
 export interface ParticipantQuality {
     /**

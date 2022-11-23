@@ -1,36 +1,57 @@
 /**
- * The VideoFilter model represents the possible video filters that allow blurring or changing the local participant's background. The video filters are available only for the Dolby.io Communications SDK for Desktop users.
+ * **Note**: This model is available only to the [Desktop SDK](https://docs.dolby.io/communications-apis/docs/desktop-sdk-overview) users.
+ *
+ * The VideoFilter model represents the possible video filters that allow blurring or changing the local participant's background.
  */
 export declare enum VideoFilter {
     /**
-     * Disables the applied video filter. This setting does not disable [video denoising](doc:js-client-sdk-model-videofilteroptions#videodenoise); you can still use [video denoising](doc:js-client-sdk-model-videofilteroptions#videodenoise) when VideoFilter is set to `None`.
+     * Disables the applied video filter. This setting does not disable [video denoising](./../interfaces/models_VideoFilters.VideoFilterOptions.html#videoDenoise); you can still use [video denoising](./../interfaces/models_VideoFilters.VideoFilterOptions.html#videoDenoise) when VideoFilter is set to `None`.
      *
-     * Example: VoxeetSDK.videoFilters.setFilter(VideoFilter.None)
+     * @example
+     * ```js
+     * VoxeetSDK.videoFilters.setFilter(VideoFilter.None)
+     * ```
      */
     None = "none",
     /**
      * Blurs the local participant's background.
      *
-     * Example: VoxeetSDK.videoFilters.setFilter(VideoFilter.Bokeh)
+     * @example
+     * ```js
+     * VoxeetSDK.videoFilters.setFilter(VideoFilter.Bokeh)
+     * ```
      */
     Bokeh = "bokeh",
     /**
-     * Replaces the local participant's background with the selected static image.
+     * Replaces the local participant's background with the selected static image. The StaticImage filter supports the following image formats:
      *
-     * Example: VoxeetSDK.videoFilters.setFilter(VideoFilter.StaticImage, {imageFile: fileObject})
+     * - Windows bitmaps: BMP and DIB
+     * - JPEG files: JPEG, JPG, and JPE
+     * - Portable Network Graphics: PNG
+     *
+     * @example
+     * ```js
+     * VoxeetSDK.videoFilters.setFilter(VideoFilter.StaticImage, {imageFile: fileObject})
+     * ```
      */
     StaticImage = "staticimage"
 }
 /**
- * The VideoFilterOptions model includes the [image file](#imagefile) for the [staticImage](doc:js-client-sdk-model-videofilter#staticimage) filter, information about the video [stream](#stream) on which the video filter should be applied, and the [video denoising](#videodenoise) option.
+ * **Note**: This model is available only to the [Desktop SDK](https://docs.dolby.io/communications-apis/docs/desktop-sdk-overview) users.
+ *
+ * The VideoFilterOptions model contains additional options for [VideoFilters](./../enums/models_VideoFilters.VideoFilter.html).
  */
 export interface VideoFilterOptions {
     /**
-     * The image file that is required for the [staticImage](doc:js-client-sdk-model-videofilter#staticimage) filter.
+     * The image file that is required for the [staticImage](./../enums/models_VideoFilters.VideoFilter.html#StaticImage) filter. The StaticImage filter supports the following image formats:
+     *
+     * - Windows bitmaps: BMP and DIB
+     * - JPEG files: JPEG, JPG, and JPE
+     * - Portable Network Graphics: PNG
      */
     imageFile?: File;
     /**
-     * The stream on which the SDK should apply the selected filter.  By default, the filters are applied on the local participant's video track that is sent to a conference. You can change the stream to the local video track to see the filters locally, without adding the filter to the video track that is sent to a conference.
+     * The stream on which the SDK should apply the selected filter. By default, the filters are applied on the local participant's video track that is sent to a conference. Participants can also retrieve the local stream using [getUserMedia](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia) and then apply the filter to that stream to preview what the filter would look like.
      */
     stream?: MediaStream | MediaStreamTrack;
     /**

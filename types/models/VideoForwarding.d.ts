@@ -2,7 +2,7 @@ import { Participant } from './Participant';
 /**
  * The VideoForwardingStrategy model defines how the SDK should select conference participants whose videos will be transmitted to the local participant. There are two possible values; the selection can be either based on the participants' audio volume or the distance from the local participant.
  *
- * Selecting the video forwarding strategy is supported only on SDK 3.6 and later versions. On SDK 3.5 and earlier, the SDK supports only the LastSpeaker strategy.
+ * Selecting the video forwarding strategy is supported only in SDK 3.6 and later. In SDK 3.5 and earlier, the SDK supports only the LastSpeaker strategy.
  *
  * By default, the SDK uses the LastSpeaker strategy.
  */
@@ -12,7 +12,7 @@ export declare enum VideoForwardingStrategy {
      */
     LastSpeaker = "lastSpeakerStrategy",
     /**
-     * Selects participants based on their distance from the local participant. This allows the local participant to receive video streams only from the nearest participants. This strategy is available only for participants who enabled spatial audio.
+     * Selects participants based on their distance from the local participant. This allows the local participant to receive video streams only from the nearest participants. This strategy is available only to participants who enabled spatial audio.
      */
     ClosestUser = "closestUserStrategy"
 }
@@ -24,11 +24,11 @@ export declare enum VideoForwardingStrategy {
  */
 export interface VideoForwardingOptions {
     /**
-     * Sets the [video forwarding strategy](doc:js-client-sdk-model-videoforwardingstrategy) for the local participant.
+     * Sets the [video forwarding strategy](./../enums/models_VideoForwarding.VideoForwardingStrategy.html) for the local participant.
      */
     strategy?: VideoForwardingStrategy;
     /**
-     * Sets the maximum number of video streams that may be transmitted to the joining participant. The valid parameter's values are between 0 and 25 for desktop browsers and between 0 and 4 for mobile browsers. In the case of providing a value smaller than 0 or greater than the valid values, SDK triggers the [VideoForwardingError](doc:js-client-sdk-model-videoforwardingerror). If the parameter value is not specified, the SDK automatically sets the maximum possible value: 25 for desktop browsers and 4 for mobile browsers.
+     * Sets the maximum number of video streams that may be transmitted to the joining participant. The valid parameter's values are between 0 and 25 for desktop browsers and between 0 and 4 for mobile browsers. In the case of providing a value smaller than 0 or greater than the valid values, SDK triggers the [VideoForwardingError](./../classes/lib_Exceptions.VideoForwardingError.html). If the parameter value is not specified, the SDK automatically sets the maximum possible value: 25 for desktop browsers and 4 for mobile browsers.
      */
     max?: number;
     /**

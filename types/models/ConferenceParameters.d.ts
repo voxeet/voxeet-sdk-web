@@ -16,14 +16,7 @@ export interface JoinParametersData {
     spatialAudioStyle?: SpatialAudioStyle;
 }
 /**
- * The ConferenceParameters model allows the application to:
- *
- * - Create an [audio-only](#audioonly) conference
- * - Enable [Dolby Voice](#optional-dolbyvoice)
- * - Turn the [live recording](#liverecording) on and off
- * - Set the [transmission bitrate adaptation mode](#rtcpmode)
- * - Customize the [waiting time](#ttl) before terminating an empty conference
- * - Change the [video codec](#videocodec) that is used during conferences
+ * The ConferenceParameters model allows defining details of a conference.
  */
 export default class ConferenceParameters {
     /**
@@ -46,9 +39,9 @@ export default class ConferenceParameters {
      *
      * The possible values are:
      *
-     * - `worst`: adjusts the transmission bitrate to the receiver who has the worst network conditions
-     * - `average`: averages the available bandwidth of all the receivers and adjusts the transmission bitrate to this value
-     * - `max`: does not adjust the transmission bitrate to the receiver’s bandwidth
+     * - `Worst`: adjusts the transmission bitrate to the receiver who has the worst network conditions
+     * - `Average`: averages the available bandwidth of all the receivers and adjusts the transmission bitrate to this value
+     * - `Max`: does not adjust the transmission bitrate to the receiver’s bandwidth
      *
      * By default, the value is set to `average`.
      *
@@ -61,29 +54,33 @@ export default class ConferenceParameters {
     /** @ignore */
     currentLanguage?: string;
     /**
-     * The preferred video codec that is used during conferences, either `H264` or `VP8`. By default, the value is set to `H264`.
+     * The preferred video codec, either H264, VP8, or none. By default, the value is set to `H264`. Setting this parameter to `none` results in creating a conference that does not allow participants to [enable their videos](./../interfaces/models_LocalVideo.LocalVideo.html#start).
      *
      */
     videoCodec?: string;
     /**
-     * Turns the live recording on and off.
+     * Enables and disables live recording:
      *
      * - When set to `true`, the recorded file is available at the end of the call and can be downloaded immediately.
-     * - When set to `false`, the [remix API](reference:start-conference-remix) must be called after the conference to generate and retrieve the recorded file.
+     * - When set to `false`, the [remix API](https://docs.dolby.io/communications-apis/reference/start-conference-remix) must be called after the conference to generate and retrieve the recorded file.
      *
-     * This parameter does not start the recording; use the [start](doc:js-client-sdk-recordingservice#start) method to turn it on.
+     * This parameter does not start the recording; use the [start](./services_recording_RecordingService.RecordingService.html#start) method to turn it on.
      *
      * By default, the value is set to `false`.
+     *
+     * For more information, see the [Recording Conferences](https://docs.dolby.io/communications-apis/docs/guides-recording-conferences) document.
      */
     liveRecording?: boolean;
-    /** A boolean that indicates whether the application wishes to create a conference with Dolby Voice enabled. For more information about Dolby Voice, see [this article](doc:guides-dolby-voice).*/
+    /** A boolean that indicates whether the application wishes to create a Dolby Voice conference. For more information about Dolby Voice, see the [Dolby Voice](https://docs.dolby.io/communications-apis/docs/guides-dolby-voice) article. By default, the parameter is set to `true`.
+     *
+     */
     dolbyVoice?: boolean;
-    /** A boolean that indicates whether the application wishes to create an audio-only conference. Setting this parameter to true results in creating a conference that does not allow participants to enable their videos. If a participant calls the [startVideo](doc:js-client-sdk-videoservice#startvideo) method in an audio-only conference, the SDK returns [ServerError](js-client-sdk-model-servererror). */
+    /** A boolean that indicates whether the application wishes to create an audio-only conference. Setting this parameter to true results in creating a conference that does not allow participants to enable their videos. If a participant calls the [start](./../interfaces/models_LocalVideo.LocalVideo.html#start) method in an audio-only conference, the SDK returns [ServerError](./lib_Exceptions.ServerError.html). */
     audioOnly?: boolean;
     /**
      * Defines how the spatial location should be communicated between the SDK and the Dolby.io server.
      *
-     * Setting the spatial audio style is supported only on SDK 3.6 and later. The earlier SDK versions support only the individual mode.
+     * Setting the spatial audio style is supported only in SDK 3.6 and later. The earlier SDK versions support only the individual mode.
      */
     spatialAudioStyle?: SpatialAudioStyle;
     /**

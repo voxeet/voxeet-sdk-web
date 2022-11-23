@@ -1,9 +1,7 @@
 import { BaseConferenceService } from '../Service';
 import { ConferenceService } from '../conference/ConferenceService';
 /**
- * The CommandService allows the application to [send](#send) text messages or notifications to all conference participants. The service also emits an [received](#received) event to inform the application about received messages.
- *
-  ---
+ * The CommandService allows applications to send and receive text messages and notifications during conferences.
  */
 export declare class CommandService extends BaseConferenceService {
     #private;

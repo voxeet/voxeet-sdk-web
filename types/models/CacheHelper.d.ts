@@ -1,4 +1,7 @@
 import { ICacheHelper } from './ICacheHelper';
+/**
+ * @ignore
+ */
 export declare class CacheHelper<T> implements ICacheHelper<string, T> {
     #private;
     clear(): void;

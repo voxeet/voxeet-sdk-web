@@ -1,6 +1,6 @@
 import Recording from '../../models/Recording';
 /**
- * Emitted when the recording status has changed.
+ * Emitted when a recording status changes. The event is available only in SDK 3.5 and later.
  *
  * @asMemberOf RecordingService
  * @event

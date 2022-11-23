@@ -22,7 +22,7 @@ export declare enum VideoProcessorType {
 /**
  * The VideoProcessor model allows choosing the preferred video processor that either blurs the local participant's background or uses a selected image as the background.
  *
- * This model is supported only in SDK 3.7 and later and is supported only on Chrome and Edge on desktop operating systems.
+ * This model is supported only in SDK 3.7 and later and only on Chrome and Edge on desktop operating systems.
  */
 export interface VideoProcessor {
     /**
@@ -30,7 +30,9 @@ export interface VideoProcessor {
      */
     type?: VideoProcessorType;
     /**
-     * The [HTMLImageElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement) object for the [BackgroundReplacement](doc:js-client-sdk-model-videoprocessortype#backgroundreplacement) video processor. The image needs to be loaded before enabling the processor. Otherwise, the SDK triggers the [VideoServiceError](doc:js-client-sdk-model-videoserviceerror).
+     * The [HTMLImageElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement) object for the [BackgroundReplacement](./../enums/models_VideoProcessor.VideoProcessorType.html#BackgroundReplacement) video processor. The supported image file formats are JPG, JPEG, 24-bit PNG, and 32-bit PNG. In the case of 32-bit PNG with an alpha channel, the transparent areas are displayed as black.
+     *
+     * The image needs to be loaded before enabling the processor. Otherwise, the SDK triggers the [VideoServiceError](./../classes/lib_Exceptions.VideoServiceError.html).
      */
     image?: HTMLImageElement;
 }

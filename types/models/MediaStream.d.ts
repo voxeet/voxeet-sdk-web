@@ -5,11 +5,11 @@ interface VideoType {
     type: MediaStreamType;
 }
 /**
- * The MediaStreamType model gathers the [camera](#camera) and [screen-share](#screenshare) media stream types.
+ * The MediaStreamType model contains the available media stream types.
  */
 export declare enum MediaStreamType {
     /**
-     * The camera media stream. The stream can be audio and/or video. This stream type is set by default, even when a participant does not use a camera.
+     * The camera media stream, either audio, video, or audio and video. This stream type is used by default.
      */
     Camera = "Camera",
     /**
@@ -40,7 +40,7 @@ export declare enum MediaStreamIndex {
  */
 export declare const CustomStreamMinIndex: number;
 /**
- * The MediaStreamWithType model is a WebRTC MediaStream that includes the stream [types](doc:js-client-sdk-model-mediastreamtype).
+ * The MediaStreamWithType model is a WebRTC MediaStream that contains information about the stream [types](./../enums/models_MediaStream.MediaStreamType.html).
  *
  */
 export declare type MediaStreamWithType = MediaStream & VideoType;

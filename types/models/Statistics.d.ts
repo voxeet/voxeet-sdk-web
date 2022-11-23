@@ -166,6 +166,9 @@ export declare class DataChannelStats extends Stats {
     state: string;
     timestamp: number;
 }
+/**
+ * @ignore
+ */
 export declare class TransportStats extends Stats {
     id: string;
     dtlsState: string;
@@ -177,6 +180,6 @@ export declare class TransportStats extends Stats {
  */
 export declare type Statistics = RTCInboundRTPAudioStreamStats | RTCOutboundRtpVideoStreamStats | RTCRemoteInboundRTPStreamStats | RTCCandidatePairStats;
 /**
- * The WebRTCStats model includes WebRTC statistics described in the [WebRTC documentation](https://www.w3.org/TR/webrtc-stats/#dom-rtcstatstype).
+ * The WebRTCStats model contains WebRTC statistics described in the [WebRTC documentation](https://www.w3.org/TR/webrtc-stats/#dom-rtcstatstype).
  */
 export declare type WebRTCStats = Map<string, Array<Statistics>>;

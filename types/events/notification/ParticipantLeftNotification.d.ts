@@ -15,7 +15,7 @@ interface NotificationData {
     };
 }
 /**
- * The ParticipantLeftNotification model gathers information about participants who left the conference, such as the conference [alias](#conferencealias), [ID](conferenceid), and information about the [participant](#participant) who left the conference.
+ * The ParticipantLeftNotification model contains information about a participant who left a conference.
  */
 export default class ParticipantLeftNotification extends Event {
     /** The conference alias. */

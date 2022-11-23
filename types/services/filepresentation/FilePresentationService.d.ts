@@ -31,7 +31,7 @@ import { ConferenceService } from '../conference/ConferenceService';
  *
  * <br>
  *
- * <img src="../assets/Web_file_presentation.png" alt="The file presentation diagram" title="The file presentation diagram" width="700"/>
+ * <img src="https://files.readme.io/45244f2-js-file-presentation.png" title="The file presentation diagram" width="700"/>
  *
  * The [current](#current) accessor allows the participants to receive information about the current state of the file presentation.
  *
@@ -77,7 +77,7 @@ export declare class FilePresentationService extends BaseConferenceService {
      */
     start(file: FileConverted): any;
     /**
-     * Informs the service to send the updated page number to the conference participants.
+     * Informs the service to send the updated page number to conference participants.
      * @param page - The page number that corresponds to the page that should be presented.
      */
     update(page: number): Promise<any>;
@@ -86,14 +86,14 @@ export declare class FilePresentationService extends BaseConferenceService {
      */
     stop(): Promise<any>;
     /**
-     * Provides the image's URL that refers to a specific page of the presented file.
+     * Provides the image URL that refers to a specific page of the presented file.
      * @param page - The number of the presented page. Files that do not have any pages, for example jpg images, require setting the value of the page parameter to `0`.
      * @param fileId - The file ID that allows presenting files without joining a conference.
      */
     image(page: number, fileId?: string): Promise<string>;
     /**
-     * Provides the thumbnail's URL that refers to a specific page of the presented file.
-     * @param page - The number of the presented page. Files that do not include any pages, for example jpg images, require setting the value of this parameter to `0`.
+     * Provides the thumbnail URL that refers to a specific page of the presented file.
+     * @param page - The number of the presented page. Files that do not have any pages, for example jpg images, require setting the value of this parameter to `0`.
      * @param fileId - The file ID that allows presenting files without joining a conference.
      */
     thumbnail(page: number, fileId?: string): Promise<string>;
@@ -104,7 +104,7 @@ export declare class FilePresentationService extends BaseConferenceService {
     private onFilePresentationUpdated;
     private onFilePresentationStopped;
     /**
-     * Returns information about the current state of the file presentation. Use this accessor if you wish to receive information that is available in the [FilePresentation](model/filepresentation) object, such as the [file ID](doc:js-client-sdk-model-filepresentation#id), [the number of images](doc:js-client-sdk-model-filepresentation#optional-imagecount) in the presentation, information about the [file owner](doc:js-client-sdk-model-filepresentation#owner), or the current [position](doc:js-client-sdk-model-filepresentation#optional-position) in the presentation. For example, use the following code to ask about the file owner:
+     * Returns information about the current state of the file presentation. Use this accessor if you wish to receive information that is available in the [FilePresentation](./models_FilePresentation.FilePresentation.html) object, such as the file ID, the number of images in the presentation, information about the file owner, or the current position in the presentation. For example, use the following code to ask about the file owner:
      *
      * ```javascript
      * VoxeetSDK.filePresentation.current.owner;

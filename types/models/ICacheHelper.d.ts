@@ -1,3 +1,6 @@
+/**
+ * @ignore
+ */
 export interface ICacheHelper<T, U> {
     get: (key: T) => U;
     set: (key: T, item: U) => void;

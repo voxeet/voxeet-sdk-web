@@ -9,7 +9,7 @@ interface NotificationData {
     };
 }
 /**
- * The ConferenceEndedNotification model gathers information about the ended conferences, such as its [alias](#conferencealias), and [ID](#conferenceid).
+ * The ConferenceEndedNotification model gathers information about ended conferences.
  */
 export default class ConferenceEndedNotification extends Event {
     /** The conference alias. */

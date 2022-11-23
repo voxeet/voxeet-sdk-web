@@ -1,7 +1,7 @@
 /**
  * Emitted when the local participant's camera or a custom video has been enabled.
  *
- * @asMemberOf VideoService
+ * @asMemberOf LocalVideo
  * @event
  * @param result - A new MediaStreamTrack object.
  *
@@ -16,7 +16,7 @@ export declare function videoStarted(result: MediaStreamTrack): void;
 /**
  * Emitted when the local participant's camera or a custom video has been disabled.
  *
- * @asMemberOf VideoService
+ * @asMemberOf LocalVideo
  * @event
  * @param result - The stopped MediaStreamTrack object.
  *
@@ -35,7 +35,7 @@ export declare function videoStopped(result: MediaStreamTrack): void;
  *  - A video input device is changed successfully when the local participant's video is enabled.
  *  - A video processing is enabled or disabled when the local participant's video is enabled.
  *
- * @asMemberOf VideoService
+ * @asMemberOf LocalVideo
  * @event
  * @param result - The updated MediaStreamTrack object.
  *

@@ -3,10 +3,7 @@ import { ParticipantInfo } from '../../models/Options';
 import { Participant } from '../../models/Participant';
 import { ConferenceLeaving, ConferenceLeft } from '../../events/conference/index';
 /**
- *
- * The SessionService allows [opening](#open) and [closing](#close) sessions. Opening a session is mandatory before interacting with any service.
- *
- * ---
+ *The SessionService allows connecting the SDK with the Dolby.io backend via the [open](#open) method. Opening a session is mandatory before interacting with any service.
  *
  */
 export declare class SessionService extends Service {
@@ -66,7 +63,7 @@ export declare class SessionService extends Service {
     close(): Promise<void>;
     private refreshToken;
     /**
-     * Provides the local participant object that belongs to the current session.
+     * Returns the local participant object that belongs to the current session.
      */
     get participant(): Participant;
     get customerKey(): string;
@@ -89,7 +86,7 @@ export declare class SessionService extends Service {
      */
     private isTokenValid;
     /**
-     * If true, indcates that connection with backend is open.
+     * Checks whether there is an open session that connects the SDK with the Dolby.io backend.
      */
     isOpen(): boolean;
     /**

@@ -1,3 +1,6 @@
+/**
+ * @ignore
+ */
 export declare class ErrorOverrideValue extends Error {
     constructor();
 }

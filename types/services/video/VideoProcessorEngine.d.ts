@@ -22,6 +22,7 @@ export declare class VideoProcessorEngine {
     setProcessor(processor?: VideoProcessor): Promise<void>;
     getProcessor(): VideoProcessor;
     getOutputStream(): Promise<MediaStream>;
+    changeOutputStreamFrameRate(frameRate: number): Promise<void>;
     changeInputStream(stream: MediaStream): Promise<void>;
     private handleEmptyProcessor;
     private handleBokehProcessor;

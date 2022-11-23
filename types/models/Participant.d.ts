@@ -4,11 +4,11 @@ import { ParticipantUpdated, ParticipantAdded } from '../events/conference/index
 import { MediaStreamWithType } from './MediaStream';
 import { ParticipantInfo } from './Options';
 /**
- * The ParticipantType model represents the types of conference participants.
+ * The ParticipantType model contains the possible types of a conference participant.
  */
 export declare enum ParticipantType {
     /**
-     * A participant who can send and receive the audio and video stream during the conference.
+     * A participant who can send and receive audio and video during the conference.
      */
     USER = "user",
     /**
@@ -17,7 +17,7 @@ export declare enum ParticipantType {
      */
     SPEAKER = "speaker",
     /**
-     * A participant who cannot send the audio and video stream during the conference.
+     * A participant who cannot send audio and video to a conference.
      */
     LISTENER = "listener",
     /**
@@ -25,19 +25,19 @@ export declare enum ParticipantType {
      */
     DOLBYVOICE = "dolbyVoice",
     /**
-     * @ignore
+     * A participant who connected to a conference using Public Switched Telephone Network (PSTN).
      */
     PSTN = "pstn",
     /**
-     * @ignore
+     * A special participant who joins a conference to record it.
      */
     MIXER = "mixer",
     /**
-     * @ignore
+     * A participant who does not have an assigned type.
      */
     NONE = "none",
     /**
-     * @ignore
+     * A participant who is present during the replay of a recorded conference.
      */
     ROBOT = "robot"
 }
@@ -105,7 +105,7 @@ export declare class Participant extends EventEmitter {
      */
     id: string;
     /**
-     * Information about the conference participant.
+     * Information about the participant.
      */
     info: ParticipantInfo;
     /**
@@ -136,7 +136,7 @@ export declare class Participant extends EventEmitter {
      */
     audioQuality: number;
     /**
-     * The status of audio transmission. True indicates that a participant's audio is transmitted to a conference, false indicates that the participant is muted.
+     * Information whether a participant is transmitting audio. True indicates that the participant's audio stream is transmitted to a conference, false indicates that the participant is muted.
      *
      * **Note**: This property is available in SDK 3.2 and later.
      */
@@ -148,7 +148,7 @@ export declare class Participant extends EventEmitter {
      */
     videoTransmitting: boolean;
     /**
-     * Identifies if the local client has requested to stopAudio or mute the remote participant.
+     * Information whether the local participant muted a remote participant or stopped the remote participant's audio.
      *
      * @ignore
      */
@@ -193,21 +193,20 @@ export declare class Participant extends EventEmitter {
      */
     updateAudioReceivingStopped(audioReceivingStopped: boolean): void;
     /**
-     * The participant's audio receiving status modified using startAudio() and stopAudio() on a remote participant.
+     * Checks whether the local participant receives audio from a specific remote participant.
      *
-     * This property is true when the participants audio can be received from the conference to the local client.
+     * For example, if a participant A calls the [stop](./services_audio_RemoteAudio.RemoteAudio.html#stop) method to stop receiving audio from a participant B and then calls `participant.audioReceivingFrom` for the participant B, the participant A receives false. This means that the participant A does not receive audio streams from the participant B.
      *
-     * If this property is false then it indicates that the local client is unable to hear the specified participant.
+     * If audioTransmitting is false for a specific remote participant, audioReceivingFrom is also false as a conference is unable to send this participant's audio into the conference.
      *
-     * Note: If the participants audioTransmitting is false, then its audioReceivingFrom will also be false as
-     * the conference is unable to send down audio for a participant that is not sending their audio into the conference.
+     * **Note**: This accessor is available only in SDK 3.2 and later.
      */
     get audioReceivingFrom(): boolean;
     /**
-     * The participant's audio status.
+     * @deprecated
+     * The SDK 3.2 deprecates the audio accessor and replaces this accessor with [audioTransmitting](#audiotransmitting) and [audioReceivingFrom](#audioreceivingfrom) to provide more specific information about audio streams.
      *
-     * @deprecated  Replaced by {@link #audioTransmitting and audioReceivingFrom()}. This
-     * now defers to audioTransmitting
+     * The participant's audio status.
      */
     get audio(): boolean;
     /**

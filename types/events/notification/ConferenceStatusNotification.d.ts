@@ -25,7 +25,7 @@ export default class ConferenceStatusNotification extends Event {
     conferenceId: string;
     /** The conference status.*/
     live: boolean;
-    /** Information about the conference participants.*/
+    /** The list of conference participants.*/
     participants: Array<Participant>;
     /** @ignore  */
     constructor();

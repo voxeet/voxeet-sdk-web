@@ -15,7 +15,7 @@ interface NotificationData {
     };
 }
 /**
- * The ParticipantJoinedNotification model gathers information about participants who joined the conference, such as the conference [alias](#conferencealias), [ID](conferenceid), and information about the [participant](#participant) who joined the conference.
+ * The ParticipantJoinedNotification model contains information about a participant who joined a conference.
  */
 export default class ParticipantJoinedNotification extends Event {
     /** The conference alias. */

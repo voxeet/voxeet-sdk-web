@@ -8,4 +8,5 @@ export declare class LocalVideoTrack {
     protected constructor(track: MediaStreamTrack);
     getMediaStreamTrack(): MediaStreamTrack;
     stop(): Promise<void>;
+    applyConstraints(constraints: MediaTrackConstraints): Promise<void>;
 }

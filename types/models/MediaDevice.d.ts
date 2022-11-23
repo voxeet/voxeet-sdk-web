@@ -25,7 +25,7 @@ export declare type Stats = {
 /**
  * The DevicesUpdates model contains [information](doc:js-client-sdk-model-stats) about devices that the local participant added, updated, or removed.
  *
- * Example:
+ * @example
  * ```
  * DevicesUpdates = {
  *  audioInput?: Stats;
@@ -42,7 +42,7 @@ export declare type DevicesUpdates = {
 /**
  * The DevicesList model gathers a list of all audio and video devices available for the local participant.
  *
- * Example:
+ * @example
  * ```
  * Deviceslist = {
  *  audioInput?: MediaDeviceInfo[];
@@ -56,11 +56,17 @@ export declare type DevicesList = {
     audioOutput?: MediaDeviceInfo[];
     videoInput?: MediaDeviceInfo[];
 };
+/**
+ * @ignore
+ */
 export declare enum DeviceKind {
     AudioInput = 1,
     AudioOutput = 2,
     VideoInput = 4
 }
+/**
+ * @ignore
+ */
 export declare enum HandlerType {
     ListDevices = 1,
     GetDifferences = 2
@@ -78,6 +84,9 @@ export declare type DeviceChangeOption = {
     deviceKind: DeviceKind;
     handlerType: HandlerType;
 };
+/**
+ * @ignore
+ */
 export interface MediaManagerInterface {
     selectAudioInputDevice: SelectAudioInputDevice;
     selectAudioOutputDevice: SelectAudioOutputDevice;
@@ -94,7 +103,7 @@ export interface MediaManagerInterface {
     selectedVideoInputDevice: MediaDeviceInfo | undefined;
 }
 /**
- * The MediaDeviceServiceInterface is an interface implemented by the [MediaDeviceService](doc:js-client-sdk-mediadeviceservice).
+ * The MediaDeviceServiceInterface is an interface implemented by the [MediaDeviceService](./../classes/services_mediadevice_MediaDeviceService.MediaDeviceService.html).
  */
 export interface MediaDeviceServiceInterface {
     /**
@@ -114,11 +123,11 @@ export interface MediaDeviceServiceInterface {
      */
     enumerateDevices: () => Promise<MediaDeviceInfo[]>;
     /**
-     * Selects a specific local participant's audio input device for capturing audio during a conference. A joining participant can either use the default audio device or select a different device. All operating systems recognize one default device, however on Windows there is an additional device called the [default communication device](https://docs.microsoft.com/en-us/windows/win32/coreaudio/using-the-communication-device). Selecting an audio device by providing the `communications` (only on Windows) or `default` deviceId causes that the SDK uses the selected device as long as the device is recognized by the operating system as the default device. After changing the default device in the system settings or disconnecting the current default device, the SDK switches to the new default device. When the participant selects the audio device by providing the actual deviceId, the SDK uses the selected device as long as it is available. After disconnecting the selected device, the SDK switches to the default device.
+     * Selects a specific local participant's audio input device for capturing audio during a conference. A joining participant can either use the default audio device or select a different device. All operating systems recognize one default device, however on Windows there is an additional device called the [default communication device](https://docs.microsoft.com/en-us/windows/win32/coreaudio/using-the-communication-device). Selecting an audio device by providing the `communications` (only on Windows) or `default` [deviceId](https://developer.mozilla.org/en-US/docs/Web/API/MediaDeviceInfo/deviceId) causes that the SDK uses the selected device as long as the device is recognized by the operating system as the default device. After changing the default device in the system settings or disconnecting the current default device, the SDK switches to the new default device. When the participant selects the audio device by providing the actual deviceId, the SDK uses the selected device as long as it is available. After disconnecting the selected device, the SDK switches to the default device.
      */
     selectAudioInput: (device: MediaDeviceInfo | string) => Promise<string | Error>;
     /**
-     * Selects a specific local participant's audio output device for playing audio during a conference.
+     * Selects a specific local participant's audio output device for playing audio during a conference. A joining participant can either use the default audio device or select a different device. All operating systems recognize one default device, however on Windows there is an additional device called the [default communication device](https://docs.microsoft.com/en-us/windows/win32/coreaudio/using-the-communication-device). Selecting an audio device by providing the `communications` (only on Windows) or `default` [deviceId](https://developer.mozilla.org/en-US/docs/Web/API/MediaDeviceInfo/deviceId) causes that the SDK uses the selected device as long as the device is recognized by the operating system as the default device. After changing the default device in the system settings or disconnecting the current default device, the SDK switches to the new default device. When the participant selects the audio device by providing the actual deviceId, the SDK uses the selected device as long as it is available. After disconnecting the selected device, the SDK switches to the default device.
      */
     selectAudioOutput: (device: MediaDeviceInfo | string) => Promise<string | Error>;
     /**
@@ -126,11 +135,15 @@ export interface MediaDeviceServiceInterface {
      */
     selectVideoInput: (device: MediaDeviceInfo | string) => Promise<string | Error>;
     /**
-     * Retrieves the comfort noise level setting for output devices in Dolby Voice conferences. This API is only supported on the [Desktop SDK](doc:desktop-sdk) and Web SDK 3.5 and later versions.
+     * Gets the comfort noise level setting for output devices in Dolby Voice conferences.
+     *
+     * This API is only supported in the [Desktop SDK](https://docs.dolby.io/communications-apis/docs/desktop-sdk-overview) and Web SDK 3.5 and later versions.
      */
     getComfortNoiseLevel: () => Promise<ComfortNoiseLevel | Error>;
     /**
-     * Configures the comfort noise level for output devices in Dolby Voice conferences. This API is only supported on the [Desktop SDK](doc:desktop-sdk) and Web SDK 3.5 and later versions.
+     * Sets the comfort noise level for output devices in Dolby Voice conferences.
+     *
+     * This API is only supported in the [Desktop SDK](https://docs.dolby.io/communications-apis/docs/desktop-sdk-overview) and Web SDK 3.5 and later versions.
      */
     setComfortNoiseLevel: (level: ComfortNoiseLevel) => Promise<void | Error>;
     /**

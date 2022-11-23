@@ -24,38 +24,48 @@ export declare class MediaDeviceService extends BaseConferenceService implements
     constructor(sdk: unknown, manager: MediaManagerInterface);
     /**
      * @deprecated
-     * **Note**: This method is deprecated in SDK 3.7 and replaced with the **getComfortNoiseLevel** method available in the [LocalAudio](doc:js-client-sdk-model-localaudio) model.
+     * This method is deprecated in SDK 3.7 and replaced with the **getComfortNoiseLevel** method available in the [LocalAudio](./services_audio_LocalAudio.LocalAudio.html) model.
+     * <br>
+     * <br>
+     * Retrieves the comfort noise level setting for output devices in Dolby Voice conferences.
      *
-     * Retrieves the comfort noise level setting for output devices in Dolby Voice conferences. This API is only supported on the [Desktop SDK](doc:desktop-sdk) and Web SDK 3.5 and Web SDK 3.6.
-     *
-     * This API is deprecated in SDK 3.7 and moved in AudioService.
+     * This API is only supported in the [Desktop SDK](https://docs.dolby.io/communications-apis/docs/desktop-sdk-overview) and Web SDK 3.5 and 3.6.
      */
     getComfortNoiseLevel(): Promise<Error | ComfortNoiseLevel>;
     /**
      * @deprecated
-     * **Note**: This method is deprecated in SDK 3.7 and replaced with the **setComfortNoiseLevel** method available in the [LocalAudio](doc:js-client-sdk-model-localaudio) model.
+     * This method is deprecated in SDK 3.7 and replaced with the **setComfortNoiseLevel** method available in the [LocalAudio](./services_audio_LocalAudio.LocalAudio.html) model.
+     * <br>
+     * <br>
+     * Sets the comfort noise level for output devices in Dolby Voice conferences. The local participant can call this method before joining a conference or during a conference. When setComfortNoiseLevel is called before joining, the SDK stores the set value and uses the setting after the participant joins the conference.
      *
-     * Configures the comfort noise level for output devices in Dolby Voice conferences. This API is only supported on the [Desktop SDK](doc:desktop-sdk) and Web SDK 3.5 and Web SDK 3.6.
-     *
-     * This API is deprecated in SDK 3.7 and moved in AudioService.
+     * This API is only available in [Desktop SDK](https://docs.dolby.io/communications-apis/docs/desktop-sdk-overview) and Web SDK 3.5 and 3.6.
      *
      * @param {ComfortNoiseLevel} level - The comfort noise level.
      */
     setComfortNoiseLevel(level: ComfortNoiseLevel): Promise<void | Error>;
     /**
      * Enumerates all connected audio and video devices that are available for the local participant.
+     *
+     * This method is available only in SDK 3.5 and later.
      */
     enumerateDevices(): Promise<MediaDeviceInfo[]>;
     /**
      * Enumerates all audio input devices that are available for the local participant.
+     *
+     * This method is available only in SDK 3.5 and later.
      */
     enumerateAudioInputDevices(): Promise<MediaDeviceInfo[]>;
     /**
      * Enumerates all audio output devices that are available for the local participant.
+     *
+     * This method is available only in SDK 3.5 and later.
      */
     enumerateAudioOutputDevices(): Promise<MediaDeviceInfo[]>;
     /**
      * Enumerates video input devices that are available for the local participant.
+     *
+     * This method is available only in SDK 3.5 and later.
      */
     enumerateVideoInputDevices(): Promise<MediaDeviceInfo[]>;
     /**
@@ -78,24 +88,32 @@ export declare class MediaDeviceService extends BaseConferenceService implements
     selectVideoInput(device: MediaDeviceInfo | string): Promise<string>;
     /**
      * Returns the audio input device that is currently used by the local participant.
+     *
+     * This API is available only in SDK 3.5 and later.
      */
     get selectedAudioInputDevice(): MediaDeviceInfo;
     /**
      * Returns the audio output device that is currently used by the local participant.
+     *
+     * This API is available only in SDK 3.5 and later.
      */
     get selectedAudioOutputDevice(): MediaDeviceInfo;
     /**
      * Returns the video input device that is currently used by the local participant.
+     *
+     * This API is available only in SDK 3.5 and later.
      */
     get selectedVideoInputDevice(): MediaDeviceInfo;
     /**
      * @deprecated
+     *
      * Enumerates all audio devices.
      * @param type - The device type, either input or output.
      */
     enumerateAudioDevices(type?: string): Promise<MediaDeviceInfo[]>;
     /**
      * @deprecated
+     *
      * Enumerates all video devices.
      * @param type - The device type, either input or output.
      */

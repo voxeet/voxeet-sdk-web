@@ -1,7 +1,7 @@
 import { LocalAudio } from './LocalAudio';
 import { RemoteAudio } from './RemoteAudio';
 /**
- * The AudioService allows enabling and disabling audio for the local and remote participants.
+ * The AudioService allows managing the local and remote participants' audio streams.
  *
  * This service is available in SDK 3.7 and later.
  */

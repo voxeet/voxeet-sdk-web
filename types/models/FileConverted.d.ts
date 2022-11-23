@@ -1,5 +1,5 @@
 /**
- * To share a file during a conference, the [FilePresentationService](doc:js-client-sdk-filepresentationservice) converts the user-provided file into multiple pages (images). The FileConverted model represents the converted file. The model includes the file [ID](#id), file [name](#optional-name), [size](#optional-size), [number of images](#imagecount) within the converted file, and the [ID of the participant](#optional-owner) who converted the file.
+ * To share a file during a conference, the [FilePresentationService](./services_filepresentation_FilePresentationService.FilePresentationService.html) converts the user-provided file into multiple pages (images). The FileConverted model gathers information about the converted file.
  */
 export default class FileConverted {
     /**

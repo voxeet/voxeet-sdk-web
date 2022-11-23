@@ -1,6 +1,6 @@
 import { Participant } from './Participant';
 /**
- * The SpatialAudioStyle model defines how the spatial location is communicated between SDK and the Dolby.io server. The style can be defined during a conference creation, although its value for each participant depends on the participant's spatial audio setting. The shared spatial audio style is only available for participants who joined a conference with spatial audio enabled. Setting the spatial audio style is supported only on SDK 3.6 and later. The earlier SDK versions support only the individual mode and do not allow participants to join conferences created with the spatial audio style set to shared. The following table lists the possible spatial audio style settings for the local participant:
+ * The SpatialAudioStyle model defines how the spatial location is communicated between SDK and the Dolby.io server. The style can be defined during a conference creation, although its value for each participant depends on the participant's spatial audio setting. The shared spatial audio style is only available for participants who joined a conference with spatial audio enabled. Setting the spatial audio style is supported only in SDK 3.6 and later. The earlier SDK versions support only the individual mode and do not allow participants to join conferences created with the spatial audio style set to shared. The following table lists the possible spatial audio style settings for the local participant:
  *
  * | Create: SpatialAudioStyle | Join: SpatialAudio | Result                            |
  * |---------------------------|--------------------|-----------------------------------|
@@ -23,11 +23,16 @@ export declare enum SpatialAudioStyle {
     Individual = "individual",
     /**
      * Sets the spatial location that is based on the spatial scene and the local participant's position, while the relative positions among participants are calculated by the Dolby.io server. This way, the spatial scene is shared by all participants, so that each client can set a position and participate in the shared scene. This approach simplifies communication between the client and the server and decreases network traffic. We recommend this mode for 2D virtual space scenarios, such as 2D games, trade shows, water cooler scenarios, etc.
+     *
+     * **Note**: The shared style currently does not support recording conferences.
      */
     Shared = "shared"
 }
 export declare type SpatialAudioStyleValuesUnion = typeof SpatialAudioStyle[keyof typeof SpatialAudioStyle];
 export declare type SupportedSpatialAudioStyles = SpatialAudioStyleValuesUnion[];
+/**
+ * @ignore
+ */
 export interface SpatialAudioManager {
     setEnvironment: (environment: SpatialEnvironment) => void;
     setParticipantPosition: (participant: Participant, position: SpatialPosition) => void;
@@ -56,30 +61,27 @@ export declare type PolarPosition = {
 /**
  * The SpatialPosition model represents a participant's audio position. The position is defined using Cartesian coordinates.
  *
- * You can define the direction of each axis in the coordinate system using the [setSpatialEnvironment](doc:js-client-sdk-conferenceservice#setspatialenvironment) method. By default, the environment consists of the following axes:
+ * You can define the direction of each axis in the coordinate system using the [setSpatialEnvironment](./../classes/services_conference_ConferenceService.ConferenceService.html#setSpatialEnvironment) method. By default, the environment consists of the following axes:
  *
  * - X-axis: Extends positive to the right
  * - Y-axis: Extends positive upwards
  * - Z-axis: Extends positive forwards
  *
- * The [setSpatialEnvironment](doc:js-client-sdk-conferenceservice#setspatialenvironment) method allows the application to choose the meaning of each axis and match the usage of the application.
+ * The [setSpatialEnvironment](./../classes/services_conference_ConferenceService.ConferenceService.html#setSpatialEnvironment) method allows the application to choose the meaning of each axis and match the usage of the application.
  *
  */
 export declare type SpatialPosition = Vector<number>;
 /**
- * The SpatialDirection model defines the direction a participant is facing. The model is specified as a set of three Euler rotations about the corresponding axis in the order of z-x-y:
- *
- * The following properties define a rotation about the specified positive axis:
- *
+ * The SpatialDirection class defines the direction a participant is facing. The class is specified as a set of three Euler rotations about the corresponding axis. The following properties define a rotation about the specified positive axis:
  * - `x`: A rotation about the x-axis
  * - `y`: A rotation about the y-axis
  * - `z`: A rotation about the z-axis
  *
- * These properties correspond to yaw, pitch, and roll:
+ * <div class="grid-container"><div class="video-1" > <p><b>Yaw:</b> A rotation about the up axis, where the default environment is the y rotation</p><video controls width="200"> <source src="https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/08_SpatialDirectionYaw_v03_220131.mp4" type="video/mp4"> Sorry, your browser doesn't support embedded videos.</video></div><div class="video-2"> <p><b>Pitch:</b> A rotation about the right axis, where the default environment is the x rotation.</p><video controls width="200"> <source src="https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/09_SpatialDirectionPitch_v03_220131.mp4" type="video/mp4"> Sorry, your browser doesn't support embedded videos.</video></div><div class="video-3"> <p><b>Roll:</b> A rotation about the forward axis, where the default environment is the z rotation.</p><video controls width="200"> <source src="https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/10_SpatialDirectionRoll_v03_220131.mp4" type="video/mp4"> Sorry, your browser doesn't support embedded videos.</video></div><br></div><style> .grid-container { display: grid; }.grid-container {display: grid;grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));grid-column-gap: 10px;grid-row-gap: 30px;}</style>
  *
- * - Yaw: A rotation about the up axis, where the default environment is the Y rotation. For more details, see the yaw.mp4 video.
- * - Pitch: A rotation about the right axis, where the default environment is the X rotation. For more details, see the pitch.mp4 video.
- * - Roll: A rotation about the forward axis, where the default environment is the Z rotation. For more details, see the roll.mp4 video.
+ * When using custom environment directions set in [setSpatialEnvironment](./../classes/services_conference_ConferenceService.ConferenceService.html#setSpatialEnvironment), the rotation is defined to always rotate about the relevant axis according to the left handed curl rule. In the animations above you can see, for the y-axis rotation, if you curl your left hand up around with your thumb pointing down the +y axis, the direction the participant will rotate is in the direction the fingers are curling around the given axis. You can see the rotation arrows in those reference animations which correspond to positive rotation direction are pointing the same direction as the fingers of the curled left hand.
+ *
+ * When a direction contains rotations around more than one axis, the rotations are applied in a defined order: yaw, pitch, and then roll. With the standard environment, this corresponds to y, x, and then z. When using custom environment directions, the directions are always in the order of yaw/pitch/roll, but which (x,y,z) axis those correspond to is different.
  */
 export declare type SpatialDirection = Vector<number>;
 /**

@@ -27,6 +27,10 @@ export declare class LocalVideoImpl extends BaseConferenceService implements Loc
      * @implements LocalVideo.disableProcessing()
      */
     disableProcessing(): Promise<void>;
+    /**
+     * @implements LocalVideo.applyConstraints()
+     */
+    applyConstraints(constraints: MediaTrackConstraints): Promise<void>;
     private emitLocalVideoStarted;
     private emitLocalVideoStopped;
     private emitLocalVideoUpdated;

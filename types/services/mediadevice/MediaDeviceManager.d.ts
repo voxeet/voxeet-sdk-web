@@ -1,4 +1,7 @@
 import { DeviceChangeOption, GetComfortNoiseLevel, MediaManagerInterface, SelectAudioInputDevice, SelectAudioOutputDevice, SelectVideoInputDevice, SetComfortNoiseLevel } from '../../models/MediaDevice';
+/**
+ * @ignore
+ */
 export declare class MediaManager implements MediaManagerInterface {
     #private;
     constructor();

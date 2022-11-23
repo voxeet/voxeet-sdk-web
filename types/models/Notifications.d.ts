@@ -10,7 +10,7 @@ export declare enum SubscriptionType {
     ConferenceActiveParticipants = "Conference.ActiveParticipants"
 }
 /**
- * The SubscriptionType model includes types of subscription.
+ * The SubscriptionType model contains types of subscription.
  *
  */
 /**
@@ -22,14 +22,14 @@ export interface BaseSubscription {
     type: SubscriptionType;
 }
 /**
- * The SubscribeInvitation model includes the [Invitation] subscription type that can be included the the [subscribe](doc:js-client-sdk-notificationservice#subscribe) method.This subscription is enabled by default.
+ * The SubscribeInvitation model contains the [Invitation](./../enums/models_Notifications.SubscriptionType.html#Invitation) subscription type that can be used in the [subscribe](./services_notification_NotificationService.NotificationService.html#subscribe) method. This subscription is enabled by default.
  */
 export declare class SubscribeInvitation implements BaseSubscription {
     /** The subscription type. */
     type: SubscriptionType;
 }
 /**
- * The SubscribeConferenceCreated model includes the conference [alias](#conferencealias) and the [ConferenceCreated](#type) subscription type that can be included in the [subscribe](doc:js-client-sdk-notificationservice#subscribe) method.
+ * The SubscribeConferenceCreated model contains information about a created conference that can be used in the [subscribe](./services_notification_NotificationService.NotificationService.html#subscribe) method.
  */
 export declare class SubscribeConferenceCreated implements BaseSubscription {
     /** The subscription type. */
@@ -40,7 +40,7 @@ export declare class SubscribeConferenceCreated implements BaseSubscription {
     constructor(conferenceAlias: string);
 }
 /**
- * The SubscribeConferenceEnded model includes the conference [alias](#conferencealias) and the [ConferenceEnded](#type) subscription type that can be included the the [subscribe](doc:js-client-sdk-notificationservice#subscribe) method.
+ * The SubscribeConferenceEnded model contains information about an ended conference that can be used in the [subscribe](./services_notification_NotificationService.NotificationService.html#subscribe) method.
  */
 export declare class SubscribeConferenceEnded implements BaseSubscription {
     /** The subscription type. */
@@ -51,7 +51,7 @@ export declare class SubscribeConferenceEnded implements BaseSubscription {
     constructor(conferenceAlias: string);
 }
 /**
- * The SubscribeParticipantJoined model includes the conference [alias](#conferencealias) and the [ParticipantJoined](#type) subscription type that can be included the the [subscribe](doc:js-client-sdk-notificationservice#subscribe) method.
+ * The SubscribeParticipantJoined model contains information about a participant who joined a conference. This information can be used in the [subscribe](./services_notification_NotificationService.NotificationService.html#subscribe) method.
  */
 export declare class SubscribeParticipantJoined implements BaseSubscription {
     /** The subscription type. */
@@ -62,7 +62,7 @@ export declare class SubscribeParticipantJoined implements BaseSubscription {
     constructor(conferenceAlias: string);
 }
 /**
- * The SubscribeParticipantLeft model includes the conference [alias](#conferencealias) and the [ParticipantLeft](#type) subscription type that can be included the the [subscribe](doc:js-client-sdk-notificationservice#subscribe) method.
+ * The SubscribeParticipantLeft model contains information about a participant who left a conference. This information can be used in the [subscribe](./services_notification_NotificationService.NotificationService.html#subscribe) method.
  */
 export declare class SubscribeParticipantLeft implements BaseSubscription {
     /** The subscription type. */
@@ -73,7 +73,7 @@ export declare class SubscribeParticipantLeft implements BaseSubscription {
     constructor(conferenceAlias: string);
 }
 /**
- * The SubscribeActiveParticipants model includes the conference [alias](#conferencealias) and the [ConferenceActiveParticipants](#type) subscription type that can be included the the [subscribe](doc:js-client-sdk-notificationservice#subscribe) method.
+ * The SubscribeActiveParticipants model contains information about active conference participants. This information can be used in the [subscribe](./services_notification_NotificationService.NotificationService.html#subscribe) method.
  */
 export declare class SubscribeActiveParticipants implements BaseSubscription {
     /** The subscription type. */

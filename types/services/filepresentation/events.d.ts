@@ -2,7 +2,7 @@ import { FilePresentation } from '../../models/FilePresentation';
 import FileConversionProgress from '../../models/FileConversionProgress';
 import FileConverted from '../../models/FileConverted';
 /**
- * Emitted when the file is converted.
+ * Emitted when a file is converted.
  *
  * @asMemberOf FilePresentationService
  * @event
@@ -17,7 +17,7 @@ import FileConverted from '../../models/FileConverted';
  */
 export declare function converted(e: FileConverted): void;
 /**
- * Emitted when the presenter started converting the file and the file conversion is in progress.
+ * Emitted when a presenter starts converting a file and the file conversion is in progress.
  *
  * @asMemberOf FilePresentationService
  * @event
@@ -32,7 +32,7 @@ export declare function converted(e: FileConverted): void;
  */
 export declare function conversionProgress(e: FileConversionProgress): void;
 /**
- * Emitted when the presenter started the file presentation.
+ * Emitted when a presenter starts a file presentation.
  *
  * @asMemberOf FilePresentationService
  * @event
@@ -48,7 +48,7 @@ export declare function conversionProgress(e: FileConversionProgress): void;
  */
 export declare function Started(e: FilePresentation): void;
 /**
- * Emitted when the presenter changed the displayed page of the shared file. The event includes information about the current page number.
+ * Emitted when a presenter changes the displayed page of the shared file. The event contains information about the current page number.
  *
  * @asMemberOf FilePresentationService
  * @event
@@ -63,7 +63,7 @@ export declare function Started(e: FilePresentation): void;
  */
 export declare function updated(e: FilePresentation): void;
 /**
- * Emitted when the presenter ended the file presentation.
+ * Emitted when a presenter ends a file presentation.
  *
  * @asMemberOf FilePresentationService
  * @event

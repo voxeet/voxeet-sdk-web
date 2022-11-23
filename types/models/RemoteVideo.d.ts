@@ -10,7 +10,7 @@ export interface RemoteVideo {
      *
      * The start method requires a few seconds to become effective.
      *
-     * Example:
+     * @example
      * ```js
      * var someRemoteParticipant = ...
      *
@@ -19,7 +19,7 @@ export interface RemoteVideo {
      *
      * @param participant - The selected remote participants whose video streams the local participant would like to receive.
      *
-     * @return A Promise which resolves when the remote video is successfully started. If the remote video cannot be started, the promise is rejected with the [VideoServiceError](doc:js-client-sdk-model-videoserviceerror).
+     * @return A Promise which resolves when the remote video is successfully started. If the remote video cannot be started, the promise is rejected with the [VideoServiceError](./../classes/lib_Exceptions.VideoServiceError.html).
      */
     start(participant: Participant): Promise<void>;
     /**
@@ -27,7 +27,7 @@ export interface RemoteVideo {
      *
      * The stop method requires a few seconds to become effective.
      *
-     * Example:
+     * @example
      * ```js
      * var someRemoteParticipant = ...
      *
@@ -36,7 +36,7 @@ export interface RemoteVideo {
      *
      * @param participant - The selected remote participants whose video streams the local participants wouldn't like to receive.
      *
-     * @return A Promise which resolves when the remote video is successfully stopped. If the remote video cannot be stopped, the promise is rejected with the [VideoServiceError](doc:js-client-sdk-model-videoserviceerror).
+     * @return A Promise which resolves when the remote video is successfully stopped. If the remote video cannot be stopped, the promise is rejected with the [VideoServiceError](./../classes/lib_Exceptions.VideoServiceError.html).
      */
     stop(participant: Participant): Promise<void>;
 }

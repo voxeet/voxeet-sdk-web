@@ -18,4 +18,6 @@ export declare class ProcessedVideoTrack extends LocalVideoTrack {
     getInputTrack(): LocalVideoTrack;
     setInputTrack(track: LocalVideoTrack): Promise<void>;
     stop(): Promise<void>;
+    applyConstraints(constraints: MediaTrackConstraints): Promise<void>;
+    get engine(): VideoProcessorEngine;
 }

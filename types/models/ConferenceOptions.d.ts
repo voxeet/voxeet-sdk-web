@@ -1,6 +1,6 @@
 import ConferenceParameters from './ConferenceParameters';
 /**
- * The ConferenceOptions model allows defining details of a conference.
+ * The ConferenceOptions model allows defining additional conference details.
  */
 export default interface ConferenceOptions {
     /**

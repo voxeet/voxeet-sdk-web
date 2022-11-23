@@ -10,6 +10,7 @@ export interface VslInitOptions {
     wasm_filepath?: string;
     model_filepath?: string;
     processing_error_handler?: VslProcessingErrorHandler;
+    debug: boolean;
 }
 /**
  * Wrapps @dolbyio/vsl package which isn't a TypeScript module.
@@ -34,5 +35,6 @@ export declare class VslWrapper {
     setProcessingErrorHandler(handler: VslProcessingErrorHandler): void;
     changeInput(newInput: MediaStream): Promise<void>;
     changeBackground(image: HTMLImageElement): Promise<void>;
-    getOutputStream(): Promise<MediaStream>;
+    getOutput(): Promise<MediaStream>;
+    changeOutputFrameRate(frameRate: number): Promise<void>;
 }

@@ -1,4 +1,7 @@
 import { Participant } from '../../models/Participant';
+/**
+ * @ignore
+ */
 export default class AudioUpdated extends Event {
     participant: Participant;
     previousAudioTransmitting: boolean;

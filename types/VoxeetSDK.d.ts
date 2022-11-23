@@ -5,7 +5,7 @@ import { Configuration } from './models/Configuration';
 /**
  * VoxeetSDK is the main object that allows the application to interact with Voxeet services. The SDK is asynchronous and uses promise at its core.
  *
- *
+ * For more information about initializing the SDK, see the [Initializing](https://docs.dolby.io/communications-apis/docs/initializing-javascript) guide.
  */
 export default class VoxeetSDK extends EventEmitter {
     #private;
@@ -19,6 +19,9 @@ export default class VoxeetSDK extends EventEmitter {
     private static wsHost;
     private static fileHost;
     private static telemetryHost;
+    /**
+     * @ignore
+     */
     static enableTelemetry: boolean;
     /**
      * @ignore
@@ -40,27 +43,27 @@ export default class VoxeetSDK extends EventEmitter {
     userId: string;
     private constructor();
     /**
-     * Retrieves the [SessionService](doc:js-client-sdk-sessionservice) instance that allows the participant to use sessions.
+     * Retrieves the [SessionService](./services_session_SessionService.SessionService.html) instance that allows the SDK to connect with the Dolby.io backend.
      */
     static get session(): SessionService;
     /**
-     * Retrieves the [MediaDeviceService](doc:js-client-sdk-mediadeviceservice) instance that allows the participant to interact with devices through the system.
+     * Retrieves the [MediaDeviceService](./services_mediadevice_MediaDeviceService.MediaDeviceService.html) instance that allows managing devices through the system.
      */
     static get mediaDevice(): MediaDeviceService;
     /**
-     * Retrieves the [ConferenceService](doc:js-client-sdk-conferenceservice) instance that allows the participant to interact with conferences.
+     * Retrieves the [ConferenceService](./services_conference_ConferenceService.ConferenceService.html) instance that allows interacting with conferences.
      */
     static get conference(): ConferenceService;
     /**
-     * Retrieves the [RecordingService](doc:js-client-sdk-recordingservice) instance that allows the participant to record conferences.
+     * Retrieves the [RecordingService](./services_recording_RecordingService.RecordingService.html) instance that allows recording conferences.
      */
     static get recording(): RecordingService;
     /**
-     * Retrieves the [FilePresentationService](doc:js-client-sdk-filepresentationservice) instance that allows the participant to use file presentations.
+     * Retrieves the [FilePresentationService](./services_filepresentation_FilePresentationService.FilePresentationService.html) instance that allows presenting files during conferences.
      */
     static get filePresentation(): FilePresentationService;
     /**
-     * Retrieves the [VideoPresentationService](doc:js-client-sdk-videopresentationservice) instance that allows the participant to use video presentations.
+     * Retrieves the [VideoPresentationService](./services_videopresentation_VideoPresentationService.VideoPresentationService.html) instance that allows presenting video files during conferences.
      */
     static get videoPresentation(): VideoPresentationService;
     /**
@@ -69,25 +72,31 @@ export default class VoxeetSDK extends EventEmitter {
      */
     static get broadcasting(): BroadcastingService;
     /**
-     * Retrieves the [CommandService](doc:js-client-sdk-commandservice) instance that allows the participant to send messages to the specified conferences.
+     * Retrieves the [CommandService](./services_command_CommandService.CommandService.html) instance that allows sending messages to conferences.
      */
     static get command(): CommandService;
     /**
-     * Retrieves the [VideoFiltersService](doc:js-client-sdk-videofiltersservice) instance that allows the local participant to blur the participant's background or use a selected image as the background.
+     * **Note**: This API is available only to the [Desktop SDK](https://docs.dolby.io/communications-apis/docs/desktop-sdk-overview) users.
+     *
+     * Retrieves the [VideoFiltersService](./services_videofilters_VideoFiltersService.VideoFiltersService.html) instance that allows the local participant to blur the participant's background or use a selected image as the background.
      */
     static get videoFilters(): VideoFiltersService;
     /**
-     * Retrieves the [VideoService](doc:js-client-sdk-videoservice) instance that allows conference participants to enable and disable video.
+     * Retrieves the [VideoService](./services_video_VideoService.VideoService.html) instance that allows conference participants to enable and disable video.
+     *
+     * This API is available in SDK 3.7 and later.
      */
     static get video(): VideoService;
     /**
-     * Retrieves the [NotificationService](doc:js-client-sdk-notificationservice) instance that allows forwarding notifications from developers to the properly registered managers.
+     * Retrieves the [NotificationService](./services_notification_NotificationService.NotificationService.html) instance that allows inviting participants to conferences.
      *
      *
      */
     static get notification(): NotificationService;
     /**
-     * Retrieves the [AudioService](doc:js-client-sdk-audioservice) instance that allows enabling and disabling audio.
+     * Retrieves the [AudioService](./services_audio_AudioService.AudioService.html) instance that allows enabling and disabling audio.
+     *
+     * This API is available in SDK 3.7 and later.
      */
     static get audio(): AudioService;
     /**
@@ -101,17 +110,17 @@ export default class VoxeetSDK extends EventEmitter {
      */
     static set uxkitVersion(version: string);
     /**
+     * Retrieves the URL prefix that is responsible for fetching SDK package files.
+     */
+    static get packageUrlPrefix(): string;
+    /**
      * Sets the URL prefix that is responsible for fetching SDK package files. By default, the prefix is generated automatically based on the main JavaScript file path. For example, when the prefix is set to "https://example.com/lib/dist/", the binary file will be fetched using the "https://example.com/lib/dist/dvwc_impl.wasm" URL.
      *
-     * If you want to set a new value of the prefix, the value needs to be a string. If you want to reset the prefix to the default value, set the prefix to null, false, or undefined. Any other values trigger the [ParameterError](js-client-sdk-model-parametererror).
+     * If you want to set a new value of the prefix, the value needs to be a string. If you want to reset the prefix to the default value, set the prefix to null, false, or undefined. Any other values trigger the [ParameterError](./lib_Exceptions.ParameterError.html).
      *
      * The prefix must contain the '/' character at the end. If the prefix ends with any other character, the SDK automatically adds '/' at its end.
      */
     static set packageUrlPrefix(prefix: string);
-    /**
-     * Retrieves the URL prefix that is responsible for fetching SDK package files.
-     */
-    static get packageUrlPrefix(): string;
     /**
      * Initializes the SDK using the customer key and secret.
      *
@@ -131,7 +140,7 @@ export default class VoxeetSDK extends EventEmitter {
      */
     static displaySettings(): void;
     /**
-     * Initialize the SDK with an access token that is provided by the customer backend communicating with Voxeet servers. The token allows securing the customer key and secret.
+     * Initializes the SDK with an access token that is provided by the customer backend communicating with Voxeet servers. The token allows securing the App key and App secret.
      *
      * The following diagram presents the authentication flow:
      *
@@ -146,9 +155,7 @@ export default class VoxeetSDK extends EventEmitter {
      *   |---------------------------------------->|
      * ```
      *
-     * The access token has a limited period of validity and needs to be refreshed for security reasons. In such case,
-     * The Voxeet SDK will call the callback provided to initializeToken. The callback must return a Promise
-     * containing the refreshed access token by calling the customer backend, as presented in the following diagram:
+     * The access token has a limited period of validity and needs to be refreshed for security reasons. In such case the Voxeet SDK will call the callback provided to initializeToken. The callback must return a Promise containing the refreshed access token by calling the customer backend, as presented in the following diagram:
      *
      * ```
      * Client          Customer Server       Voxeet Server
@@ -161,7 +168,7 @@ export default class VoxeetSDK extends EventEmitter {
      * Where (1) and (2) are two REST API endpoints available on Voxeet servers and documented on the developer portal.
      *
      * @param accessToken - The access token provided by the customer's backend
-     * @param callback - A callback returning a promise, called when the access token needs to refreshed
+     * @param callback - A callback that returns a promise when the access token needs to be refreshed. The callback parameter takes the `isExpired` boolean parameter to check if the previous token has expired.
      * @param __namedParameters Optional parameter to override SDK default configuration
      * @param host host
      * @param wsHost websocket host

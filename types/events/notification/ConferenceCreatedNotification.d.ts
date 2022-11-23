@@ -9,7 +9,7 @@ interface NotificationData {
     };
 }
 /**
- * The ConferenceCreatedNotification model gathers information about the created conferences, such as its [alias](#conferencealias), and [ID](#conferenceid).
+ * The ConferenceCreatedNotification model gathers information about created conferences.
  */
 export default class ConferenceCreatedNotification extends Event {
     /** The conference alias. */

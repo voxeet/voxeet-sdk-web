@@ -1,6 +1,6 @@
 import { Participant } from './Participant';
 /**
- * The VideoPresentation model includes information about the video presentation, such as information about the [participant](#owner) who started the video presentation, the [URL of the presented video file](#url), and the video presentation [timestamp](#timestamp).
+ * The VideoPresentation model contains additional information about a video presentation.
  */
 export default class VideoPresentation {
     /**

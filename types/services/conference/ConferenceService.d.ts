@@ -23,49 +23,10 @@ declare type StateDump = {
     content: Blob;
 };
 /**
- * The ConferenceService allows the application to manage the conference life-cycle and interact with the conference.
+ * The ConferenceService allows an application to manage a conference life cycle and interact with the conference. Using the service, you can [create](#create), [join](#join), and [leave](#leave) conferences.
  *
- * **The ConferenceService introduces APIs that allow the application to:**
+ * For more information about creating and joining conferences, see the [Conferencing](https://docs.dolby.io/communications-apis/docs/conferencing-javascript) guide.
  *
- * - [Create](#create) a conference
- * - [Fetch](#fetch) the Conference object required to join a conference
- * - [Join](#join) a conference with permission to share media or as a [listener](#listen)
- * - [Set](#videoforwarding) the maximum number of video streams a participant would like to receive.
- * - Configure the quality of the received [Simulcast](#simulcast) streams
- * - Create a [demo](#demo) conference and join it
- * - [Start](#startaudio) and [stop](#stopaudio) audio transmission
- * - [Start](#startscreenshare) and [stop](#stopscreenshare) sharing the screen
- * - Control the [mute](#mute) state of the conference participants
- * - Get the current [mute state](#ismuted) of the local participant
- * - Check the [audio level](#audiolevel) of a specific participant
- * - Get the [participants'](#participants) list
- * - Get the [speaking status](#isspeaking) of a selected participant
- * - [Check](#localstats) the WebRTC statistics
- * - [Leave](#leave) the conference
- * - [Replay](#replay) the previously recorded conference
- * - Enable and disable [audio processing](#audioprocessing) for the local participant
- * - [Kick](#kick) a participant from a conference
- * - [Update](#updatepermissions) the participant's permissions
- * - [Ask](#current) about conference details
- * - [Set](#setspatialposition) a participant's position to enable the spatial audio experience during a Dolby Voice conference
- * - [Configure](#setspatialenvironment) a spatial environment of the application for the spatial audio feature
- * - [Set](#setspatialdirection) the direction a participant is facing during a conference with enabled spatial audio
- *
- * **The ConferenceService introduces events that inform the application that:**
- *
- * - The participant has [joined](#joined) a conference or has [left](#left) it
- * - A connected participant [joins](#switched) a conference using another device and the same `ExternalId`
- * - A conference participant has [joined](#participantadded) a conference or [changed](#participantupdated) status
- * - A stream is [added](#streamadded), [updated](#streamupdated), or [removed](#streamremoved)
- * - The replayed conference has [ended](#ended)
- * - An [error](#error) has occurred
- * - Conference permissions have been [updated](#permissionsupdated)
- *
- * Additionally, every 5 seconds the application emits the [qualityIndicators](#qualityindicators) event informing about the audio and video quality of the remote participants.
- *
- * If a browser blocks the received audio streams due to auto-play policy, the application can call the [autoplayBlocked](#autoplayblocked) and [playBlockedAudio](#playblockedaudio) APIs to enable playing the received audio.
- *
- * ---
  */
 export declare class ConferenceService extends BaseConferenceService {
     #private;
@@ -78,7 +39,7 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     constructor(sdk: unknown, session: SessionService, mediaManager: MediaManagerInterface, localVideo: LocalVideo);
     /**
-     * Creates a conference with [ConferenceOptions](model/conferenceoptions).
+     * Creates a conference.
      *
      * @param options - The conference options.
      * @return {Promise<Conference>}
@@ -97,7 +58,9 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     create(options: ConferenceOptions): Promise<Conference>;
     /**
-     * Provides a Conference object that allows joining a conference. For more information about using the fetch method, see the [Conferencing](doc:conferencing-javascript#joining-conferences-using-the-conference-id) document.
+     * Provides a Conference object that allows joining a conference. The returned object is based on the cached data received from the SDK and contains the conference ID, participants list, and conference permissions.
+     *
+     * For more information about using the fetch method, see the [Conferencing](https://docs.dolby.io/communications-apis/docs/conferencing-javascript#joining-conferences-using-the-conference-id) document.
      *
      * @param conferenceId - The conference ID.
      * @return {Promise<Conference>}
@@ -121,7 +84,7 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     demo(options?: DemoOptions): Promise<Conference>;
     /**
-     * Replays a previously recorded conference. For more information, see the [Recording Conferences](doc:guides-recording-conferences) article.
+     * Replays a previously recorded conference. For more information, see the [Recording Conferences](https://docs.dolby.io/communications-apis/docs/guides-recording-conferences) article.
      *
      * See also: [join](#join), [listen](#listen)
      *
@@ -156,21 +119,7 @@ export declare class ConferenceService extends BaseConferenceService {
     /**
      * Joins the conference.
      *
-     * **Note**: Participants who use Apple Mac OS and the Safari browser to join conferences may experience problems with distorted audio. To solve the problem, we recommend using the latest version of Safari.
-     *
-     * **Note**: Due to a known Firefox issue, a user who has never permitted Firefox to use a microphone and camera cannot join a conference as a listener. If you want to join a conference as a listener using the Firefox browser, make sure that Firefox has permission to use your camera and microphone. To check the permissions, follow these steps:
-     *
-     * **1.** Select the lock icon in the address bar. </br>
-     * **2.** Select the right arrow placed next to `Connection Secure`. </br>
-     * **3.** Select `More information`. </br>
-     * **4.** Go to the `Permissions` tab. </br>
-     * **5.** Look for the `Use the camera` and `Use the microphone` permission and select the `Allow` option.
-     *
-     * See also: [listen](#listen), [replay](#replay)
-     *
-     * @param conference - The conference object.
-     * @param options - The additional options for the joining participant.
-     * @return {Promise<Conference|Error>}
+     * **Warning**: If you use SDK 3.7 or later and use two different URLs for serving your application and hosting the SDK through a Content Delivery Network (CDN), you must enable cross-origin resource sharing (CORS) to join a conference using the Dolby Voice Codec. To enable CORS, see the [Install the SDK](https://docs.dolby.io/communications-apis/docs/initializing-javascript#install-the-sdk) instruction.
      *
      * @example
      *```javascript
@@ -194,11 +143,30 @@ export declare class ConferenceService extends BaseConferenceService {
      *
      * await VoxeetSDK.conference.join(conference, {constraints: constraints});
      * ```
+     *
+     * **Note**: Participants who use Apple Mac OS and the Safari browser to join conferences may experience problems with distorted audio. To solve the problem, we recommend using the latest version of Safari.
+     * <br>
+     * <br>
+     * **Note**: Due to a known Firefox issue, a user who has never permitted Firefox to use a microphone and camera cannot join a conference as a listener. If you want to join a conference as a listener using the Firefox browser, make sure that Firefox has permission to use your camera and microphone. To check the permissions, follow these steps:
+     * <br>
+     * <br>
+     * **1.** Select the lock icon in the address bar. </br>
+     * **2.** Select the right arrow placed next to `Connection Secure`. </br>
+     * **3.** Select `More information`. </br>
+     * **4.** Go to the `Permissions` tab. </br>
+     * **5.** Look for the `Use the camera` and `Use the microphone` permission and select the `Allow` option.
+     * <br>
+     * <br>
+     * See also: [listen](#listen), [replay](#replay)
+     *
+     * @param conference - The conference object.
+     * @param options - The additional options for the joining participant.
+     * @return {Promise<Conference|Error>}
      */
     join(conference: Conference, options: JoinOptions): Promise<Conference>;
     private _join;
     /**
-     * Updates the participant's conference permissions. If a participant does not have permission to perform a specific action, this action is not available for this participant during a conference, and the participant receives [InsufficientPermissionsError](doc:js-client-sdk-model-conferenceerror). If a participant started a specific action and then lost permission to perform this action, the SDK stops the blocked action. For example, if a participant started sharing a screen and received the updated permissions that do not allow him to share a screen, the SDK stops the screen sharing session and the participant cannot start sharing the screen again.
+     * Updates the participant's conference permissions. If a participant does not have permission to perform a specific action, this action is not available for this participant during a conference, and the participant receives [InsufficientPermissionsError](./lib_Exceptions.ConferenceError.html). If a participant started a specific action and then lost permission to perform this action, the SDK stops the blocked action. For example, if a participant started sharing a screen and received the updated permissions that do not allow him to share a screen, the SDK stops the screen sharing session and the participant cannot start sharing the screen again.
      *
      * ```javascript
      * VoxeetSDK.conference.updatePermissions(participantPermissions: Array<ParticipantPermissions>)
@@ -219,7 +187,7 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     updatePermissions(participantPermissions: Array<ParticipantPermissions>): Promise<any>;
     /**
-     * Leaves the conference.
+     * Leaves a conference.
      * @param options
      *
      * @example
@@ -229,21 +197,23 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     leave(options?: ConferenceLeaveOptions): Promise<void>;
     /**
-     * Allows a specific participant to play audio that is blocked by the browser's auto-play policy.
+     * Allows playing audio that is blocked by the browser's auto-play policy.
      */
     playBlockedAudio(): Promise<void>;
     /**
-     * Stops playing the specified remote participants' audio to the local participant or stops playing the local participant's audio to the conference. The mute method does not notify the server to stop audio stream transmission. To stop sending an audio stream to the server or to stop receiving an audio stream from the server, use the [stopAudio](#stopaudio) method.
+     * Stops playing the specified remote participants' audio to the local participant or stops playing the local participant's audio to the conference. The mute method does not notify the server to stop audio stream transmission. To stop sending an audio stream to the server, use the [stop](./services_audio_LocalAudio.LocalAudio.html#stop) method. To stop receiving an audio stream from the server, use the [stop](./services_audio_RemoteAudio.RemoteAudio.html#stop) method.
      *
      * The mute method depends on the Dolby Voice usage:
      *
-     * - In conferences where Dolby Voice is not enabled, conference participants can mute themselves or remote participants.
-     * - In conferences where Dolby Voice is enabled, please use [stopAudio](#stopAudio) to mute and [startAudio](#startAudio) to unmute remote participants.
+     * - In non-Dolby Voice conferences, conference participants can mute themselves or remote participants.
+     * - In Dolby Voice conferences, conference participants can only mute themselves.
      *
-     * **Note**: In SDK 2.4 and prior releases, if a conference participant calls the mute method, empty frames are sent to the other participants. Due to a Safari issue, participants who join a conference using Safari and start receiving the empty frames can experience a Safari crash. Due to a different API implementation in SDK 3.0, this problem does not occur during Dolby Voice conferences.
+     * If you wish to mute remote participants in Dolby Voice conferences, you must use the [stop](./services_audio_RemoteAudio.RemoteAudio.html#stop) API. This API allows the conference participants to stop receiving the specific audio streams from the server.
+     *
+     * **Note**: In SDK 2.4 and prior releases, if a conference participant calls the mute method, empty frames are sent to other participants. Due to a Safari issue, participants who join a conference using Safari and start receiving the empty frames can experience a Safari crash. Due to a different API implementation in SDK 3.0, this problem does not occur in Dolby Voice conferences.
      *
      * @param participant - The local or remote conference participant.
-     * @param isMuted - The mute state, `true` indicates that a participant will be muted, `false` indicates that a participant will be unmuted.
+     * @param isMuted - A boolean that indicates the desired mute state to either mute or un-mute a participant.
      *
      * @example
      *```javascript
@@ -265,15 +235,16 @@ export declare class ConferenceService extends BaseConferenceService {
     /**
      * Gets the current mute state of the local participant.
      *
-     * **Note**: This API is no longer supported for remote participants.
-     *
      * @return
      */
     isMuted(): boolean;
     /**
-     * Gets the participant's audio level. The possible values of the audio level are in range from 0.0 to 1.0 point.
+     * Gets the participant's audio level:
      *
-     * **Note**: This API is no longer supported for remote participants when the client connects to a Dolby Voice conference.
+     * - In Dolby Voice conferences, this method is available only for the local participant
+     * - In non-Dolby Voice conferences, this method is available for the local participant and remote participants
+     *
+     * The possible values of the audio level are in a range from 0.0 to 1.0.
      *
      * @param participant - The conference participant.
      * @param callback - The callback that retrieves the audio level.
@@ -288,9 +259,9 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     audioLevel(participant: Participant, callback: Function): any;
     /**
-     * Gets the participant's current speaking status for an active talker indicator.
+     * Gets the participant's current speaking status for an active talker indicator. This method must be called repeatedly during a conference. For more information, see the [Detect participants who are speaking](https://docs.dolby.io/communications-apis/docs/isspeaking-javascript-web-example) guide.
      * @param participant - The conference participant.
-     * @param callback - The callback that accepts a boolean value indicating the participant's current speaking status. If the participant actively uses a microphone, the callback marks the participant as an active speaker.
+     * @param callback - The callback that accepts a boolean value indicating the participant's current speaking status. If the boolean value is true, the callback can mark the participant as an active talker in the application UI.
      *
      * @example
      *```javascript
@@ -315,11 +286,11 @@ export declare class ConferenceService extends BaseConferenceService {
     stopStream(stream: MediaStream): void;
     /**
      * @deprecated
-     * **Note**: This method is deprecated in SDK 3.7 and replaced with the **start** methods that are available in the [LocalVideo](doc:js-client-sdk-model-localvideo) and [RemoteVideo](doc:js-client-sdk-model-remotevideo) models.
+     * This method is deprecated in SDK 3.7 and replaced with the **start** methods that are available in the [LocalVideo](./../interfaces/models_LocalVideo.LocalVideo.html) and [RemoteVideo](./../interfaces/models_RemoteVideo.RemoteVideo.html) models.
      *
      * Notifies the server to either start sending the local participant's video stream to the conference or start sending a remote participant's video stream to the local participant. The startVideo method does not control the remote participant's video stream; if a remote participant does not transmit any video stream, the local participant cannot change it using the startVideo method.
      *
-     * @param participant - The participant who will receive the video stream, either remote or local.
+     * @param participant - Either the local or remote participant.
      * @param constraints - The [WebRTC video constraints](https://www.w3.org/TR/mediacapture-streams/#dom-mediastreamconstraints-video).
      *
      * @return {Promise<Error>}
@@ -348,10 +319,10 @@ export declare class ConferenceService extends BaseConferenceService {
     startVideoInternal(participant: Participant, constraints?: MediaTrackConstraints, processor?: VideoProcessor): Promise<void>;
     /**
      * @deprecated
-     * **Note**: This method is deprecated in SDK 3.7 and replaced with the **stop** methods that are available in the [LocalVideo](doc:js-client-sdk-model-localvideo) and [RemoteVideo](doc:js-client-sdk-model-remotevideo) models.
+     * This method is deprecated in SDK 3.7 and replaced with the **stop** methods that are available in the [LocalVideo](./../interfaces/models_LocalVideo.LocalVideo.html) and [RemoteVideo](./../interfaces/models_RemoteVideo.RemoteVideo.html) models.
      *
      * Notifies the server to either stop sending the local participant's video stream to the conference or stop sending a remote participant's video stream to the local participant.
-     * @param participant - The participant who will stop receiving the video stream.
+     * @param participant - Either the local or remote participant.
      * @return {Promise<Error>}
      */
     stopVideo(participant: Participant): Promise<void>;
@@ -361,19 +332,21 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     stopVideoInternal(participant: Participant, constraints?: MediaTrackConstraints): Promise<void>;
     /**
-     * Sets the maximum number of video streams that may be transmitted to the local participant. This method also allows the local participant to use a pin option to prioritize the specific participant's video streams and display their videos even when these participants do not talk. For more information, see the [Video Forwarding](doc:guides-video-forwarding) article.
-     * This method was introduced in SDK 3.1 and deprecated in SDK 3.6.
-     * @param max - The maximum number of video streams that may be transmitted to the local participant. The valid parameter's values are between 0 and 25 for desktop browsers and between 0 and 4 for mobile browsers. In the case of providing a value smaller than 0 or greater than the valid values, SDK triggers the [VideoForwardingError](doc:js-client-sdk-model-videoforwardingerror). If the parameter value is not specified, the SDK automatically sets the maximum possible value: 25 for desktop browsers and 4 for mobile browsers.
+     * @deprecated This method was introduced in SDK 3.1 and deprecated in SDK 3.6.
+     * <br>
+     * <br>
+     * Sets the maximum number of video streams that may be transmitted to the local participant. This method also allows the local participant to use a pin option to prioritize the specific participant's video streams and display their videos even when these participants do not talk. For more information, see the [Video Forwarding](https://docs.dolby.io/communications-apis/docs/guides-video-forwarding) article.
+     *
+     * @param max - The maximum number of video streams that may be transmitted to the local participant. The valid parameter's values are between 0 and 25 for desktop browsers and between 0 and 4 for mobile browsers. In the case of providing a value smaller than 0 or greater than the valid values, SDK triggers the [VideoForwardingError](./lib_Exceptions.VideoForwardingError.html). If the parameter value is not specified, the SDK automatically sets the maximum possible value: 25 for desktop browsers and 4 for mobile browsers.
      * @param participants - The list of the prioritized participants. This parameter allows using a pin option to prioritize specific participant's video streams and display their videos even when these participants do not talk.
      * @return {Promise<Error>}
-     * @deprecated
      */
     videoForwarding(max: number, participants?: Array<Participant>): Promise<void>;
     /**
      * Sets the video forwarding functionality for the local participant. The method allows:
      * - Setting the maximum number of video streams that may be transmitted to the local participant
      * - Prioritizing specific participants' video streams that need to be transmitted to the local participant
-     * - Changing the [video forwarding strategy](doc:js-client-sdk-model-videoforwardingstrategy) that defines how the SDK should select conference participants whose videos will be received by the local participant
+     * - Changing the [video forwarding strategy](./../enums/models_VideoForwarding.VideoForwardingStrategy.html) that defines how the SDK should select conference participants whose videos will be received by the local participant
      *
      * This method is available only in SDK 3.6 and later.
      * @param VideoForwardingOptions - The video forwarding options.
@@ -393,9 +366,9 @@ export declare class ConferenceService extends BaseConferenceService {
     videoForwarding({ strategy, max, participants }: VideoForwardingOptions): Promise<void>;
     /**
      * @deprecated
-     * Enables and disables audio processing for the local participant in Dolby Voice conferences.
+     * This method is deprecated in SDK 3.7 and replaced with the [setCaptureMode](./services_audio_LocalAudio.LocalAudio.html#setCaptureMode) method.
      *
-     * This method is deprecated in SDK 3.7 and replaced with the [AudioCaptureMode](doc:js-client-sdk-model-audiomode) option that you can define using the [setCaptureMode](doc:js-client-sdk-audioservice#setcapturemode) method.
+     * Enables and disables audio processing for the local participant in Dolby Voice conferences.
      *
      * @param participant - The conference participant.
      * @param options - The audio processing information.
@@ -404,7 +377,7 @@ export declare class ConferenceService extends BaseConferenceService {
     audioProcessing(participant: Participant, options: AudioProcessingOptions): Promise<void>;
     /**
      * @deprecated
-     * **Note**: This method is deprecated in SDK 3.7 and replaced with the **start** methods that are available in the [LocalAudio](doc:js-client-sdk-model-localaudio) and [RemoteAudio](doc:js-client-sdk-model-remoteaudio) models.
+     * This method is deprecated in SDK 3.7 and replaced with the **start** methods that are available in the [LocalAudio](./services_audio_LocalAudio.LocalAudio.html) and [RemoteAudio](./services_audio_RemoteAudio.RemoteAudio.html) models.
      *
      * Starts audio transmission between the local client and a conference. The startAudio method impacts only the audio streams that the local participant sends and receives; the method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to force sending remote participants’ streams to the conference or to the local participant. Depending on the specified participant in the `participant` parameter, the startAudio method starts the proper audio transmission:
      *
@@ -412,9 +385,9 @@ export declare class ConferenceService extends BaseConferenceService {
      *
      * - When the specified participant is a remote participant, startAudio ensures sending remote participant’s audio from the conference to the local client. This allows the local participant to unmute remote participants who are locally muted through the [stopAudio](#stopaudio) method.
      *
-     * The startAudio method in Dolby Voice conferences is not available for listeners and triggers [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
+     * The startAudio method in Dolby Voice conferences is not available for listeners and triggers [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      *
-     * The SDK automatically manages audio rendering, which means that the application does not need to implement its own <audio> element. The application can use the [selectAudioInput](doc:js-client-sdk-mediadeviceservice#selectaudioinput) and [selectAudioOutput](doc:js-client-sdk-mediadeviceservice#selectaudiooutput) methods to select the proper audio input and output devices.
+     * The SDK automatically manages audio rendering, which means that the application does not need to implement its own `<audio>` element. The application can use the [selectAudioInput](./services_mediadevice_MediaDeviceService.MediaDeviceService.html#selectAudioInput) and [selectAudioOutput](./services_mediadevice_MediaDeviceService.MediaDeviceService.html#selectAudioOutput) methods to select the proper audio input and output devices.
      *
      * The startAudio method requires a few seconds to become effective.
      *
@@ -425,7 +398,7 @@ export declare class ConferenceService extends BaseConferenceService {
     startAudio(participant: Participant): Promise<void>;
     /**
      * @deprecated
-     * **Note**: This method is deprecated in SDK 3.7 and replaced with the **stop** methods that are available in the [LocalAudio](doc:js-client-sdk-model-localaudio) and [RemoteAudio](doc:js-client-sdk-model-remoteaudio) models.
+     * This method is deprecated in SDK 3.7 and replaced with the **stop** methods that are available in the [LocalAudio](./services_audio_LocalAudio.LocalAudio.html) and [RemoteAudio](./services_audio_RemoteAudio.RemoteAudio.html) models.
      *
      * Stops audio transmission between the local client and a conference. The stopAudio method impacts only the audio streams that the local participant sends and receives; the method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to stop sending remote participants’ streams to the conference. Depending on the specified participant in the `participant` parameter, the stopAudio method stops the proper audio transmission:
      *
@@ -433,18 +406,23 @@ export declare class ConferenceService extends BaseConferenceService {
      *
      * - When the specified participant is a remote participant, stopAudio stops sending remote participant’s audio from the conference to the local client. This allows the local participant to locally mute remote participants.
      *
-     * The stopAudio method in Dolby Voice conferences is not available for listeners and triggers [UnsupportedError](doc:js-client-sdk-model-unsupportederror).
+     * The stopAudio method in Dolby Voice conferences is not available for listeners and triggers [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      *
      * Leaving a conference resets the stopAudio settings. Participants who rejoin a conference need to provide the desired stopAudio parameters and call the stopAudio method once again.
      *
      * The stopAudio method requires a few seconds to become effective.
+     *
+     * **Warning**: If you use the stopAudio method on remote participants in non-Dolby Voice conferences, do not rely on the [streamAdded](#streamadded) and [streamRemoved](#streamremoved) events to determine the attendee list. When the local participant uses the stopAudio method on a specific remote participant while the local participant does not receive any video stream from this participant, the local participant receives the [streamRemoved](#streamremoved) event. If the application uses the [streamRemoved](#streamremoved) event to determine the list of conference participants, the application may incorrectly show that the muted participant is not present at a conference.
      *
      * @param participant - The selected participant. If you wish to not transmit the local participant's audio stream to the conference, provide the local participant's object. If you wish to not receive the specific remote participants' audio streams, provide these remote participants' objects.
      * @return {Promise<Error>}
      */
     stopAudio(participant: Participant): Promise<void>;
     /**
-     * Starts a screen sharing session.
+     * Starts a screen-sharing session. This method is not available on mobile browsers; participants who join a conference using a mobile browser cannot share a screen.
+     *
+     * @param sourceId - The device ID. If you use multiple screens, use this parameter to specify which screen you want to share.
+     *
      * @return {Promise<Error>}
      *
      * @example
@@ -464,14 +442,14 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     stopScreenShare(): Promise<any>;
     /**
-     * Provides [standard WebRTC statistics](https://www.w3.org/TR/webrtc-stats/#dom-rtcstatstype) for the application. Based on the WebRTC statistics, the SDK computes [audio and video statistics](doc:js-client-sdk-model-qualityindicator). Calling this function at a higher frequency than 2Hz will have no effect.
+     * Provides [standard WebRTC statistics](https://www.w3.org/TR/webrtc-stats/#dom-rtcstatstype) for the application. Based on the WebRTC statistics, the SDK computes [audio and video statistics](./../interfaces/models_Conference.QualityIndicator.html). Calling this function at a higher frequency than 2Hz will have no effect.
      * @return {Promise<Statistics>}
      */
     localStats(): WebRTCStats;
     /**
-     * Configures the quality of the received Simulcast streams.
+     * Sets the quality of the received Simulcast streams.
      *
-     * @param requested - An array that includes the streams qualities for specific conference participants.
+     * @param requested - An array that contains stream qualities for specific conference participants.
      */
     simulcast(requested: Array<ParticipantQuality>): any;
     /**
@@ -483,6 +461,7 @@ export declare class ConferenceService extends BaseConferenceService {
      *```javascript
      * await VoxeetSDK.conference.kick(participant);
      * ```
+     *
      */
     kick(participant: Participant): Promise<any>;
     /**
@@ -501,33 +480,19 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     configureStateDump(audioLoggingLength: number): Promise<any>;
     /**
-     * Sets a participant's position in space to enable the spatial audio experience during a Dolby Voice conference. This method is available only for participants who joined the conference using the [join](#join) method with the [spatialAudio](doc:js-client-sdk-model-joinoptions#spatialaudio) parameter enabled. Otherwise, SDK triggers the [UnsupportedError](doc:js-client-sdk-model-unsupportederror) error. To set a spatial position for listeners, use the [Set Spatial Listeners Audio](ref:set-spatial-listeners-audio) REST API.
+     * Sets a participant's position in space to enable the spatial audio experience during a Dolby Voice conference. This method is available only to participants who joined the conference using the [join](#join) method with the [spatialAudio](./../interfaces/models_Options.JoinOptions.html#spatialAudio) parameter enabled. Otherwise, SDK triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html) error. To set a spatial position for listeners, use the [Set Spatial Listeners Audio](https://docs.dolby.io/communications-apis/reference/set-spatial-listeners-audio) REST API.
      *
      * Depending on the specified participant in the `participant` parameter, the setSpatialPosition method impacts the location from which audio is heard or from which audio is rendered:
      *
      * - When the specified participant is the local participant, setSpatialPosition sets a location from which the local participant listens to a conference. If the local participant does not have an established location, the participant hears audio from the default location (0, 0, 0).
      *
-     * - When the specified participant is a remote participant, setSpatialPosition ensures the remote participant's audio is rendered from the specified location in space. Setting the remote participants’ positions is required in conferences that use the individual [spatial audio style](doc:js-client-sdk-model-spatialaudiostyle). In these conferences, if a remote participant does not have an established location, the participant does not have a default position and will remain muted until a position is specified. The shared spatial audio style does not support setting the remote participants' positions. In conferences that use the shared style, the spatial scene is shared by all participants, so that each client can set a position and participate in the shared scene.
+     * - When the specified participant is a remote participant, setSpatialPosition ensures the remote participant's audio is rendered from the specified location in space. Setting the remote participants’ positions is required in conferences that use the individual [spatial audio style](./../enums/models_SpatialAudio.SpatialAudioStyle.html). In these conferences, if a remote participant does not have an established location, the participant does not have a default position and will remain muted until a position is specified. The shared spatial audio style does not support setting the remote participants' positions. In conferences that use the shared style, the spatial scene is shared by all participants, so that each client can set a position and participate in the shared scene.
      *
      * For example, if a local participant Eric, who uses the individual spatial audio style and does not have a set direction, calls setSpatialPosition(VoxeetSDK.session.participant, {x:3,y:0,z:0}), Eric hears audio from the position (3,0,0). If Eric also calls setSpatialPosition(Sophia, {x:7,y:1,z:2}), he hears Sophia from the position (7,1,2). In this case, Eric hears Sophia 4 meters to the right, 1 meter above, and 2 meters in front. The following graphic presents the participants' locations:
      *
+     * <img src="https://files.readme.io/d4d9f7a-05_Axis_People_v04_220202.png" width="700"/>
      *
-     * [block:image]
-     * {
-     *   "images": [
-     *     {
-     *       "image": [
-     *         "https://files.readme.io/d4d9f7a-05_Axis_People_v04_220202.png",
-     *         "05_Axis_People_v04_220202.png",
-     *         1920,
-     *         1080,
-     *         "#264159"
-     *       ],
-     *       "sizing": "full"
-     *     }
-     *   ]
-     * }
-     * [/block]
+     * If sending the updated positions to the server fails, the SDK generates the ConferenceService event error that includes [SpatialAudioError](./lib_Exceptions.SpatialAudioError.html).
      *
      * @param participant - The selected participant. Using the local participant sets the location from which the participant will hear a conference. Using a remote participant sets the position from which the participant's audio will be rendered.
      * @param position - The participants' audio location.
@@ -544,11 +509,11 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     setSpatialPosition(participant: Participant, position: NonNullable<SpatialPosition>): void;
     /**
-     * Sets the direction the local participant is facing in space. This method is available only for participants who joined the conference using the [join](#join) method with the [spatialAudio](doc:js-client-sdk-model-joinoptions#spatialaudio) parameter enabled. Otherwise, SDK triggers the [UnsupportedError](doc:js-client-sdk-model-unsupportederror) error. To set a spatial direction for listeners, use the [Set Spatial Listeners Audio](ref:set-spatial-listeners-audio) REST API.
+     * Sets the direction the local participant is facing in space. This method is available only to participants who joined the conference using the [join](#join) method with the [spatialAudio](./../interfaces/models_Options.JoinOptions.html#spatialAudio) parameter enabled. Otherwise, SDK triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html) error. To set a spatial direction for listeners, use the [Set Spatial Listeners Audio](https://docs.dolby.io/communications-apis/reference/set-spatial-listeners-audio) REST API.
      *
      * If the local participant hears audio from the position (0,0,0) facing down the Z-axis and locates a remote participant in the position (1,0,1), the local participant hears the remote participant from their front-right. If the local participant chooses to change the direction they are facing and rotate +90 degrees about the Y-axis, then instead of hearing the speaker from the front-right position, they hear the speaker from the front-left position. The following video presents this example:
      *
-     * [VIDEO] ("https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/07_setSpatialDirection_v03_220131.mp4)
+     * <div style="text-align:center"><video controls width="700"> <source src="https://s3.us-west-1.amazonaws.com/static.dolby.link/videos/readme/communications/spatial/07_setSpatialDirection_v03_220131.mp4" type="video/mp4"> Sorry, your browser doesn't support embedded videos.</video></div>
      *
      * For more information, see the [SpatialDirection](doc:js-client-sdk-model-spatialdirection) model.
      *
@@ -569,7 +534,7 @@ export declare class ConferenceService extends BaseConferenceService {
     /**
      * Configures a spatial environment of an application, so the audio renderer understands which directions the application considers forward, up, and right and which units it uses for distance.
      *
-     * This method is available only for participants who joined a conference using the [join](#join) method with the [spatialAudio](doc:js-client-sdk-model-joinoptions#spatialaudio) parameter enabled. Otherwise, SDK triggers the [UnsupportedError](doc:js-client-sdk-model-unsupportederror) error. To set a spatial environment for listeners, use the [Set Spatial Listeners Audio](ref:set-spatial-listeners-audio) REST API.
+     * This method is available only to participants who joined a conference using the [join](#join) method with the [spatialAudio](./../interfaces/models_Options.JoinOptions.html#spatialAudio) parameter enabled. Otherwise, SDK triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html) error. To set a spatial environment for listeners, use the [Set Spatial Listeners Audio](https://docs.dolby.io/communications-apis/reference/set-spatial-listeners-audio) REST API.
      *
      * If not called, the SDK uses the default spatial environment, which consists of the following values:
      *
@@ -580,10 +545,14 @@ export declare class ConferenceService extends BaseConferenceService {
      *
      * The default spatial environment is presented in the following diagram:
      *
-     * @param scale - A scale that defines how to convert units from the coordinate system of an application (pixels or centimeters) into meters used by the spatial audio coordinate system. For example, if SpatialScale is set to (100,100,100), it indicates that 100 of the applications units (cm) map to 1 meter for the audio coordinates. In such a case, if the listener's location is (0,0,0)cm and a remote participant's location is (200,200,200)cm, the listener has an impression of hearing the remote participant from the (2,2,2)m location. The scale value must be greater than 0. For more information, see the [Spatial Audio](doc:guides-integrating-spatial-audio#configure-the-spatial-environment-scale) article.
-     * @param forward - A vector describing the direction the application considers as forward. The value must be orthogonal to up and right. Otherwise, SDK emits [ParameterError](doc:js-client-sdk-model-parametererror).
-     * @param up - A vector describing the direction the application considers as up. Must be orthogonal to forward and right. Otherwise, SDK emits [ParameterError](doc:js-client-sdk-model-parametererror).
-     * @param right - A vector describing the direction the application considers as right. Must be orthogonal to forward and up. Otherwise, SDK emits [ParameterError](doc:js-client-sdk-model-parametererror).
+     * <img src="https://files.readme.io/e43475b-defaultEnv.png" width="700">
+     *
+     * If sending the updated positions to the server fails, the SDK generates the ConferenceService event error that includes [SpatialAudioError](./lib_Exceptions.SpatialAudioError.html).
+     *
+     * @param scale - A scale that defines how to convert units from the coordinate system of an application (pixels or centimeters) into meters used by the spatial audio coordinate system. For example, if SpatialScale is set to (100,100,100), it indicates that 100 of the applications units (cm) map to 1 meter for the audio coordinates. In such a case, if the listener's location is (0,0,0)cm and a remote participant's location is (200,200,200)cm, the listener has an impression of hearing the remote participant from the (2,2,2)m location. The scale value must be greater than 0. Otherwise, SDK emits [ParameterError](./lib_Exceptions.ParameterError.html). For more information, see the [Spatial Audio](https://docs.dolby.io/communications-apis/docs/guides-integrating-individual-spatial-audio#configure-the-spatial-environment-scale) article.
+     * @param forward - A vector describing the direction the application considers as forward. The value must be orthogonal to up and right. Otherwise, SDK emits [ParameterError](./lib_Exceptions.ParameterError.html).
+     * @param up - A vector describing the direction the application considers as up. Must be orthogonal to forward and right. Otherwise, SDK emits [ParameterError](./lib_Exceptions.ParameterError.html).
+     * @param right - A vector describing the direction the application considers as right. Must be orthogonal to forward and up. Otherwise, SDK emits [ParameterError](./lib_Exceptions.ParameterError.html).
      *
      * @example
      *```javascript
@@ -653,7 +622,7 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     get peerConnectionStatus(): String;
     /**
-     * Returns a list of [users](doc:js-client-sdk-model-participanttype#user) who are present at a conference. The local participant is also included on the list, even if the local participant is a [listener](doc:js-client-sdk-model-participanttype#listener).
+     * Returns a list of [users](./../enums/models_Participant.ParticipantType.html#USER) who are present at a conference. The local participant is also included on the list, even if the local participant is a [listener](./../enums/models_Participant.ParticipantType.html#LISTENER).
      */
     get participants(): Map<string, Participant>;
     /**
@@ -662,7 +631,9 @@ export declare class ConferenceService extends BaseConferenceService {
     get maxVideoForwarding(): number;
     get videoForwardingStrategy(): VideoForwardingStrategy;
     /**
-     * Returns information about the current conference. Use this accessor if you wish to receive information that is available in the [Conference](doc:js-client-sdk-model-conference) object, such as the conference [alias](doc:js-client-sdk-model-conference#alias), [ID](doc:js-client-sdk-model-conference#id), information if the conference [is new](doc:js-client-sdk-model-conference#isnew), conference [parameters](doc:js-client-sdk-model-conference#params), local participant's conference [permissions](doc:js-client-sdk-model-conference#permissions), conference [PIN code](doc:js-client-sdk-model-conference#pincode), or conference [status](doc:js-client-sdk-model-conference#status). For example, use the following code to ask about the local participant's conference permissions:
+     * Returns information about the current conference. Use this accessor if you wish to receive information that is available in the [Conference](./models_Conference.Conference.html) object, such as the conference alias, ID, information whether the conference is new, conference parameters, local participant's conference permissions, conference PIN code, or conference status.
+     *
+     * For example, use the following code to ask about the local participant's conference permissions:
      *
      * ```JavaScript
      * VoxeetSDK.conference.current.permissions
