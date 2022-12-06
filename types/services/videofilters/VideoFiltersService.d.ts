@@ -3,7 +3,7 @@ import { ConferenceService } from '../conference/ConferenceService';
 import { SessionService } from '..';
 import { VideoFilter, VideoFilterOptions } from '../../models/VideoFilters';
 /**
- * **Note**: This service is available only to the [Desktop SDK](https://docs.dolby.io/communications-apis/docs/desktop-sdk-overview) users.
+ * **Note**: This service is available only to the [Desktop SDK](https://docs.dolby.io/communications-apis/docs/desktop-sdk-overview) users. If you wish to change the local participant's background using the Web SDK, call the [start](https://docs.dolby.io/communications-apis/docs/js-client-sdk-model-localvideo#start) or [setProcessor](https://docs.dolby.io/communications-apis/docs/js-client-sdk-model-localvideo#setprocessor) method.
  *
  * The VideoFiltersService manages video filters that allow blurring the local participant's background or using a selected image as the background.
  *

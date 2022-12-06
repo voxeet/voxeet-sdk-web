@@ -28,7 +28,7 @@ import { VideoProcessor } from './VideoProcessor';
  */
 export interface LocalVideo {
     /**
-     * Enables the local participant's camera and starts a video stream transmission. If the local participant calls this method before a conference, the SDK starts a camera stream that will be added to the conference after joining and the participant can see the video preview. If the participant calls this method in a conference, the method starts sending the participant's video stream to the conference.
+     * Enables the local participant's camera and starts a video stream transmission. If the local participant calls this method before a conference, the SDK starts a camera stream that will be added to the conference after joining and the participant can see the video preview. If the participant calls this method in a conference, the method starts sending the participant's video stream to the conference. By default, when video constraints are not specified, the SDK starts a video stream with a resolution of 1280x720 at 25 frames per second.
      *
      * If the participant calls this method when their video is already enabled, the SDK stops the existing video stream and starts a new one with new constraints.
      *
@@ -36,7 +36,7 @@ export interface LocalVideo {
      *
      * This method is not available for listeners and triggers the [UnsupportedError](./../classes/lib_Exceptions.UnsupportedError.html).
      *
-     * **Note**: This method requires using Chrome or Edge with Graphics Processing Unit (GPU) acceleration enabled and the following minimum hardware requirements:
+     * **Note**: If you want to use the `processor` parameter, make sure that you use Chrome or Edge with Graphics Processing Unit (GPU) acceleration enabled and the following minimum hardware requirements:
      * - i5 dual-core CPU
      * - 8GB of RAM
      * - 64-bit operating system
@@ -57,6 +57,8 @@ export interface LocalVideo {
      * let videoTrack = await VoxeetSDK.video.local.start(videoConstraints);
      * ```
      *
+     * For more information about using this method, see the [Enable Video Processing](https://docs.dolby.io/communications-apis/docs/enable-video-processing) guide.
+     *
      * @param constraints - The [MediaTrackConstraints](https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints).
      * @param processor - The video processor configuration.
      *
@@ -72,7 +74,7 @@ export interface LocalVideo {
      *
      * This method is not available for listeners and triggers the [UnsupportedError](./../classes/lib_Exceptions.UnsupportedError.html).
      *
-     * **Note**: This method requires using Chrome or Edge with Graphics Processing Unit (GPU) acceleration enabled and the following minimum hardware requirements:
+     * **Note**: If you want to use the `processor` parameter, make sure that you use Chrome or Edge with Graphics Processing Unit (GPU) acceleration enabled and the following minimum hardware requirements:
      * - i5 dual-core CPU
      * - 8GB of RAM
      * - 64-bit operating system
@@ -107,6 +109,8 @@ export interface LocalVideo {
      * - 64-bit operating system
      *
      * **Warning**: If you use two different URLs for serving your application and hosting the SDK through a Content Delivery Network (CDN), you have to enable cross-origin resource sharing (CORS) to use this method. To enable CORS, see the [Install the SDK](https://docs.dolby.io/communications-apis/docs/initializing-javascript#install-the-sdk) instruction.
+     *
+     * For more information about using this method, see the [Enable Video Processing](https://docs.dolby.io/communications-apis/docs/enable-video-processing) guide.
      *
      * @param processor - The video processor configuration.
      *

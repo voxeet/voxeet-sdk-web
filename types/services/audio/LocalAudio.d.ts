@@ -18,7 +18,7 @@ export declare class LocalAudio extends BaseConferenceService {
     getCaptureMode(): Promise<AudioCaptureModeOptions>;
     /**
      * Sets the local participant's audio capture mode in Dolby Voice conferences.
-     * @param options - The audio capture mode.
+     * @param options - The preferred audio capture mode and additional settings for the selected mode.
      * @return {Promise<Error>}
      */
     setCaptureMode(options: AudioCaptureModeOptions): Promise<void>;

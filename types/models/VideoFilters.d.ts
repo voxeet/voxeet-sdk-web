@@ -1,5 +1,5 @@
 /**
- * **Note**: This model is available only to the [Desktop SDK](https://docs.dolby.io/communications-apis/docs/desktop-sdk-overview) users.
+ * **Note**: This model is available only to the [Desktop SDK](https://docs.dolby.io/communications-apis/docs/desktop-sdk-overview) users. If you wish to change the local participant's background using the Web SDK, call the [start](https://docs.dolby.io/communications-apis/docs/js-client-sdk-model-localvideo#start) or [setProcessor](https://docs.dolby.io/communications-apis/docs/js-client-sdk-model-localvideo#setprocessor) method.
  *
  * The VideoFilter model represents the possible video filters that allow blurring or changing the local participant's background.
  */
@@ -37,7 +37,7 @@ export declare enum VideoFilter {
     StaticImage = "staticimage"
 }
 /**
- * **Note**: This model is available only to the [Desktop SDK](https://docs.dolby.io/communications-apis/docs/desktop-sdk-overview) users.
+ * **Note**: This model is available only to the [Desktop SDK](https://docs.dolby.io/communications-apis/docs/desktop-sdk-overview) users. If you wish to change the local participant's background using the Web SDK, call the [start](https://docs.dolby.io/communications-apis/docs/js-client-sdk-model-localvideo#start) or [setProcessor](https://docs.dolby.io/communications-apis/docs/js-client-sdk-model-localvideo#setprocessor) method.
  *
  * The VideoFilterOptions model contains additional options for [VideoFilters](./../enums/models_VideoFilters.VideoFilter.html).
  */

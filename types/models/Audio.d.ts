@@ -17,7 +17,7 @@ export declare enum AudioCaptureMode {
      *
      * Due to higher levels of background noise, we do not recommend using the Music mode in conferences focused on conversation. In the case of experiencing issues while using the mode, see the [Troubleshooting](https://docs.dolby.io/communications-apis/docs/troubleshooting-audio-issues-in-music-mode) guide.
      *
-     * This mode is available in SDK 3.8 and later.
+     * This mode is available in SDK 3.8 and later and requires [using the Dolby Voice Codec (DVC)](https://docs.dolby.io/communications-apis/docs/using-the-dolby-voice-codec-javascript).
      */
     Music = "music"
 }
@@ -33,11 +33,13 @@ export declare enum NoiseReductionLevel {
     High = "high",
     /**
      * Removes stationary background sounds, such as the sound of a computer fan, air conditioning, or microphone hum, from audio transmitted to a conference. In this mode, non-stationary sounds are transmitted to give participants full context of other participants' environments and create a more realistic audio experience. If you want to send only voice to a conference, use the [High](#high) level.
+     *
+     * This level requires [using the Dolby Voice Codec (DVC)](doc:using-the-dolby-voice-codec-javascript).
      */
     Low = "low"
 }
 /**
- * The AudioEchoCancellation model allows modifying the echo management setting.
+ * The AudioEchoCancellation model allows modifying the echo management setting for the [Music](./models_Audio.AudioCaptureMode.html#Music) mode while calling the [setCaptureMode](./../classes/services_audio_LocalAudio.LocalAudio.html#setCaptureMode) method.
  *
  * This mode is available in SDK 3.8 and later.
  */
@@ -83,7 +85,7 @@ export declare enum AudioBitrate {
     Bitrate128k = "128Kbps"
 }
 /**
- * The AudioCaptureModeStandardOptions model allows selecting the preferred audio mode options.
+ * The AudioCaptureModeStandardOptions model allows setting additional options for the [Standard](./../enums/models_Audio.AudioCaptureMode.html#Standard) mode.
  *
  * This model is available in SDK 3.7 and later.
  */
@@ -105,7 +107,7 @@ export interface AudioCaptureModeMusicOptions {
     echoCancellation?: AudioEchoCancellation;
 }
 /**
- * The AudioCaptureModeOptions model allows selecting the preferred audio capture mode and the preferred noise reduction level.
+ * The AudioCaptureModeOptions model allows selecting the preferred audio capture mode and additional options for the selected mode.
  *
  * This model is available in SDK 3.7 and later.
  */
@@ -115,7 +117,25 @@ export interface AudioCaptureModeOptions {
      */
     mode: AudioCaptureMode;
     /**
-     * Additional audio options.
+     * Additional audio options for the selected audio mode:
+     *
+     * - If you use the [Standard](./../enums/models_Audio.AudioCaptureMode.html#Standard) mode, use additional settings available in [AudioCaptureModeStandardOptions](./models_Audio.AudioCaptureModeStandardOptions.html):
+     * @example
+     * ```js
+     * setCaptureMode({mode: "standard", modeOptions: {noiseReductionLevel: "low"}});
+     * ```
+     *
+     * - If you use the [Music](./../enums/models_Audio.AudioCaptureMode.html#Music) mode , use additional settings available in [AudioCaptureModeMusicOptions](.//models_Audio.AudioCaptureModeMusicOptions.html):
+     * @example
+     * ```js
+     * setCaptureMode({mode: "unprocessed"});
+     * ```
+     *
+     * - The [Unprocessed](./../enums/models_Audio.AudioCaptureMode.html#Unprocessed) mode does not offer any additional settings:
+     * @example
+     * ```js
+     * setCaptureMode({mode: "music", modeOptions: {echoCancellation: "off"}});
+     * ```
      */
     modeOptions?: AudioCaptureModeStandardOptions & AudioCaptureModeMusicOptions;
 }
