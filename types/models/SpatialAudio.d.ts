@@ -12,6 +12,9 @@ import { Participant } from './Participant';
  * | Disabled                  | False              | Success                           |
  *
  */
+/**
+ * @ignore
+ */
 export declare enum SpatialAudioStyle {
     /**
      * Disables spatial audio in a conference.
@@ -28,7 +31,13 @@ export declare enum SpatialAudioStyle {
      */
     Shared = "shared"
 }
+/**
+ * @ignore
+ */
 export declare type SpatialAudioStyleValuesUnion = typeof SpatialAudioStyle[keyof typeof SpatialAudioStyle];
+/**
+ * @ignore
+ */
 export declare type SupportedSpatialAudioStyles = SpatialAudioStyleValuesUnion[];
 /**
  * @ignore
@@ -40,11 +49,17 @@ export interface SpatialAudioManager {
     removeParticipant?: (participantId: string) => void;
     release: () => void;
 }
+/**
+ * @ignore
+ */
 export declare type CreateSpatialAudioManager = (option: {
     style: SpatialAudioStyle;
     conferenceId: string;
     participantId: string;
 }) => SpatialAudioManager | undefined;
+/**
+ * @ignore
+ */
 export declare type Vector<T> = {
     x: T;
     y: T;
@@ -52,6 +67,7 @@ export declare type Vector<T> = {
 };
 /**
  * Model representing spherical coordinate system used internally.
+ * @ignore
  */
 export declare type PolarPosition = {
     distance: number;
@@ -90,6 +106,9 @@ export declare type SpatialDirection = Vector<number>;
  * **Note**: A scale value must have a value greater than zero. The default is (1,1,1).
  */
 export declare type SpatialScale = Vector<number>;
+/**
+ * @ignore
+ */
 export declare type Quaternion = {
     x: number;
     y: number;
@@ -98,6 +117,7 @@ export declare type Quaternion = {
 };
 /**
  * Model storing all spatial audio environment parameters used internally for converting between application and audio space.
+ * @ignore
  */
 export declare type SpatialEnvironment = {
     scale: SpatialScale;
@@ -107,6 +127,7 @@ export declare type SpatialEnvironment = {
 };
 /**
  * Model storing all spatial audio parameters used internally for remote participants.
+ * @ignore
  */
 export declare type SpatialRemoteParticipant = {
     participant: Participant;
