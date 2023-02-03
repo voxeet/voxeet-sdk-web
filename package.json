@@ -1,6 +1,6 @@
 {
   "name": "@voxeet/voxeet-web-sdk",
-  "version": "3.8.4",
+  "version": "3.8.5",
   "description": "The Voxeet Javascript SDK",
   "author": "Thomas Gourgues (tgourgues@voxeet.com)",
   "main": "dist/voxeet-sdk.js",
