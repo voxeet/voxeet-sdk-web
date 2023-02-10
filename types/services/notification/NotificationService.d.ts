@@ -24,7 +24,7 @@ export declare class NotificationService extends Service {
      * ]);
      *
      * // Subscribes to the conferenceCreated and conferenceEnded events
-     * await VoxeetSDK.notification.unsubscribe([
+     * await VoxeetSDK.notification.subscribe([
      *   {
      *     type: "Conference.Created",
      *     conferenceAlias: "yourConferenceAlias"

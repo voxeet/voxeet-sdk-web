@@ -1,4 +1,6 @@
+/// <reference types="node" />
 import { VideoProcessor } from './VideoProcessor';
+import { EventEmitter } from 'events';
 /**
  * The LocalVideo model allows enabling and disabling the local participant's video and video processor.
  *
@@ -24,9 +26,9 @@ import { VideoProcessor } from './VideoProcessor';
  *
  * This model is supported only in SDK 3.7 and later.
  *
- * The video processor needs to be initialized before usage. Otherwise, the processor does not have access to the required  `vsl_impl.wasm` and `vsl_impl.pkgwvsl` files and cannot function properly.
+ * The video processor needs to be initialized before usage. Otherwise, the processor does not have access to the required  `vsl_impl.wasm` and `vsl_impl.bin` files and cannot function properly.
  */
-export interface LocalVideo {
+export interface LocalVideo extends EventEmitter {
     /**
      * Enables the local participant's camera and starts a video stream transmission. If the local participant calls this method before a conference, the SDK starts a camera stream that will be added to the conference after joining and the participant can see the video preview. If the participant calls this method in a conference, the method starts sending the participant's video stream to the conference. By default, when video constraints are not specified, the SDK starts a video stream with a resolution of 1280x720 at 25 frames per second.
      *
@@ -59,7 +61,7 @@ export interface LocalVideo {
      *
      * For more information about using this method, see the [Enable Video Processing](https://docs.dolby.io/communications-apis/docs/enable-video-processing) guide.
      *
-     * @param constraints - The [MediaTrackConstraints](https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints).
+     * @param constraints - The [MediaTrackConstraints](https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints). If the constrains are not specified, the SDK uses 720p (1280 x 720) resolution at 25fps to capture video.
      * @param processor - The video processor configuration.
      *
      * @returns A Promise which handler receives a MediaStreamTrack object. If the track cannot be created, the promise is rejected with the [VideoServiceError](./../classes/lib_Exceptions.VideoServiceError.html).

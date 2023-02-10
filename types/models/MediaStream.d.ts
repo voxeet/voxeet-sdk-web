@@ -54,6 +54,7 @@ export declare class DvcsMediaStream extends MediaStream {
     addTrack(track: FakeMediaStreamAudioTrack | MediaStreamTrack): void;
     removeTrack(track: FakeMediaStreamAudioTrack | MediaStreamTrack): void;
     getAudioTracks(): MediaStreamTrack[];
+    getTracks(): MediaStreamTrack[];
 }
 /**
  * @ignore

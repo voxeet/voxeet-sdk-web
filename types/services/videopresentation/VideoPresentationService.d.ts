@@ -1,6 +1,7 @@
 import { BaseConferenceService } from '../Service';
 import VideoPresentation from '../../models/VideoPresentation';
 import { ConferenceService } from '../conference/ConferenceService';
+import { ConferenceJoined, ConferenceLeft } from '../../events/conference';
 /**
  * The VideoPresentationState model represents video presentation statuses.
  */
@@ -55,7 +56,8 @@ export declare class VideoPresentationService extends BaseConferenceService {
     constructor(sdk: any, conferenceService: ConferenceService);
     private clear;
     /**
-     * Starts sharing a video file.
+     * Starts sharing a video file. This method is not available for [listeners](./enums/models_Participant.ParticipantType.html#LISTENER). Calling this method by a listener results in the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
+     *
      * @param url - The URL that specifies the video file location.
      */
     start(url: string): any;
@@ -97,4 +99,6 @@ export declare class VideoPresentationService extends BaseConferenceService {
      * Provides the current state of the video presentation.
      */
     get state(): VideoPresentationState;
+    protected onConferenceJoined(event: ConferenceJoined): void;
+    protected onConferenceLeft(event: ConferenceLeft): void;
 }

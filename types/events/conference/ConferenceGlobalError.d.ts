@@ -4,6 +4,7 @@ import Event from '../Event';
  */
 export default class ConferenceGlobalError extends Event {
     error: Error;
-    constructor(e: Error);
-    static fromData(e: Error): ConferenceGlobalError;
+    code?: number;
+    constructor(e: Error, code?: number);
+    static fromData(e: Error, code?: number): ConferenceGlobalError;
 }

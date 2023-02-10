@@ -8,7 +8,7 @@ import { DeviceChangeResult } from '../../models/MediaDevice';
  *
  * @example
  * ```javascript
- * VoxeetSDK.conference.on('devicechange', (result) => {
+ * VoxeetSDK.mediaDevice.on('deviceChanged', (result) => {
  *
  * });
  * ```

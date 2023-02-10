@@ -56,6 +56,7 @@ export declare type CreateSpatialAudioManager = (option: {
     style: SpatialAudioStyle;
     conferenceId: string;
     participantId: string;
+    setDirection?: (yaw: number, pitch: number, roll: number) => void;
 }) => SpatialAudioManager | undefined;
 /**
  * @ignore

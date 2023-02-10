@@ -28,7 +28,7 @@ export interface VideoProcessor {
     /**
      * The type of the video processor.
      */
-    type?: VideoProcessorType;
+    type: VideoProcessorType;
     /**
      * The [HTMLImageElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement) object for the [BackgroundReplacement](./../enums/models_VideoProcessor.VideoProcessorType.html#BackgroundReplacement) video processor. The supported image file formats are JPG, JPEG, 24-bit PNG, and 32-bit PNG. In the case of 32-bit PNG with an alpha channel, the transparent areas are displayed as black.
      *

@@ -40,6 +40,7 @@ export declare class RTCInboundRTPVideoStreamStats extends Stats {
     nackCount: number;
     decoderImplementation: string;
     qpSum: number;
+    framesPerSecond: number;
 }
 /**
  * @ignore
@@ -79,6 +80,7 @@ export declare class RTCOutboundRtpVideoStreamStats extends Stats {
     totalPacketSendDelay: number;
     encoderImplementation: string;
     qpSum: number;
+    framesPerSecond: number;
 }
 /**
  * @ignore
@@ -148,9 +150,12 @@ export declare class WebAudioStats extends Stats {
     bufferIsOverrun: boolean;
     bufferOverrunTimes: number;
     bufferOverrunLength: number;
+    bufferOverrunMaxLength: number;
+    bufferOverrunDuration: number;
     bufferIsUnderrun: boolean;
     bufferUnderrunTimes: number;
-    bufferUnderrunLength: number;
+    bufferUnderrunMaxLength: number;
+    bufferUnderrunDuration: number;
 }
 /**
  * @ignore
@@ -174,6 +179,30 @@ export declare class TransportStats extends Stats {
     dtlsState: string;
     selectedCandidatePairChanges: number;
     selectedCandidatePairId: string;
+}
+/**
+ * @ignore
+ */
+export declare class RTCVideoSource extends Stats {
+    type: string;
+    id: string;
+    kind: string;
+    trackIdentifier: number;
+    width: number;
+    height: number;
+    framesPerSecond: number;
+}
+/**
+ * @ignore
+ */
+export declare class RTCAudioSource extends Stats {
+    type: string;
+    id: string;
+    kind: string;
+    trackIdentifier: number;
+    audioLevel: number;
+    totalAudioEnergy: number;
+    totalSamplesDuration: number;
 }
 /**
  * @ignore

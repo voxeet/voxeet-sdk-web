@@ -2,6 +2,7 @@ import { BaseConferenceService } from '../Service';
 import { FilePresentation } from '../../models/FilePresentation';
 import FileConverted from '../../models/FileConverted';
 import { ConferenceService } from '../conference/ConferenceService';
+import { ConferenceJoined, ConferenceLeft } from '../../events/conference';
 /**
  * The FilePresentationService allows presenting files during a conference. The Dolby.io Communications APIs service converts the user-provided file into multiple pages, as images, accessible through the [image](#image) method.
  *
@@ -73,6 +74,9 @@ export declare class FilePresentationService extends BaseConferenceService {
     convertUrl(filename: string, url: string): any;
     /**
      * Starts a file presentation. The Dolby.io Communications APIs allow presenting only the converted files.
+     *
+     * This method is not available for [listeners](./enums/models_Participant.ParticipantType.html#LISTENER). Calling this method by a listener results in the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
+     *
      * @param file - The converted file that the presenter wants to share during the conference.
      */
     start(file: FileConverted): any;
@@ -111,4 +115,6 @@ export declare class FilePresentationService extends BaseConferenceService {
      * ```
      */
     get current(): FilePresentation;
+    protected onConferenceJoined(event: ConferenceJoined): void;
+    protected onConferenceLeft(event: ConferenceLeft): void;
 }

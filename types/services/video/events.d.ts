@@ -41,7 +41,7 @@ export declare function videoStopped(result: MediaStreamTrack): void;
  *
  * @example
  * ```javascript
- * VoxeetSDK.video.on('videoUpdated', (result) => {
+ * VoxeetSDK.video.local.on('videoUpdated', (result) => {
  *
  * });
  * ```

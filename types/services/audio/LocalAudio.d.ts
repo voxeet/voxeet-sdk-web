@@ -17,30 +17,37 @@ export declare class LocalAudio extends BaseConferenceService {
      */
     getCaptureMode(): Promise<AudioCaptureModeOptions>;
     /**
-     * Sets the local participant's audio capture mode in Dolby Voice conferences.
+     * Sets the local participant's audio capture mode in Dolby Voice conferences to allow changing audio processing. The following modes are available:
+     *
+     * - [Standard](./../enums/models_Audio.AudioCaptureMode.html#Standard): The default mode that optimizes captured audio for speech by aggressively removing non-speech content, such as background noise. The mode is supported in SDK 3.7 and later.
+     *
+     * - [Music](./../enums/models_Audio.AudioCaptureMode.html#Music): Enhances the quality of music content and allows transmitting the captured audio with a high-quality stream. The mode is supported in SDK 3.8 and later.
+     *
+     * - [Unprocessed](./../enums/models_Audio.AudioCaptureMode.html#Unprocessed): Reduces latency that comes from audio processing and prevents over-processing audio in some scenarios. The mode is supported in SDK 3.7 and later.
+     *
      * @param options - The preferred audio capture mode and additional settings for the selected mode.
      * @return {Promise<Error>}
      */
     setCaptureMode(options: AudioCaptureModeOptions): Promise<void>;
     /**
-     * Gets the comfort noise level setting for output devices in Dolby Voice conferences.
+     * Returns the comfort noise level setting for output devices. Getting the comfort noise level is supported only in Dolby Voice conferences for users who use the [Dolby Voice Codec](https://docs.dolby.io/communications-apis/docs/using-the-dolby-voice-codec-javascript).
      */
     getComfortNoiseLevel(): Promise<ComfortNoiseLevel>;
     /**
-     * Sets the comfort noise level for output devices in Dolby Voice conferences.
+     * Sets the comfort noise level for output devices. Setting the comfort noise level is supported only in Dolby Voice conferences for users who use the [Dolby Voice Codec](https://docs.dolby.io/communications-apis/docs/using-the-dolby-voice-codec-javascript).
      * @param {ComfortNoiseLevel} level - The comfort noise level.
      */
     setComfortNoiseLevel(level: ComfortNoiseLevel): Promise<void>;
     /**
-     * Enables the local participant's audio and sends the audio to a conference. This method is not available for listeners and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
+     * Starts transmitting local participant's audio to a conference. This method is not available for listeners and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      *
      * The SDK automatically manages audio rendering, which means that the application does not need to implement its own `<audio>` element. The application can use the [selectAudioInput](./services_mediadevice_MediaDeviceService.MediaDeviceService.html#selectAudioInput) and [selectAudioOutput](./services_mediadevice_MediaDeviceService.MediaDeviceService.html#selectAudioOutput) methods to select the proper audio input and output devices.
      *
      * The start method requires a few seconds to become effective.
      *
-     * @param constraints - The audio constraints.
+     * @param constraintsOrTrack
      */
-    start(constraints?: MediaTrackConstraints): Promise<any>;
+    start(constraintsOrTrack?: MediaTrackConstraints | MediaStreamTrack): Promise<any>;
     /**
      * Disables the local participant's audio and stop sending the audio to a conference. This method is not available for listeners and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      *
@@ -51,7 +58,7 @@ export declare class LocalAudio extends BaseConferenceService {
     /**
      * Applies a set of audio constraints to an audio track to allow setting ideal values and acceptable value ranges of constrainable properties of the track, such as echo cancellation and noise suppression. The method does not allow setting the deviceId and groupId constraints. If the required constraints are too strict to find a match during a track configuration attempt, the promise is rejected with the [OverconstrainedError](./lib_Exceptions.MediaStreamError.html). We recommend using this method for applying constraints; [MediaStreamTrack.applyconstraints()](https://www.w3.org/TR/mediacapture-streams/#dom-mediastreamtrack-applyconstraints) may not work as expected.
      *
-     * The method is available only for [users](./../enums/models_Participant.ParticipantType.html#USER) who use the Opus codec. Calling this method by listeners or participants who use the Dolby Voice Codec triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html). Calling the method outside of a conference causes a rejection of a promise and the ConferenceUninitializedError. Calling the method when the local audio track is not started causes a rejection of a promise and the UnsupportedError.
+     * The method is available only for [users](./../enums/models_Participant.ParticipantType.html#USER) who use the Opus codec. The method may be rejected and trigger the [UnsupportedError](./lib_Exceptions.UnsupportedError.html) after being called by a listener, a participant who uses the Dolby Voice Codec or sends audio from a custom track, or an application user who is not in a conference or whose local audio track is not started.
      *
      * The method may require some time to become effective because an audio track object must be recreated.
      *

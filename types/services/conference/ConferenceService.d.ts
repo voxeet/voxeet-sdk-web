@@ -2,7 +2,7 @@ import { BaseConferenceService } from '../Service';
 import { ConferenceJoined, ConferenceLeft } from '../../events/conference/index';
 import ConferenceManager from './ConferenceManager';
 import { SessionService } from '..';
-import { DemoOptions, JoinOptions, ListenOptions, MixingOptions, ParticipantPermissions, ReplayOptions } from '../../models/Options';
+import { DemoOptions, JoinOptions, ListenOptions, MixingOptions, ParticipantPermissions, ReplayOptions, ScreenshareOptions } from '../../models/Options';
 import { Participant } from '../../models/Participant';
 import { MediaStreamType, MediaStreamWithType } from '../../models/MediaStream';
 import Conference, { ConferenceLeaveOptions } from '../../models/Conference';
@@ -239,10 +239,34 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     isMuted(): boolean;
     /**
-     * Gets the participant's audio level:
+     * Gets a participant's audio level. The method allows getting the audio level of either only the local participant or all participants, depending on the conference type and the codec used:
      *
-     * - In Dolby Voice conferences, this method is available only for the local participant
-     * - In non-Dolby Voice conferences, this method is available for the local participant and remote participants
+     * <table>
+     * <thead>
+     *   <tr>
+     *     <th>Conference type</th>
+     *     <th>Codec</th>
+     *     <th>Participants whose audio level you can get</th>
+     *   </tr>
+     * </thead>
+     * <tbody>
+     *   <tr>
+     *     <td>Dolby Voice</td>
+     *     <td>DVC</td>
+     *     <td>All participants</td>
+     *   </tr>
+     *   <tr>
+     *     <td>Dolby Voice</td>
+     *     <td>Opus</td>
+     *     <td>Local participant</td>
+     *   </tr>
+     *   <tr>
+     *     <td>Non-Dolby Voice</td>
+     *     <td>Opus</td>
+     *     <td>All participants</td>
+     *   </tr>
+     * </tbody>
+     * </table>
      *
      * The possible values of the audio level are in a range from 0.0 to 1.0.
      *
@@ -259,7 +283,7 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     audioLevel(participant: Participant, callback: Function): any;
     /**
-     * Gets the participant's current speaking status for an active talker indicator. This method must be called repeatedly during a conference. For more information, see the [Detect participants who are speaking](https://docs.dolby.io/communications-apis/docs/isspeaking-javascript-web-example) guide.
+     * Gets the participant's current speaking status for an active talker indicator. This method must be called repeatedly during a conference.
      * @param participant - The conference participant.
      * @param callback - The callback that accepts a boolean value indicating the participant's current speaking status. If the boolean value is true, the callback can mark the participant as an active talker in the application UI.
      *
@@ -348,7 +372,7 @@ export declare class ConferenceService extends BaseConferenceService {
      * - Prioritizing specific participants' video streams that need to be transmitted to the local participant
      * - Changing the [video forwarding strategy](./../enums/models_VideoForwarding.VideoForwardingStrategy.html) that defines how the SDK should select conference participants whose videos will be received by the local participant
      *
-     * This method is available only in SDK 3.6 and later.
+     * This method is available only in SDK 3.6 and later and is not available for [RTS listeners](./enums/models_Options.ListenType.html#Mixed). Calling this method by an RTS listener triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      * @param VideoForwardingOptions - The video forwarding options.
      * @return {Promise<void>}
      *
@@ -419,6 +443,8 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     stopAudio(participant: Participant): Promise<void>;
     /**
+     * @deprecated
+     * This method is deprecated in SDK 3.9 and replaced with a new startScreenShare method.
      * Starts a screen-sharing session. This method is not available on mobile browsers; participants who join a conference using a mobile browser cannot share a screen.
      *
      * @param sourceId - The device ID. If you use multiple screens, use this parameter to specify which screen you want to share.
@@ -430,9 +456,15 @@ export declare class ConferenceService extends BaseConferenceService {
      * await VoxeetSDK.conference.startScreenShare();
      * ```
      */
-    startScreenShare(sourceId?: any): any;
+    startScreenShare(sourceId?: any): Promise<void>;
     /**
-     * Stops the screen-sharing session.
+     * Starts sharing the local participant's screen. This method is not available on mobile browsers; participants who join a conference using a mobile browser cannot share their screens. The method is available in SDK 3.9 and later and is not available for [listeners](./enums/models_Participant.ParticipantType.html#LISTENER). Calling this method by a listener results in the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
+     *
+     * @param options - Options that allow you to select a screen, send the computer's audio, and modify parameters of the shared screen.
+     */
+    startScreenShare(options: ScreenshareOptions): Promise<void>;
+    /**
+     * Stops the screen-sharing session. This method is not available for [listeners](./enums/models_Participant.ParticipantType.html#LISTENER). Calling this method by a listener results in the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      * @return {Promise<Error>}
      *
      * @example
@@ -447,13 +479,15 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     localStats(): WebRTCStats;
     /**
-     * Sets the quality of the received Simulcast streams.
+     * Sets the quality of the received Simulcast streams. This method is not available for [RTS listeners](./enums/models_Options.ListenType.html#Mixed) and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      *
      * @param requested - An array that contains stream qualities for specific conference participants.
      */
     simulcast(requested: Array<ParticipantQuality>): any;
     /**
      * Allows the conference owner, or a participant with adequate permissions, to kick another participant from the conference by revoking the conference access token. The kicked participant cannot join the conference again.
+     *
+     * This method is not available for [RTS listeners](./enums/models_Options.ListenType.html#Mixed) and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      *
      * @param participant - The participant who needs to be kicked from the conference.
      *
@@ -574,7 +608,6 @@ export declare class ConferenceService extends BaseConferenceService {
     private onConferenceGlobalError;
     private onOfferCreated;
     private onActiveSpeakerChange;
-    private onVideoForwardedChanged;
     private onDvcsMetric;
     /**
      *
@@ -588,13 +621,10 @@ export declare class ConferenceService extends BaseConferenceService {
     private updatePermissionsFromToken;
     private getPermissionsFromToken;
     private onParticipantAdded;
-    private clearStream;
     private onParticipantUpdated;
-    private onParticipantUpdatedHandleStreams;
     private onParticipantKicked;
     private onParticipantSwitched;
     private onOwnParticipantSwitched;
-    private onAudioUpdated;
     /**
      * @ignore
      */
@@ -604,19 +634,19 @@ export declare class ConferenceService extends BaseConferenceService {
      * @param peerId
      * @param stream
      */
-    onStreamAdded(peerId: string, stream: MediaStreamWithType): void;
+    onStreamAdded(participant: Participant, stream: MediaStreamWithType): void;
     /**
      * @ignore
      * @param peerId
      * @param stream
      */
-    onStreamUpdated(peerId: string, stream: MediaStreamWithType): void;
+    private onStreamUpdated;
     /**
      * @ignore
      * @param peerId
      * @param stream
      */
-    onStreamRemoved(peerId: string, stream: MediaStreamWithType): void;
+    private onStreamRemoved;
     /**
      * @ignore
      */
@@ -649,5 +679,7 @@ export declare class ConferenceService extends BaseConferenceService {
     private onLocalVideoStarted;
     private onLocalVideoStopped;
     private onLocalVideoUpdated;
+    private onRtsStatusUpdated;
+    private isJoinedAsRTSViewer;
 }
 export {};

@@ -1,5 +1,6 @@
 import Event from '../Event';
 import ConferenceParameters, { JoinParametersData } from '../../models/ConferenceParameters';
+import { ListenOnly } from '../../models/ListenOnly';
 /**
  * @ignore
  */
@@ -9,7 +10,7 @@ export interface ConferenceJoinedData {
     recordingUser: string;
     startRecordTimestamp: number;
     metadata: JoinParametersData;
-    listenOnly: boolean;
+    listenOnly: ListenOnly;
 }
 /**
  * @name ConferenceJoined
@@ -21,7 +22,8 @@ export default class ConferenceJoined extends Event {
     recordingParticipant: string;
     recordingStartTimestamp: number;
     parameters: ConferenceParameters;
-    listenOnly: boolean;
+    listenOnly: ListenOnly;
     constructor();
     static fromData(data: ConferenceJoinedData): ConferenceJoined;
+    isJoinedAsRTSViewer(): boolean;
 }

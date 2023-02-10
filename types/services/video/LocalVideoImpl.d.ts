@@ -4,6 +4,27 @@ import { LocalVideo } from '../../models/LocalVideo';
 import { VideoDeviceHelper } from './VideoDeviceHelper';
 import { VideoProcessor } from '../../models/VideoProcessor';
 /**
+ * @ignore
+ */
+export declare enum LocalVideoEvents {
+    /**
+     * Emitted when the local participant's camera or a custom video has been enabled.
+     */
+    VideoStarted = "videoStarted",
+    /**
+     * Emitted when the local participant's camera or a custom video has been disabled.
+     */
+    VideoStopped = "videoStopped",
+    /**
+     * Emitted when the local participant's camera or a custom video has been updated.
+     */
+    VideoUpdated = "videoUpdated",
+    /**
+     * Emitted when internal error occurs
+     */
+    VideoInternalError = "videoInternalError"
+}
+/**
  * Implementation of LocalVideo interface.
  *
  * @ignore
@@ -34,7 +55,7 @@ export declare class LocalVideoImpl extends BaseConferenceService implements Loc
     private emitLocalVideoStarted;
     private emitLocalVideoStopped;
     private emitLocalVideoUpdated;
-    private reportError;
+    private emitLocalVideoInternalEvent;
     private changeCameraDeviceId;
     private onBandwidthRestrictionChanged;
     private handleProcessingError;

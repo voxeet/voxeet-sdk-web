@@ -7,10 +7,26 @@ import { VideoForwardingStrategy } from './VideoForwarding';
 import { VideoProcessor } from './VideoProcessor';
 import { AudioBitrate } from './Audio';
 /**
- *
-The ListenOptions model defines how the application expects to join a conference using the [listen](#listen) method.
+ * The ListenType model contains the possible types of listeners. This model is available in SDK 3.9 and later.
+ */
+export declare enum ListenType {
+    /**
+     * A regular listener who uses only the Communications APIs and receives one mixed audio stream and one video stream from each participant who sends video to a conference.
+     */
+    Regular = "regular",
+    /**
+     * A listener who connects to a conference using Streaming APIs and real-time streaming. This type of listener receives only one mixed audio stream and one mixed video stream from a conference.
+     */
+    Mixed = "mixed"
+}
+/**
+ * The ListenOptions model defines how the application expects to join a conference using the [listen](#listen) method.
  */
 export interface ListenOptions {
+    /**
+     * The listener type that indicates whether a participant wishes to join a conference as a **regular** listener or a **mixed** listener who can connect to the conference using real-time streaming. This property is available in SDK 3.9 and later.
+     */
+    type?: ListenType;
     /**
      * Sets the maximum number of video streams that may be transmitted to the joining participant. The valid parameter's values are between 0 and 25 for desktop browsers and between 0 and 4 for mobile browsers. In the case of providing a value smaller than 0 or greater than the valid values, SDK triggers the [VideoForwardingError](./../classes/lib_Exceptions.VideoForwardingError.html). If the parameter value is not specified, the SDK automatically sets the maximum possible value: 25 for desktop browsers and 4 for mobile browsers.
      *
@@ -35,6 +51,10 @@ export interface ListenOptions {
      * Enables spatial audio for the local participant who joins a Dolby Voice conference. By default, this parameter is set to false.
      */
     spatialAudio?: boolean;
+    /**
+     * Indicates whether a participant wants to receive mono sound. By default, participants receive stereo audio. This configuration is only applicable when using the Opus codec and is available in non-Dolby Voice and Dolby Voice conferences.
+     */
+    preferRecvMono?: boolean;
 }
 /**
  * The MixingOptions model notifies the server that a participant who [joins](./../classes/services_conference_ConferenceService.ConferenceService.html#join) or [replays](./../classes/services_conference_ConferenceService.ConferenceService.html#replay) a conference is a special participant called Mixer. Mixer can use the SDK in a mixer mode to record or replay a conference. For more information, see the [Recording Conferences](https://docs.dolby.io/communications-apis/docs/guides-recording-conferences) article.
@@ -73,6 +93,23 @@ export interface DemoOptions {
      *
      */
     spatialAudio?: boolean;
+}
+/**
+ * The ScreenshareOptions model contains additional options that you can use when you want to share a screen. This model is available in SDK 3.9 and later.
+ */
+export interface ScreenshareOptions {
+    /**
+     * The ID of a device that you want to use. If you use multiple screens, use this parameter to specify which screen you want to share.
+     */
+    sourceId?: any;
+    /**
+     * A property that allows sending the computer's audio to remote participants while sharing a screen. It is useful if audio is an important part of your shared content. Enabling audio is supported only on Chrome and Edge for users who use the Opus codec. On Windows, the method allows sending the system's audio. However, on macOS the method allows sending audio only from a browser tab. By default, the property is set to false.
+     */
+    audio?: boolean | MediaTrackConstraints;
+    /**
+     * A property that allows modifying parameters of the shared screen, such as its resolution or frame rate.
+     */
+    video?: MediaTrackConstraints;
 }
 /**
  * @ignore
@@ -147,7 +184,7 @@ export interface DvwcParameters {
  */
 export interface JoinOptions {
     /**
-     * Sets the conference [WebRTC constraints](https://webrtc.org/getting-started/media-capture-and-constraints#constraints). By default, only audio is enabled: `{audio: true, video: false}` unless a video has been started before joining a conference.
+     * Sets the conference [WebRTC constraints](https://webrtc.org/getting-started/media-capture-and-constraints#constraints). By default, only audio is enabled: `{audio: true, video: false}` unless a video has been started before joining a conference. If the constrains are not specified when a participants joins a conference, the SDK uses 720p (1280 x 720) resolution at 25fps to capture video.
      *
      * **Note**: A video stream started before joining a conference will be added to the conference only if video constraints are unfilled.
      */
@@ -194,7 +231,25 @@ export interface JoinOptions {
      * - If set to true, the SDK uses the Dolby Voice Codec (DVC) on Chrome and Edge on desktop operating systems; on other browsers and mobile operating systems, the SDK uses Opus. In a case of a problem with using DVC in a conference, the SDK automatically switches to Opus.
      * - If set to false, the SDK uses Opus.
      *
-     * By default, this parameter is set to false. For more information about the supported audio codecs, see the [Dolby Voice](https://docs.dolby.io/communications-apis/docs/guides-dolby-voice) document.
+     * By default, this parameter is set to false. The following example shows how to create a Dolby Voice conference and join the conference using the Dolby Voice Codec:
+     *
+     * ```js
+     * // Create a Dolby Voice conference
+     * const createOptions = {
+     * alias: "conferenceAlias",
+     * params: {
+     * dolbyVoice: true
+     * }
+     * };
+     * const conference = await VoxeetSDK.conference.create(createOptions);
+     * // Join the Dolby Voice conference using Dolby Voice Codec
+     * const joinOptions = {
+     * dvwc: true
+     * };
+     * await VoxeetSDK.conference.join(conference, joinOptions);
+     * ```
+     *
+     * For more information about the supported audio codecs, see the [Dolby Voice](https://docs.dolby.io/communications-apis/docs/guides-dolby-voice) document.
      */
     dvwc?: boolean | DvwcParameters;
     /**
@@ -226,9 +281,13 @@ export interface JoinOptions {
      */
     videoProcessor?: VideoProcessor;
     /**
-     * A custom video track object to add to a conference. Defining this property causes ignoring video constraints defined in the constraints property.
+     * A custom video track object to add to a conference. Defining this property causes ignoring video constraints defined in the constraints property. This property is available in SDK 3.7 and later.
      */
     customVideoTrack?: MediaStreamTrack;
+    /**
+     * A custom audio track object to add to a conference. Defining this property causes ignoring audio constraints defined in the constraints property. This property is available in SDK 3.9 and later.
+     */
+    customAudioTrack?: MediaStreamTrack;
     /**
      * The preferred outgoing audio bitrate. Setting this property is available only while joining a non-Dolby Voice conference. Otherwise, the SDK triggers an error.
      *

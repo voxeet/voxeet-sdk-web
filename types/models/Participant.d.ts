@@ -39,7 +39,11 @@ export declare enum ParticipantType {
     /**
      * A participant who is present during the replay of a recorded conference.
      */
-    ROBOT = "robot"
+    ROBOT = "robot",
+    /**
+     * A special participant responsible for streaming a conference using Streaming APIs and real-time streaming. This type is available in SDK 3.9 and later.
+     */
+    MIXER_MIX = "mixer_mix"
 }
 /**
  * @ignore
@@ -49,12 +53,12 @@ export declare const toParticipantType: (participantType: string) => Participant
 /**
  * The ParticipantStatus model represents the statuses of conference participants. The following graphic shows possible status changes during a conference:
  *
- * <img src="../../assets/web_participant_status.png" alt="screen-share" title="Screen share" width="1000"/>
+ * <img src="https://files.readme.io/2105b14-js-swift-conferenceService-participantUpdated.png" title="Diagram that presents the possible status changes" width="1000"/>
  *
  */
 export declare enum ParticipantStatus {
     /**
-     * A participant is invited to a conference and waits for an invitation.
+     * A participant is invited to a conference but has not joined it yet.
      */
     RESERVED = "Reserved",
     /**

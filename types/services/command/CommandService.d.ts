@@ -1,5 +1,6 @@
 import { BaseConferenceService } from '../Service';
 import { ConferenceService } from '../conference/ConferenceService';
+import { ConferenceJoined, ConferenceLeft } from '../../events/conference';
 /**
  * The CommandService allows applications to send and receive text messages and notifications during conferences.
  */
@@ -12,7 +13,8 @@ export declare class CommandService extends BaseConferenceService {
      */
     constructor(sdk: any, conferenceService: ConferenceService);
     /**
-     * Sends a message, in the form of a string, to all conference participants.
+     * Sends a message, in the form of a string, to all conference participants. This method is not available for [RTS listeners](./enums/models_Options.ListenType.html#Mixed) and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
+     *
      * @param message - The message to send.
      *
      * @example
@@ -30,4 +32,6 @@ export declare class CommandService extends BaseConferenceService {
      */
     send(message: string): Promise<any>;
     private onConferenceMessageReceived;
+    protected onConferenceJoined(event: ConferenceJoined): void;
+    protected onConferenceLeft(event: ConferenceLeft): void;
 }

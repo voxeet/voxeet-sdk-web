@@ -140,35 +140,27 @@ export default class VoxeetSDK extends EventEmitter {
      */
     static displaySettings(): void;
     /**
-     * Initializes the SDK with an access token that is provided by the customer backend communicating with Voxeet servers. The token allows securing the App key and App secret.
+     * Initializes the SDK with the client access token provided by the Dolby.io platform. The client access token protects customer's conferences from unauthorized access and can be generated only by the Dolby.io platform via an application's authentication server and the [oauth2/token](https://docs.dolby.io/communications-apis/reference/get-client-access-token) request. The SDK requests a new token from the platform after half of the token expiration time, three fourth of the token expiration time, and when the token expires.
      *
-     * The following diagram presents the authentication flow:
+     * The initializeToken method saves the received token and starts the token expiration timers. The method requires providing two parameters - the **client access token** received from the Dolby.io platform and the **refresh token callback**. The callback must be a function that requests a new token and returns a Promise containing the refreshed client access token when the token is incorrect or needs to be refreshed. The refresh token callback uses an **isExpired** boolean parameter to inform whether the currently used client access token is expired.
      *
-     * ```
-     * Client          Customer Server       Voxeet Server
-     *   |                    |                    |
-     *   |  Get Access Token  |  /oauth2/token (1) |
-     *   |------------------->|------------------->|
-     *   |    Access Token    |    Access Token    |
-     *   |<-------------------|<-------------------|
-     *   |  initializeToken(accessToken, callback) |
-     *   |---------------------------------------->|
-     * ```
+     * ```js
+     * VoxeetSDK.initializeToken(accessToken, (isExpired) => {
+     *  if (isExpired) {
+     *    // The token expired
+     *    throw "The access token has expired.";
+     *  }
      *
-     * The access token has a limited period of validity and needs to be refreshed for security reasons. In such case the Voxeet SDK will call the callback provided to initializeToken. The callback must return a Promise containing the refreshed access token by calling the customer backend, as presented in the following diagram:
-     *
-     * ```
-     * Client          Customer Server       Voxeet Server
-     *   |      callback      |  /oauth2/token (2) |
-     *   |------------------->|------------------->|
-     *   |    Access Token    |    Access Token    |
-     *   |<-------------------|<-------------------|
+     *  return requestNewToken();
+     * });
      * ```
      *
-     * Where (1) and (2) are two REST API endpoints available on Voxeet servers and documented on the developer portal.
+     * The Dolby.io platform verifies each API call and processes the call only if the provided token is correct.
      *
-     * @param accessToken - The access token provided by the customer's backend
-     * @param callback - A callback that returns a promise when the access token needs to be refreshed. The callback parameter takes the `isExpired` boolean parameter to check if the previous token has expired.
+     * <img src="https://files.readme.io/00aacd8-client-access-token-overview.png" width="700"/>
+     *
+     * @param accessToken -  The client access token received from the Dolby.io platform.
+     * @param callback - A function that requests and returns a new client access token from the Dolby.io platform when the previous token is incorrect or should be refreshed. The callback must use the **isExpired** boolean parameter to inform whether the currently used client access token is expired.
      * @param __namedParameters Optional parameter to override SDK default configuration
      * @param host host
      * @param wsHost websocket host

@@ -59,6 +59,8 @@ declare const Events: {
     StreamRemoved: typeof ConferenceEvents.StreamRemoved;
     StreamUpdated: typeof ConferenceEvents.StreamUpdated;
     BandwidthRestrictionChanged: typeof ConferenceEvents.BandwidthRestrictionChanged;
+    RtsStatusUpdated: typeof ConferenceEvents.RtsStatusUpdated;
+    UserAction: typeof ConferenceEvents.UserAction;
 };
 /**
  * @ignore

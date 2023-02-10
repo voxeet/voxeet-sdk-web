@@ -19,7 +19,7 @@ export declare class VideoProcessorEngine {
     stop(): void;
     start(): void;
     setProcessingErrorCallback(callback: VideoProcessingErrorCallback): void;
-    setProcessor(processor?: VideoProcessor): Promise<void>;
+    setProcessor(processor: VideoProcessor): Promise<void>;
     getProcessor(): VideoProcessor;
     getOutputStream(): Promise<MediaStream>;
     changeOutputStreamFrameRate(frameRate: number): Promise<void>;

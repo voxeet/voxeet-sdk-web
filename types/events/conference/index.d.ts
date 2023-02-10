@@ -20,3 +20,5 @@ export { default as StreamAdded } from './StreamAdded';
 export { default as StreamRemoved } from './StreamRemoved';
 export { default as StreamUpdated } from './StreamUpdated';
 export { default as BandwidthRestrictionChanged } from './BandwidthRestrictionChanged';
+export { default as RtsStatusUpdated } from './RtsStatusUpdated';
+export { default as UserAction } from './UserAction';
