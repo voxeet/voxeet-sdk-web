@@ -13,7 +13,9 @@ export declare class CommandService extends BaseConferenceService {
      */
     constructor(sdk: any, conferenceService: ConferenceService);
     /**
-     * Sends a message, in the form of a string, to all conference participants. This method is not available for [RTS listeners](./enums/models_Options.ListenType.html#Mixed) and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
+     * Sends a message, in the form of a string, to all conference participants. Message size is limited to 16KB.
+     *
+     * This method is not available for [RTS listeners](./enums/models_Options.ListenType.html#Mixed) and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      *
      * @param message - The message to send.
      *

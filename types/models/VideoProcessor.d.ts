@@ -32,7 +32,7 @@ export interface VideoProcessor {
     /**
      * The [HTMLImageElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement) object for the [BackgroundReplacement](./../enums/models_VideoProcessor.VideoProcessorType.html#BackgroundReplacement) video processor. The supported image file formats are JPG, JPEG, 24-bit PNG, and 32-bit PNG. In the case of 32-bit PNG with an alpha channel, the transparent areas are displayed as black.
      *
-     * The image needs to be loaded before enabling the processor. Otherwise, the SDK triggers the [VideoServiceError](./../classes/lib_Exceptions.VideoServiceError.html).
+     * The image needs to be loaded before enabling the processor. Otherwise, the SDK triggers an error.
      */
     image?: HTMLImageElement;
 }

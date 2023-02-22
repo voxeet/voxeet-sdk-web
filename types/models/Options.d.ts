@@ -103,7 +103,9 @@ export interface ScreenshareOptions {
      */
     sourceId?: any;
     /**
-     * A property that allows sending the computer's audio to remote participants while sharing a screen. It is useful if audio is an important part of your shared content. Enabling audio is supported only on Chrome and Edge for users who use the Opus codec. On Windows, the method allows sending the system's audio. However, on macOS the method allows sending audio only from a browser tab. By default, the property is set to false.
+     * A property that allows sending the computer's audio to remote participants while sharing a screen. It is useful if audio is an important part of your shared content. Enabling audio is supported only on Chrome and Edge for users who use the Opus codec. On Windows, the method allows sending the system's audio. However, on macOS the method allows sending audio only from a browser tab. This functionality is not supported for any other SDK, which means that participants who use, for example, the iOS SDK cannot hear the shared audio.
+     *
+     * By default, the property is enabled on Chrome and Edge for users who use the Opus codec; on other browsers and for users who use the Dolby Voice Codec the property is set to false.
      */
     audio?: boolean | MediaTrackConstraints;
     /**

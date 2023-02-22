@@ -458,7 +458,9 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     startScreenShare(sourceId?: any): Promise<void>;
     /**
-     * Starts sharing the local participant's screen. This method is not available on mobile browsers; participants who join a conference using a mobile browser cannot share their screens. The method is available in SDK 3.9 and later and is not available for [listeners](./enums/models_Participant.ParticipantType.html#LISTENER). Calling this method by a listener results in the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
+     * Starts sharing the local participant's screen. This method is not available on mobile browsers; participants who join a conference using a mobile browser cannot share their screens. The method is available in SDK 3.9 and later and is not supported for [listeners](./enums/models_Participant.ParticipantType.html#LISTENER). Calling this method by a listener results in the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
+     *
+     * By default, the method supports sending the computer's audio to remote participants while sharing a screen. However, this functionality is enabled and supported only on Chrome and Edge for users who use the Opus codec. On Windows, the method allows sending the system's audio. On macOS, the method allows sending audio only from a browser tab. This functionality is not supported for any other SDK, which means that participants who use, for example, the iOS SDK cannot hear the shared audio.
      *
      * @param options - Options that allow you to select a screen, send the computer's audio, and modify parameters of the shared screen.
      */
@@ -479,7 +481,9 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     localStats(): WebRTCStats;
     /**
-     * Sets the quality of the received Simulcast streams. This method is not available for [RTS listeners](./enums/models_Options.ListenType.html#Mixed) and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
+     * Sets the quality of the received Simulcast streams. For more information, see the [Simulcast](https://docs.dolby.io/communications-apis/docs/guides-simulcast) guide.
+     *
+     * This method is not available for [RTS listeners](./enums/models_Options.ListenType.html#Mixed) and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      *
      * @param requested - An array that contains stream qualities for specific conference participants.
      */

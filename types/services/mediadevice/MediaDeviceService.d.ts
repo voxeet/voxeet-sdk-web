@@ -31,7 +31,7 @@ export declare class MediaDeviceService extends BaseConferenceService implements
      *
      * This API is only supported in the [Desktop SDK](https://docs.dolby.io/communications-apis/docs/desktop-sdk-overview) and Web SDK 3.5 and 3.6.
      */
-    getComfortNoiseLevel(): Promise<Error | ComfortNoiseLevel>;
+    getComfortNoiseLevel(): Promise<ComfortNoiseLevel | Error>;
     /**
      * @deprecated
      * This method is deprecated in SDK 3.7 and replaced with the **setComfortNoiseLevel** method available in the [LocalAudio](./services_audio_LocalAudio.LocalAudio.html) model.

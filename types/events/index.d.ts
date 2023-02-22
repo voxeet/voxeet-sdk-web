@@ -38,6 +38,7 @@ declare const Events: {
     FileConversionProgress: typeof FilePresentationEvents.FileConversionProgress;
     FileConverted: typeof FilePresentationEvents.FileConverted;
     ConferenceJoined: typeof ConferenceEvents.ConferenceJoined;
+    ConferenceJoining: typeof ConferenceEvents.ConferenceJoining;
     ConferenceStats: typeof ConferenceEvents.ConferenceStats;
     ConferenceLeft: typeof ConferenceEvents.ConferenceLeft;
     OfferCreated: typeof ConferenceEvents.OfferCreated;

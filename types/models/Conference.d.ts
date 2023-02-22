@@ -140,7 +140,7 @@ export declare enum ConferencePermission {
      */
     ShareFile = "SHARE_FILE",
     /**
-     * Allows a participant to send a message to other participants during a conference. Message size is limited to 16KB.
+     * Allows a participant to send a message to other participants during a conference.
      */
     SendMessage = "SEND_MESSAGE",
     /**

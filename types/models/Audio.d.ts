@@ -123,16 +123,16 @@ export interface AudioCaptureModeOptions {
      * VoxeetSDK.audio.local.setCaptureMode({mode: "standard", modeOptions: {noiseReductionLevel: "low"}});
      * ```
      *
-     * - If you use the [Music](./../enums/models_Audio.AudioCaptureMode.html#Music) mode , use additional settings available in [AudioCaptureModeMusicOptions](.//models_Audio.AudioCaptureModeMusicOptions.html):
+     * - If you use the [Music](./../enums/models_Audio.AudioCaptureMode.html#Music) mode, use additional settings available in [AudioCaptureModeMusicOptions](.//models_Audio.AudioCaptureModeMusicOptions.html):
      * @example
      * ```js
-     * VoxeetSDK.audio.local.setCaptureMode({mode: "unprocessed"});
+     * VoxeetSDK.audio.local.setCaptureMode({mode: "music", modeOptions: {echoCancellation: "off"}});
      * ```
      *
      * - The [Unprocessed](./../enums/models_Audio.AudioCaptureMode.html#Unprocessed) mode does not offer any additional settings:
      * @example
      * ```js
-     * VoxeetSDK.audio.local.setCaptureMode({mode: "music", modeOptions: {echoCancellation: "off"}});
+     * VoxeetSDK.audio.local.setCaptureMode({mode: "unprocessed"});
      * ```
      */
     modeOptions?: AudioCaptureModeStandardOptions & AudioCaptureModeMusicOptions;

@@ -64,7 +64,7 @@ export interface LocalVideo extends EventEmitter {
      * @param constraints - The [MediaTrackConstraints](https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints). If the constrains are not specified, the SDK uses 720p (1280 x 720) resolution at 25fps to capture video.
      * @param processor - The video processor configuration.
      *
-     * @returns A Promise which handler receives a MediaStreamTrack object. If the track cannot be created, the promise is rejected with the [VideoServiceError](./../classes/lib_Exceptions.VideoServiceError.html).
+     * @returns A Promise which handler receives a MediaStreamTrack object. If the track cannot be created, the promise is rejected with an error.
      */
     start(constraints?: MediaTrackConstraints, processor?: VideoProcessor): Promise<MediaStreamTrack>;
     /**
@@ -84,7 +84,7 @@ export interface LocalVideo extends EventEmitter {
      * @param customTrack - The MediaStreamTrack object
      * @param processor - The video processor configuration.
      *
-     * @returns A Promise which handler receives a MediaStreamTrack object. If the track cannot be created, the promise is rejected with the [VideoServiceError](./../classes/lib_Exceptions.VideoServiceError.html).
+     * @returns A Promise which handler receives a MediaStreamTrack object. If the track cannot be created, the promise is rejected with an error.
      */
     start(customTrack: MediaStreamTrack, processor?: VideoProcessor): Promise<MediaStreamTrack>;
     /**
@@ -99,7 +99,7 @@ export interface LocalVideo extends EventEmitter {
      * await VoxeetSDK.video.local.stop();
      * ```
      *
-     * @return A Promise which resolves when the video is successfully stopped. If the video cannot be stopped, the promise is rejected with the [VideoServiceError](./../classes/lib_Exceptions.VideoServiceError.html).
+     * @return A Promise which resolves when the video is successfully stopped. If the video cannot be stopped, the promise is rejected with an error.
      */
     stop(): Promise<void>;
     /**
@@ -116,19 +116,19 @@ export interface LocalVideo extends EventEmitter {
      *
      * @param processor - The video processor configuration.
      *
-     * @return A Promise that resolves when the processor is successfully enabled and set. If the processor cannot be enabled, the promise is rejected with the [VideoServiceError](./../classes/lib_Exceptions.VideoServiceError.html).
+     * @return A Promise that resolves when the processor is successfully enabled and set. If the processor cannot be enabled, the promise is rejected with an error.
      */
     setProcessor(processor: VideoProcessor): Promise<void>;
     /**
      * Disables video processing.
      *
-     * @return A Promise that resolves when the processor is successfully disabled. If the processor cannot be disabled, the promise is rejected with the [VideoServiceError](./../classes/lib_Exceptions.VideoServiceError.html).
+     * @return A Promise that resolves when the processor is successfully disabled. If the processor cannot be disabled, the promise is rejected with an error.
      */
     disableProcessing(): Promise<void>;
     /**
-     * Applies a set of constraints to a video track to allow setting ideal values and acceptable value ranges of constrainable properties of the track, such as frame rate or dimensions. The method does not allow setting the deviceId and groupId constraints. If the required constraints are too strict to find a match during a track configuration attempt, the promise is rejected with the [VideoServiceError](./../classes/lib_Exceptions.VideoServiceError.html). We recommend using this method for applying constraints, especially when video processing is enabled; [MediaStreamTrack.applyconstraints()](https://www.w3.org/TR/mediacapture-streams/#dom-mediastreamtrack-applyconstraints) may not work as expected when the video processor is enabled.
+     * Applies a set of constraints to a video track to allow setting ideal values and acceptable value ranges of constrainable properties of the track, such as frame rate or dimensions. The method does not allow setting the deviceId and groupId constraints. If the required constraints are too strict to find a match during a track configuration attempt, the promise is rejected with an error. We recommend using this method for applying constraints, especially when video processing is enabled; [MediaStreamTrack.applyconstraints()](https://www.w3.org/TR/mediacapture-streams/#dom-mediastreamtrack-applyconstraints) may not work as expected when the video processor is enabled.
      *
-     * Calling this method when the local video is not started causes a promise rejection with the [VideoServiceError](./../classes/lib_Exceptions.VideoServiceError.html).
+     * Calling this method when the local video is not started causes a promise rejection with an error.
      *
      * @param constraints - The [WebRTC video constraints](https://www.w3.org/TR/mediacapture-streams/#dom-mediastreamconstraints-video).
      */

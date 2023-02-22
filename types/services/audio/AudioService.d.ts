@@ -1,4 +1,4 @@
-import { LocalAudio } from './LocalAudio';
+import { LocalAudio } from '../../models/LocalAudio';
 import { RemoteAudio } from './RemoteAudio';
 /**
  * The AudioService allows managing the local and remote participants' audio streams.

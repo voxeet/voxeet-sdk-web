@@ -1,4 +1,5 @@
 export { default as ConferenceJoined } from './ConferenceJoined';
+export { default as ConferenceJoining } from './ConferenceJoining';
 export { default as ConferenceStats } from './ConferenceStats';
 export { default as ConferenceLeft } from './ConferenceLeft';
 export { default as OfferCreated } from './OfferCreated';
