@@ -1,0 +1,222 @@
+body {
+    font-family: proxima nova, proxima-nova, -apple-system, BlinkMacSystemFont,
+    Segoe UI, open sans, Helvetica, Arial, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji;
+}
+
+.tsd-page-toolbar {
+    background-color: #000000;
+    height: 70px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.container.conainer-main {
+    max-width: 1200px;
+    margin: inherit; 
+    margin-left: 50px;
+}
+.container-main > .row {
+    flex-direction: row-reverse;
+}
+
+.tsd-navigation.secondary {
+    min-width: 250px;
+}
+
+.property-list {
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+a.property-title:hover {
+    background-color: #F4F4F4AD;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+a.property-title.selected:hover {
+    background-color: #F3EDFF;
+
+}
+
+.property-title {
+    cursor: pointer;
+}
+
+.hidden { 
+    display: none;
+}
+
+.tsd-navigation.primary > a {
+    font-weight: 300;
+    margin-top: 0;
+    padding-left: 8px;
+    border-radius: 7px;
+}
+
+.tsd-navigation.primary {
+    max-height: 100vh;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+}
+
+a.property {
+    color: #000;
+    font-weight: 300;
+    padding-left: 7px;
+    border-radius: 7px;
+}
+
+a.selected {
+    font-size: bold;
+    color: #7D33FE;
+    background-color: #F3EDFF;
+    font-weight: 400;
+    border-radius: 10px;
+}
+
+#tsd-search > a.title {
+    background-image: url('./logo.png');
+    background-repeat: no-repeat;
+    color: #000;
+    cursor: pointer;
+    width: 140px;
+    height: 70px;
+    display: inline-block;
+    background-size: contain;
+    text-indent: -9999px; 
+    margin-top: 10px;
+}
+
+#tsd-filter .tsd-filter-group{
+    display: none;
+}
+
+.tsd-navigation.primary > a.tsd-kind-icon {
+    border: solid 1px rgba(0,0,0,.1);
+    background-color: white;
+    border-radius: 7px;
+    text-align: center;
+    text-decoration: none !important;
+    box-shadow: 0 4px 10px rgba(62,62,62,.03);
+    transition: all .2s ease .01s !important;
+    padding: 20px 25px 20px 25px;
+    padding: 10px;
+    color: black !important;
+    font-size: 14px;
+    font-weight: 300;
+    margin: 4px;
+}
+
+.tsd-index-section > ul > li > a.tsd-kind-icon {
+    border: solid 1px rgba(0,0,0,.1);
+    background-color: white;
+    border-radius: 7px;
+    text-align: center;
+    text-decoration: none !important;
+    box-shadow: 0 4px 10px rgba(62,62,62,.03);
+    transition: all .2s ease .01s !important;
+    padding: 20px 25px 20px 25px;
+    padding: 10px;
+    color: black !important;
+    font-size: 11px;
+    font-weight: 300;
+    margin: 4px;
+}   
+
+.tsd-kind-icon::before {
+    display: none;
+}
+
+.tsd-navigation.secondary > p {
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 600;
+    color: #637388;
+}
+
+.tsd-navigation.secondary > ul > .tsd-parent-kind-module > a.tsd-kind-icon {
+    font-size: 14px;
+    color: #4F5A66;
+    font-weight: 400;
+}
+
+.tsd-parent-kind-class > a.tsd-kind-icon {
+    font-size: 14px;
+    color: #4F5A66;
+    padding: 4px 0;
+}
+
+footer {
+    background-color: #000;
+    margin-top: 40px;
+    color: #6a6a6d;
+}
+
+footer > div > .tsd-legend-group,
+footer > div > h2:nth-child(1)  {
+    display: none;
+}
+
+.tsd-panel.tsd-hierarchy {
+    display: none;
+}
+
+.tsd-page-title {
+    text-indent: -9999px; 
+    box-shadow: none;
+    padding: 20px;
+}
+
+.tsd-panel-group.tsd-index-group {
+    display: none;
+}
+
+a, a.tsd-signature-type[data-tsd-kind="Class"] {
+    color: #7d33ff;
+}
+
+li.property-list {
+    padding: 5px;
+}
+
+.tsd-navigation.primary li {
+    border: 1px solid transparent;
+}
+
+.tsd-page-toolbar--hide {
+    transform: none;
+}
+
+.tsd-page-title {
+    display: none;
+}
+
+div.row {
+    margin-top: 100px;
+    justify-content: flex-end;
+}
+
+#tsd-search > .field > label {
+    position: absolute;
+    overflow: hidden;
+    right: -40px;
+    top: 10px;
+    border: 1px solid #fff;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+body.dark {
+    --icon-filter: black;
+}
+
+.col-8 {
+    max-width: 55%;
+}
