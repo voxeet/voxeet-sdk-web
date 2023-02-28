@@ -7,7 +7,6 @@ export interface JoinParametersData {
     dolbyVoice?: string;
     liveRecording: boolean;
     mode: string;
-    multiSession: boolean;
     rtcpMode: string;
     simulcast: boolean;
     stats: boolean;
@@ -23,10 +22,6 @@ export default class ConferenceParameters {
      * The time to live defines the number of seconds a conference is kept running when empty. A minimum of 30 seconds is given when creating the conference to allow time for participants to join. The default value is 0.
      */
     ttl?: number;
-    /**
-     * @ignore
-     */
-    multiSession?: boolean;
     /**
      * Conference mode
      * @ignore

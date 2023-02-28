@@ -10,6 +10,7 @@ interface ConferenceCreateData {
     isNew: boolean;
     isProtected: boolean;
     isAudioOnly: boolean;
+    isDolbyVoice: boolean;
 }
 /**
  * @ignore

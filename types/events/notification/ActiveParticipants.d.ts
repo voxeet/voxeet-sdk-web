@@ -18,6 +18,7 @@ export interface ActiveParticipantsData {
     participants: ParticipantData[];
     conference: ConferenceData;
     participantCount: number;
+    viewerCount: number;
 }
 /**
  * The ActiveParticipants model gathers information about all participants who joined a specific conference.
@@ -31,6 +32,8 @@ export default class ActiveParticipants extends Event {
     conferenceId: string;
     /** The number of participants who joined the conference.*/
     participantCount: number;
+    /** The number of viewers who joined the conference. */
+    viewerCount: number;
     /** @ignore */
     constructor();
     /** @ignore */

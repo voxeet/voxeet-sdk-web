@@ -145,9 +145,11 @@ export declare function autoplayBlocked(): void;
  */
 export declare function streamAdded(participant: Participant, stream: MediaStreamWithType): void;
 /**
- * Emitted when a conference participant who is connected to the `audio and video` stream changes the stream by enabling a microphone while using a camera or by enabling a camera while using a microphone. The event is emitted to all conference participants. The following graphic shows this behavior:
+ * Emitted whenever a participant's media stream is modified. The SDK emits the event to all conference participants in the following situations:
  *
- * <img src="https://files.readme.io/21575c1-conference-stream-added.png" alt="The difference between the streamAdded and streamUpdated events" title="The difference between the streamAdded and streamUpdated events" width="700"/>
+ * - A conference participant who is connected to an `audio and video` stream changes the stream by enabling a microphone while using a camera or by enabling a camera while using a microphone.
+ *
+ * - A conference participant starts sharing their screen with audio enabled. In this situation, the SDK emits the [streamAdded](#streamadded) and streamUpdated event.
  *
  * The SDK can also emit the streamUpdated event only for the local participant. When the local participant uses the [stopAudio](#stopaudio) or [startAudio](#startaudio) method to locally mute or unmute a selected remote participant who uses a camera, the local participant receives the streamUpdated event.
  *

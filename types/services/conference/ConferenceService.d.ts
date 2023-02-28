@@ -486,8 +486,10 @@ export declare class ConferenceService extends BaseConferenceService {
      * This method is not available for [RTS listeners](./enums/models_Options.ListenType.html#Mixed) and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      *
      * @param requested - An array that contains stream qualities for specific conference participants.
+     *
+     * @return {Promise<any>}
      */
-    simulcast(requested: Array<ParticipantQuality>): any;
+    simulcast(requested: Array<ParticipantQuality>): Promise<any>;
     /**
      * Allows the conference owner, or a participant with adequate permissions, to kick another participant from the conference by revoking the conference access token. The kicked participant cannot join the conference again.
      *
