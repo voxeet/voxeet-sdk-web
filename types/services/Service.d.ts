@@ -17,6 +17,9 @@ export declare class BaseConferenceService extends Service {
     constructor(sdk: any);
     protected onConferenceJoined(e: ConferenceJoined): void;
     protected onConferenceLeft(e: ConferenceLeft): void;
+    /**
+     * @ignore
+     * */
     checkConference(): void;
 }
 /**

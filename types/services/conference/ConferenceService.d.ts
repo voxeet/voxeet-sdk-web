@@ -372,7 +372,7 @@ export declare class ConferenceService extends BaseConferenceService {
      * - Prioritizing specific participants' video streams that need to be transmitted to the local participant
      * - Changing the [video forwarding strategy](./../enums/models_VideoForwarding.VideoForwardingStrategy.html) that defines how the SDK should select conference participants whose videos will be received by the local participant
      *
-     * This method is available only in SDK 3.6 and later and is not available for [RTS listeners](./enums/models_Options.ListenType.html#Mixed). Calling this method by an RTS listener triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
+     * This method is available only in SDK 3.6 and later and is not available for [Real-time Streaming viewers](../enums/models_Options.ListenType.html#Mixed). Calling this method by an RTS viewer triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      * @param VideoForwardingOptions - The video forwarding options.
      * @return {Promise<void>}
      *
@@ -458,7 +458,7 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     startScreenShare(sourceId?: any): Promise<void>;
     /**
-     * Starts sharing the local participant's screen. This method is not available on mobile browsers; participants who join a conference using a mobile browser cannot share their screens. The method is available in SDK 3.9 and later and is not supported for [listeners](./enums/models_Participant.ParticipantType.html#LISTENER). Calling this method by a listener results in the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
+     * Starts sharing the local participant's screen. This method is not available on mobile browsers; participants who join a conference using a mobile browser cannot share their screens. The method is available in SDK 3.9 and later and is not supported for [listeners](../enums/models_Participant.ParticipantType.html#LISTENER). Calling this method by a listener results in the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      *
      * By default, the method supports sending the computer's audio to remote participants while sharing a screen. However, this functionality is enabled and supported only on Chrome and Edge for users who use the Opus codec. On Windows, the method allows sending the system's audio. On macOS, the method allows sending audio only from a browser tab. This functionality is not supported for any other SDK, which means that participants who use, for example, the iOS SDK cannot hear the shared audio.
      *
@@ -483,7 +483,7 @@ export declare class ConferenceService extends BaseConferenceService {
     /**
      * Sets the quality of the received Simulcast streams. For more information, see the [Simulcast](https://docs.dolby.io/communications-apis/docs/guides-simulcast) guide.
      *
-     * This method is not available for [RTS listeners](./enums/models_Options.ListenType.html#Mixed) and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
+     * This method is not available for [Real-time Streaming viewers](../enums/models_Options.ListenType.html#Mixed) and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      *
      * @param requested - An array that contains stream qualities for specific conference participants.
      *
@@ -493,7 +493,7 @@ export declare class ConferenceService extends BaseConferenceService {
     /**
      * Allows the conference owner, or a participant with adequate permissions, to kick another participant from the conference by revoking the conference access token. The kicked participant cannot join the conference again.
      *
-     * This method is not available for [RTS listeners](./enums/models_Options.ListenType.html#Mixed) and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
+     * This method is not available for [Real-time Streaming viewers](../enums/models_Options.ListenType.html#Mixed) and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      *
      * @param participant - The participant who needs to be kicked from the conference.
      *
@@ -665,6 +665,9 @@ export declare class ConferenceService extends BaseConferenceService {
      * Returns the number of video streams that are transmitted to the local user.
      */
     get maxVideoForwarding(): number;
+    /**
+     * @ignore
+     */
     get videoForwardingStrategy(): VideoForwardingStrategy;
     /**
      * Returns information about the current conference. Use this accessor if you wish to receive information that is available in the [Conference](./models_Conference.Conference.html) object, such as the conference alias, ID, information whether the conference is new, conference parameters, local participant's conference permissions, conference PIN code, or conference status.
@@ -680,7 +683,13 @@ export declare class ConferenceService extends BaseConferenceService {
      * @ignore
      */
     get manager(): ConferenceManager;
+    /**
+     * @ignore
+     */
     get spatialAudioStyle(): SpatialAudioStyle | null;
+    /**
+     * @ignore
+     */
     get leaveConferenceOnBeforeUnload(): boolean;
     private onLocalVideoStarted;
     private onLocalVideoStopped;

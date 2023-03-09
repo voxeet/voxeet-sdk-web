@@ -1,3 +1,6 @@
+/**
+ * @ignore
+ */
 export declare type Configuration = {
     host?: string;
     wsHost?: string;

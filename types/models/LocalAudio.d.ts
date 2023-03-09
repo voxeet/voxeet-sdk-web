@@ -6,15 +6,18 @@ import ComfortNoiseLevel from './ComfortNoiseLevel';
  * The LocalAudio model allows enabling and disabling the local participant's audio as well as setting and checking the capture mode and comfort noise level.
  */
 export interface LocalAudio extends EventEmitter {
+    /**
+     * Starts transmitting audio from the local participant's microphone to a conference. The SDK automatically manages audio rendering, which means that an application does not need to implement its own `<audio>` element. The method is available in SDK 3.7 and later, requires a few seconds to become effective, and is not supported for listeners.
+     */
     start(constraints?: MediaTrackConstraints): Promise<MediaStreamTrack>;
     /**
-     * Starts transmitting the local participant's audio from a custom track to a conference. The method allows transmitting audio from a non-microphone source, which may be useful for adding bots to a conference or using custom audio processing. For the best experience, set the audio capture mode to [Unprocessed](./enums/models_Audio.AudioCaptureMode.html#Unprocessed) if your custom track contains a non-speech content. The SDK automatically manages audio rendering, which means that an application does not need to implement its own `<audio>` element.
+     * Starts transmitting the local participant's audio from a custom track to a conference. The method allows transmitting audio from a non-microphone source, which may be useful for adding bots to a conference or using custom audio processing. For the best experience, set the audio capture mode to [Unprocessed](../enums/models_Audio.AudioCaptureMode.html#Unprocessed) if your custom track contains a non-speech content. The SDK automatically manages audio rendering, which means that an application does not need to implement its own `<audio>` element.
      *
      * This method is available in SDK 3.9 and later and is not supported for listeners. [Applying constraints](#applyconstraints) to an audio track is not supported while using the method.
      */
     start(customTrack: MediaStreamTrack): Promise<MediaStreamTrack>;
     /**
-     * Enables the local participant's audio and sends the audio to a conference. This method is not available for listeners and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
+     * Enables the local participant's audio and sends the audio to a conference. This method is not available for listeners and triggers the [UnsupportedError](../lib_Exceptions.UnsupportedError.html).
      *
      * The SDK automatically manages audio rendering, which means that the application does not need to implement its own `<audio>` element. The application can use the [selectAudioInput](./services_mediadevice_MediaDeviceService.MediaDeviceService.html#selectAudioInput) and [selectAudioOutput](./services_mediadevice_MediaDeviceService.MediaDeviceService.html#selectAudioOutput) methods to select the proper audio input and output devices.
      *
@@ -31,7 +34,7 @@ export interface LocalAudio extends EventEmitter {
     /**
      * Applies a set of audio constraints to an audio track to allow setting ideal values and acceptable value ranges of constrainable properties of the track, such as echo cancellation and noise suppression. The method does not allow setting the deviceId and groupId constraints. If the required constraints are too strict to find a match during a track configuration attempt, the promise is rejected with the [OverconstrainedError](./lib_Exceptions.MediaStreamError.html). We recommend using this method for applying constraints; [MediaStreamTrack.applyconstraints()](https://www.w3.org/TR/mediacapture-streams/#dom-mediastreamtrack-applyconstraints) may not work as expected.
      *
-     * The method is supported in SDK 3.7 and later and is available only for [users](./../enums/models_Participant.ParticipantType.html#USER) who use the Opus codec. The method may be rejected and trigger the [UnsupportedError](./lib_Exceptions.UnsupportedError.html) after being called by a listener, a participant who uses the Dolby Voice Codec or sends audio from a custom track, or an application user who is not in a conference or whose local audio track is not started.
+     * The method is supported in SDK 3.7 and later and is available only for [users](../enums/models_Participant.ParticipantType.html#USER) who use the Opus codec. The method may be rejected and trigger the [UnsupportedError](../lib_Exceptions.UnsupportedError.html) after being called by a listener, a participant who uses the Dolby Voice Codec or sends audio from a custom track, or an application user who is not in a conference or whose local audio track is not started.
      *
      * The method may require a few seconds to become effective because some constraints of an audio track must be recreated.
      *

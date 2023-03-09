@@ -1,9 +1,14 @@
 import ComfortNoiseLevel from './ComfortNoiseLevel';
 declare type Callback = (device: MediaDeviceInfo) => Promise<void | Error>;
+/** * @ignore */
 export declare type SelectAudioInputDevice = Callback;
+/** * @ignore */
 export declare type SelectAudioOutputDevice = Callback;
+/** * @ignore */
 export declare type SelectVideoInputDevice = Callback;
+/** @ignore */
 export declare type GetComfortNoiseLevel = () => Promise<ComfortNoiseLevel | Error>;
+/** * @ignore */
 export declare type SetComfortNoiseLevel = (level: ComfortNoiseLevel) => Promise<void | Error>;
 /**
  * The Stats model contains a list of added, updated, or removed devices.
@@ -78,7 +83,13 @@ export declare type DeviceChangeResult = {
     list?: DevicesList;
     updates?: DevicesUpdates;
 };
+/**
+ * @ignore
+ */
 export declare type Handler = (result: DeviceChangeResult) => void;
+/**
+ * @ignore
+ */
 export declare type DeviceChangeOption = {
     handler: Handler;
     deviceKind: DeviceKind;

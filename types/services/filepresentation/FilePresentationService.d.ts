@@ -75,7 +75,7 @@ export declare class FilePresentationService extends BaseConferenceService {
     /**
      * Starts a file presentation. The Dolby.io Communications APIs allow presenting only the converted files.
      *
-     * This method is not available for [listeners](./enums/models_Participant.ParticipantType.html#LISTENER). Calling this method by a listener results in the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
+     * This method is not available for [listeners](../enums/models_Participant.ParticipantType.html#LISTENER). Calling this method by a listener results in the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      *
      * @param file - The converted file that the presenter wants to share during the conference.
      */

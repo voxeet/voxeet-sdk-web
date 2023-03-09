@@ -1,3 +1,6 @@
+/**
+ * @ignore
+ * */
 export interface EventReportData {
     type: string;
     level: string;
@@ -26,6 +29,9 @@ declare class EventReport {
     level: string;
     constructor(e: EventReportData);
 }
+/**
+ * @ignore
+ */
 export declare class UserActionReport extends EventReport {
     action: string;
     description: string;
@@ -34,6 +40,9 @@ export declare class UserActionReport extends EventReport {
     payload?: Array<any>;
     constructor(e: UserActionData);
 }
+/**
+ * @ignore
+ */
 export declare class SDKErrorReport extends EventReport {
     error: string;
     message: string;

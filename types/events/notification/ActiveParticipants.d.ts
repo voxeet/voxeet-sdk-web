@@ -24,15 +24,15 @@ export interface ActiveParticipantsData {
  * The ActiveParticipants model gathers information about all participants who joined a specific conference.
  */
 export default class ActiveParticipants extends Event {
-    /** The objects of participants who joined the conference. This property contains external IDs, IDs, and names. All other properties of the Participant objects contain the default values. */
+    /** The objects of all participants who joined the conference and use only the Communications APIs. The property does not contain objects of [Real-time Streaming viewers](../enums/models_Options.ListenType.html#Mixed). */
     participants: Participant[];
     /** The conference alias.*/
     conferenceAlias: string;
     /** The conference ID.*/
     conferenceId: string;
-    /** The number of participants who joined the conference.*/
+    /** The number of all participants who joined the conference and use only the Communications APIs. This property does not count [Real-time Streaming viewers](../enums/models_Options.ListenType.html#Mixed).*/
     participantCount: number;
-    /** The number of viewers who joined the conference. */
+    /** The number of Real-time Streaming viewers who joined the conference. */
     viewerCount: number;
     /** @ignore */
     constructor();

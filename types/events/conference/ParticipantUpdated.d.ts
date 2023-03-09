@@ -1,4 +1,5 @@
 import Event from '../Event';
+import { Participant } from '../../models/Participant';
 /**
  * @ignore
  */
@@ -28,4 +29,5 @@ export default class ParticipantUpdated extends Event {
     video: boolean;
     constructor();
     static fromData(data: ParticipantUpdatedData): ParticipantUpdated;
+    static fromParticipant(participant: Participant): ParticipantUpdated;
 }

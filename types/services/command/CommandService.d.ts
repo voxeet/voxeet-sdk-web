@@ -15,7 +15,7 @@ export declare class CommandService extends BaseConferenceService {
     /**
      * Sends a message, in the form of a string, to all conference participants. Message size is limited to 16KB.
      *
-     * This method is not available for [RTS listeners](./enums/models_Options.ListenType.html#Mixed) and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
+     * This method is not available for [Real-time Streaming viewers](../enums/models_Options.ListenType.html#Mixed) and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      *
      * @param message - The message to send.
      *

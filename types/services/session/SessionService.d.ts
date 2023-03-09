@@ -66,7 +66,13 @@ export declare class SessionService extends Service {
      * Returns the local participant object that belongs to the current session.
      */
     get participant(): Participant;
+    /**
+     * @ignore
+     */
     get customerKey(): string;
+    /**
+     * @ignore
+     */
     get customerSecret(): string;
     /**
      * Refreshes the conference access token.

@@ -56,7 +56,7 @@ export declare class VideoPresentationService extends BaseConferenceService {
     constructor(sdk: any, conferenceService: ConferenceService);
     private clear;
     /**
-     * Starts sharing a video file. This method is not available for [listeners](./enums/models_Participant.ParticipantType.html#LISTENER). Calling this method by a listener results in the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
+     * Starts sharing a video file. This method is not available for [listeners](../enums/models_Participant.ParticipantType.html#LISTENER). Calling this method by a listener results in the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      *
      * @param url - The URL that specifies the video file location.
      */
