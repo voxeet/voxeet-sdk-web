@@ -1,6 +1,9 @@
-window.addEventListener('load', function () {
+setThemeToBody()
 
+window.addEventListener('load', function () {
     addFavicon()
+    addThemeToggle()
+    addPageHeading()
 
     const missingModels = [
         { 
@@ -15,7 +18,30 @@ window.addEventListener('load', function () {
           name: 'SpatialScale',
           url: 'modules/models_SpatialAudio.html#SpatialScale'
         },
-
+        { 
+            name: 'DeviceChangeResult',
+            url: 'modules/models_MediaDevice.html#DeviceChangeResult'
+        },
+        { 
+            name: 'DevicesList',
+            url: 'modules/models_MediaDevice.html#DevicesList'
+        },
+        { 
+            name: 'DevicesUpdates',
+            url: 'modules/models_MediaDevice.html#DevicesUpdates'
+        },
+        { 
+            name: 'Stats',
+            url: 'modules/models_MediaDevice.html#Stats'
+        },
+        { 
+            name: 'WebRTCStats',
+            url: 'modules/models_Statistics.html#WebRTCStats'
+        },
+        { 
+            name: 'MediaStreamWithType',
+            url: 'modules/models_MediaStream.html#MediaStreamWithType'
+        }
     ]
 
     const data = this.window.data
@@ -63,6 +89,13 @@ window.addEventListener('load', function () {
         generateNav(hierarchy)
 
         const secondaryNav = document.querySelector('.tsd-navigation.secondary')
+        const search = document.querySelector('#tsd-search-field')
+        search.placeholder = 'Search'
+
+        const searchContainer = document.querySelector('#tsd-search')
+        if(!searchContainer.classList.contains('has-focus')) {
+            searchContainer.classList.add('has-focus')
+        }
         const navTitle = document.createElement('p')
         navTitle.innerText = 'table of contents'
   
@@ -110,10 +143,22 @@ function generateNav(obj) {
                 link.id = el.name
                 link.href = generateHref(el.url)
 
-                if(window.document.location.href.indexOf(el.name + '.html') !== -1 || 
+                if(el.name === 'VoxeetSDK') {
+                    removeNamedParameters() 
+                }
+
+                if(window.document.location.href.indexOf('MediaDevice.html#' + el.name) !== -1) {
+                    const typeDeclarations = document.querySelectorAll('div.tsd-type-declaration')
+                    typeDeclarations.forEach(element => element.remove())
+                }
+               
+                if(window.document.location.href.indexOf('.' + el.name + '.html') !== -1 || 
                 (window.document.location.href.indexOf('index.html') !== -1 && el.name === 'Overview') ||
                 (window.document.location.href.indexOf(el.name + '-1.html') !== -1) || 
-                (window.document.location.href.indexOf('SpatialAudio.html#' + el.name) !== -1) 
+                (window.document.location.href.indexOf('SpatialAudio.html#' + el.name) !== -1) || 
+                (window.document.location.href.indexOf('MediaDevice.html#' + el.name) !== -1) || 
+                (window.document.location.href.indexOf('Statistics.html#' + el.name) !== -1) ||
+                (window.document.location.href.indexOf('MediaStream.html#' + el.name) !== -1) 
                 ) {
                     link.classList.add('selected')
 
@@ -124,12 +169,26 @@ function generateNav(obj) {
                         el.name === 'AudioService' ||
                         el.name === 'ParticipantInvited' ||
                         el.name === 'ParticipantPermissions' ||
-                        el.name === 'RemoteAudio' || 
-                        el.name === 'SubscribeInvitation'
+                        el.name === 'SubscribeInvitation' ||
+                        el.name === 'MediaStreamError'
                     ) {
                         const li = document.querySelectorAll('li.tsd-kind-constructor.tsd-parent-kind-class')
                         li.forEach(el => el.remove())
                         document.querySelector('.tsd-panel-group.tsd-member-group ').style.display = 'none'
+                    }
+
+                    if(el.name === 'MediaStreamError' || el.name === 'PeerError' || el.name === 'ServerError') {
+                        document.querySelector('.tsd-panel-group.tsd-member-group ').style.display = 'none'
+                        const properties = document.querySelector('li.current.tsd-kind-class.tsd-parent-kind-module')
+                        properties.childNodes.forEach((p) => {
+                            if(p.nodeName === 'UL') {
+                                p.remove()
+                            }
+                        })
+                    }
+
+                    if(el.name.includes('MediaDeviceService')) {
+                        removeImplementedByHeader()
                     }
 
                     if(el.name.indexOf('Error') !== -1 ) {
@@ -147,7 +206,65 @@ function generateNav(obj) {
             listTitle.appendChild(list)
         }
         navigation.appendChild(listTitle)
+        scrollNavToSelectedItem()
     }
+}
+
+function scrollNavToSelectedItem() {
+    const navigation = document.querySelector('.tsd-navigation.primary')
+    const selectedLink = document.querySelector('a.selected')
+    if(selectedLink) {
+        const listItemOffsetTop = selectedLink.offsetTop;
+        const navHeight = navigation.offsetHeight;
+        const listItemHeight = selectedLink.offsetHeight;
+        const scrollPosition = listItemOffsetTop - (navHeight / 2) + (listItemHeight / 2);
+        navigation.scrollTo({
+            top: scrollPosition,
+            behavior: 'smooth'
+        })
+    }
+}
+
+function setThemeToBody(theme) {
+    const typedocScript = document.scripts[1]
+    typedocScript.remove()
+    document.body.classList.forEach(function(value) {
+        document.body.classList.remove(value)
+    })
+    if(theme) {
+        document.body.classList.add(theme)
+        localStorage.setItem('tsd-custom-theme', theme)
+    } else {
+        document.body.classList.add(localStorage.getItem('tsd-custom-theme') || 'light')
+    }
+}
+
+function removeImplementedByHeader() {
+    const headers = document.querySelectorAll('h3')
+    headers.forEach((header) => {
+        if(header.innerText === 'Implements' || header.innerText === 'Implemented by' ) {
+            header.parentElement.remove()
+        }
+    })
+}
+
+function removeNamedParameters() {
+    const headers = document.querySelectorAll('h5')
+    headers.forEach((header) => {
+        if(header.textContent.includes('namedParameters')) {
+            header.parentElement.remove()
+        }
+    })
+    const signatures = document.querySelectorAll('.tsd-signature.tsd-kind-icon')
+    signatures.forEach((signature) => {
+        signature.childNodes.forEach((span) => {
+            if(span.textContent.includes('namedParameters')) {
+                span.nextSibling.nextSibling.remove()
+                span.nextSibling.remove()
+                span.remove()
+            } 
+        })
+    })
 }
 
 function generateHref(property) {
@@ -165,6 +282,13 @@ function generateHref(property) {
 function setPageTitle(title) {
     if(title) {
         document.title = `${title} | Web SDK API documentation`
+        const midContent = document.querySelector('.col-8.col-content')
+        if(!midContent.querySelector('h1')) {
+            const heading = document.createElement('h1')
+            heading.classList.add('mid-heading')
+            heading.textContent = title
+            midContent.insertBefore(heading, midContent.firstChild)
+        }
     } else {
         document.title = `Web SDK API documentation`
     }
@@ -184,4 +308,48 @@ function addFavicon() {
     }
     
     document.getElementsByTagName('head')[0].appendChild(link);
+}
+
+
+
+function addThemeToggle() {
+    const header = document.querySelector('.tsd-page-toolbar > .container > .table-wrap > #tsd-search')
+    const themeToggle = document.createElement('div')
+    const lightIcon = document.createElement('button')
+    lightIcon.id = 'light'
+    lightIcon.classList.add('darkTheme')
+    const darkIcon = document.createElement('button')
+    darkIcon.id = 'dark'
+    darkIcon.classList.add('lightTheme')
+    themeToggle.appendChild(lightIcon)
+    themeToggle.appendChild(darkIcon)
+    header.appendChild(themeToggle)
+
+    lightIcon.addEventListener("click", changeTheme)
+    darkIcon.addEventListener("click", changeTheme)
+    
+    function changeTheme(e) {
+        e.target.style.display = "none"
+        const buttons = header.querySelectorAll('button')
+        buttons.forEach(function(button){ 
+            if(button.id != e.target.id) {
+                button.style.display = 'block'
+            } 
+        })
+        setThemeToBody(e.target.id)
+    }
+
+    if(document.body.className === 'light') {
+        lightIcon.style.display = "none"
+    } else {
+        darkIcon.style.display = "none"
+    }
+}
+
+function addPageHeading() {
+    const header = document.querySelector('.tsd-page-toolbar > .container > .table-wrap > #tsd-search')
+    const heading = document.createElement('div')
+    heading.classList.add("heading-title")
+    heading.textContent = 'Communications SDK for Web'
+    header.appendChild(heading)
 }
