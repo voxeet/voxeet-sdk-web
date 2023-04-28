@@ -1,5 +1,6 @@
 import Event from '../Event';
 import { Participant } from '../../models/Participant';
+import { Metadata } from '../../models/Metadata';
 /**
  * @ignore
  */
@@ -27,6 +28,7 @@ export default class ParticipantUpdated extends Event {
     avatarUrl: string;
     externalId: string;
     video: boolean;
+    metadata: Metadata;
     constructor();
     static fromData(data: ParticipantUpdatedData): ParticipantUpdated;
     static fromParticipant(participant: Participant): ParticipantUpdated;

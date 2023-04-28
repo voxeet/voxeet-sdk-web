@@ -1,11 +1,12 @@
 import Event from '../Event';
+import { Metadata } from '../../models/Metadata';
 export interface ParticipantAddedData {
     user_id: string;
     externalId: string;
     name: string;
     avatarUrl: string;
     status: string;
-    metadata: object;
+    metadata: Metadata | {};
     participantType: string;
     audio: boolean;
     audioReceivingStopped: boolean;
@@ -17,7 +18,7 @@ export default class ParticipantAdded extends Event {
     name: string;
     avatarUrl: string;
     status: string;
-    metadata: object;
+    metadata: Metadata | {};
     participantType: string;
     audio: boolean;
     audioReceivingStopped: boolean;

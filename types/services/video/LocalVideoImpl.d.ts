@@ -1,5 +1,5 @@
-import { BaseConferenceService } from '../Service';
 import { ConferenceJoined, ConferenceLeft } from '../../events/conference/index';
+import { BaseConferenceService } from '../Service';
 import { LocalVideo } from '../../models/LocalVideo';
 import { VideoDeviceHelper } from './VideoDeviceHelper';
 import { VideoProcessor } from '../../models/VideoProcessor';
@@ -36,10 +36,12 @@ export declare class LocalVideoImpl extends BaseConferenceService implements Loc
      * @implements LocalVideo.start()
      */
     start(constraintsOrTrack?: MediaTrackConstraints | MediaStreamTrack, processor?: VideoProcessor): Promise<MediaStreamTrack>;
+    private startLocalVideo;
     /**
      * @implements LocalVideo.stop()
      */
     stop(): Promise<void>;
+    private stopLocalVideo;
     /**
      * @implements LocalVideo.setProcessor()
      */
@@ -58,6 +60,7 @@ export declare class LocalVideoImpl extends BaseConferenceService implements Loc
     private emitLocalVideoInternalEvent;
     private changeCameraDeviceId;
     private onBandwidthRestrictionChanged;
+    private onUpdateToken;
     private handleProcessingError;
     private getLocalVideo;
     private getLocalVideoAsCamera;
@@ -75,4 +78,7 @@ export declare class LocalVideoImpl extends BaseConferenceService implements Loc
     private verifyVideoProcessorOrThrow;
     protected onConferenceJoined(e: ConferenceJoined): void;
     protected onConferenceLeft(e: ConferenceLeft): void;
+    private onVideoStarted;
+    private onVideoStopped;
+    private onVideoUpdated;
 }

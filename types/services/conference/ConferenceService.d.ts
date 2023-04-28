@@ -2,7 +2,7 @@ import { BaseConferenceService } from '../Service';
 import { ConferenceJoined, ConferenceLeft } from '../../events/conference/index';
 import ConferenceManager from './ConferenceManager';
 import { SessionService } from '..';
-import { DemoOptions, JoinOptions, ListenOptions, MixingOptions, ParticipantPermissions, ReplayOptions, ScreenshareOptions } from '../../models/Options';
+import { DemoOptions, JoinOptions, ListenOptions, MixingOptions, ParticipantInfo, ParticipantPermissions, ReplayOptions, ScreenshareOptions } from '../../models/Options';
 import { Participant } from '../../models/Participant';
 import { MediaStreamType, MediaStreamWithType } from '../../models/MediaStream';
 import Conference, { ConferenceLeaveOptions } from '../../models/Conference';
@@ -15,6 +15,9 @@ import { MediaManagerInterface } from '../../models/MediaDevice';
 import { VideoForwardingOptions, VideoForwardingStrategy } from '../../models/VideoForwarding';
 import { LocalVideo } from '../../models/LocalVideo';
 import { VideoProcessor } from '../../models/VideoProcessor';
+import { RemoteVideo } from '../../models/RemoteVideo';
+import { LocalAudio } from '../../models/LocalAudio';
+import { RemoteAudio } from '../audio/RemoteAudio';
 /**
  * @ignore
  */
@@ -37,7 +40,7 @@ export declare class ConferenceService extends BaseConferenceService {
      * @param helper
      * @param mediaManager
      */
-    constructor(sdk: unknown, session: SessionService, mediaManager: MediaManagerInterface, localVideo: LocalVideo);
+    constructor(sdk: unknown, session: SessionService, mediaManager: MediaManagerInterface, localVideo: LocalVideo, remoteVideo: RemoteVideo, localAudio: LocalAudio, remoteAudio: RemoteAudio);
     /**
      * Creates a conference.
      *
@@ -239,6 +242,11 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     isMuted(): boolean;
     /**
+     * Controls playing remote participants' audio to the local participant.
+     * @param isMuted The mute state. True indicates that the local participant's application does not play the remote participants' audio, false indicates that the local participant's application plays the remote participants' audio.
+     */
+    muteOutput(isMuted: boolean): Promise<void>;
+    /**
      * Gets a participant's audio level. The method allows getting the audio level of either only the local participant or all participants, depending on the conference type and the codec used:
      *
      * <table>
@@ -419,7 +427,7 @@ export declare class ConferenceService extends BaseConferenceService {
      *
      * @return {Promise<Error>}
      */
-    startAudio(participant: Participant): Promise<void>;
+    startAudio(participant: Participant): Promise<MediaStreamTrack> | Promise<void>;
     /**
      * @deprecated
      * This method is deprecated in SDK 3.7 and replaced with the **stop** methods that are available in the [LocalAudio](./services_audio_LocalAudio.LocalAudio.html) and [RemoteAudio](./services_audio_RemoteAudio.RemoteAudio.html) models.
@@ -460,7 +468,7 @@ export declare class ConferenceService extends BaseConferenceService {
     /**
      * Starts sharing the local participant's screen. This method is not available on mobile browsers; participants who join a conference using a mobile browser cannot share their screens. The method is available in SDK 3.9 and later and is not supported for [listeners](../enums/models_Participant.ParticipantType.html#LISTENER). Calling this method by a listener results in the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      *
-     * By default, the method supports sending the computer's audio to remote participants while sharing a screen. However, this functionality is enabled and supported only on Chrome and Edge for users who use the Opus codec. On Windows, the method allows sending the system's audio. On macOS, the method allows sending audio only from a browser tab. This functionality is not supported for any other SDK, which means that participants who use, for example, the iOS SDK cannot hear the shared audio.
+     * By default, the method supports sending the computer's audio to remote participants while sharing a screen. However, this functionality is enabled and supported only on Chrome and Edge for users who use the Opus codec. On Windows, the method allows sending the system's audio. On macOS, the method allows sending audio only from a browser tab. This functionality is not supported for any other SDK, which means that participants who use, for example, the iOS SDK cannot hear the shared audio. In case of experiencing audio issues while sharing system audio, see the [Troubleshooting](https://docs.dolby.io/communications-apis/docs/troubleshooting-screen-share-audio-issues) guide.
      *
      * @param options - Options that allow you to select a screen, send the computer's audio, and modify parameters of the shared screen.
      */
@@ -696,5 +704,6 @@ export declare class ConferenceService extends BaseConferenceService {
     private onLocalVideoUpdated;
     private onRtsStatusUpdated;
     private isJoinedAsRTSViewer;
+    updateParticipantInfo(participantInfo: ParticipantInfo): Promise<void>;
 }
 export {};

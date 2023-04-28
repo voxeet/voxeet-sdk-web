@@ -111,4 +111,10 @@ export declare class SessionService extends Service {
      * @ignore
      */
     set refreshCallback(callback: Function);
+    /**
+     * Updates the local participant's name and avatar URL. The method does not allow updating the externalId.
+     *
+     * @param participantInfo - The preferred participant name and avatar URL.
+     */
+    updateParticipantInfo({ name, avatarUrl }: ParticipantInfo): Promise<void>;
 }

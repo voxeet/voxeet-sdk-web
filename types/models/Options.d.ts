@@ -105,7 +105,9 @@ export interface ScreenshareOptions {
     /**
      * A property that allows sending the computer's audio to remote participants while sharing a screen. It is useful if audio is an important part of your shared content. Enabling audio is supported only on Chrome and Edge for users who use the Opus codec. On Windows, the method allows sending the system's audio. However, on macOS the method allows sending audio only from a browser tab. This functionality is not supported for any other SDK, which means that participants who use, for example, the iOS SDK cannot hear the shared audio.
      *
-     * By default, the property is enabled on Chrome and Edge for users who use the Opus codec; on other browsers and for users who use the Dolby Voice Codec the property is set to false.
+     * By default, the property is set to true on Chrome and Edge for users who use the Opus codec; on other browsers and for users who use the Dolby Voice Codec the property is set to false.
+     *
+     * In case of experiencing audio issues while sharing system audio, see the [Troubleshooting](https://docs.dolby.io/communications-apis/docs/troubleshooting-screen-share-audio-issues) guide.
      */
     audio?: boolean | MediaTrackConstraints;
     /**
@@ -178,6 +180,15 @@ export interface DvwcParameters {
     inputAudioConfig?: InputAudioConfig;
     outputAudioConfig?: OutputAudioConfig;
     sessionConfig?: SessionConfig;
+}
+/**
+ * @ignore
+ */
+export declare enum MultiStreamOption {
+    None = "none",
+    SendOnly = "sendonly",
+    RecvOnly = "recvonly",
+    SendRecv = "sendrecv"
 }
 /**
  * The JoinOptions model defines how the application expects to join a conference.
@@ -296,4 +307,9 @@ export interface JoinOptions {
      * This API is supported only in SDK 3.8 and later.
      */
     audioBitrate?: AudioBitrate;
+    /**
+     * @ignore
+     * Whether or not multi screenshare is supported by the SDK
+     */
+    supportedMultiScreenShare?: MultiStreamOption;
 }

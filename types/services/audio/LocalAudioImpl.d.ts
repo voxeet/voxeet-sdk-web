@@ -19,6 +19,10 @@ export declare class LocalAudioImpl extends BaseConferenceService implements Loc
      * @implements LocalAudio.setCaptureMode()
      */
     setCaptureMode(options: AudioCaptureModeOptions): Promise<void>;
+    private setModeUnprocessed;
+    private setModeStandard;
+    private setModeMusic;
+    private resetDeviceConstraint;
     validateAudioCaptureOptions(options: any): boolean;
     /**
      * @implements LocalAudio.getComfortNoiseLevel()
@@ -31,11 +35,13 @@ export declare class LocalAudioImpl extends BaseConferenceService implements Loc
     /**
      * @implements LocalAudio.start()
      */
-    start(constraintsOrTrack?: MediaTrackConstraints | MediaStreamTrack): Promise<any>;
+    start(constraintsOrTrack?: MediaTrackConstraints | MediaStreamTrack): Promise<MediaStreamTrack>;
+    private startLocalAudio;
     /**
      * @implements LocalAudio.stop()
      */
-    stop(): Promise<any>;
+    stop(): Promise<void>;
+    private stopLocalAudio;
     /**
      * @implements LocalAudio.applyConstraints()
      */

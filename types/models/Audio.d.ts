@@ -68,6 +68,10 @@ export declare enum AudioBitrate {
      */
     Bitrate18k = "18Kbps",
     /**
+     * Sets the bitrate to 32 kbps.
+     */
+    Bitrate32k = "32Kbps",
+    /**
      * Sets the bitrate to 64 kbps.
      */
     Bitrate64k = "64Kbps",

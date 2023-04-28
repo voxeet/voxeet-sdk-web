@@ -248,10 +248,14 @@ export default class Conference {
      * @param {ConferenceParameters} value
      */
     set params(value: ConferenceParameters);
-    /**
-     * Gets the participants list.
-     */
     get participants(): Map<string, Participant>;
+    /**
+     * @ignore
+     * Sets the function that retrieves the participants list.
+     * The provided function should return the current state of the participants list.
+     * @param getter A function that returns a `Map<string, Participant>` object representing the current state of the participants list.
+     */
+    set participantsGetter(getter: () => Map<string, Participant>);
     /**
      * Gets a list of the local participant's conference permissions.
      */

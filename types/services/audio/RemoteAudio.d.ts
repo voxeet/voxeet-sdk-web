@@ -1,6 +1,5 @@
 import { LocalAudio } from '../../models/LocalAudio';
 import { Participant } from '../../models/Participant';
-import { ConferenceService } from '../conference/ConferenceService';
 import { BaseConferenceService } from '../Service';
 import { SessionService } from '../session/SessionService';
 /**
@@ -13,7 +12,7 @@ export declare class RemoteAudio extends BaseConferenceService {
     /**
      * @ignore
      */
-    constructor(sdk: any, localAudio: LocalAudio, conference: ConferenceService, session: SessionService);
+    constructor(sdk: any, localAudio: LocalAudio, session: SessionService);
     /**
      * Allows the local participant to unmute a specific remote participant who is locally muted through the [stop](#stop) method. The start method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to force sending remote participants’ streams to the conference or to the local participant. This method is not available for listeners and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      *
@@ -25,7 +24,8 @@ export declare class RemoteAudio extends BaseConferenceService {
      *
      * @return {Promise<Error>}
      */
-    start(participant: Participant): Promise<MediaStreamTrack> | Promise<void>;
+    start(participant: Participant): Promise<void>;
+    private startRemoteAudio;
     /**
      * Allows the local participant to locally mute specific remote participants. This method does not impact the audio transmission between remote participants and a conference and does not allow the local participant to stop sending remote participants’ streams to the conference. The method is not available for listeners and triggers [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
      *
@@ -35,4 +35,5 @@ export declare class RemoteAudio extends BaseConferenceService {
      * @return {Promise<Error>}
      */
     stop(participant: Participant): Promise<void>;
+    private stopRemoteAudio;
 }
