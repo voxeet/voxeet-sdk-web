@@ -47,6 +47,7 @@ declare const Events: {
     ConferenceLeaving: typeof ConferenceEvents.ConferenceLeaving;
     ConferenceEnded: typeof ConferenceEvents.ConferenceEnded;
     ConferenceGlobalError: typeof ConferenceEvents.ConferenceGlobalError;
+    ConferenceGlobalTrace: typeof ConferenceEvents.ConferenceGlobalTrace;
     ParticipantSwitched: typeof ConferenceEvents.ParticipantSwitched;
     OwnParticipantSwitched: typeof ConferenceEvents.OwnParticipantSwitched;
     ConferenceDestroyed: typeof ConferenceEvents.ConferenceDestroyed;

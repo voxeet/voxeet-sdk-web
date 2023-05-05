@@ -24,6 +24,11 @@ interface SDKErrorData {
     message: string;
     code?: number;
 }
+interface SDKTraceData {
+    description?: string;
+    data: any;
+    api: string;
+}
 declare class EventReport {
     type: string;
     level: string;
@@ -48,5 +53,14 @@ export declare class SDKErrorReport extends EventReport {
     message: string;
     code?: number;
     constructor(e: SDKErrorData);
+}
+/**
+ * @ignore
+ */
+export declare class SDKTraceReport extends EventReport {
+    description?: string;
+    payload: any;
+    api: string;
+    constructor(e: SDKTraceData);
 }
 export {};

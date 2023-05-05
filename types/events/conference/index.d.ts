@@ -8,6 +8,7 @@ export { default as ParticipantUpdated } from './ParticipantUpdated';
 export { default as ConferenceLeaving } from './ConferenceLeaving';
 export { default as ConferenceEnded } from './ConferenceEnded';
 export { default as ConferenceGlobalError } from './ConferenceGlobalError';
+export { default as ConferenceGlobalTrace } from './ConferenceGlobalTrace';
 export { default as ParticipantSwitched } from './ParticipantSwitched';
 export { default as OwnParticipantSwitched } from './OwnParticipantSwitched';
 export { default as ConferenceDestroyed } from './ConferenceDestroyed';

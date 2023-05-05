@@ -1,6 +1,6 @@
 {
   "name": "@voxeet/voxeet-web-sdk",
-  "version": "3.10.0-beta.1",
+  "version": "3.10.0-beta.2",
   "description": "The Voxeet Javascript SDK",
   "author": "Thomas Gourgues (tgourgues@voxeet.com)",
   "main": "dist/voxeet-sdk.js",
@@ -23,7 +23,7 @@
     "clean": "rimraf dist types coverage",
     "clean-types": "rimraf types/utils types/api types/packages types/lib types/events/EventBus.d.ts types/events/EventFactory.d.ts types/events/EventBusInstance.d.ts types/models/Telemetry.d.ts types/services/browserevent types/services/conference/ConferenceManager.d.ts types/services/session/SessionClient.d.ts types/services/telemetry types/services/videofilters/VideoFiltersHelper.d.ts types/services/videofilters/VideoFilterInConferenceController.d.ts",
     "build": "npm run check && npm run audit && webpack --progress",
-    "postbuild": "npm run clean-types",
+    "postbuild": "npm run clean-types && node clean-ssr.js",
     "watch": "webpack --progress --watch",
     "watch:prod": "cross-env NODE_ENV=production npm run watch",
     "watch:client": "cross-env NODE_ENV=staging CLIENT=true npm run watch",
