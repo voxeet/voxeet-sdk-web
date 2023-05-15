@@ -47,4 +47,5 @@ export declare class LocalAudioImpl extends BaseConferenceService implements Loc
      */
     applyConstraints(constraints: MediaTrackConstraints): Promise<void>;
     protected onConferenceJoined(e: ConferenceJoined): Promise<void>;
+    private onUpdateToken;
 }

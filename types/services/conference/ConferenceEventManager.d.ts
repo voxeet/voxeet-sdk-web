@@ -23,7 +23,6 @@ declare class ConferenceEventManager {
     onLeave(): void;
     private onVideoForwardedChanged;
     private onParticipantAdded;
-    private clearStream;
     private onParticipantUpdated;
     private onParticipantUpdatedHandleStreams;
     private onAudioUpdated;

@@ -5,3 +5,9 @@ export declare const MUSIC_MODE: {
         preferSendMono: boolean;
     };
 };
+export declare const UNPROCESSED_MODE: {
+    options: {
+        audioBitrate: AudioBitrate;
+        preferSendMono: boolean;
+    };
+};

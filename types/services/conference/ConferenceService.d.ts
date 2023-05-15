@@ -491,8 +491,6 @@ export declare class ConferenceService extends BaseConferenceService {
     /**
      * Sets the quality of the received Simulcast streams. For more information, see the [Simulcast](https://docs.dolby.io/communications-apis/docs/guides-simulcast) guide.
      *
-     * This method is not available for [Real-time Streaming viewers](../enums/models_Options.ListenType.html#Mixed) and triggers the [UnsupportedError](./lib_Exceptions.UnsupportedError.html).
-     *
      * @param requested - An array that contains stream qualities for specific conference participants.
      *
      * @return {Promise<any>}

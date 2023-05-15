@@ -207,7 +207,7 @@ export interface JoinOptions {
      */
     simulcast?: boolean;
     /**
-     * Indicates whether a participant wants to send mono sound to a conference. By default, when using the Opus codec, participants' audio is sent as stereo. This configuration is only applicable when using the Opus codec and is available in non-Dolby Voice and Dolby Voice conferences.
+     * Indicates whether a participant wants to send mono sound to a conference. By default, when using the Opus codec, participants' audio is sent as mono. This configuration is only applicable when using the Opus codec and is available in non-Dolby Voice and Dolby Voice conferences.
      */
     preferSendMono?: boolean;
     /**
