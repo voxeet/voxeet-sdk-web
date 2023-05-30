@@ -30,6 +30,8 @@ export declare class RTCInboundRTPVideoStreamStats extends Stats {
     packetsLost: number;
     jitter: number;
     framesDecoded: number;
+    frameHeight: number;
+    frameWidth: number;
     keyFramesDecoded: number;
     totalInterFrameDelay: number;
     totalSquaredInterFrameDelay: number;
