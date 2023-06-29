@@ -18,9 +18,12 @@ export declare class NotificationService extends Service {
      *
      * @example
      *```javascript
-     * // Subscribes to the invitation event
+     * // Subscribes to the Participant.Joined event
      * await VoxeetSDK.notification.subscribe([
-     *   { type: "Invitation" }
+     *   {
+     *     type: "Participant.Joined",
+     *     conferenceAlias: "yourConferenceAlias",
+     *   }
      * ]);
      *
      * // Subscribes to the conferenceCreated and conferenceEnded events

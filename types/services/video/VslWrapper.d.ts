@@ -4,11 +4,14 @@
 export declare type VslProcessingErrorHandler = (error: Error) => Promise<void>;
 /**
  * @ignore
+ *
+ * NOTE: Property names must correspond to the names defined inside VSL library
  */
 export interface VslInitOptions {
     passthrough?: boolean;
     wasm_filepath?: string;
     model_filepath?: string;
+    dvdnr_filepath?: string;
     processing_error_handler?: VslProcessingErrorHandler;
     debug: boolean;
 }
@@ -20,21 +23,35 @@ export interface VslInitOptions {
 export declare class VslWrapper {
     #private;
     static create(inputStream: MediaStream, options?: VslInitOptions): Promise<VslWrapper>;
-    constructor(vsl: any);
-    setProcessEnable(enabled: boolean): void;
-    getProcessEnable(): boolean;
-    setFaceEnhanceMode(enabled: boolean): void;
-    getFaceEnhanceMode(): boolean;
+    private constructor();
+    getModelVersion(): string;
+    setProcessingErrorHandler(handler: VslProcessingErrorHandler): void;
+    getOutput(): Promise<MediaStream>;
+    stop(): void;
+    start(): void;
+    changeOutputFrameRate(frameRate: number): Promise<void>;
+    changeInput(newInput: MediaStream): Promise<void>;
     setPassthroughMode(enabled: boolean): void;
     getPassthroughMode(): boolean;
     setBackgroundMode(mode: string): void;
     getBackgroundMode(): string;
-    getModelVersion(): string;
-    stop(): void;
-    start(): void;
-    setProcessingErrorHandler(handler: VslProcessingErrorHandler): void;
-    changeInput(newInput: MediaStream): Promise<void>;
-    changeBackground(image: HTMLImageElement): Promise<void>;
-    getOutput(): Promise<MediaStream>;
-    changeOutputFrameRate(frameRate: number): Promise<void>;
+    changeBackground(image: HTMLImageElement | HTMLVideoElement): Promise<void>;
+    setFaceEnhanceMode(enabled: boolean): void;
+    getFaceEnhanceMode(): boolean;
+    setDenoiseMode(enabled: boolean): void;
+    getDenoiseMode(): boolean;
+    setAutoframeMode(enabled: boolean): void;
+    getAutoframeMode(): boolean;
+    setFaceSmoothMode(enabled: boolean): void;
+    getFaceSmoothMode(): boolean;
+    setFaceSmoothStrength(strength: number): void;
+    getFaceSmoothStrength(): number;
+    getFaceSmoothStrengthMax(): number;
+    getFaceSmoothStrengthMin(): number;
+    setStudioLightMode(enabled: boolean): void;
+    getStudioLightMode(): boolean;
+    setFaceGlowStrength(strength: number): void;
+    getFaceGlowStrength(): number;
+    getFaceGlowStrengthMax(): number;
+    getFaceGlowStrengthMin(): number;
 }

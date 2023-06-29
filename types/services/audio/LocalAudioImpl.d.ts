@@ -15,14 +15,11 @@ export declare class LocalAudioImpl extends BaseConferenceService implements Loc
      * @implements LocalAudio.getCaptureMode()
      */
     getCaptureMode(): Promise<AudioCaptureModeOptions>;
+    private pickCaptureModeStrategy;
     /**
      * @implements LocalAudio.setCaptureMode()
      */
     setCaptureMode(options: AudioCaptureModeOptions): Promise<void>;
-    private setModeUnprocessed;
-    private setModeStandard;
-    private setModeMusic;
-    private resetDeviceConstraint;
     validateAudioCaptureOptions(options: any): boolean;
     /**
      * @implements LocalAudio.getComfortNoiseLevel()

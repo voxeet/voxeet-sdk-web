@@ -36,4 +36,6 @@ export declare class RemoteAudio extends BaseConferenceService {
      */
     stop(participant: Participant): Promise<void>;
     private stopRemoteAudio;
+    setVolume(participant: Participant, volume: number): void;
+    setOutputVolume(volume: number): void;
 }

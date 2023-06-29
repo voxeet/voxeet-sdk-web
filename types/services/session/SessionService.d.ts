@@ -40,6 +40,8 @@ export declare class SessionService extends Service {
     /**
      * Opens a new session.
      *
+     * **Note**: The external ID field in this API has been deprecated; now you can provide the external ID only when requesting a [client access token](https://docs.dolby.io/communications-apis/reference/get-client-access-token). If you provide to this API an external ID that is different from the one in your client access token, it will be rejected.
+     *
      * @param info - The optional information about the local participant.
      *
      * @example

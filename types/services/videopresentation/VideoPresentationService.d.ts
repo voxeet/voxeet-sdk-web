@@ -60,32 +60,33 @@ export declare class VideoPresentationService extends BaseConferenceService {
      *
      * @param url - The URL that specifies the video file location.
      */
-    start(url: string): any;
+    start(url: string): Promise<void>;
     /**
      * Stops the video presentation.
      */
-    stop(): any;
+    stop(): Promise<void>;
     /**
      * Resumes the paused video presentation.
      */
-    play(): any;
+    play(): Promise<void>;
     /**
      * Pauses the video presentation. As a timestamp, we recommend using the [currentTime](https://www.w3.org/TR/2011/WD-html5-20110113/video.html#dom-media-currenttime) attribute of the HTML video element, as in the following example:
      *
      * ```javascript
-     * const timestamp = Math.round($(`#stream-video video`)[0].currentTime * 1000);
+     * const element = document.getElementById('video-presentation');
+     * const timestamp = Math.round(element.currentTime * 1000);
      * ```
      *
      * When the timestamp is not specified, the SDK automatically sets the timestamp value to 0.
      *
      * @param timestamp - The timestamp that informs when the video should be paused, in milliseconds.
      */
-    pause(timestamp: number): any;
+    pause(timestamp: number): Promise<void>;
     /**
      * Allows the presenter to navigate to the specific section of the shared video.
      * @param timestamp - The timestamp the presenter wants to start playing the video from, in milliseconds.
      */
-    seek(timestamp: number): any;
+    seek(timestamp: number): Promise<void>;
     private onVideoPresentationStarted;
     private onVideoPresentationStopped;
     private onVideoPresentationPlay;

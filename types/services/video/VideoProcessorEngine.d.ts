@@ -1,6 +1,6 @@
-import { VslWrapper } from './VslWrapper';
-import { VideoProcessor } from '../../models/VideoProcessor';
 import { VideoServiceError } from '../../lib/Exceptions';
+import { VideoProcessorOptions } from '../../models/VideoProcessor';
+import { VslWrapper } from './VslWrapper';
 /**
  * Callback called when an exceptions occurs during processing a video frame.
  * @ignore
@@ -19,12 +19,15 @@ export declare class VideoProcessorEngine {
     stop(): void;
     start(): void;
     setProcessingErrorCallback(callback: VideoProcessingErrorCallback): void;
-    setProcessor(processor: VideoProcessor): Promise<void>;
-    getProcessor(): VideoProcessor;
+    setOptions(options: VideoProcessorOptions): Promise<void>;
+    getOptions(): VideoProcessorOptions;
     getOutputStream(): Promise<MediaStream>;
     changeOutputStreamFrameRate(frameRate: number): Promise<void>;
     changeInputStream(stream: MediaStream): Promise<void>;
-    private handleEmptyProcessor;
-    private handleBokehProcessor;
-    private handleBackgroundReplacementProcessor;
+    private handleVirtualBackground;
+    private handleFacialSmoothing;
+    private handleAutoBrightness;
+    private handleSpotLight;
+    private handleNoiseReduction;
+    private handleAutoFraming;
 }

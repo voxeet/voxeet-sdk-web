@@ -1,10 +1,10 @@
 import Event from '../Event';
-import { StateDump } from '@dolby-dvc/dvwc';
+import { ClientStateDump } from '../../models/ClientStateDump';
 /**
  * @ignore
  */
 export default class ConferenceLeft extends Event {
-    stateDump?: StateDump;
+    stateDump?: ClientStateDump;
     constructor();
-    static fromData(data: StateDump): ConferenceLeft;
+    static fromData(data: ClientStateDump): ConferenceLeft;
 }
