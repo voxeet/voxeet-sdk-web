@@ -14,6 +14,7 @@ export default class ConferenceGlobalTrace extends Event {
     description?: string;
     data: any;
     api: string;
+    ts: number;
     constructor(e: ConferenceGlobalTraceData);
     static fromData(e: ConferenceGlobalTraceData): ConferenceGlobalTrace;
 }

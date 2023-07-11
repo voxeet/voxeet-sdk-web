@@ -61,7 +61,7 @@ export declare enum NoiseReductionLevel {
  *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/abyss_female.wav" >Sorry, your browser does not support the audio element.</audio></td>
  *         </tr>
  *         <tr>
- *             <td><code>AmRadio</code></td>
+ *             <td><code>AMRadio</code></td>
  *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/amradio_male.wav" >Sorry, your browser does not support the audio element.</audio></td>
  *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/amradio_female.wav" >Sorry, your browser does not support the audio element.</audio></td>
  *       </tr>

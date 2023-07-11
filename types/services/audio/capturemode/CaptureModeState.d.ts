@@ -2,10 +2,11 @@ import { AudioCaptureModeOptions } from '../../../models/Audio';
 export declare type CaptureModeContext = {
     participantId: string;
     conferenceId: string;
-    isDapm: boolean;
+    isDapmReady: (abortSignal: AbortSignal) => Promise<boolean>;
 };
 export interface CaptureModeState {
     setCaptureMode(previousAudioCaptureModeOptions: AudioCaptureModeOptions, audioCaptureModeOptions: AudioCaptureModeOptions, context?: CaptureModeContext): Promise<void>;
+    init?(conferenceId: string, participantId: string, isDapmReady: (abortSignal: AbortSignal) => Promise<boolean>, audioCaptureModeOptions: AudioCaptureModeOptions): void;
 }
 /**
  * @ignore

@@ -36,6 +36,7 @@ export declare class LocalVideoImpl extends BaseConferenceService implements Loc
      * @implements LocalVideo.start()
      */
     start(constraintsOrTrack?: MediaTrackConstraints | MediaStreamTrack, processor?: VideoProcessor | VideoProcessorOptions): Promise<MediaStreamTrack>;
+    private createSchedulerParamsForStartVideo;
     private startLocalVideo;
     /**
      * @implements LocalVideo.stop()
@@ -46,10 +47,12 @@ export declare class LocalVideoImpl extends BaseConferenceService implements Loc
      * @implements LocalVideo.setProcessor()
      */
     setProcessor(processor: VideoProcessor | VideoProcessorOptions): Promise<void>;
+    private setProcessorInternal;
     /**
      * @implements LocalVideo.disableProcessing()
      */
     disableProcessing(): Promise<void>;
+    private disableProcessingInternal;
     /**
      * @implements LocalVideo.applyConstraints()
      */
@@ -57,7 +60,7 @@ export declare class LocalVideoImpl extends BaseConferenceService implements Loc
     private emitLocalVideoStarted;
     private emitLocalVideoStopped;
     private emitLocalVideoUpdated;
-    private emitLocalVideoInternalEvent;
+    private emitLocalVideoInternalError;
     private changeCameraDeviceId;
     private onBandwidthRestrictionChanged;
     private onUpdateToken;

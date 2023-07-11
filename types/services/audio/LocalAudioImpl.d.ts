@@ -33,6 +33,7 @@ export declare class LocalAudioImpl extends BaseConferenceService implements Loc
      * @implements LocalAudio.start()
      */
     start(constraintsOrTrack?: MediaTrackConstraints | MediaStreamTrack): Promise<MediaStreamTrack>;
+    private createSchedulerParamsForStartAudio;
     private startLocalAudio;
     /**
      * @implements LocalAudio.stop()
@@ -44,5 +45,6 @@ export declare class LocalAudioImpl extends BaseConferenceService implements Loc
      */
     applyConstraints(constraints: MediaTrackConstraints): Promise<void>;
     protected onConferenceJoined(e: ConferenceJoined): Promise<void>;
+    private initialUpdateProcessing;
     private onUpdateToken;
 }

@@ -43,6 +43,23 @@ export interface VideoProcessor {
     image?: HTMLImageElement;
 }
 /**
+ * Flags are a way to activate video processor features that are not available by default.
+ *
+ * This API is for internal use only and is not intended for publishing.
+ *
+ * @ignore
+ */
+export interface VideoProcessorFlags {
+    /**
+     * Enables debug logs. All messages are printed to a standard console output. Note that debug logs, because of the large amount, may slightly impact on general performance and it's recommended to disable it during performance or load tests.
+     */
+    debugLogs?: boolean;
+    /**
+     * Experimental feature that reduces a main thread blocking by using async pixels readback from GPU memory.
+     */
+    nonBlockingAsyncPixelReadback?: boolean;
+}
+/**
  * The VideoProcessorOptions model gathers video processing settings. This model is supported only in SDK 3.11 and later.
  */
 export interface VideoProcessorOptions {
@@ -77,4 +94,9 @@ export interface VideoProcessorOptions {
      * Automatically adjusts the local participant's video frame to keep the participant within view and centered in the video frame the whole time. By default, this property is disabled.
      */
     autoFraming?: boolean;
+    /**
+     * Flags can be set once when video processor is initializing. They cannot be modified while video processing is running.
+     * @ignore
+     */
+    flags?: VideoProcessorFlags;
 }

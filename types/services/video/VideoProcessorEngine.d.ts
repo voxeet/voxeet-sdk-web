@@ -1,5 +1,5 @@
 import { VideoServiceError } from '../../lib/Exceptions';
-import { VideoProcessorOptions } from '../../models/VideoProcessor';
+import { VideoProcessorOptions, VideoProcessorFlags } from '../../models/VideoProcessor';
 import { VslWrapper } from './VslWrapper';
 /**
  * Callback called when an exceptions occurs during processing a video frame.
@@ -14,7 +14,7 @@ export declare type VideoProcessingErrorCallback = (error: VideoServiceError) =>
  */
 export declare class VideoProcessorEngine {
     #private;
-    static create(inputStream: MediaStream): Promise<VideoProcessorEngine>;
+    static create(inputStream: MediaStream, flags?: VideoProcessorFlags): Promise<VideoProcessorEngine>;
     constructor(vsl: VslWrapper);
     stop(): void;
     start(): void;

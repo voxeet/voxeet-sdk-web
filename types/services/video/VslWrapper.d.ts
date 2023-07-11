@@ -7,6 +7,17 @@ export declare type VslProcessingErrorHandler = (error: Error) => Promise<void>;
  *
  * NOTE: Property names must correspond to the names defined inside VSL library
  */
+export interface VslFlags {
+    /**
+     * Use non-blocking async pixels readback from GPU memory. It reduces main thread blocking time.
+     */
+    nonBlockingAsyncPixelReadback: boolean;
+}
+/**
+ * @ignore
+ *
+ * NOTE: Property names must correspond to the names defined inside VSL library
+ */
 export interface VslInitOptions {
     passthrough?: boolean;
     wasm_filepath?: string;
@@ -14,6 +25,7 @@ export interface VslInitOptions {
     dvdnr_filepath?: string;
     processing_error_handler?: VslProcessingErrorHandler;
     debug: boolean;
+    flags?: VslFlags;
 }
 /**
  * Wrapps @dolbyio/vsl package which isn't a TypeScript module.
