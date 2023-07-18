@@ -120,18 +120,18 @@ export declare enum NoiseReductionLevel {
  */
 export declare enum VoiceFont {
     None = "none",
-    BrokenRobot = "BrokenRobot",
-    Abyss = "Abyss",
-    Helium = "Helium",
-    StarshipCaptain = "StarshipCaptain",
-    Feminine = "Feminine",
-    AMRadio = "AMRadio",
-    Interference = "Interference",
-    Swarm = "Swarm",
-    DarkModulation = "DarkModulation",
-    NervousRobot = "NervousRobot",
-    Wobble = "Wobble",
-    Masculine = "Masculine"
+    BrokenRobot = "brokenRobot",
+    Abyss = "abyss",
+    Helium = "helium",
+    StarshipCaptain = "starshipCaptain",
+    Feminine = "feminine",
+    AMRadio = "amRadio",
+    Interference = "interference",
+    Swarm = "swarm",
+    DarkModulation = "darkModulation",
+    NervousRobot = "nervousRobot",
+    Wobble = "wobble",
+    Masculine = "masculine"
 }
 /**
  * The AudioEchoCancellation model allows modifying the echo management setting for the [Music](./models_Audio.AudioCaptureMode.html#Music) mode while calling the [setCaptureMode](./../classes/services_audio_LocalAudio.LocalAudio.html#setCaptureMode) method.

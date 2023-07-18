@@ -4,7 +4,7 @@ import Event from '../Event';
  */
 interface ConferenceGlobalTraceData {
     description?: string;
-    data: any;
+    data?: any;
     api: string;
 }
 /**
@@ -12,7 +12,7 @@ interface ConferenceGlobalTraceData {
  */
 export default class ConferenceGlobalTrace extends Event {
     description?: string;
-    data: any;
+    data?: any;
     api: string;
     ts: number;
     constructor(e: ConferenceGlobalTraceData);

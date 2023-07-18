@@ -47,4 +47,5 @@ export declare class LocalAudioImpl extends BaseConferenceService implements Loc
     protected onConferenceJoined(e: ConferenceJoined): Promise<void>;
     private initialUpdateProcessing;
     private onUpdateToken;
+    private shouldReport;
 }

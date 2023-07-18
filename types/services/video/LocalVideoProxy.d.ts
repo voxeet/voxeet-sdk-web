@@ -38,4 +38,5 @@ export declare class LocalVideoProxy extends BaseConferenceService implements Lo
     private isEligibleToReport;
     private onInternalError;
     private reportError;
+    private shouldReport;
 }

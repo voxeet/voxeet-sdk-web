@@ -702,5 +702,7 @@ export declare class ConferenceService extends BaseConferenceService {
     private onLocalVideoUpdated;
     private onRtsStatusUpdated;
     private isJoinedAsRTSViewer;
+    private shouldReport;
+    private shouldSwallowWhenJoining;
 }
 export {};
