@@ -26,7 +26,7 @@ interface SDKErrorData {
 }
 interface SDKTraceData {
     description?: string;
-    data?: any;
+    data: any;
     api: string;
 }
 declare class EventReport {

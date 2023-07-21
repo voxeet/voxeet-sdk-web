@@ -31,7 +31,7 @@ export declare enum SpatialAudioStyle {
 /**
  * @ignore
  */
-export declare type SpatialAudioStyleValuesUnion = (typeof SpatialAudioStyle)[keyof typeof SpatialAudioStyle];
+export declare type SpatialAudioStyleValuesUnion = typeof SpatialAudioStyle[keyof typeof SpatialAudioStyle];
 /**
  * @ignore
  */
@@ -43,7 +43,6 @@ export interface SpatialAudioManager {
     setEnvironment: (environment: SpatialEnvironment) => void;
     setParticipantPosition: (participant: Participant, position: SpatialPosition) => void;
     setLocalDirection: (direction: SpatialDirection) => void;
-    setLocalAudioAttenuation?: (audioAttenuationName: string) => void;
     removeParticipant?: (participantId: string) => void;
     release: () => void;
 }
@@ -55,53 +54,7 @@ export declare type CreateSpatialAudioManager = (option: {
     conferenceId: string;
     participantId: string;
     setDirection?: (yaw: number, pitch: number, roll: number) => void;
-    audioAttenuationName?: string;
 }) => SpatialAudioManager | undefined;
-/**
- * Model representing a gain that should be applied when the specified distance is reached
- * Used only within the AudioAttenuation model
- * @ignore
- */
-export declare type DistanceAttenuationPair = {
-    distance: number;
-    linearGain: number;
-};
-/**
- * The SpatialAudioAttenuation model represents how a participants audio will be attenuated when heard by others.
- * It is only meant to be used when creating conferences as attenuation profiles can only be created during conference initialisation. They cannot be added at any later points.
- * - `name`:        Name used to specify this distance attenuation. It can be used later to assign it to specific participants.
- * - `distanceGains`: A series of DistanceAttenuationPair models whereby a participant's audio has the specified gain applied at the corresponding distance. Interim distances between pairs result in an interpolated gain.
- * - `isDefault`:  Specifies whether this audio distance attenuation should be the conference default. Only one may exist (isDefault = true) per conference, although it can be changed later.
- *
- * The [create](./../classes/services_conference_ConferenceService.ConferenceService.html#create) method allows the application to create a conference and define what these audio distance attenuations should be.
- *
- * <h3>Properties</h3>
- *
- * <b>name</b>
- *
- * - <b> name </b>: string
- *
- * The name of this specific audio distance attenuation.
- *
- * <b>distanceGains</b>
- *
- * - <b> distanceGains </b>: DistanceAttenuationPair[]
- *
- * A series of distance gains that define and interpolate the gain that needs to be applied to a participant's audio at certain distances.
- *
- * <b>isDefault</b>
- *
- * - <b> isDefault </b>: boolean
- *
- * Specifies whether this audio distance attenuation should be the conference default.
- *
- * @ignore
- */
-export declare type SpatialAudioAttenuation = {
-    name: string;
-    isDefault: boolean;
-    distanceGains: DistanceAttenuationPair[];
-};
 /**
  * @ignore
  */

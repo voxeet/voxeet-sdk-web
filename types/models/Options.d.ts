@@ -4,7 +4,7 @@ import { InputAudioConfig, OutputAudioConfig, SessionConfig } from '@dolby-dvc/d
 import { VideoFilter, VideoFilterOptions } from './VideoFilters';
 import { SupportedSpatialAudioStyles } from './SpatialAudio';
 import { VideoForwardingStrategy } from './VideoForwarding';
-import { VideoProcessor, VideoProcessorOptions } from './VideoProcessor';
+import { VideoProcessor } from './VideoProcessor';
 import { AudioBitrate } from './Audio';
 /**
  * The ListenType model contains the possible types of listeners. This model is available in SDK 3.9 and later.
@@ -129,9 +129,9 @@ export declare class ParticipantInfo {
      */
     name?: string;
     /**
-     * The external unique identifier that a customer's application can add to a participant when applying for a [client access token](https://docs.dolby.io/communications-apis/reference/get-client-access-token). Setting the external ID via the [open](./services_session_SessionService.SessionService.html#open) method is no longer supported.
+     * The external unique identifier that the customer's application can add to the participant while opening a session. If a participant uses the same external ID in conferences, the participant's ID also remains the same across all sessions. When a second participant joins a conference using the same external ID as another participant who has already joined the conference, the SDK removes the first participant who uses this external ID and emits the [switched](./services_conference_ConferenceService.ConferenceService.html#switched) event (SDK 2.2.3+).
      *
-     * If a participant uses the same external ID in conferences, the participant's ID also remains the same across all sessions. When a participant joins a conference in which there is already a participant who uses the same external ID, the SDK removes the participant who joined the conference earlier and emits the [switched](./services_conference_ConferenceService.ConferenceService.html#switched) event. The external ID is required to invite participants to a conference.
+     * **Note**: This property is required to invite participants to a conference.
      */
     externalId?: string;
     /**
@@ -266,18 +266,10 @@ export interface JoinOptions {
      */
     dvwc?: boolean | DvwcParameters;
     /**
-     * > 🚧 Deprecated
-     * >
-     * > Dolby.io Communications SDK for Desktop has been deprecated. If you want to use video processing, use the [videoProcessor](#videoprocessor) property.
-     *
      * Sets the video filter that allows blurring or changing the local participant's background. The video filters are available only to the [Desktop SDK](https://docs.dolby.io/communications-apis/docs/desktop-sdk-overview) users.
      */
     videoFilter?: VideoFilter;
     /**
-     * > 🚧 Deprecated
-     * >
-     * > Dolby.io Communications SDK for Desktop has been deprecated. If you want to use video processing, use the [videoProcessor](#videoprocessor) property.
-     *
      * Sets video filter options that can contain the image file for the [staticImage](./../enums/models_VideoFilters.VideoFilter.html#StaticImage) filter and information about the video stream on which the video filter should be applied.
      */
     videoFilterOptions?: VideoFilterOptions;
@@ -298,14 +290,9 @@ export interface JoinOptions {
      */
     supportedAVSyncFakeAudio?: boolean;
     /**
-     * Sets the preferred video processing options:
-     *
-     * - If you use SDK 3.10 or earlier, use the [VideoProcessor](./models_VideoProcessor.VideoProcessor.html) model as a parameter
-     * - If you use SDK 3.11 or later, use the [VideoProcessorOptions](./models_VideoProcessor.VideoProcessorOptions.html) model as a parameter
-     *
-     *  This property is available only in SDK 3.7 and later.
+     * Sets the video processor that allows blurring or changing the local participant's background. This property is available only in SDK 3.7 and later.
      */
-    videoProcessor?: VideoProcessor | VideoProcessorOptions;
+    videoProcessor?: VideoProcessor;
     /**
      * A custom video track object to add to a conference. Defining this property causes ignoring video constraints defined in the constraints property. This property is available in SDK 3.7 and later.
      */

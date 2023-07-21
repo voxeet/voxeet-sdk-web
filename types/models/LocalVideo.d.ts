@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { VideoProcessor, VideoProcessorOptions } from './VideoProcessor';
+import { VideoProcessor } from './VideoProcessor';
 import { EventEmitter } from 'events';
 /**
  * The LocalVideo model allows enabling and disabling the local participant's video and video processor.
@@ -25,6 +25,8 @@ import { EventEmitter } from 'events';
  * - Disable the video by calling the [stop](#stop) method. Disabling video in a conference triggers the SDK to emit the [videoStopped](#videostopped) and [streamAdded](./../classes/services_conference_ConferenceService.ConferenceService.html#streamAdded) or [streamUpdated](./../classes/services_conference_ConferenceService.ConferenceService.html#streamupdated) events.
  *
  * This model is supported only in SDK 3.7 and later.
+ *
+ * The video processor needs to be initialized before usage. Otherwise, the processor does not have access to the required  `vsl_impl.wasm` and `vsl_impl.bin` files and cannot function properly.
  */
 export interface LocalVideo extends EventEmitter {
     /**
@@ -36,15 +38,10 @@ export interface LocalVideo extends EventEmitter {
      *
      * This method is not available for listeners and triggers the [UnsupportedError](./../classes/lib_Exceptions.UnsupportedError.html).
      *
-     * **Note**: If you want to use the `processor` parameter, make sure that you use a desktop operating system with with Graphics Processing Unit (GPU) acceleration enabled and the following minimum hardware requirements:
+     * **Note**: If you want to use the `processor` parameter, make sure that you use Chrome or Edge with Graphics Processing Unit (GPU) acceleration enabled and the following minimum hardware requirements:
      * - i5 dual-core CPU
      * - 8GB of RAM
      * - 64-bit operating system
-     * Additionally, it requires using one of the following browsers:
-     * - Chrome 109+
-     * - Edge 109+
-     * - Firefox 109+
-     * - Safari 16.4+
      *
      * @example
      * ```js
@@ -65,11 +62,11 @@ export interface LocalVideo extends EventEmitter {
      * For more information about using this method, see the [Enable Video Processing](https://docs.dolby.io/communications-apis/docs/enable-video-processing) guide.
      *
      * @param constraints - The [MediaTrackConstraints](https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints). If the constrains are not specified, the SDK uses 720p (1280 x 720) resolution at 25fps to capture video.
-     * @param processor - The video processor configuration, either [VideoProcessor](./models_VideoProcessor.VideoProcessor.html) in SDK 3.10 and earlier or [VideoProcessorOptions](./models_VideoProcessor.VideoProcessorOptions.html) in SDK 3.11 and later.
+     * @param processor - The video processor configuration.
      *
      * @returns A Promise which handler receives a MediaStreamTrack object. If the track cannot be created, the promise is rejected with an error.
      */
-    start(constraints?: MediaTrackConstraints, processor?: VideoProcessor | VideoProcessorOptions): Promise<MediaStreamTrack>;
+    start(constraints?: MediaTrackConstraints, processor?: VideoProcessor): Promise<MediaStreamTrack>;
     /**
      * Starts transmission of the local participant's video from a custom track. If the local participant calls this method before a conference, the SDK starts a new stream that will be added to the conference after joining and the participant can see the video preview. If the participant calls this method in a conference, the method starts sending the participant's video stream to the conference.
      *
@@ -79,26 +76,21 @@ export interface LocalVideo extends EventEmitter {
      *
      * This method is not available for listeners and triggers the [UnsupportedError](./../classes/lib_Exceptions.UnsupportedError.html).
      *
-     * **Note**: If you want to use the `processor` parameter, make sure that you use a desktop operating system with with Graphics Processing Unit (GPU) acceleration enabled and the following minimum hardware requirements:
+     * **Note**: If you want to use the `processor` parameter, make sure that you use Chrome or Edge with Graphics Processing Unit (GPU) acceleration enabled and the following minimum hardware requirements:
      * - i5 dual-core CPU
      * - 8GB of RAM
      * - 64-bit operating system
-     * Additionally, it requires using one of the following browsers:
-     * - Chrome 109+
-     * - Edge 109+
-     * - Firefox 109+
-     * - Safari 16.4+
      *
      * @param customTrack - The MediaStreamTrack object
-     * @param processor - The video processor configuration, either [VideoProcessor](./models_VideoProcessor.VideoProcessor.html) in SDK 3.10 and earlier or [VideoProcessorOptions](./models_VideoProcessor.VideoProcessorOptions.html) in SDK 3.11 and later.
+     * @param processor - The video processor configuration.
      *
      * @returns A Promise which handler receives a MediaStreamTrack object. If the track cannot be created, the promise is rejected with an error.
      */
-    start(customTrack: MediaStreamTrack, processor?: VideoProcessor | VideoProcessorOptions): Promise<MediaStreamTrack>;
+    start(customTrack: MediaStreamTrack, processor?: VideoProcessor): Promise<MediaStreamTrack>;
     /**
      * @ignore
      */
-    start(constraintsOrTrack?: MediaTrackConstraints | MediaStreamTrack, processor?: VideoProcessor | VideoProcessorOptions): Promise<MediaStreamTrack>;
+    start(constraintsOrTrack?: MediaTrackConstraints | MediaStreamTrack, processor?: VideoProcessor): Promise<MediaStreamTrack>;
     /**
      * Stops the local participant's video stream transmission. Disabling video before a conference triggers the SDK to emit the [videoStopped](#videostopped) event. Calling this method in a conference additionally triggers the [streamAdded](./../classes/services_conference_ConferenceService.ConferenceService.html#streamAdded) or [streamUpdated](./../classes/services_conference_ConferenceService.ConferenceService.html#streamupdated) event.
      *
@@ -111,27 +103,22 @@ export interface LocalVideo extends EventEmitter {
      */
     stop(): Promise<void>;
     /**
-     * Sets video processing. If the processor is enabled via one of the **start** methods, the setProcessor method allows changing the processor.
+     * Enables video processing and adds a video processor to the existing local participant's video stream to blur the participant's background or replace the background with an image. If the processor is enabled via one of the **start** methods, the setProcessor method allows changing the processor.
      *
-     * **Note**: This method requires using a desktop operating system with with Graphics Processing Unit (GPU) acceleration enabled and the following minimum hardware requirements:
+     * **Note**: This method requires using Chrome or Edge with Graphics Processing Unit (GPU) acceleration enabled and the following minimum hardware requirements:
      * - i5 dual-core CPU
      * - 8GB of RAM
      * - 64-bit operating system
-     * Additionally, it requires using one of the following browsers:
-     * - Chrome 109+
-     * - Edge 109+
-     * - Firefox 109+
-     * - Safari 16.4+
      *
-     * **Warning**: Using video processor requires downloading and hosting additional SDK package files. For more information, see the [Initializing the SDK](https://docs.dolby.io/communications-apis/docs/initializing-javascript) instruction.
+     * **Warning**: If you use two different URLs for serving your application and hosting the SDK through a Content Delivery Network (CDN), you have to enable cross-origin resource sharing (CORS) to use this method. To enable CORS, see the [Install the SDK](https://docs.dolby.io/communications-apis/docs/initializing-javascript#install-the-sdk) instruction.
      *
      * For more information about using this method, see the [Enable Video Processing](https://docs.dolby.io/communications-apis/docs/enable-video-processing) guide.
      *
-     * @param processor - The video processor configuration, either [VideoProcessor](./models_VideoProcessor.VideoProcessor.html) in SDK 3.10 and earlier or [VideoProcessorOptions](./models_VideoProcessor.VideoProcessorOptions.html) in SDK 3.11 and later.
+     * @param processor - The video processor configuration.
      *
      * @return A Promise that resolves when the processor is successfully enabled and set. If the processor cannot be enabled, the promise is rejected with an error.
      */
-    setProcessor(processor: VideoProcessor | VideoProcessorOptions): Promise<void>;
+    setProcessor(processor: VideoProcessor): Promise<void>;
     /**
      * Disables video processing.
      *

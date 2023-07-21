@@ -16,10 +16,6 @@ export declare class RTCInboundRTPAudioStreamStats extends Stats {
     bitrateReceived: Number;
     packetsLost: number;
     jitter: number;
-    jitterBufferDelay: number;
-    jitterBufferEmittedCount: number;
-    jitterBufferMinimumDelay: number;
-    jitterBufferTargetDelay: number;
 }
 /**
  * @ignore
@@ -33,8 +29,6 @@ export declare class RTCInboundRTPVideoStreamStats extends Stats {
     bitrateReceived: Number;
     packetsLost: number;
     jitter: number;
-    jitterBufferDelay: number;
-    jitterBufferEmittedCount: number;
     framesDecoded: number;
     frameHeight: number;
     frameWidth: number;

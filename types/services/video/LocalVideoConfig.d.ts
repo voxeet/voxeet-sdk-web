@@ -1,4 +1,4 @@
-import { VideoProcessorOptions } from '../../models/VideoProcessor';
+import { VideoProcessor } from '../../models/VideoProcessor';
 /**
  * Video source types.
  *
@@ -28,15 +28,15 @@ export declare class LocalVideoConfig {
     /**
      * Creates a video configuration for camera device.
      */
-    static camera(constraints?: MediaTrackConstraints, processorOptions?: VideoProcessorOptions): CameraLocalVideoConfig;
+    static camera(constraints?: MediaTrackConstraints, processor?: VideoProcessor): CameraLocalVideoConfig;
     /**
      * Creates a video configuration for custom track.
      */
-    static custom(userVideoTrack: MediaStreamTrack, processorOptions?: VideoProcessorOptions): CustomLocalVideoConfig;
-    protected constructor(sourceType: LocalVideoSourceType, processorOptions?: VideoProcessorOptions);
+    static custom(userVideoTrack: MediaStreamTrack, processor?: VideoProcessor): CustomLocalVideoConfig;
+    protected constructor(sourceType: LocalVideoSourceType, processor?: VideoProcessor);
     get sourceType(): LocalVideoSourceType;
-    get processorOptions(): VideoProcessorOptions | undefined;
-    set processorOptions(processorOptions: VideoProcessorOptions | undefined);
+    get processor(): VideoProcessor | undefined;
+    set processor(processor: VideoProcessor | undefined);
     isCamera(): boolean;
     isCustom(): boolean;
     asCamera(): CameraLocalVideoConfig;
@@ -49,7 +49,7 @@ export declare class LocalVideoConfig {
  */
 export declare class CameraLocalVideoConfig extends LocalVideoConfig {
     #private;
-    constructor(constraints?: MediaTrackConstraints, processorOptions?: VideoProcessorOptions);
+    constructor(constraints?: MediaTrackConstraints, processor?: VideoProcessor);
     get constraints(): MediaTrackConstraints | undefined;
 }
 /**
@@ -59,7 +59,7 @@ export declare class CameraLocalVideoConfig extends LocalVideoConfig {
  */
 export declare class CustomLocalVideoConfig extends LocalVideoConfig {
     #private;
-    constructor(userVideoTrack: MediaStreamTrack, processorOptions?: VideoProcessorOptions);
+    constructor(userVideoTrack: MediaStreamTrack, processor?: VideoProcessor);
     /**
      * Returns a user-provided video track
      */

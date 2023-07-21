@@ -150,13 +150,13 @@ export interface MediaDeviceServiceInterface {
     /**
      * Gets the comfort noise level setting for output devices in Dolby Voice conferences.
      *
-     * This API is supported in Web SDK 3.5 and later.
+     * This API is only supported in the [Desktop SDK](https://docs.dolby.io/communications-apis/docs/desktop-sdk-overview) and Web SDK 3.5 and later versions.
      */
     getComfortNoiseLevel: () => Promise<ComfortNoiseLevel | Error>;
     /**
      * Sets the comfort noise level for output devices in Dolby Voice conferences.
      *
-     * This API is supported in Web SDK 3.5 and later.
+     * This API is only supported in the [Desktop SDK](https://docs.dolby.io/communications-apis/docs/desktop-sdk-overview) and Web SDK 3.5 and later versions.
      */
     setComfortNoiseLevel: (level: ComfortNoiseLevel) => Promise<void | Error>;
     /**

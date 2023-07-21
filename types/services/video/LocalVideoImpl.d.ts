@@ -2,7 +2,7 @@ import { ConferenceJoined, ConferenceLeft } from '../../events/conference/index'
 import { BaseConferenceService } from '../Service';
 import { LocalVideo } from '../../models/LocalVideo';
 import { VideoDeviceHelper } from './VideoDeviceHelper';
-import { VideoProcessor, VideoProcessorOptions } from '../../models/VideoProcessor';
+import { VideoProcessor } from '../../models/VideoProcessor';
 /**
  * @ignore
  */
@@ -35,8 +35,7 @@ export declare class LocalVideoImpl extends BaseConferenceService implements Loc
     /**
      * @implements LocalVideo.start()
      */
-    start(constraintsOrTrack?: MediaTrackConstraints | MediaStreamTrack, processor?: VideoProcessor | VideoProcessorOptions): Promise<MediaStreamTrack>;
-    private createSchedulerParamsForStartVideo;
+    start(constraintsOrTrack?: MediaTrackConstraints | MediaStreamTrack, processor?: VideoProcessor): Promise<MediaStreamTrack>;
     private startLocalVideo;
     /**
      * @implements LocalVideo.stop()
@@ -46,13 +45,11 @@ export declare class LocalVideoImpl extends BaseConferenceService implements Loc
     /**
      * @implements LocalVideo.setProcessor()
      */
-    setProcessor(processor: VideoProcessor | VideoProcessorOptions): Promise<void>;
-    private setProcessorInternal;
+    setProcessor(processor: VideoProcessor): Promise<void>;
     /**
      * @implements LocalVideo.disableProcessing()
      */
     disableProcessing(): Promise<void>;
-    private disableProcessingInternal;
     /**
      * @implements LocalVideo.applyConstraints()
      */
@@ -60,7 +57,7 @@ export declare class LocalVideoImpl extends BaseConferenceService implements Loc
     private emitLocalVideoStarted;
     private emitLocalVideoStopped;
     private emitLocalVideoUpdated;
-    private emitLocalVideoInternalError;
+    private emitLocalVideoInternalEvent;
     private changeCameraDeviceId;
     private onBandwidthRestrictionChanged;
     private onUpdateToken;
@@ -78,7 +75,7 @@ export declare class LocalVideoImpl extends BaseConferenceService implements Loc
     private detachProcessedVideo;
     private isProcessedVideoAttached;
     private createProcessedVideo;
-    private adjustVideoProcessorOptionsOrThrow;
+    private verifyVideoProcessorOrThrow;
     protected onConferenceJoined(e: ConferenceJoined): void;
     protected onConferenceLeft(e: ConferenceLeft): void;
     private onVideoStarted;

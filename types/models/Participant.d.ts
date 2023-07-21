@@ -53,7 +53,7 @@ export declare const toParticipantType: (participantType: string) => Participant
 /**
  * The ParticipantStatus model represents the statuses of conference participants. The following graphic shows possible status changes during a conference:
  *
- * <img src="https://files.readme.io/c562991-js-swift-conferenceService-participantUpdated.png" title="Diagram that presents the possible status changes" width="1000"/>
+ * <img src="https://files.readme.io/2105b14-js-swift-conferenceService-participantUpdated.png" title="Diagram that presents the possible status changes" width="1000"/>
  *
  */
 export declare enum ParticipantStatus {
@@ -71,7 +71,6 @@ export declare enum ParticipantStatus {
     DECLINE = "Decline",
     /**
      * A participant received the conference invitation and is connecting to a conference.
-     * @ignore
      */
     CONNECTING = "Connecting",
     /**

@@ -47,9 +47,9 @@ export interface LocalAudio extends EventEmitter {
      */
     getCaptureMode(): Promise<AudioCaptureModeOptions>;
     /**
-     * Sets the local participant's audio capture mode. The following modes are available:
+     * Sets the local participant's audio capture mode in Dolby Voice conferences to allow changing audio processing. The following modes are available:
      *
-     * - [Standard](./../enums/models_Audio.AudioCaptureMode.html#Standard): The default mode aimed at enhancing speech to create a conversation-focused conference environment. This mode optimizes captured audio for speech by aggressively removing non-speech content, such as background noise. The mode additionally allows using [VoiceFonts](../enums/models_Audio.VoiceFont.html). The mode is supported in SDK 3.7 and later.
+     * - [Standard](./../enums/models_Audio.AudioCaptureMode.html#Standard): The default mode that optimizes captured audio for speech by aggressively removing non-speech content, such as background noise. The mode is supported in SDK 3.7 and later.
      *
      * - [Music](./../enums/models_Audio.AudioCaptureMode.html#Music): Enhances the quality of music content and allows transmitting the captured audio with a high-quality stream. The mode is supported in SDK 3.8 and later.
      *
