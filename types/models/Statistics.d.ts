@@ -16,6 +16,10 @@ export declare class RTCInboundRTPAudioStreamStats extends Stats {
     bitrateReceived: Number;
     packetsLost: number;
     jitter: number;
+    jitterBufferDelay: number;
+    jitterBufferEmittedCount: number;
+    jitterBufferMinimumDelay: number;
+    jitterBufferTargetDelay: number;
 }
 /**
  * @ignore
@@ -29,6 +33,8 @@ export declare class RTCInboundRTPVideoStreamStats extends Stats {
     bitrateReceived: Number;
     packetsLost: number;
     jitter: number;
+    jitterBufferDelay: number;
+    jitterBufferEmittedCount: number;
     framesDecoded: number;
     frameHeight: number;
     frameWidth: number;
@@ -83,6 +89,7 @@ export declare class RTCOutboundRtpVideoStreamStats extends Stats {
     encoderImplementation: string;
     qpSum: number;
     framesPerSecond: number;
+    mediaSourceId: string;
 }
 /**
  * @ignore
@@ -193,6 +200,7 @@ export declare class RTCVideoSource extends Stats {
     width: number;
     height: number;
     framesPerSecond: number;
+    frames: number;
 }
 /**
  * @ignore

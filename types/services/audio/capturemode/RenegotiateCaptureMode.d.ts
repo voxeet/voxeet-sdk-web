@@ -1,4 +1,4 @@
-import { AudioBitrate, AudioCaptureModeOptions } from '../../../models/Audio';
+import { AudioBitrate, AudioCaptureMode, AudioCaptureModeOptions } from '../../../models/Audio';
 /**
  * @ignore
  */
@@ -11,4 +11,13 @@ export declare type RenegotiableJoinOptions = {
  */
 export declare type RenegotiateCaptureMode = (joinOptions: RenegotiableJoinOptions, constraints?: MediaTrackConstraints & {
     [otherOptions: string]: unknown;
-}, captureModeOptions?: AudioCaptureModeOptions, sendRequest?: boolean) => Promise<void>;
+}, captureModeOptions?: AudioCaptureModeOptions, sendRequest?: boolean, dapmInited?: boolean) => Promise<void>;
+/**
+ * @ignore
+ */
+export declare const renegotiableJoinOptionsPerCaptureMode: Record<AudioCaptureMode, RenegotiableJoinOptions>;
+/**
+ * @ignore
+ */
+export declare const getRenegotiableJoinOptionsPerCaptureMode: (captureMode: AudioCaptureMode) => RenegotiableJoinOptions;
+export declare const STANDARD_BITRATE: AudioBitrate;

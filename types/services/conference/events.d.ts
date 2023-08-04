@@ -86,7 +86,7 @@ export declare function participantAdded(participant: Participant): void;
  *
  * The following graphic shows possible status changes during a conference:
  *
- * <img src="https://files.readme.io/2105b14-js-swift-conferenceService-participantUpdated.png" title="Screen share" width="1000"/>
+ * <img src="https://files.readme.io/c562991-js-swift-conferenceService-participantUpdated.png" title="Screen share" width="1000"/>
  *
  * @asMemberOf ConferenceService
  * @event

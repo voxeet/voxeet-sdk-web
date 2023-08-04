@@ -1,5 +1,6 @@
 import { BaseConferenceService } from '../Service';
 import { LocalVideo } from '../../models/LocalVideo';
+import { UserActionLoggerForVideo } from './UserActionLoggerForVideo';
 import { VideoProcessor } from '../../models/VideoProcessor';
 /**
  * LocalVideo proxy. It catches and reports eligible errors during a conference.
@@ -11,8 +12,7 @@ import { VideoProcessor } from '../../models/VideoProcessor';
  */
 export declare class LocalVideoProxy extends BaseConferenceService implements LocalVideo {
     #private;
-    constructor(sdk: any, target: LocalVideo);
-    get target(): LocalVideo;
+    constructor(sdk: any, target: LocalVideo, userActionLogger: UserActionLoggerForVideo);
     /**
      * @implements LocalVideo.start()
      */
@@ -37,4 +37,6 @@ export declare class LocalVideoProxy extends BaseConferenceService implements Lo
     private isEligibleToReport;
     private onInternalError;
     private reportError;
+    private shouldReport;
+    protected onSessionClosed(): void;
 }

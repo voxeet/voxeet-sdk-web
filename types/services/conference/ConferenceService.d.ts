@@ -2,7 +2,7 @@ import { BaseConferenceService } from '../Service';
 import { ConferenceJoined, ConferenceLeft } from '../../events/conference/index';
 import ConferenceManager from './ConferenceManager';
 import { SessionService } from '..';
-import { DemoOptions, JoinOptions, ListenOptions, MixingOptions, ParticipantInfo, ParticipantPermissions, ReplayOptions, ScreenshareOptions } from '../../models/Options';
+import { DemoOptions, JoinOptions, ListenOptions, MixingOptions, ParticipantPermissions, ReplayOptions, ScreenshareOptions } from '../../models/Options';
 import { Participant } from '../../models/Participant';
 import { MediaStreamType, MediaStreamWithType } from '../../models/MediaStream';
 import Conference, { ConferenceLeaveOptions } from '../../models/Conference';
@@ -190,7 +190,7 @@ export declare class ConferenceService extends BaseConferenceService {
      */
     updatePermissions(participantPermissions: Array<ParticipantPermissions>): Promise<any>;
     /**
-     * Leaves a conference.
+     * Leaves a conference. This method triggers receiving the [streamRemoved](#streamremoved) events from all participants and the **stopped** events from the [FilePresentationService](./services_filepresentation_FilePresentationService.FilePresentationService.html#stop) and the [VideoPresentationService](./services_videopresentation_VideoPresentationService.VideoPresentationService.html#stop) to clean up UI resources for the local participant.
      * @param options
      *
      * @example
@@ -702,6 +702,7 @@ export declare class ConferenceService extends BaseConferenceService {
     private onLocalVideoUpdated;
     private onRtsStatusUpdated;
     private isJoinedAsRTSViewer;
-    updateParticipantInfo(participantInfo: ParticipantInfo): Promise<void>;
+    private shouldReport;
+    private shouldSwallowWhenJoining;
 }
 export {};

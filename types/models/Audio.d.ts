@@ -7,7 +7,7 @@ export declare enum AudioCaptureMode {
      */
     Unprocessed = "unprocessed",
     /**
-     * The default mode that optimizes captured audio for speech by aggressively removing non-speech content, such as background noise. This mode additionally enhances speech perceptibility to create a conversation-focused conference environment. The mode is supported in SDK 3.7 and later.
+     * The default mode aimed at enhancing speech to create a conversation-focused conference environment. This mode optimizes captured audio for speech by aggressively removing non-speech content, such as background noise. The mode additionally allows using [VoiceFonts](../enums/models_Audio.VoiceFont.html). For the best experience, we recommend [downloading additional SDK package files and hosting the files](https://docs.dolby.io/communications-apis/docs/initializing-javascript) either on your own application server or CDN. The mode is supported in SDK 3.7 and later.
      */
     Standard = "standard",
     /**
@@ -37,6 +37,101 @@ export declare enum NoiseReductionLevel {
      * This level requires [using the Dolby Voice Codec (DVC)](https://docs.dolby.io/communications-apis/docs/initializing-javascript).
      */
     Low = "low"
+}
+/**
+ * The VoiceFont model gathers the possible voice modification effects that you can use to change the local participant's voice in real time. The model is supported only in SDK 3.11 and later and requires [downloading additional SDK package files and hosting the files](https://docs.dolby.io/communications-apis/docs/initializing-javascript#host-files) either on your own application server or CDN.
+ *
+ * The following table lists audio samples for each available voice font:
+ *
+ * <table>
+ *     <tbody>
+ *         <tr style="height:60px">
+ *             <th align='center' width=20%><b>Voice font</b></th>
+ *             <th align='center' width=40%><b>Example 1</b></th>
+ *             <th align='center' width=40%><b>Example 2</b></th>
+ *         </tr>
+ *         <tr>
+ *             <td><code>None</code></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/original_male.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/original_female.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *         </tr>
+ *         <tr>
+ *           <td><code>Abyss</code></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/abyss_male.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/abyss_female.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *         </tr>
+ *         <tr>
+ *             <td><code>AMRadio</code></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/amradio_male.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/amradio_female.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *       </tr>
+ *         <tr>
+ *             <td><code>BrokenRobot</code></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/broken_robot_male.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/broken_robot_female.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *         </tr>
+ *         <tr>
+ *             <td><code>DarkModulation</code></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/dark_modulation_male.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/dark_modulation_female.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *         </tr>
+ *         <tr>
+ *             <td><code>Feminine</code></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/feminine_male.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/feminine_female.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *         </tr>
+ *         <tr>
+ *             <td><code>Helium</code></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/helium_male.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/helium_female.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *         </tr>
+ *         <tr>
+ *             <td><code>Interference</code></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/interference_male.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/interference_female.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *         </tr>
+ *         <tr>
+ *             <td><code>Masculine</code></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/masculine_male.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/masculine_female.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *         </tr>
+ *         <tr>
+ *             <td><code>NervousRobot</code></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/nervous_robot_male.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/nervous_robot_female.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *         </tr>
+ *         <tr>
+ *             <td><code>StarshipCaptain</code></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/starship_captain_male.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/starship_captain_female.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *         </tr>
+ *         <tr>
+ *             <td><code>Swarm</code></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/swarm_male.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/swarm_female.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *         </tr>
+ *         <tr>
+ *             <td><code>Wobble</code></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/wobble_male.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *             <td><audio controls preload="auto"><source src="https://dolbyio.s3.us-west-1.amazonaws.com/public/voice-fonts/skywalker/wobble_female.wav" >Sorry, your browser does not support the audio element.</audio></td>
+ *         </tr>
+ *     </tbody>
+ * </table>
+ */
+export declare enum VoiceFont {
+    None = "none",
+    BrokenRobot = "brokenRobot",
+    Abyss = "abyss",
+    Helium = "helium",
+    StarshipCaptain = "starshipCaptain",
+    Feminine = "feminine",
+    AMRadio = "amRadio",
+    Interference = "interference",
+    Swarm = "swarm",
+    DarkModulation = "darkModulation",
+    NervousRobot = "nervousRobot",
+    Wobble = "wobble",
+    Masculine = "masculine"
 }
 /**
  * The AudioEchoCancellation model allows modifying the echo management setting for the [Music](./models_Audio.AudioCaptureMode.html#Music) mode while calling the [setCaptureMode](./../classes/services_audio_LocalAudio.LocalAudio.html#setCaptureMode) method.
@@ -98,6 +193,10 @@ export interface AudioCaptureModeStandardOptions {
      * The preferred level of noise reduction.
      */
     noiseReductionLevel?: NoiseReductionLevel;
+    /**
+     * The preferred voice modification effect that you can use to change the local participant's voice in real time. This property is supported in SDK 3.11 and later and requires [downloading additional SDK package files and hosting the files](https://docs.dolby.io/communications-apis/docs/initializing-javascript#host-files) either on your own application server or CDN.
+     */
+    voiceFont?: VoiceFont;
 }
 /**
  * The AudioCaptureModeMusicOptions model allows configuring additional audio options for the [Music](./../enums/models_Audio.AudioCaptureMode.html#Music) mode.

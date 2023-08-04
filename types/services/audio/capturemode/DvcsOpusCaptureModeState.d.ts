@@ -4,7 +4,7 @@ import { RenegotiableJoinOptions, RenegotiateCaptureMode } from './RenegotiateCa
 export declare class DvcsOpusCaptureModeState implements CaptureModeState {
     #private;
     constructor(renegotiateCaptureMode: RenegotiateCaptureMode, initialRenegotiableOptions: () => RenegotiableJoinOptions);
-    setCaptureMode(previousModeAndOptions: AudioCaptureModeOptions, newModeAndOptions: AudioCaptureModeOptions, { participantId, conferenceId, isDapmReady }: CaptureModeContext): Promise<void>;
+    setCaptureMode(previousModeAndOptions: AudioCaptureModeOptions, newModeAndOptions: AudioCaptureModeOptions, { participantId, conferenceId, isDapmReady, shouldUpdateProcessing }: CaptureModeContext): Promise<void>;
     private performSetCaptureModeSteps;
     private getRenegotiateOptions;
     private getModeStandardRenegotiateOptions;

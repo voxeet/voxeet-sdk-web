@@ -8,7 +8,8 @@ interface UserActionData {
     description: string;
     component: string;
     api: string;
-    payload: Array<any>;
+    payload?: Array<any>;
+    timestamp?: number;
 }
 /**
  * @ignore
@@ -19,7 +20,8 @@ export default class UserAction extends Event {
     description: string;
     component: string;
     api: string;
-    payload: Array<any>;
+    payload?: Array<any>;
+    timestamp?: number;
     constructor(e: UserActionData);
     static fromData(e: UserActionData): UserAction;
 }

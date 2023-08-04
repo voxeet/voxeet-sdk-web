@@ -3,11 +3,8 @@
  */
 declare enum ComfortNoiseLevel {
     /**
-     * The default comfort noise level that depends on the platform:
-     *
-     * - In the Web SDK, the default value automatically switches to [Off](#off) and disables the comfort noise.
-     *
-     * - In the Desktop SDK, the default value is based on the device database that gathers the optimal comfort noise levels, individual for all devices.
+     * The default comfort noise level that automatically switches to [Off]()#off and disables the comfort noise.
+     * @ignore
      */
     Default = "default",
     /**

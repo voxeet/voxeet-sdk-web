@@ -1,6 +1,6 @@
 {
   "name": "@voxeet/voxeet-web-sdk",
-  "version": "3.10.1",
+  "version": "3.11.0",
   "description": "The Voxeet Javascript SDK",
   "author": "Thomas Gourgues (tgourgues@voxeet.com)",
   "main": "dist/voxeet-sdk.js",
@@ -55,8 +55,9 @@
     "url": "https://github.com/voxeet/voxeet-sdk-web.git"
   },
   "devDependencies": {
-    "@dolby-dvc/dvwc": "1.4.4",
-    "@dolbyio/vsl": "1.0.0-develop-4123afa7-682112",
+    "@dolby-dvc/dvwc": "1.5.3",
+    "@dolbyio/dapm": "0.118.1-1184480-bf183dab",
+    "@dolbyio/vsl": "1.0.0-develop-3b56a68e-1114019",
     "@millicast/sdk": "^0.1.36",
     "@size-limit/file": "^8.1.0",
     "@types/bowser": "^1.1.1",
@@ -88,7 +89,7 @@
     "md5": "^2.3.0",
     "moment-locales-webpack-plugin": "1.2.0",
     "preprocessify": "^1.0.1",
-    "prettier": "^2.8.0",
+    "prettier": "2.8.3",
     "pretty-quick": "^3.1.0",
     "rimraf": "^2.4.3",
     "size-limit": "^8.1.0",
