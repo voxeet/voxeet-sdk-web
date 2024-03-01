@@ -60,6 +60,7 @@ export declare class DvcsMediaStream extends MediaStream {
  * @ignore
  */
 export declare class FakeMediaStreamAudioTrack implements MediaStreamTrack {
+    contentHint: string;
     id: string;
     kind: string;
     enabled: boolean;
